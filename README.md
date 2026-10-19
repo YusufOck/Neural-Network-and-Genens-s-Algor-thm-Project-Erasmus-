@@ -118,6 +118,19 @@ aynı mikroskobik alanın dönüşümleri görünümündeydi. Bu nedenle henüz 
 seçilmemiştir ve split oluşturulmamıştır. Ayrıntılı sonuç:
 [`research/PHASH_PILOT_AUDIT_TR.md`](research/PHASH_PILOT_AUDIT_TR.md).
 
+Manuel kararları sohbetten bağımsız ve makine-okunur biçimde saklamak için mevcut 120 adaydan
+güvenli bir `review_labels.csv` şablonu hazırlanabilir:
+
+```powershell
+py -3.10 src/prepare_phash_review.py
+```
+
+Bu yardımcı araç görüntüleri sınıflandırmaz. SHA-256 ile zaten byte-byte aynı olduğu kanıtlanan
+çiftleri önceden işaretler; diğer satırları `same_source_candidate`, `independent_lookalike` veya
+`uncertain` görsel kararlarından biri girilmek üzere boş bırakır. Var olan tabloyu normal
+çalıştırmada ezmez. Dosya yerel bir audit çıktısı olduğu için `artifacts/` altında tutulur ve
+GitHub'a gönderilmez.
+
 ## Eğitim kodunun mevcut durumu
 
 `src/train.py` şu modelleri destekleyen bir temel uygulamadır:
