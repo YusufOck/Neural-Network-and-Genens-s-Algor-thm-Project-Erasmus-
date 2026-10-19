@@ -15,6 +15,7 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 ## Temel belgeler
 
 - [PROJECT_PLAN.md](PROJECT_PLAN.md): deney sırası, başarı ölçütleri ve teslim planı
+- [research/PROJECT_STATUS_TR.md](research/PROJECT_STATUS_TR.md): tam kapsam, pilot, devam eden ve başlamamış işlerin güncel kontrol listesi
 - [research/DATASET_MASTER_AUDIT_TR.md](research/DATASET_MASTER_AUDIT_TR.md): veri setinin ana denetimi
 - [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
 - [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması

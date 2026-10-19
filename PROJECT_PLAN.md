@@ -1,6 +1,10 @@
 # NNGA Multi-Cancer Project Plan
 
-Updated: 2026-10-15
+Updated: 2026-10-19
+
+Current completion state and acceptance boundaries are tracked in
+[research/PROJECT_STATUS_TR.md](research/PROJECT_STATUS_TR.md). In particular, a completed
+two-subclass pHash pilot is not a completed 26-subclass near-duplicate audit.
 
 ## 1. Project question
 
@@ -139,8 +143,10 @@ reached 97.08% test accuracy and 97.02% macro-F1, while the reduced 26-class Den
 reproduction reached 78.21% and 76.18% respectively. These are documented in
 [research/PILOT_RESULTS.md](research/PILOT_RESULTS.md).
 
-Do not start a new training run yet. The explicit 26-leaf taxonomy, source audit, image-metadata
-audit, exact-duplicate audit and two-subclass pHash pilot are complete. The pHash pilot found a
+Do not start a new training run yet. The explicit 26-leaf taxonomy artifact, full-dataset
+image-metadata audit, full-dataset exact-duplicate audit and two-subclass pHash **pilot** are
+complete within their stated scopes. Mehmet's complete label-semantics review and the
+26-subclass near-duplicate audit are not complete. The pHash pilot found a
 strong modality effect: MRI produces many false-positive candidates even at low distances, while
 the reviewed lung-histology candidates remain strongly geometrically consistent through distance
 12. No global threshold has been selected. The immediate next action, after Mehmet reviews
@@ -149,6 +155,8 @@ the reviewed lung-histology candidates remain strongly geometrically consistent 
 `P0001`–`P0120` Pair IDs; the original 24,995,000-pair scan was not repeated. After the manual
 labels are complete, turn the ORB/RANSAC checks into a reproducible hybrid validation procedure,
 add independent negative controls, test additional modalities and examine recall beyond distance
-12. Only then may augmentation families and a fixed reusable split be frozen. Professor contact
-remains deferred.
+12. Then validate the procedure on blood-smear microscopy, MRI, H&E histopathology, Pap-smear
+microscopy and CT before applying it to all 26 subclasses. Only after every subclass is covered
+may augmentation families and a fixed reusable split be frozen. Professor contact remains
+deferred.
 
