@@ -50,10 +50,10 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | SHA-256 pozitif kontrolü | Pilot kapsamında tamamlandı | Pilot içindeki 279 exact `lung_scc` çiftinin tamamı pHash 0. |
 | İlk görsel yorum | Pilot kapsamında ön inceleme tamamlandı | Codex destekli ön inceleme raporlandı; bu, resmi ortak etiket tablosunun tamamlandığı anlamına gelmez. |
 | Eski 120-pair pilotun izlenebilir etiketlenmesi | Devam ediyor / pilot kaydı | 8 exact satır hazır, 112 satır bekliyor; bu pHash-yanlı iki-sınıf örneklemi nihai kalibrasyon kümesi değildir. |
-| Bütün 26 sınıflı resmi kalibrasyon kümesi | Planlandı, başlamadı | Exact, sentetik pozitif, rastgele/hard negative, >12 ve çapraz-sınıf çiftler içerecek. |
-| Bağımsız negatif kontroller | Başlamadı | Her modaliteden rastgele bağımsız çiftler eklenmeli. |
+| Bütün 26 sınıflı resmi kalibrasyon kümesi | Taslak üretildi / inceleme bekliyor | 1.342 çift: 1.064 kesin pozitif ve 278 insan-inceleme adayı; iki audit bölümünde de 26/26 yaprak var. |
+| Bağımsız negatif kontroller | Adaylar üretildi / doğrulanmadı | 104 rastgele, 104 pHash-hard ve 70 çapraz-yaprak çift henüz negatif sayılmıyor; insan kararı bekliyor. |
 | Tekrar üretilebilir ORB/RANSAC doğrulaması | Başlamadı | Ad-hoc destekleyici ölçüm yapıldı; kod/CSV çıktısı henüz kalıcı pipeline değil. |
-| Uzaklık 12 üzerindeki recall/kaçırma kontrolü | Başlamadı | Gerçek akrabaların eşik dışında kalıp kalmadığı ölçülmedi. |
+| Uzaklık 12 üzerindeki recall/kaçırma kontrolü | Kontrollü sentetik kapsamda tamamlandı | 1.040 kesin sentetik pozitifin 552'si (%53,08) pHash 12 üzerindeydi; doğal akrabalar ve diğer aday kanalları henüz ölçülmedi. |
 | Kan yayması mikroskopisi doğrulaması | Başlamadı | ALL ve/veya lymphoma temsilcileri gerekli. |
 | Pap smear mikroskopisi doğrulaması | Başlamadı | Cervical alt sınıfları gerekli. |
 | CT doğrulaması | Başlamadı | `kidney_normal` ve `kidney_tumor` gerekli. |
@@ -87,9 +87,10 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 
 ## 6. Değiştirilemez ilerleme sırası
 
-1. `research/NEAR_DUPLICATE_METHOD_PLAN_TR.md` yöntem ve kalibrasyon tasarımını Mehmet ile onayla.
+1. `research/NEAR_DUPLICATE_METHOD_PLAN_TR.md` yöntem ve kalibrasyon tasarımını Mehmet ile onayla. **Tamamlandı.**
 2. Bütün 26 alt sınıftan exact/sentetik pozitif, rastgele/hard negative, >12 ve çapraz-sınıf
    örnekleri içeren `calibration-set v1` oluştur. Mevcut 120 çifti ayrı pilot kaydı olarak koru.
+   **Taslak üretildi; 278 adayın insan incelemesi henüz yapılmadı.**
 3. Yeni şemayla resmi çift etiketlemesini yap; eski pilotun 112 bekleyen satırını da pilot kaydı
    olarak kapat, fakat nihai kalibrasyon sonucu sayma.
 4. pHash aday üretimi, ORB/RANSAC, ECC/phase correlation ve hizalanmış SSIM/NMI yöntemlerini

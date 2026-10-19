@@ -17,6 +17,7 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 - [PROJECT_PLAN.md](PROJECT_PLAN.md): deney sırası, başarı ölçütleri ve teslim planı
 - [research/PROJECT_STATUS_TR.md](research/PROJECT_STATUS_TR.md): tam kapsam, pilot, devam eden ve başlamamış işlerin güncel kontrol listesi
 - [research/NEAR_DUPLICATE_METHOD_PLAN_TR.md](research/NEAR_DUPLICATE_METHOD_PLAN_TR.md): pHash, ORB/RANSAC, ECC ve hizalanmış benzerlikle bütün 26 sınıfa genişleme planı
+- [research/CALIBRATION_SET_V1_AUDIT_TR.md](research/CALIBRATION_SET_V1_AUDIT_TR.md): 26 sınıflı duplicate-yöntem kalibrasyon taslağının üretim ve kontrol sonuçları
 - [research/DATASET_MASTER_AUDIT_TR.md](research/DATASET_MASTER_AUDIT_TR.md): veri setinin ana denetimi
 - [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
 - [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması
@@ -141,6 +142,21 @@ taramadan yalnızca mevcut adaylar tekrar çizilebilir:
 ```powershell
 py -3.10 src/audit_perceptual_duplicates.py --rerender-existing
 ```
+
+### Bütün 26 sınıflı duplicate kalibrasyon taslağı
+
+Eski iki-sınıflı pilotun yerine geçmek üzere, bütün 26 alt sınıftan kontrollü pozitif ve insan
+incelemeli adaylar şu komutla üretildi:
+
+```powershell
+$env:PYTHONUTF8="1"
+py -3.10 .\src\build_duplicate_calibration_set.py --seed 42 --workers 4
+```
+
+Bu komut model eğitmez ve 70/15/15 sınıflandırma split'i oluşturmaz. Üretilen audit artefaktları
+`artifacts/audit/duplicate_calibration_v1/` altında yerel tutulur. Doğrulanmış sayılar ve pHash
+recall bulguları için
+[`research/CALIBRATION_SET_V1_AUDIT_TR.md`](research/CALIBRATION_SET_V1_AUDIT_TR.md) dosyasına bakın.
 
 ## Eğitim kodunun mevcut durumu
 

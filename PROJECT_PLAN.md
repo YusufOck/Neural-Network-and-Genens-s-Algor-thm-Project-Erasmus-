@@ -151,11 +151,13 @@ complete within their stated scopes. Mehmet's complete label-semantics review an
 26-subclass near-duplicate audit are not complete. The pHash pilot found a
 strong modality effect: MRI produces many false-positive candidates even at low distances, while
 the reviewed lung-histology candidates remain strongly geometrically consistent through distance
-12. No global threshold has been selected. The immediate next action is to review and approve
-`research/NEAR_DUPLICATE_METHOD_PLAN_TR.md`, then build a balanced calibration-set v1 across all
-26 subclasses. The existing 120 pairs remain a two-subclass, pHash-biased legacy pilot and are not
-the final calibration set. Candidate CSV, review worksheet and all 20 pilot contact sheets share
-stable `P0001`–`P0120` Pair IDs. Calibrate pHash candidate generation, ORB/RANSAC, ECC/phase
+12. No global threshold has been selected. The hybrid method plan is approved and an all-26-leaf
+calibration-set v1 draft has been generated: 1,342 pairs containing 1,064 controlled/SHA positives
+and 278 unreviewed candidates. The immediate next action is to render traceable contact sheets for
+those 278 candidates and complete the human review schema; none of those rows is currently assumed
+to be a true negative. The existing 120 pairs remain a two-subclass, pHash-biased legacy pilot and
+are not the final calibration set. Candidate CSV, review worksheet and all 20 pilot contact sheets
+share stable `P0001`–`P0120` Pair IDs. Calibrate pHash candidate generation, ORB/RANSAC, ECC/phase
 correlation and aligned SSIM/NMI using controlled positives, hard/random negatives and hold-out
 pairs across blood-smear microscopy, MRI, H&E histopathology, Pap-smear microscopy and CT. Only
 after every subclass is covered

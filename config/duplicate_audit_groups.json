@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-19",
+  "purpose": "Group the 26 leaf labels by acquisition modality and compatible source family for near-duplicate calibration. These are audit groups, not classifier targets.",
+  "source_groups": {
+    "all_blood_smear": {
+      "modality_key": "blood_smear",
+      "modality_name": "Peripheral blood smear microscopy",
+      "labels": ["all_benign", "all_early", "all_pre", "all_pro"]
+    },
+    "brain_ce_mri": {
+      "modality_key": "mri",
+      "modality_name": "T1-weighted contrast-enhanced MRI slice",
+      "labels": ["brain_glioma", "brain_menin", "brain_tumor"]
+    },
+    "breast_histology": {
+      "modality_key": "histopathology",
+      "modality_name": "H&E histopathology",
+      "labels": ["breast_benign", "breast_malignant"]
+    },
+    "cervix_pap_smear": {
+      "modality_key": "pap_smear",
+      "modality_name": "Pap smear cell microscopy",
+      "labels": ["cervix_dyk", "cervix_koc", "cervix_mep", "cervix_pab", "cervix_sfi"]
+    },
+    "kidney_ct": {
+      "modality_key": "ct",
+      "modality_name": "Abdominal CT slice",
+      "labels": ["kidney_normal", "kidney_tumor"]
+    },
+    "lung_colon_histology": {
+      "modality_key": "histopathology",
+      "modality_name": "H&E histopathology",
+      "labels": ["colon_aca", "colon_bnt", "lung_aca", "lung_bnt", "lung_scc"]
+    },
+    "lymphoma_histology": {
+      "modality_key": "histopathology",
+      "modality_name": "H&E histopathology",
+      "labels": ["lymph_cll", "lymph_fl", "lymph_mcl"]
+    },
+    "oral_histology": {
+      "modality_key": "histopathology",
+      "modality_name": "H&E histopathology at 100x or 400x",
+      "labels": ["oral_normal", "oral_scc"]
+    }
+  }
+}
