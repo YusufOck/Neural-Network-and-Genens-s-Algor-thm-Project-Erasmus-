@@ -157,6 +157,6 @@ labels are complete, turn the ORB/RANSAC checks into a reproducible hybrid valid
 add independent negative controls, test additional modalities and examine recall beyond distance
 12. Then validate the procedure on blood-smear microscopy, MRI, H&E histopathology, Pap-smear
 microscopy and CT before applying it to all 26 subclasses. Only after every subclass is covered
-may augmentation families and a fixed reusable split be frozen. Professor contact remains
-deferred.
+and compatible modalities/source groups have been checked for cross-subclass perceptual matches
+may augmentation families and a fixed reusable split be frozen. Professor contact remains deferred.
 

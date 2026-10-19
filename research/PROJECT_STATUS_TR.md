@@ -59,6 +59,7 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Diğer MRI alt sınıfları | Başlamadı | `brain_menin` ve `brain_tumor` gerekli. |
 | Diğer H&E histopatoloji alt sınıfları | Başlamadı | Breast, colon, diğer lung, lymphoma ve oral alt sınıfları gerekli. |
 | Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Pilot ve modalite doğrulaması bitmeden çalıştırılmayacak. |
+| Sınıflar arası perceptual-duplicate kontrolü | Başlamadı | Pilot yalnız aynı alt sınıf içindeki çiftleri karşılaştırdı. Uyumlu modalite/kaynak grupları arasında değiştirilmiş çapraz-etiket kopyaları ayrıca aranmalı. |
 | 130.000 görüntü için augmentation-family grupları | Başlamadı | Henüz hiçbir nihai aile listesi yok. |
 
 ## 4. Split durumu
@@ -92,9 +93,12 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    smear ve CT.
 5. Aynı denetim protokolünü 26 alt sınıfın tamamına uygula. Modaliteye göre farklı karar kuralı
    gerekebilir; hiçbir alt sınıf kapsam dışı bırakılamaz.
-6. Exact ve doğrulanmış yakın-kopyaları aile gruplarına dönüştür.
-7. Aileleri bölmeden sabit 70/15/15 manifestleri oluştur ve kesişim testini yap.
-8. Ancak bundan sonra adil model eğitimi ve karşılaştırmasına geç.
+6. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
+   denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
+   yöntemiyle yap.
+7. Exact ve doğrulanmış yakın-kopyaları aile gruplarına dönüştür.
+8. Aileleri bölmeden sabit 70/15/15 manifestleri oluştur ve kesişim testini yap.
+9. Ancak bundan sonra adil model eğitimi ve karşılaştırmasına geç.
 
 Bir pilotta bulunan eşik veya kural, yukarıdaki 2–4. adımlarda doğrulanmadan bütün veri setine
 uygulanamaz. Buna karşılık, nihai split hazırlanırken 26 alt sınıftan hiçbiri yalnızca pilotta yer
