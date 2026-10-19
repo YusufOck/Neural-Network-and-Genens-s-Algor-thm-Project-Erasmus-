@@ -93,13 +93,13 @@ SHA-256 denetimi 1.318 birebir kopya grubu ve bu gruplarda 2.673 dosya bulmuştu
 yalnızca dosya içeriği tamamen aynı olan kopyaları belirler; döndürülmüş, parlaklığı değiştirilmiş
 veya yeniden kodlanmış akrabaları bulamaz.
 
-## Sıradaki kontrollü adım: pHash pilotu
+## Tamamlanan kontrollü adım: pHash pilotu
 
 `src/audit_perceptual_duplicates.py`, seçilen alt sınıflardaki görüntüler için 64-bit pHash
 hesaplar ve Hamming uzaklığı aralıklarından manuel inceleme örnekleri üretir. Kod otomatik eşik
 seçmez, split oluşturmaz ve model eğitmez.
 
-Planlanan pilot komutu:
+2026-10-19 tarihinde Python 3.10 ile çalıştırılan pilot komutu:
 
 ```powershell
 py -3.10 src/audit_perceptual_duplicates.py `
@@ -109,7 +109,14 @@ py -3.10 src/audit_perceptual_duplicates.py `
   --workers 4
 ```
 
-Bu komut ancak açıklaması incelendikten ve açık çalıştırma onayı verildikten sonra kullanılacaktır.
+Pilot 10.000 görüntüyü ve iki sınıfta toplam 24.995.000 çifti taradı; 120 örneği 20 temas
+sayfasında incelemeye açtı. Bilinen 279 SHA-256 tam-kopya çiftinin tamamı pHash uzaklığı 0 verdi.
+Ancak yöntem görüntü türüne çok farklı tepki verdi: `brain_glioma` için 12 veya daha küçük
+uzaklıkta 173.992 aday, `lung_scc` için yalnız 1.731 aday oluştu. Görsel denetimde beyin MR
+adaylarının çoğu ortak arka plan/anatomi kaynaklı false positive iken akciğer histoloji örnekleri
+aynı mikroskobik alanın dönüşümleri görünümündeydi. Bu nedenle henüz otomatik/global eşik
+seçilmemiştir ve split oluşturulmamıştır. Ayrıntılı sonuç:
+[`research/PHASH_PILOT_AUDIT_TR.md`](research/PHASH_PILOT_AUDIT_TR.md).
 
 ## Eğitim kodunun mevcut durumu
 

@@ -140,8 +140,12 @@ reproduction reached 78.21% and 76.18% respectively. These are documented in
 [research/PILOT_RESULTS.md](research/PILOT_RESULTS.md).
 
 Do not start a new training run yet. The explicit 26-leaf taxonomy, source audit, image-metadata
-audit and exact-duplicate audit are complete. The immediate next action is to review
-`research/DATASET_MASTER_AUDIT_TR.md` with Mehmet group by group. After the label lesson is
-understood, design and validate the near-duplicate/augmentation-family method before freezing a
-reusable split. Professor contact remains deferred.
+audit, exact-duplicate audit and two-subclass pHash pilot are complete. The pHash pilot found a
+strong modality effect: MRI produces many false-positive candidates even at low distances, while
+the reviewed lung-histology candidates remain strongly geometrically consistent through distance
+12. No global threshold has been selected. The immediate next action, after Mehmet reviews
+`research/PHASH_PILOT_AUDIT_TR.md`, is to turn the manual labels and ORB/RANSAC checks into a
+reproducible hybrid validation procedure, add independent negative controls, test additional
+modalities and examine recall beyond distance 12. Only then may augmentation families and a fixed
+reusable split be frozen. Professor contact remains deferred.
 
