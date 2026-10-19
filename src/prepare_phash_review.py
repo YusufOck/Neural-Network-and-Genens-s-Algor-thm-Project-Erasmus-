@@ -98,11 +98,16 @@ def is_true(value: str) -> bool:
 
 def prepare_review_rows(candidates: List[Dict[str, str]]) -> List[Dict[str, str]]:
     rows: List[Dict[str, str]] = []
+    seen_ids = set()
     for index, candidate in enumerate(candidates, start=1):
         exact = is_true(candidate["known_exact_duplicate"])
+        pair_id = (candidate.get("pair_id") or "").strip() or f"P{index:04d}"
+        if pair_id in seen_ids:
+            raise ValueError(f"Tekrarlanan Pair ID: {pair_id}")
+        seen_ids.add(pair_id)
         rows.append(
             {
-                "pair_id": f"P{index:04d}",
+                "pair_id": pair_id,
                 "subclass": candidate["subclass"],
                 "distance_band": candidate["distance_band"],
                 "distance": candidate["distance"],

@@ -131,6 +131,14 @@ Bu yardımcı araç görüntüleri sınıflandırmaz. SHA-256 ile zaten byte-byt
 çalıştırmada ezmez. Dosya yerel bir audit çıktısı olduğu için `artifacts/` altında tutulur ve
 GitHub'a gönderilmez.
 
+Temas sayfaları, `candidate_samples.csv` ve `review_labels.csv` aynı `P0001`–`P0120` Pair ID
+değerlerini kullanır. Eski bir pilot çıktısına Pair ID eklemek için 24.995.000 çifti yeniden
+taramadan yalnızca mevcut adaylar tekrar çizilebilir:
+
+```powershell
+py -3.10 src/audit_perceptual_duplicates.py --rerender-existing
+```
+
 ## Eğitim kodunun mevcut durumu
 
 `src/train.py` şu modelleri destekleyen bir temel uygulamadır:

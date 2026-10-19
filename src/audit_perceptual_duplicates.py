@@ -14,7 +14,7 @@ import json
 import random
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
@@ -48,6 +48,7 @@ class PairCandidate:
     left: HashedImage
     right: HashedImage
     known_exact_duplicate: bool
+    pair_id: str = ""
 
 
 def parse_args() -> argparse.Namespace:
@@ -86,6 +87,14 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=4,
         help="Görüntü hash'lerini hesaplarken kullanılacak iş parçacığı sayısı.",
+    )
+    parser.add_argument(
+        "--rerender-existing",
+        action="store_true",
+        help=(
+            "Var olan candidate_samples.csv dosyasını kullanarak Pair ID içeren temas "
+            "sayfalarını yeniden üretir; pHash ve bütün çiftleri tekrar hesaplamaz."
+        ),
     )
     return parser.parse_args()
 
@@ -282,6 +291,85 @@ def build_pair_candidates(
     return candidates
 
 
+def assign_pair_ids(candidates: Sequence[PairCandidate]) -> List[PairCandidate]:
+    """Attach stable, human-readable IDs to the candidates in saved CSV order."""
+
+    return [
+        replace(candidate, pair_id=f"P{index:04d}")
+        for index, candidate in enumerate(candidates, start=1)
+    ]
+
+
+def parse_csv_bool(value: str) -> bool:
+    return value.strip().lower() in {"1", "true", "yes"}
+
+
+def load_existing_candidates(
+    path: Path, records: Sequence[ImageRecord], root: Path
+) -> List[PairCandidate]:
+    """Load a prior candidate sample without repeating the all-pairs scan."""
+
+    if not path.is_file():
+        raise FileNotFoundError(f"Aday CSV bulunamadı: {path}")
+
+    records_by_path = {relative_posix(record.path, root): record for record in records}
+    required = {
+        "subclass",
+        "distance_band",
+        "distance",
+        "known_exact_duplicate",
+        "left_path",
+        "right_path",
+        "left_phash",
+        "right_phash",
+    }
+    candidates: List[PairCandidate] = []
+    seen_ids = set()
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        missing = sorted(required - set(reader.fieldnames or []))
+        if missing:
+            raise ValueError(f"Aday CSV içinde eksik sütunlar var: {missing}")
+
+        for index, row in enumerate(reader, start=1):
+            pair_id = (row.get("pair_id") or "").strip() or f"P{index:04d}"
+            if pair_id in seen_ids:
+                raise ValueError(f"Tekrarlanan Pair ID: {pair_id}")
+            seen_ids.add(pair_id)
+
+            left_path = row["left_path"]
+            right_path = row["right_path"]
+            if left_path not in records_by_path or right_path not in records_by_path:
+                raise ValueError(
+                    f"Pair ID {pair_id} için veri setinde görüntü bulunamadı: "
+                    f"{left_path} | {right_path}"
+                )
+
+            candidates.append(
+                PairCandidate(
+                    pair_id=pair_id,
+                    subclass=row["subclass"],
+                    distance_band=row["distance_band"],
+                    distance=int(row["distance"]),
+                    left=HashedImage(
+                        record=records_by_path[left_path],
+                        relative_path=left_path,
+                        phash=int(row["left_phash"], 16),
+                    ),
+                    right=HashedImage(
+                        record=records_by_path[right_path],
+                        relative_path=right_path,
+                        phash=int(row["right_phash"], 16),
+                    ),
+                    known_exact_duplicate=parse_csv_bool(row["known_exact_duplicate"]),
+                )
+            )
+
+    if not candidates:
+        raise ValueError("Aday CSV boş; temas sayfası üretilemedi.")
+    return candidates
+
+
 def known_exact_control(
     items: Sequence[HashedImage], exact_group_by_path: Mapping[str, str]
 ) -> Dict[str, object]:
@@ -337,6 +425,7 @@ def write_candidate_csv(path: Path, candidates: Sequence[PairCandidate]) -> None
         writer = csv.DictWriter(
             handle,
             fieldnames=[
+                "pair_id",
                 "subclass",
                 "distance_band",
                 "distance",
@@ -351,6 +440,7 @@ def write_candidate_csv(path: Path, candidates: Sequence[PairCandidate]) -> None
         for pair in candidates:
             writer.writerow(
                 {
+                    "pair_id": pair.pair_id,
                     "subclass": pair.subclass,
                     "distance_band": pair.distance_band,
                     "distance": pair.distance,
@@ -413,7 +503,8 @@ def write_contact_sheets(
                 exact_text = "yes" if pair.known_exact_duplicate else "no"
                 draw.text(
                     (margin, top),
-                    f"{subclass} | distance={pair.distance} | SHA-256 exact={exact_text}",
+                    f"{pair.pair_id} | {subclass} | distance={pair.distance} | "
+                    f"SHA-256 exact={exact_text}",
                     fill="black",
                 )
                 draw.text(
@@ -453,6 +544,7 @@ def nonzero_histogram(histogram: np.ndarray) -> Dict[str, int]:
 def candidates_for_json(candidates: Iterable[PairCandidate]) -> List[Dict[str, object]]:
     return [
         {
+            "pair_id": pair.pair_id,
             "subclass": pair.subclass,
             "distance_band": pair.distance_band,
             "distance": pair.distance,
@@ -464,6 +556,27 @@ def candidates_for_json(candidates: Iterable[PairCandidate]) -> List[Dict[str, o
     ]
 
 
+def update_existing_report_pair_ids(
+    path: Path, candidates: Sequence[PairCandidate], contact_sheets: Sequence[str]
+) -> Optional[str]:
+    """Add traceability IDs to an existing pilot report after a lightweight rerender."""
+
+    if not path.is_file():
+        return f"Pilot raporu bulunamadı, Pair ID bilgisi JSON'a eklenemedi: {path}"
+
+    with path.open("r", encoding="utf-8") as handle:
+        report = json.load(handle)
+    report["sampled_candidate_pairs"] = candidates_for_json(candidates)
+    report["contact_sheets"] = list(contact_sheets)
+    report["contact_sheets_rerendered_at_utc"] = datetime.now(timezone.utc).isoformat()
+    report["review_traceability"] = (
+        "Pair IDs are shared by candidate_samples.csv, review_labels.csv and contact sheets."
+    )
+    with path.open("w", encoding="utf-8") as handle:
+        json.dump(report, handle, indent=2, ensure_ascii=False)
+    return None
+
+
 def main() -> None:
     args = parse_args()
     validate_args(args)
@@ -472,6 +585,25 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     all_records = discover_records(root)
+    if args.rerender_existing:
+        candidates_path = output_dir / "candidate_samples.csv"
+        candidates = load_existing_candidates(candidates_path, all_records, root)
+        write_candidate_csv(candidates_path, candidates)
+        contact_sheets = write_contact_sheets(output_dir, candidates)
+        report_warning = update_existing_report_pair_ids(
+            output_dir / "phash_pilot_report.json", candidates, contact_sheets
+        )
+        print("İşlem türü: mevcut pHash adaylarını Pair ID ile yeniden çizme")
+        print("pHash/çift taraması: yapılmadı")
+        print(f"Aday çift sayısı: {len(candidates)}")
+        print(f"Temas sayfası sayısı: {len(contact_sheets)}")
+        print(f"Pair ID aralığı: {candidates[0].pair_id}-{candidates[-1].pair_id}")
+        if report_warning:
+            print(f"UYARI: {report_warning}")
+        print(f"Aday tablosu: {candidates_path}")
+        print(f"Temas sayfaları: {output_dir / 'contact_sheets'}")
+        return
+
     requested = set(args.subclasses)
     records = sorted(
         (record for record in all_records if record.subclass in requested),
@@ -529,6 +661,7 @@ def main() -> None:
             ),
         }
 
+    all_candidates = assign_pair_ids(all_candidates)
     write_candidate_csv(output_dir / "candidate_samples.csv", all_candidates)
     contact_sheets = write_contact_sheets(output_dir, all_candidates)
 

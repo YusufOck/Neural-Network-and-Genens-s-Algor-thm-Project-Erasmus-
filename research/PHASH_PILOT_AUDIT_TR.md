@@ -216,3 +216,10 @@ Mehmet'in onayından sonra, model eğitmeden:
 
 Bu sırada hiçbir model eğitimi başlatılmamalı ve 97% gibi önceki image-level split sonuçları nihai
 performans olarak yorumlanmamalıdır.
+
+### İzlenebilirlik güncellemesi — 2026-10-19
+
+`candidate_samples.csv`, `review_labels.csv` ve 20 temas sayfası aynı `P0001`–`P0120` Pair ID
+değerlerini kullanacak şekilde güncellenmiştir. Önceden üretilmiş aday çiftler kullanılarak yalnız
+temas sayfaları yeniden çizilmiş; pHash hesaplama ve 24.995.000 çiftlik tarama tekrarlanmamıştır.
+Pair ID, görselde verilen kararın inceleme tablosundaki satıra yanlış eşlenmesini önler.

@@ -144,8 +144,11 @@ audit, exact-duplicate audit and two-subclass pHash pilot are complete. The pHas
 strong modality effect: MRI produces many false-positive candidates even at low distances, while
 the reviewed lung-histology candidates remain strongly geometrically consistent through distance
 12. No global threshold has been selected. The immediate next action, after Mehmet reviews
-`research/PHASH_PILOT_AUDIT_TR.md`, is to turn the manual labels and ORB/RANSAC checks into a
-reproducible hybrid validation procedure, add independent negative controls, test additional
-modalities and examine recall beyond distance 12. Only then may augmentation families and a fixed
-reusable split be frozen. Professor contact remains deferred.
+`research/PHASH_PILOT_AUDIT_TR.md`, is to complete the 112 pending rows in the local
+`review_labels.csv`. Candidate CSV, review worksheet and all 20 contact sheets now share stable
+`P0001`–`P0120` Pair IDs; the original 24,995,000-pair scan was not repeated. After the manual
+labels are complete, turn the ORB/RANSAC checks into a reproducible hybrid validation procedure,
+add independent negative controls, test additional modalities and examine recall beyond distance
+12. Only then may augmentation families and a fixed reusable split be frozen. Professor contact
+remains deferred.
 
