@@ -16,6 +16,7 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 
 - [PROJECT_PLAN.md](PROJECT_PLAN.md): deney sırası, başarı ölçütleri ve teslim planı
 - [research/PROJECT_STATUS_TR.md](research/PROJECT_STATUS_TR.md): tam kapsam, pilot, devam eden ve başlamamış işlerin güncel kontrol listesi
+- [research/NEAR_DUPLICATE_METHOD_PLAN_TR.md](research/NEAR_DUPLICATE_METHOD_PLAN_TR.md): pHash, ORB/RANSAC, ECC ve hizalanmış benzerlikle bütün 26 sınıfa genişleme planı
 - [research/DATASET_MASTER_AUDIT_TR.md](research/DATASET_MASTER_AUDIT_TR.md): veri setinin ana denetimi
 - [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
 - [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması
@@ -130,7 +131,8 @@ Bu yardımcı araç görüntüleri sınıflandırmaz. SHA-256 ile zaten byte-byt
 çiftleri önceden işaretler; diğer satırları `same_source_candidate`, `independent_lookalike` veya
 `uncertain` görsel kararlarından biri girilmek üzere boş bırakır. Var olan tabloyu normal
 çalıştırmada ezmez. Dosya yerel bir audit çıktısı olduğu için `artifacts/` altında tutulur ve
-GitHub'a gönderilmez.
+GitHub'a gönderilmez. Bu 120 satır yalnızca iki alt sınıftaki eski pHash pilotunun kaydıdır;
+bütün 26 alt sınıfı kapsayacak resmi kalibrasyon kümesinin yerine geçmez.
 
 Temas sayfaları, `candidate_samples.csv` ve `review_labels.csv` aynı `P0001`–`P0120` Pair ID
 değerlerini kullanır. Eski bir pilot çıktısına Pair ID eklemek için 24.995.000 çifti yeniden

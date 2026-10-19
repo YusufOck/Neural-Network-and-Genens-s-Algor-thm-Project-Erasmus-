@@ -49,7 +49,8 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Pair ID ve inceleme tablosu | Pilot altyapısı tamamlandı | `P0001`–`P0120`; CSV/JSON/temas sayfası eşleşme hatası 0. |
 | SHA-256 pozitif kontrolü | Pilot kapsamında tamamlandı | Pilot içindeki 279 exact `lung_scc` çiftinin tamamı pHash 0. |
 | İlk görsel yorum | Pilot kapsamında ön inceleme tamamlandı | Codex destekli ön inceleme raporlandı; bu, resmi ortak etiket tablosunun tamamlandığı anlamına gelmez. |
-| Resmi/izlenebilir ortak görsel etiketleme | Devam ediyor | 120 satırın 8'i exact olarak önceden doğrulandı; 112 satır Mehmet ile gözden geçirilmeyi bekliyor. |
+| Eski 120-pair pilotun izlenebilir etiketlenmesi | Devam ediyor / pilot kaydı | 8 exact satır hazır, 112 satır bekliyor; bu pHash-yanlı iki-sınıf örneklemi nihai kalibrasyon kümesi değildir. |
+| Bütün 26 sınıflı resmi kalibrasyon kümesi | Planlandı, başlamadı | Exact, sentetik pozitif, rastgele/hard negative, >12 ve çapraz-sınıf çiftler içerecek. |
 | Bağımsız negatif kontroller | Başlamadı | Her modaliteden rastgele bağımsız çiftler eklenmeli. |
 | Tekrar üretilebilir ORB/RANSAC doğrulaması | Başlamadı | Ad-hoc destekleyici ölçüm yapıldı; kod/CSV çıktısı henüz kalıcı pipeline değil. |
 | Uzaklık 12 üzerindeki recall/kaçırma kontrolü | Başlamadı | Gerçek akrabaların eşik dışında kalıp kalmadığı ölçülmedi. |
@@ -86,20 +87,24 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 
 ## 6. Değiştirilemez ilerleme sırası
 
-1. Mevcut 112 pilot çiftin resmi etiketlemesini tamamla.
-2. Negatif kontrolleri ve uzaklık >12 örneklerini ekle.
-3. ORB/RANSAC doğrulamasını tekrar üretilebilir kod ve CSV çıktısına dönüştür.
-4. Beş ana görüntü modalitesinde yöntemi doğrula: kan yayması, MRI, H&E histopatoloji, Pap
-   smear ve CT.
-5. Aynı denetim protokolünü 26 alt sınıfın tamamına uygula. Modaliteye göre farklı karar kuralı
+1. `research/NEAR_DUPLICATE_METHOD_PLAN_TR.md` yöntem ve kalibrasyon tasarımını Mehmet ile onayla.
+2. Bütün 26 alt sınıftan exact/sentetik pozitif, rastgele/hard negative, >12 ve çapraz-sınıf
+   örnekleri içeren `calibration-set v1` oluştur. Mevcut 120 çifti ayrı pilot kaydı olarak koru.
+3. Yeni şemayla resmi çift etiketlemesini yap; eski pilotun 112 bekleyen satırını da pilot kaydı
+   olarak kapat, fakat nihai kalibrasyon sonucu sayma.
+4. pHash aday üretimi, ORB/RANSAC, ECC/phase correlation ve hizalanmış SSIM/NMI yöntemlerini
+   tekrar üretilebilir kod ve CSV çıktısına dönüştür.
+5. Kalibrasyon ile eşikleri geliştir; farklı kaynak görüntülerden oluşan hold-out çiftlerinde beş
+   ana modaliteyi doğrula: kan yayması, MRI, H&E histopatoloji, Pap smear ve CT.
+6. Aynı denetim protokolünü 26 alt sınıfın tamamına uygula. Modaliteye göre farklı karar kuralı
    gerekebilir; hiçbir alt sınıf kapsam dışı bırakılamaz.
-6. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
+7. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
    denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
    yöntemiyle yap.
-7. Exact ve doğrulanmış yakın-kopyaları aile gruplarına dönüştür.
-8. Aileleri bölmeden sabit 70/15/15 manifestleri oluştur ve kesişim testini yap.
-9. Ancak bundan sonra adil model eğitimi ve karşılaştırmasına geç.
+8. Exact ve doğrulanmış yakın-kopyaları aile gruplarına dönüştür.
+9. Aileleri bölmeden sabit 70/15/15 manifestleri oluştur ve kesişim testini yap.
+10. Ancak bundan sonra adil model eğitimi ve karşılaştırmasına geç.
 
-Bir pilotta bulunan eşik veya kural, yukarıdaki 2–4. adımlarda doğrulanmadan bütün veri setine
+Bir pilotta bulunan eşik veya kural, yukarıdaki 2–5. adımlarda doğrulanmadan bütün veri setine
 uygulanamaz. Buna karşılık, nihai split hazırlanırken 26 alt sınıftan hiçbiri yalnızca pilotta yer
 almadığı gerekçesiyle denetimsiz bırakılamaz.

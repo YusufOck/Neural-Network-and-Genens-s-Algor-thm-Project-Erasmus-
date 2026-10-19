@@ -5,6 +5,8 @@ Updated: 2026-10-19
 Current completion state and acceptance boundaries are tracked in
 [research/PROJECT_STATUS_TR.md](research/PROJECT_STATUS_TR.md). In particular, a completed
 two-subclass pHash pilot is not a completed 26-subclass near-duplicate audit.
+The planned hybrid near-duplicate method and its calibration requirements are defined in
+[research/NEAR_DUPLICATE_METHOD_PLAN_TR.md](research/NEAR_DUPLICATE_METHOD_PLAN_TR.md).
 
 ## 1. Project question
 
@@ -149,14 +151,14 @@ complete within their stated scopes. Mehmet's complete label-semantics review an
 26-subclass near-duplicate audit are not complete. The pHash pilot found a
 strong modality effect: MRI produces many false-positive candidates even at low distances, while
 the reviewed lung-histology candidates remain strongly geometrically consistent through distance
-12. No global threshold has been selected. The immediate next action, after Mehmet reviews
-`research/PHASH_PILOT_AUDIT_TR.md`, is to complete the 112 pending rows in the local
-`review_labels.csv`. Candidate CSV, review worksheet and all 20 contact sheets now share stable
-`P0001`–`P0120` Pair IDs; the original 24,995,000-pair scan was not repeated. After the manual
-labels are complete, turn the ORB/RANSAC checks into a reproducible hybrid validation procedure,
-add independent negative controls, test additional modalities and examine recall beyond distance
-12. Then validate the procedure on blood-smear microscopy, MRI, H&E histopathology, Pap-smear
-microscopy and CT before applying it to all 26 subclasses. Only after every subclass is covered
+12. No global threshold has been selected. The immediate next action is to review and approve
+`research/NEAR_DUPLICATE_METHOD_PLAN_TR.md`, then build a balanced calibration-set v1 across all
+26 subclasses. The existing 120 pairs remain a two-subclass, pHash-biased legacy pilot and are not
+the final calibration set. Candidate CSV, review worksheet and all 20 pilot contact sheets share
+stable `P0001`–`P0120` Pair IDs. Calibrate pHash candidate generation, ORB/RANSAC, ECC/phase
+correlation and aligned SSIM/NMI using controlled positives, hard/random negatives and hold-out
+pairs across blood-smear microscopy, MRI, H&E histopathology, Pap-smear microscopy and CT. Only
+after every subclass is covered
 and compatible modalities/source groups have been checked for cross-subclass perceptual matches
 may augmentation families and a fixed reusable split be frozen. Professor contact remains deferred.
 
