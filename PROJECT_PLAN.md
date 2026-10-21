@@ -153,9 +153,10 @@ strong modality effect: MRI produces many false-positive candidates even at low 
 the reviewed lung-histology candidates remain strongly geometrically consistent through distance
 12. No global threshold has been selected. The hybrid method plan is approved and an all-26-leaf
 calibration-set v1 draft has been generated: 1,342 pairs containing 1,064 controlled/SHA positives
-and 278 unreviewed candidates. The immediate next action is to render traceable contact sheets for
-those 278 candidates and complete the human review schema; none of those rows is currently assumed
-to be a true negative. The existing 120 pairs remain a two-subclass, pHash-biased legacy pilot and
+and 278 unreviewed candidates. Traceable contact sheets and a review worksheet now cover all 278
+Pair IDs with zero mapping errors. The immediate next action is to label only the 139 development
+candidates in small batches; the 139 holdout candidates remain unseen until the method rules are
+frozen. None of those rows is currently assumed to be a true negative. The existing 120 pairs remain a two-subclass, pHash-biased legacy pilot and
 are not the final calibration set. Candidate CSV, review worksheet and all 20 pilot contact sheets
 share stable `P0001`–`P0120` Pair IDs. Calibrate pHash candidate generation, ORB/RANSAC, ECC/phase
 correlation and aligned SSIM/NMI using controlled positives, hard/random negatives and hold-out
