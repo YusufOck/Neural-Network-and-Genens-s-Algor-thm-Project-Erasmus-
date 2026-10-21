@@ -17,6 +17,7 @@ from render_calibration_review import (  # noqa: E402
     safe_name,
     thumbnail,
     validate_candidates,
+    verdict_text,
 )
 
 
@@ -70,6 +71,16 @@ class ReviewPreparationTests(unittest.TestCase):
 
     def test_safe_name_removes_path_punctuation(self) -> None:
         self.assertEqual(safe_name("MRI / hold-out"), "MRI___hold_out")
+
+    def test_verdict_text_shows_blank_or_recorded_decision(self) -> None:
+        row = candidate_row()
+        self.assertIn("________", verdict_text(row))
+        row["human_verdict"] = "same_source_candidate"
+        row["confidence"] = "high"
+        self.assertEqual(
+            verdict_text(row),
+            "VERDICT: same_source_candidate | confidence=high",
+        )
 
 
 if __name__ == "__main__":

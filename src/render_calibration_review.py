@@ -239,6 +239,14 @@ def group_key(row: Mapping[str, str]) -> Tuple[str, str, str]:
     return row["audit_partition"], row["pair_kind"], row["source_group"]
 
 
+def verdict_text(row: Mapping[str, str]) -> str:
+    verdict = row.get("human_verdict", "").strip()
+    if not verdict:
+        return "HUMAN VERDICT: ________"
+    confidence = row.get("confidence", "").strip() or "n/a"
+    return f"VERDICT: {verdict} | confidence={confidence}"
+
+
 def render_contact_sheets(
     rows: Sequence[Mapping[str, str]],
     dataset_root: Path,
@@ -288,7 +296,7 @@ def render_contact_sheets(
                 distance = row["phash_distance"] or "n/a"
                 draw.text(
                     (margin, top),
-                    f"{row['pair_id']} | pHash distance={distance} | HUMAN VERDICT: ________",
+                    f"{row['pair_id']} | pHash distance={distance} | {verdict_text(row)}",
                     fill="black",
                 )
                 draw.text(

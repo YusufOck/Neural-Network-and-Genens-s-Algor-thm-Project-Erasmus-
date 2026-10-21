@@ -1,6 +1,7 @@
 # Calibration-set v1 insan inceleme paketi
 
-Durum: **Paket üretildi ve teknik olarak doğrulandı; insan etiketlemesi başlamadı.**
+Durum: **Paket üretildi ve teknik olarak doğrulandı; 139/139 development çifti Codex tarafından
+AI-destekli görsel incelemeyle etiketlendi, 139/139 holdout kararı boş tutuldu.**
 
 Tarih: 2026-10-21
 
@@ -43,8 +44,10 @@ Kod mevcut `review/` klasörünü ezmez. Yerel çıktılar:
 | Temas sayfası | 64 |
 | Eksik indekslenmiş sayfa | 0 |
 | Pair ID/path eşleme hatası | 0 |
-| Boş `human_verdict` | 278 |
-| `pending_visual_review` | 278 |
+| Doldurulmuş development kararı | 139 |
+| Boş holdout kararı | 139 |
+| `reviewed_ai_assisted` | 139 |
+| `pending_visual_review` | 139 |
 | Temas sayfası boyutu | Yaklaşık 82,34 MiB |
 
 Çift türleri:
@@ -93,17 +96,28 @@ gelecekteki kanser sınıflandırıcısının train/validation/test split'i değ
 
 ## Görsel kalite kontrolü
 
-Yalnız üç development sayfası açılarak düzen kontrol edildi:
+Paket üretildiğinde üç development sayfası düzen kontrolü için açılmıştı. 2026-10-21 tarihindeki
+AI-destekli incelemede development bölümündeki 32 sayfanın tamamı ve 139 çift incelendi. Holdout
+sayfaları açılmadı.
 
-- çapraz-alt-sınıf brain MRI;
-- pHash-hard lung/colon histoloji;
-- rastgele Pap smear.
+## Development incelemesi
 
-Pair ID, sınıf, dosya adı ve pHash metinleri okunabilir; sol/sağ görüntüler doğru yerleşmiştir.
-Holdout sayfaları açılmadı ve hiçbir çift için insan kararı kaydedilmedi.
+2026-10-21 tarihinde Mehmet'in açık yetkilendirmesiyle 32 development temas sayfasındaki 139 çift
+Codex tarafından görsel olarak incelendi. Sonuç: 15 `same_source_candidate`, 123
+`independent_lookalike` ve 1 `uncertain`. Reviewer alanı bunun bağımsız insan gold standardı değil,
+AI-destekli inceleme olduğunu açıkça belirtir. Ayrıntılı kanıt ve Pair ID listesi:
+`research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md`.
+
+Kararların doğrudan PNG başlıklarında görülebildiği 32 development sayfası şurada tutulur:
+
+```text
+artifacts/audit/duplicate_calibration_v1/review/reviewed_development_v1/contact_sheets/
+```
+
+Bu klasörde holdout görüntüsü yoktur. Orijinal boş temas sayfaları ayrıca korunmuştur.
 
 ## Bir sonraki durma noktası
 
-Sonraki iş, development çiftlerini küçük ve izlenebilir partiler hâlinde birlikte etiketlemektir.
-İlk önerilen parti bir source group içindeki tek sayfadır. Her karar Pair ID üzerinden
-`review_labels.csv` dosyasına işlenecek; sayfa tamamlanmadan sonraki gruba geçilmeyecektir.
+Development kararlarıyla hibrit yöntemi kodla ve kuralları dondur. Holdout temas sayfalarını bu
+sırada açma. Yöntem dondurulduktan sonra 139 holdout çifti yalnız bir kez incelenip bağımsız ölçüm
+için kullanılacaktır.

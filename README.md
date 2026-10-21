@@ -20,6 +20,7 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 - [research/NEAR_DUPLICATE_METHOD_PLAN_TR.md](research/NEAR_DUPLICATE_METHOD_PLAN_TR.md): pHash, ORB/RANSAC, ECC ve hizalanmış benzerlikle bütün 26 sınıfa genişleme planı
 - [research/CALIBRATION_SET_V1_AUDIT_TR.md](research/CALIBRATION_SET_V1_AUDIT_TR.md): 26 sınıflı duplicate-yöntem kalibrasyon taslağının üretim ve kontrol sonuçları
 - [research/CALIBRATION_REVIEW_PACKAGE_TR.md](research/CALIBRATION_REVIEW_PACKAGE_TR.md): 278 aday için Pair ID'li temas sayfaları ve kontrollü development/holdout inceleme protokolü
+- [research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md](research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md): 139 development çiftinin AI-destekli görsel kararları ve holdout koruması
 - [research/DATASET_MASTER_AUDIT_TR.md](research/DATASET_MASTER_AUDIT_TR.md): veri setinin ana denetimi
 - [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
 - [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması
@@ -171,6 +172,13 @@ py -3.10 .\src\render_calibration_review.py --pairs-per-page 6 --thumb-size 320
 İnceleme paketi ve karar sözlüğü
 [`research/CALIBRATION_REVIEW_PACKAGE_TR.md`](research/CALIBRATION_REVIEW_PACKAGE_TR.md) içinde
 açıklanmıştır.
+
+139 development çiftinin AI-destekli görsel incelemesi tamamlandı: 15 aynı-kaynak adayı, 123
+bağımsız benzer görüntü ve 1 belirsiz çift kaydedildi. Karar kaynağı
+`research/development_visual_review_v1.csv`, ayrıntılı rapor ise
+`research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md` dosyasındadır. Kararların PNG başlıklarında görüldüğü
+32 yerel sayfa `artifacts/audit/duplicate_calibration_v1/review/reviewed_development_v1/`
+altındadır. Holdout 0/139 incelenmiş olarak kapalı tutulmaktadır.
 
 ## Eğitim kodunun mevcut durumu
 

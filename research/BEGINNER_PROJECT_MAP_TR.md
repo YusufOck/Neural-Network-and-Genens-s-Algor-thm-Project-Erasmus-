@@ -11,8 +11,10 @@ yapıldığında aynı görüntü ailesinin farklı bölümlere dağılıp data 
 
 Güncel sıra:
 
-1. 278 belirsiz adayın önce yalnız **139 development** çifti gözle incelenecek.
-2. ORB/RANSAC, ECC/phase correlation ve hizalanmış benzerlik kanalları kodlanacak.
+1. 278 belirsiz adayın önce yalnız **139 development** çifti gözle incelenecek. **Tamamlandı:
+   15 aynı-kaynak, 123 bağımsız, 1 belirsiz.**
+2. ORB/RANSAC, ECC/phase correlation ve hizalanmış benzerlik kanalları kodlanacak. **Sıradaki
+   aşama budur.**
 3. Yöntem yalnız development sonuçlarıyla ayarlanıp dondurulacak.
 4. O zamana kadar açılmayan 139 holdout çiftiyle yöntem bir kez ölçülecek.
 5. Doğrulanmış yöntem bütün 26 alt sınıfa uygulanacak.
@@ -54,8 +56,20 @@ NNGA/
 artifacts/audit/duplicate_calibration_v1/review/contact_sheets/
 ```
 
-64 PNG sayfası vardır. Her sayfada en çok altı çift bulunur. Sayfa genel tarama içindir.
-Development sayfaları önce incelenir; holdout sayfaları yöntem dondurulana kadar açılmaz.
+64 PNG **sayfası** vardır; bunlar 64 çift değildir. Her sayfada en çok altı çift bulunur ve bütün
+sayfalar birlikte 278 çifti gösterir. 32 development sayfasında 139 çift, diğer 32 holdout
+sayfasında 139 çift vardır. Development sayfaları incelendi; holdout sayfaları yöntem dondurulana
+kadar açılmaz.
+
+Kararların görüntülerin üstünde yazdığı ve şu anda bakman gereken klasör:
+
+```text
+artifacts/audit/duplicate_calibration_v1/review/reviewed_development_v1/contact_sheets/
+```
+
+Burada 32 PNG vardır ve yalnız 139 development çiftini içerir. Her çiftin başlığında Pair ID,
+pHash mesafesi, karar ve confidence görünür. Eski `review/contact_sheets/` klasörü karar öncesindeki
+boş çalışma sayfalarını korur; holdout sayfaları da orada kapalı kalır.
 
 ### 2. Pair ID indeksi
 
@@ -72,8 +86,9 @@ tablosu değildir.
 artifacts/audit/duplicate_calibration_v1/review/review_labels.csv
 ```
 
-278 çiftin asıl kayıt tablosudur. `human_verdict`, `confidence`, `review_notes`, `reviewer` ve
-`review_date` alanları karar verilene kadar boş kalır. Boş satır **negatif** anlamına gelmez.
+278 çiftin asıl kayıt tablosudur. Development bölümündeki 139 karar AI-destekli görsel incelemeyle
+dolduruldu. Holdout bölümündeki 139 karar hâlâ boştur. `reviewer` alanı kararı kimin verdiğini açık
+biçimde saklar. Boş satır **negatif** anlamına gelmez.
 
 ## Bir çifti kaybolmadan nasıl açacağız?
 
@@ -137,7 +152,10 @@ kaçırdığını ölçmek içindir.
 pHash her görüntüyü 64 bitlik kaba bir görsel parmak izine dönüştürür:
 
 1. Görüntüyü gri tona çevirir ve 32×32 boyuta küçültür.
-2. DCT ile geniş renk/parlaklık ayrıntısından çok genel uzamsal yapıyı frekans bileşenlerinde özetler.
+2. DCT görüntüyü üst üste eklenebilen 32×32 farklı dalga deseniyle tarif eder. Sol-üstteki DCT
+   katsayıları yavaş değişen geniş açık/koyu bölgeleri ve ana şekilleri; sağa ve aşağı gidildikçe
+   katsayılar ince kenar/doku ayrıntılarını temsil eder. pHash yalnız sol-üstteki düşük frekanslı
+   8×8 bölgeyi alarak 1024 pikseli 64 kaba yapı kararına indirger.
 3. Düşük frekanslı katsayıların medyanın altında/üstünde olmasına göre 64 adet 0/1 üretir.
 4. İki parmak izindeki farklı bitler sayılır; buna Hamming mesafesi denir.
 
@@ -168,7 +186,7 @@ kaçırdı. Sonuç: pHash yararlı bir **aday üretme kanalıdır**, nihai karar
 - pHash mesafesi: 10
 - Şimdiki resmi insan kararı: boş
 
-İlk görsel ön yorumda ortadaki koyu çekirdek kümesi, sağdaki yuvarlak boşluk, alttaki beyaz doku
-yırtığı ve üst sınırdaki hücrelerin şekil/konumları iki tarafta birlikte örtüşüyor. Bu, yalnız aynı
-sınıfa benzemekten daha güçlüdür ve `same_source_candidate` yönünde güçlü kanıttır. Ancak karar,
-Mehmet ile ortak incelemeden sonra Pair ID üzerinden tabloya yazılacaktır.
+Ortadaki koyu çekirdek kümesi, sağdaki yuvarlak boşluk, alttaki beyaz doku yırtığı ve üst sınırdaki
+hücrelerin şekil/konumları iki tarafta birlikte örtüşür. Mehmet'in görsel incelemeyi Codex'e açıkça
+devretmesinden sonra `C000613`, `same_source_candidate` ve `high` confidence olarak kaydedildi.
+Reviewer alanı kararın AI-destekli olduğunu belirtir.
