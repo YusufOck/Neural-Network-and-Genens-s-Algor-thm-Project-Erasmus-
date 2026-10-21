@@ -14,6 +14,7 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 
 ## Temel belgeler
 
+- [research/BEGINNER_PROJECT_MAP_TR.md](research/BEGINNER_PROJECT_MAP_TR.md): başlangıçtan klasör/kod haritası, tek Pair ID inceleme yöntemi, sentetik pozitif ve pHash açıklaması
 - [PROJECT_PLAN.md](PROJECT_PLAN.md): deney sırası, başarı ölçütleri ve teslim planı
 - [research/PROJECT_STATUS_TR.md](research/PROJECT_STATUS_TR.md): tam kapsam, pilot, devam eden ve başlamamış işlerin güncel kontrol listesi
 - [research/NEAR_DUPLICATE_METHOD_PLAN_TR.md](research/NEAR_DUPLICATE_METHOD_PLAN_TR.md): pHash, ORB/RANSAC, ECC ve hizalanmış benzerlikle bütün 26 sınıfa genişleme planı
