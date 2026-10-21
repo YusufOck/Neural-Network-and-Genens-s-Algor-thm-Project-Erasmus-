@@ -21,6 +21,7 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 - [research/CALIBRATION_SET_V1_AUDIT_TR.md](research/CALIBRATION_SET_V1_AUDIT_TR.md): 26 sınıflı duplicate-yöntem kalibrasyon taslağının üretim ve kontrol sonuçları
 - [research/CALIBRATION_REVIEW_PACKAGE_TR.md](research/CALIBRATION_REVIEW_PACKAGE_TR.md): 278 aday için Pair ID'li temas sayfaları ve kontrollü development/holdout inceleme protokolü
 - [research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md](research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md): 139 development çiftinin AI-destekli görsel kararları ve holdout koruması
+- [research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md](research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md): 671 development çiftinde ORB/RANSAC, phase correlation, ECC ve hizalanmış benzerlik pilotu
 - [research/DATASET_MASTER_AUDIT_TR.md](research/DATASET_MASTER_AUDIT_TR.md): veri setinin ana denetimi
 - [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
 - [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması
@@ -179,6 +180,21 @@ bağımsız benzer görüntü ve 1 belirsiz çift kaydedildi. Karar kaynağı
 `research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md` dosyasındadır. Kararların PNG başlıklarında görüldüğü
 32 yerel sayfa `artifacts/audit/duplicate_calibration_v1/review/reviewed_development_v1/`
 altındadır. Holdout 0/139 incelenmiş olarak kapalı tutulmaktadır.
+
+Development bölümündeki 671 çift için tekrar üretilebilir hibrit kanıt çıkarımı şu komutla
+çalıştırılır:
+
+```powershell
+$env:PYTHONUTF8="1"
+py -3.10 .\src\score_duplicate_development.py
+```
+
+Bu komut ORB/RANSAC, phase correlation, CT/MRI/Pap için ECC ve hizalanmış SSIM/NMI ölçümlerini
+`artifacts/audit/duplicate_hybrid_development_v1/` altına yazar. Holdout görüntülerini açmaz;
+otomatik duplicate kararı, augmentation family veya model split'i üretmez. Doğrulanmış pilot
+bulguları için
+[`research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md`](research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md)
+dosyasına bakın.
 
 ## Eğitim kodunun mevcut durumu
 

@@ -1,6 +1,6 @@
 # NNGA proje durum kaydı
 
-Son güncelleme: 2026-10-21
+Son güncelleme: 2026-10-22
 
 Bu dosya, küçük bir pilotun yanlışlıkla bütün veri setinde tamamlanmış bir denetim gibi
 anlatılmasını önlemek için projenin tek durum kontrol listesidir. Bir adım ancak aşağıdaki
@@ -50,16 +50,16 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | SHA-256 pozitif kontrolü | Pilot kapsamında tamamlandı | Pilot içindeki 279 exact `lung_scc` çiftinin tamamı pHash 0. |
 | İlk görsel yorum | Pilot kapsamında ön inceleme tamamlandı | Codex destekli ön inceleme raporlandı; bu, resmi ortak etiket tablosunun tamamlandığı anlamına gelmez. |
 | Eski 120-pair pilotun izlenebilir etiketlenmesi | Devam ediyor / pilot kaydı | 8 exact satır hazır, 112 satır bekliyor; bu pHash-yanlı iki-sınıf örneklemi nihai kalibrasyon kümesi değildir. |
-| Bütün 26 sınıflı resmi kalibrasyon kümesi | Taslak üretildi / inceleme bekliyor | 1.342 çift: 1.064 kesin pozitif ve 278 insan-inceleme adayı; iki audit bölümünde de 26/26 yaprak var. |
+| Bütün 26 sınıflı resmi kalibrasyon kümesi | Development tamamlandı / holdout korumalı | 1.342 çift: 1.064 kesin pozitif ve 278 inceleme adayı; development etiket/skorları hazır, holdout yöntem dondurulana kadar kapalı. |
 | Kalibrasyon insan-inceleme paketi | Development incelemesi tamamlandı / holdout kapalı | 278 Pair ID ve 64 temas sayfası hazır. 139/139 development kararı AI-destekli olarak kaydedildi; 139/139 holdout boş tutuldu. |
 | Bağımsız negatif kontroller | Development doğrulandı / holdout bekliyor | Development içinde 123 bağımsız, 15 aynı-kaynak ve 1 belirsiz karar kaydedildi. Bu oran doğal duplicate prevalence değildir. |
-| Tekrar üretilebilir ORB/RANSAC doğrulaması | Başlamadı | Ad-hoc destekleyici ölçüm yapıldı; kod/CSV çıktısı henüz kalıcı pipeline değil. |
+| Tekrar üretilebilir ORB/RANSAC doğrulaması | Development pilotu tamamlandı / eşik dondurulmadı | 671/671 development çifti için kalıcı kod, CSV ve JSON çıktı üretildi; holdout açılmadı. |
 | Uzaklık 12 üzerindeki recall/kaçırma kontrolü | Kontrollü sentetik kapsamda tamamlandı | 1.040 kesin sentetik pozitifin 552'si (%53,08) pHash 12 üzerindeydi; doğal akrabalar ve diğer aday kanalları henüz ölçülmedi. |
-| Kan yayması mikroskopisi doğrulaması | Başlamadı | ALL ve/veya lymphoma temsilcileri gerekli. |
-| Pap smear mikroskopisi doğrulaması | Başlamadı | Cervical alt sınıfları gerekli. |
-| CT doğrulaması | Başlamadı | `kidney_normal` ve `kidney_tumor` gerekli. |
-| Diğer MRI alt sınıfları | Başlamadı | `brain_menin` ve `brain_tumor` gerekli. |
-| Diğer H&E histopatoloji alt sınıfları | Başlamadı | Breast, colon, diğer lung, lymphoma ve oral alt sınıfları gerekli. |
+| Kan yayması mikroskopisi doğrulaması | Development pilotu tamamlandı / holdout bekliyor | Kontrollü pozitifler ve development review çiftleri skorlandı; bağımsız ölçüm yapılmadı. |
+| Pap smear mikroskopisi doğrulaması | Development pilotu tamamlandı / holdout bekliyor | ORB/phase/ECC kanıtları çıkarıldı; beş bağımsız çiftte ECC yakınsamadı. |
+| CT doğrulaması | Development pilotu tamamlandı / holdout bekliyor | `kidney_normal` ve `kidney_tumor` development çiftleri skorlandı; `C000620` belirsiz kaldı. |
+| Diğer MRI alt sınıfları | Development pilotu tamamlandı / holdout bekliyor | Üç brain yaprağı development kalibrasyonunda temsil edildi; bağımsız ölçüm yapılmadı. |
+| Diğer H&E histopatoloji alt sınıfları | Development pilotu tamamlandı / holdout bekliyor | Bütün H&E kaynak grupları development kalibrasyonunda temsil edildi; bağımsız ölçüm yapılmadı. |
 | Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Pilot ve modalite doğrulaması bitmeden çalıştırılmayacak. |
 | Sınıflar arası perceptual-duplicate kontrolü | Başlamadı | Pilot yalnız aynı alt sınıf içindeki çiftleri karşılaştırdı. Uyumlu modalite/kaynak grupları arasında değiştirilmiş çapraz-etiket kopyaları ayrıca aranmalı. |
 | 130.000 görüntü için augmentation-family grupları | Başlamadı | Henüz hiçbir nihai aile listesi yok. |
@@ -91,13 +91,15 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 1. `research/NEAR_DUPLICATE_METHOD_PLAN_TR.md` yöntem ve kalibrasyon tasarımını Mehmet ile onayla. **Tamamlandı.**
 2. Bütün 26 alt sınıftan exact/sentetik pozitif, rastgele/hard negative, >12 ve çapraz-sınıf
    örnekleri içeren `calibration-set v1` oluştur. Mevcut 120 çifti ayrı pilot kaydı olarak koru.
-   **Taslak üretildi; 278 adayın insan incelemesi henüz yapılmadı.**
+   **Taslak üretildi; 139 development adayı incelendi, 139 holdout adayı yöntem dondurulana kadar
+   kapalı tutuluyor.**
 3. Yeni şemayla resmi çift etiketlemesini yap; eski pilotun 112 bekleyen satırını da pilot kaydı
    olarak kapat, fakat nihai kalibrasyon sonucu sayma. **Yeni kalibrasyonda 139/139 development
    kararı AI-destekli olarak girildi; eski pilot kaydı hâlâ açık, holdout yöntem dondurulana kadar
    kapalı.**
 4. pHash aday üretimi, ORB/RANSAC, ECC/phase correlation ve hizalanmış SSIM/NMI yöntemlerini
-   tekrar üretilebilir kod ve CSV çıktısına dönüştür.
+   tekrar üretilebilir kod ve CSV çıktısına dönüştür. **Development özellik çıkarımı tamamlandı;
+   birleşik karar kuralı/eşikleri henüz dondurulmadı.**
 5. Kalibrasyon ile eşikleri geliştir; farklı kaynak görüntülerden oluşan hold-out çiftlerinde beş
    ana modaliteyi doğrula: kan yayması, MRI, H&E histopatoloji, Pap smear ve CT.
 6. Aynı denetim protokolünü 26 alt sınıfın tamamına uygula. Modaliteye göre farklı karar kuralı

@@ -13,9 +13,9 @@ Güncel sıra:
 
 1. 278 belirsiz adayın önce yalnız **139 development** çifti gözle incelenecek. **Tamamlandı:
    15 aynı-kaynak, 123 bağımsız, 1 belirsiz.**
-2. ORB/RANSAC, ECC/phase correlation ve hizalanmış benzerlik kanalları kodlanacak. **Sıradaki
-   aşama budur.**
-3. Yöntem yalnız development sonuçlarıyla ayarlanıp dondurulacak.
+2. ORB/RANSAC, ECC/phase correlation ve hizalanmış benzerlik kanalları kodlanacak. **Tamamlandı:
+   671/671 development çifti skorlandı; holdout açılmadı.**
+3. Yöntem yalnız development sonuçlarıyla ayarlanıp dondurulacak. **Sıradaki aşama budur.**
 4. O zamana kadar açılmayan 139 holdout çiftiyle yöntem bir kez ölçülecek.
 5. Doğrulanmış yöntem bütün 26 alt sınıfa uygulanacak.
 6. Yakın-kopya aileleri parçalanmadan 70/15/15 split hazırlanacak.
@@ -41,6 +41,8 @@ NNGA/
 │   │                                 26 sınıflı kalibrasyon setini üretir
 │   ├── render_calibration_review.py  278 adayın 64 temas sayfasını üretir
 │   ├── render_review_pair.py         Pair ID ile tek development çiftini büyük açar
+│   ├── score_duplicate_development.py
+│   │                                 Yalnız development'ta hibrit kanıt skorlarını çıkarır
 │   └── train.py                      Model eğitim temeli; şu anda çalıştırılmayacak
 ├── research/                         İnsan tarafından okunabilir kanıt ve durum raporları
 ├── tests/                            Kodun beklenen davranışlarını otomatik kontrol eder
@@ -107,6 +109,24 @@ artifacts/audit/duplicate_calibration_v1/review/pair_views/C000613.png
 
 Araç yalnız development çiftini gösterir. Karar yazmaz, CSV'yi değiştirmez, eşik seçmez, split
 oluşturmaz ve model eğitmez. Holdout çifti yanlışlıkla girilirse varsayılan olarak durur.
+
+## Development hibrit skorları nasıl üretilir?
+
+```powershell
+$env:PYTHONUTF8="1"
+py -3.10 .\src\score_duplicate_development.py
+```
+
+Bu işlem 671 development çiftini okur ve şu iki yerel dosyayı üretir:
+
+```text
+artifacts/audit/duplicate_hybrid_development_v1/pair_scores.csv
+artifacts/audit/duplicate_hybrid_development_v1/report.json
+```
+
+`pair_scores.csv` içindeki her satır bir Pair ID'nin pHash, ORB/RANSAC, phase correlation, ECC ve
+hizalanmış SSIM/NMI kanıtlarını içerir. Bu tablo **karar tablosu değildir**: eşikler henüz
+dondurulmadı, holdout açılmadı ve family/split oluşturulmadı.
 
 ## Gözle karşılaştırma kontrol listesi
 
