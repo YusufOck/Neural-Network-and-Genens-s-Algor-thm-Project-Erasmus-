@@ -26,6 +26,8 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 - [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
 - [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması
 - [research/ROUPB_CANCER_APP_AUDIT_TR.md](research/ROUPB_CANCER_APP_AUDIT_TR.md): en yakın 26-sınıf dış projenin kod denetimi
+- [output/pdf/NNGA_Progress_Update_2026-10-22.pdf](output/pdf/NNGA_Progress_Update_2026-10-22.pdf): hocaya gönderilebilecek iki sayfalık İngilizce ilerleme özeti
+- [output/pdf/NNGA_Duplicate_Examples_2026-10-22.png](output/pdf/NNGA_Duplicate_Examples_2026-10-22.png): aynı-kaynak ve belirsiz çift örneğini gösteren ek görsel
 
 ## Öğretmenin istediği teslim
 

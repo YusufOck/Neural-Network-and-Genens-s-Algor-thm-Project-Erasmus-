@@ -1,0 +1,21 @@
+Hello Professor,
+
+I would like to share a short progress update on my Neural Networks and Genetic Algorithms project.
+
+During the last three weeks, I first audited and organized the Multi Cancer dataset before starting the final model training. The dataset contains 130,000 images organized into 8 top-level groups and 26 leaf classes across five imaging modalities. I also found that the dataset already contains augmented and duplicate images, so a naive random train/test split could produce data leakage and unrealistically high accuracy.
+
+So far, I have:
+- completed the file-integrity, image-format, label-taxonomy and exact-duplicate audits;
+- built a 1,342-pair calibration set covering all 26 leaf classes;
+- implemented a reproducible near-duplicate analysis using pHash, ORB/RANSAC, phase correlation, ECC, SSIM and NMI;
+- scored all 671 development pairs while keeping 671 holdout pairs sealed for an unbiased evaluation.
+
+I am currently freezing the duplicate-detection rule. Next, I will evaluate it once on the holdout set, build a leakage-aware train/validation/test split, and then compare the neural-network models under the same split. I plan to report the required 8 top-level classification results and also study the 26 leaf labels as a structured extension.
+
+I attached a two-page progress report and one representative visual example. If you prefer, I can also come to your office and explain the current work in person. My work is continuing, but I wanted to make sure you could see the progress and confirm that the direction is appropriate.
+
+GitHub repository:
+https://github.com/YusufOck/Neural-Network-and-Genens-s-Algor-thm-Project-Erasmus-
+
+Best regards,
+Mehmet
