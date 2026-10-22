@@ -70,9 +70,9 @@ def draw_centered(draw: ImageDraw.ImageDraw, box: tuple[int, int, int, int], tex
 
 
 def create_visual_example() -> None:
-    canvas = PILImage.new("RGB", (1600, 900), "#F4F7FA")
+    canvas = PILImage.new("RGB", (1800, 1120), "#F4F7FA")
     draw = ImageDraw.Draw(canvas)
-    draw.rounded_rectangle((24, 20, 1576, 92), radius=18, fill="#16324F")
+    draw.rounded_rectangle((24, 20, 1776, 92), radius=18, fill="#16324F")
     draw.text(
         (52, 35),
         "Representative near-duplicate evidence",
@@ -80,7 +80,7 @@ def create_visual_example() -> None:
         fill="white",
     )
     draw.text(
-        (1040, 43),
+        (1180, 43),
         "Development data only - holdout remains sealed",
         font=font(19),
         fill="#D9E4EC",
@@ -88,7 +88,7 @@ def create_visual_example() -> None:
 
     examples = [
         {
-            "panel": (40, 120, 780, 730),
+            "panel": (35, 120, 590, 825),
             "color": "#1D7874",
             "title": "C000613 - same-source candidate",
             "subtitle": "Colon histology: repeated local tissue landmarks align",
@@ -100,13 +100,22 @@ def create_visual_example() -> None:
             / "Lung and Colon Cancer"
             / "colon_aca"
             / "colon_aca_4354.jpg",
-            "metrics": "pHash distance 10 | ORB/RANSAC inliers 2,270 | aligned SSIM 0.777",
+            "metrics": "pHash 10 | inliers 2,270 | SSIM 0.777",
         },
         {
-            "panel": (820, 120, 1560, 730),
+            "panel": (605, 120, 1160, 825),
+            "color": "#6C8EAD",
+            "title": "C000533 - independent",
+            "subtitle": "Blood smear: similar modality, no shared layout",
+            "left": DATASET_ROOT / "ALL" / "all_benign" / "all_benign_4655.jpg",
+            "right": DATASET_ROOT / "ALL" / "all_benign" / "all_benign_0961.jpg",
+            "metrics": "pHash 30 | inliers 5 | SSIM 0.224",
+        },
+        {
+            "panel": (1175, 120, 1740, 825),
             "color": "#F4A261",
             "title": "C000620 - uncertain",
-            "subtitle": "Kidney CT: similar level, but same slice vs adjacent slice is unclear",
+            "subtitle": "Kidney CT: same slice is unclear",
             "left": DATASET_ROOT
             / "Kidney Cancer"
             / "kidney_tumor"
@@ -115,7 +124,7 @@ def create_visual_example() -> None:
             / "Kidney Cancer"
             / "kidney_tumor"
             / "kidney_tumor_4836.jpg",
-            "metrics": "pHash distance 8 | ORB/RANSAC inliers 44 | aligned SSIM 0.754",
+            "metrics": "pHash 8 | inliers 44 | SSIM 0.754",
         },
     ]
 
@@ -126,11 +135,11 @@ def create_visual_example() -> None:
         draw.text((x1 + 38, y1 + 31), example["title"], font=font(25, bold=True), fill="white")
         draw.text((x1 + 28, y1 + 91), example["subtitle"], font=font(17), fill="#354A5F")
 
-        image_size = (320, 320)
+        image_size = (220, 220)
         left_image = fit_image(example["left"], image_size)
         right_image = fit_image(example["right"], image_size)
-        left_position = (x1 + 32, y1 + 140)
-        right_position = (x1 + 388, y1 + 140)
+        left_position = (x1 + 42, y1 + 140)
+        right_position = (x1 + 300, y1 + 140)
         canvas.paste(left_image, left_position)
         canvas.paste(right_image, right_position)
         draw.rectangle(
@@ -145,28 +154,28 @@ def create_visual_example() -> None:
         )
         draw_centered(
             draw,
-            (left_position[0], y1 + 467, left_position[0] + 320, y1 + 500),
+            (left_position[0], y1 + 382, left_position[0] + 220, y1 + 415),
             "Image A",
             font(17, bold=True),
             "#16324F",
         )
         draw_centered(
             draw,
-            (right_position[0], y1 + 467, right_position[0] + 320, y1 + 500),
+            (right_position[0], y1 + 382, right_position[0] + 220, y1 + 415),
             "Image B",
             font(17, bold=True),
             "#16324F",
         )
-        draw.rounded_rectangle((x1 + 28, y1 + 520, x2 - 28, y1 + 582), radius=12, fill="#EEF3F7")
+        draw.rounded_rectangle((x1 + 28, y1 + 445, x2 - 28, y1 + 507), radius=12, fill="#EEF3F7")
         draw_centered(
             draw,
-            (x1 + 36, y1 + 525, x2 - 36, y1 + 577),
+            (x1 + 36, y1 + 450, x2 - 36, y1 + 502),
             example["metrics"],
             font(17, bold=True),
             "#22313F",
         )
 
-    draw.rounded_rectangle((40, 760, 1560, 865), radius=18, fill="#16324F")
+    draw.rounded_rectangle((35, 875, 1740, 1055), radius=18, fill="#16324F")
     steps = [
         "pHash candidate",
         "ORB + RANSAC",
@@ -174,13 +183,13 @@ def create_visual_example() -> None:
         "SSIM / NMI",
         "family-aware split",
     ]
-    x_positions = [80, 370, 660, 950, 1240]
+    x_positions = [75, 410, 745, 1080, 1415]
     for index, (label, x) in enumerate(zip(steps, x_positions)):
-        draw.rounded_rectangle((x, 785, x + 235, 840), radius=14, fill="#1D7874")
-        draw_centered(draw, (x, 785, x + 235, 840), label, font(18, bold=True), "white")
+        draw.rounded_rectangle((x, 935, x + 270, 995), radius=14, fill="#1D7874")
+        draw_centered(draw, (x, 935, x + 270, 995), label, font(18, bold=True), "white")
         if index < len(steps) - 1:
             draw.polygon(
-                [(x + 250, 801), (x + 278, 812), (x + 250, 823)],
+                [(x + 285, 951), (x + 312, 965), (x + 285, 979)],
                 fill="#F4A261",
             )
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -462,7 +471,7 @@ def create_pdf() -> None:
             st["subtitle"],
         )
     )
-    visual = Image(str(PNG_PATH), width=163 * mm, height=91.7 * mm)
+    visual = Image(str(PNG_PATH), width=163 * mm, height=101.5 * mm)
     story.extend([visual, Spacer(1, 4 * mm)])
 
     findings_left = [
@@ -521,6 +530,49 @@ def create_pdf() -> None:
             st["small"],
         )
     )
+
+    story.append(PageBreak())
+    story.append(Spacer(1, 2 * mm))
+    story.append(Paragraph("How the duplicate evidence works", st["title"]))
+    story.append(Paragraph(
+        "No single number decides whether two images are copies. The pipeline combines complementary evidence so that a similar-looking image is not automatically treated as the same source.",
+        st["subtitle"],
+    ))
+    method_rows = [
+        [Paragraph("Method", ParagraphStyle("TableHead1", parent=st["body"], textColor=colors.white)), Paragraph("What it measures", ParagraphStyle("TableHead2", parent=st["body"], textColor=colors.white)), Paragraph("Why it is used", ParagraphStyle("TableHead3", parent=st["body"], textColor=colors.white)), Paragraph("How to read it", ParagraphStyle("TableHead4", parent=st["body"], textColor=colors.white))],
+        [Paragraph("pHash", st["body"]), Paragraph("A compact fingerprint of the overall visual layout.", st["body"]), Paragraph("Finds candidate pairs quickly.", st["body"]), Paragraph("Small distance means globally similar; it is not proof.", st["body"])],
+        [Paragraph("ORB", st["body"]), Paragraph("Distinctive local points such as edges, nuclei or tissue marks.", st["body"]), Paragraph("Checks whether local details can be matched.", st["body"]), Paragraph("More reliable matches are stronger evidence.", st["body"])],
+        [Paragraph("RANSAC", st["body"]), Paragraph("Whether ORB matches agree with one rotation/shift/scale transform.", st["body"]), Paragraph("Rejects accidental matches.", st["body"]), Paragraph("An inlier supports one coherent geometry.", st["body"])],
+        [Paragraph("ECC / phase", st["body"]), Paragraph("Global alignment and displacement between two images.", st["body"]), Paragraph("Supports low-texture MRI/CT images.", st["body"]), Paragraph("A high score means alignable intensity structure, not identical origin.", st["body"])],
+        [Paragraph("SSIM", st["body"]), Paragraph("Local structural similarity after alignment.", st["body"]), Paragraph("Checks shape and contrast together.", st["body"]), Paragraph("Closer to 1 means more structurally similar.", st["body"])],
+        [Paragraph("Correlation", st["body"]), Paragraph("Whether intensity changes rise and fall together.", st["body"]), Paragraph("Adds a global intensity-pattern check.", st["body"]), Paragraph("Closer to 1 means stronger shared pattern; alone it is insufficient.", st["body"])],
+        [Paragraph("NMI", st["body"]), Paragraph("Shared information between image intensities.", st["body"]), Paragraph("Helps when brightness or contrast differs.", st["body"]), Paragraph("Supportive evidence, interpreted with the other measures.", st["body"])],
+    ]
+    methods = Table(method_rows, colWidths=[25 * mm, 49 * mm, 43 * mm, 46 * mm], repeatRows=1)
+    methods.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), NAVY),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("BOX", (0, 0), (-1, -1), 0.8, MID),
+        ("INNERGRID", (0, 0), (-1, -1), 0.5, MID),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 2.2 * mm),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 2.2 * mm),
+        ("TOPPADDING", (0, 0), (-1, -1), 2 * mm),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 2 * mm),
+    ]))
+    story.append(methods)
+    story.append(Spacer(1, 4 * mm))
+    story.append(Paragraph("Reading the current numbers", st["section"]))
+    story.append(bullet("Same-source reference examples: ORB/RANSAC inliers 449-2,360, SSIM 0.777-0.969 and correlation 0.959-0.999.", st))
+    story.append(bullet("Independent-looking examples: inliers 3-17, SSIM 0.012-0.742 and correlation -0.299-0.837.", st))
+    story.append(bullet("C000620 is between these ranges, so it remains uncertain rather than being forced into either class.", st))
+    story.append(bullet("These ranges describe development evidence only; the frozen rule must still be evaluated once on sealed holdout data.", st))
+    story.append(Spacer(1, 3 * mm))
+    story.append(Paragraph("Important scope note", st["section"]))
+    story.append(Paragraph(
+        "This audit protects the future train/validation/test split from near-duplicate leakage. It is not a cancer diagnosis, not a patient-identity test, and not a model-accuracy result. The holdout remains sealed until the rule and its configuration are frozen.",
+        st["body"],
+    ))
 
     document.build(story, onFirstPage=draw_page, onLaterPages=draw_page)
 
