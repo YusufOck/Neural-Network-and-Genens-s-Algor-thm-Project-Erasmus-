@@ -1,6 +1,6 @@
 # NNGA proje durum kaydı
 
-Son güncelleme: 2026-10-22
+Son güncelleme: 2026-10-25
 
 Bu dosya, küçük bir pilotun yanlışlıkla bütün veri setinde tamamlanmış bir denetim gibi
 anlatılmasını önlemek için projenin tek durum kontrol listesidir. Bir adım ancak aşağıdaki
@@ -53,7 +53,8 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Bütün 26 sınıflı resmi kalibrasyon kümesi | Development tamamlandı / holdout korumalı | 1.342 çift: 1.064 kesin pozitif ve 278 inceleme adayı; development etiket/skorları hazır, holdout yöntem dondurulana kadar kapalı. |
 | Kalibrasyon insan-inceleme paketi | Development incelemesi tamamlandı / holdout kapalı | 278 Pair ID ve 64 temas sayfası hazır. 139/139 development kararı AI-destekli olarak kaydedildi; 139/139 holdout boş tutuldu. |
 | Bağımsız negatif kontroller | Development doğrulandı / holdout bekliyor | Development içinde 123 bağımsız, 15 aynı-kaynak ve 1 belirsiz karar kaydedildi. Bu oran doğal duplicate prevalence değildir. |
-| Tekrar üretilebilir ORB/RANSAC doğrulaması | Development pilotu tamamlandı / eşik dondurulmadı | 671/671 development çifti için kalıcı kod, CSV ve JSON çıktı üretildi; holdout açılmadı. |
+| Tekrar üretilebilir ORB/RANSAC doğrulaması | Development pilotu tamamlandı / rule v1 donduruldu | 671/671 development çifti için kalıcı kod, CSV ve JSON çıktı üretildi; bu kanıtla birleşik rule v1 donduruldu ve holdout açılmadı. |
+| Birlesik duplicate karar kurali v1 | Development kurali donduruldu / holdout kapali | Uc cikisli `same_source` / `independent` / `uncertain` kurali JSON'a yazildi ve SHA-256 degeri kaydedildi. Development'ta 547/547 ayni-kaynak, 123/123 bagimsiz karar korundu; C000620 uncertain kaldi. Bu holdout basarisi degildir. |
 | Uzaklık 12 üzerindeki recall/kaçırma kontrolü | Kontrollü sentetik kapsamda tamamlandı | 1.040 kesin sentetik pozitifin 552'si (%53,08) pHash 12 üzerindeydi; doğal akrabalar ve diğer aday kanalları henüz ölçülmedi. |
 | Kan yayması mikroskopisi doğrulaması | Development pilotu tamamlandı / holdout bekliyor | Kontrollü pozitifler ve development review çiftleri skorlandı; bağımsız ölçüm yapılmadı. |
 | Pap smear mikroskopisi doğrulaması | Development pilotu tamamlandı / holdout bekliyor | ORB/phase/ECC kanıtları çıkarıldı; beş bağımsız çiftte ECC yakınsamadı. |
@@ -99,7 +100,7 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    kapalı.**
 4. pHash aday üretimi, ORB/RANSAC, ECC/phase correlation ve hizalanmış SSIM/NMI yöntemlerini
    tekrar üretilebilir kod ve CSV çıktısına dönüştür. **Development özellik çıkarımı tamamlandı;
-   birleşik karar kuralı/eşikleri henüz dondurulmadı.**
+   birleşik karar kuralı v1, holdout açılmadan önce JSON ve SHA-256 ile donduruldu.**
 5. Kalibrasyon ile eşikleri geliştir; farklı kaynak görüntülerden oluşan hold-out çiftlerinde beş
    ana modaliteyi doğrula: kan yayması, MRI, H&E histopatoloji, Pap smear ve CT.
 6. Aynı denetim protokolünü 26 alt sınıfın tamamına uygula. Modaliteye göre farklı karar kuralı

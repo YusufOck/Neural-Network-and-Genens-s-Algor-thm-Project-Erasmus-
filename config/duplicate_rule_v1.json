@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "rule_id": "duplicate_rule_v1",
+  "status": "frozen_before_holdout",
+  "frozen_at": "2026-10-25",
+  "purpose": "Classify already-scored image pairs as same_source, independent, or uncertain before duplicate-family construction.",
+  "calibration_partition": "development",
+  "decision_priority": [
+    "sha256_exact",
+    "strong_geometry",
+    "strong_intensity_structure",
+    "conservative_independent",
+    "uncertain"
+  ],
+  "rules": {
+    "sha256_exact": {
+      "sha256_equal": "yes",
+      "decision": "same_source"
+    },
+    "strong_geometry": {
+      "orb_affine_plausible": "yes",
+      "orb_inliers_min": 30,
+      "orb_inlier_ratio_min": 0.55,
+      "orb_coverage_min": 0.2,
+      "decision": "same_source"
+    },
+    "strong_intensity_structure": {
+      "best_ssim_min": 0.8,
+      "best_correlation_min": 0.95,
+      "best_nmi_min": 1.25,
+      "decision": "same_source"
+    },
+    "conservative_independent": {
+      "orb_inliers_max": 20,
+      "best_ssim_max": 0.75,
+      "best_correlation_max": 0.85,
+      "decision": "independent"
+    },
+    "fallback": {
+      "decision": "uncertain"
+    }
+  },
+  "roles": {
+    "phash": "candidate_generation_only_not_a_final_decision",
+    "ecc": "alignment_support_not_a_standalone_same_source_decision",
+    "phase_correlation": "alignment_support_not_a_standalone_same_source_decision",
+    "uncertain": "manual_review_required"
+  },
+  "development_evidence": {
+    "pair_scores_sha256": "990ca55cd4ee42757a77255f1100813a2b6987ae7eae5b998bc1582ed93c4dfb",
+    "scorer_sha256": "ac9f0a1538a24615bea6fac530806c1536aefb3ad0916fd3f2895d8ca4af513f",
+    "same_source_pairs": 547,
+    "independent_pairs": 123,
+    "uncertain_pairs": 1
+  },
+  "limitations": [
+    "Thresholds were chosen from development evidence and are not holdout performance.",
+    "AI-assisted visual labels are not an independent medical-expert gold standard.",
+    "The default uncertain outcome is intentional and prevents forced decisions.",
+    "This rule detects likely shared image source; it does not establish patient identity or clinical equivalence."
+  ]
+}
