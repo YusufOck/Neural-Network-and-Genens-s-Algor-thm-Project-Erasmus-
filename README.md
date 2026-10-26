@@ -22,6 +22,7 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 - [research/CALIBRATION_REVIEW_PACKAGE_TR.md](research/CALIBRATION_REVIEW_PACKAGE_TR.md): 278 aday için Pair ID'li temas sayfaları ve kontrollü development/holdout inceleme protokolü
 - [research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md](research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md): 139 development çiftinin AI-destekli görsel kararları ve holdout koruması
 - [research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md](research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md): 671 development çiftinde ORB/RANSAC, phase correlation, ECC ve hizalanmış benzerlik pilotu
+- [research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md](research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md): dondurulmuş duplicate rule v1'in 671 holdout çiftindeki tek seferlik değerlendirmesi ve kesinti sonrası bütünlük doğrulaması
 - [research/DATASET_MASTER_AUDIT_TR.md](research/DATASET_MASTER_AUDIT_TR.md): veri setinin ana denetimi
 - [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
 - [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması
@@ -181,7 +182,8 @@ bağımsız benzer görüntü ve 1 belirsiz çift kaydedildi. Karar kaynağı
 `research/development_visual_review_v1.csv`, ayrıntılı rapor ise
 `research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md` dosyasındadır. Kararların PNG başlıklarında görüldüğü
 32 yerel sayfa `artifacts/audit/duplicate_calibration_v1/review/reviewed_development_v1/`
-altındadır. Holdout 0/139 incelenmiş olarak kapalı tutulmaktadır.
+altındadır. Bu geliştirme tamamlandıktan sonra rule v1 dondurulmuş ve holdout kontrollü olarak
+açılmıştır; aşağıdaki holdout bölümü güncel durumu verir.
 
 Development bölümündeki 671 çift için tekrar üretilebilir hibrit kanıt çıkarımı şu komutla
 çalıştırılır:
@@ -197,6 +199,30 @@ otomatik duplicate kararı, augmentation family veya model split'i üretmez. Do�
 bulguları için
 [`research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md`](research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md)
 dosyasına bakın.
+
+### Dondurulmuş kuralın holdout değerlendirmesi
+
+139 doğal holdout adayı önce algoritma skorları gösterilmeyen temas sayfalarında etiketlendi.
+Ardından frozen rule v1, development scorer koduyla aynı SHA-256 doğrulanarak 671 holdout çifti
+üzerinde yalnız bir kez çalıştırıldı:
+
+```powershell
+$env:PYTHONUTF8="1"
+py -3.10 .\src\evaluate_duplicate_holdout.py
+```
+
+Kaydedilmiş çıktının eksiksizliğini görüntüleri yeniden açmadan kontrol etmek için:
+
+```powershell
+$env:PYTHONUTF8="1"
+py -3.10 .\src\verify_duplicate_holdout.py
+```
+
+Sonuç: 547/547 aynı-kaynak bulundu, 120/124 bağımsız çift kesin negatif ayrıldı, dört zor MRI/CT
+çifti güvenli biçimde `uncertain` kaldı; kesin karar verilen 667 çiftte hata yoktur. Bu bir
+duplicate-audit sonucudur, kanser sınıflandırma doğruluğu değildir. Ayrıntılar
+[`research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md`](research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md)
+dosyasındadır.
 
 ## Eğitim kodunun mevcut durumu
 
