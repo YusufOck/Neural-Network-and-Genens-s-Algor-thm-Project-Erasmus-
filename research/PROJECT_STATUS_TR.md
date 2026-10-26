@@ -61,6 +61,7 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | CT doğrulaması | Holdout tamamlandı | 51 çift; iki bağımsız çift güvenli `uncertain`, kesin kararlarda hata 0. |
 | Diğer MRI alt sınıfları | Holdout tamamlandı | 75 çift; iki bağımsız çift güvenli `uncertain`, kesin kararlarda hata 0. |
 | Diğer H&E histopatoloji alt sınıfları | Holdout tamamlandı | 313 çift; `uncertain` 0, kesin kararlarda hata 0. |
+| Ölçeklenebilir aday üretimi v1 | Pilot tamamlandı / tam taramaya kabul edilmedi | 1.748 kalibrasyon görüntüsü: pHash ≤32 %100 recall fakat çiftlerin %94,5'i; ResNet18 top-50 %99,54 recall ve 5 kaçırma. |
 | Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Kalibrasyon/holdout doğrulandı; 130.000 görüntülük ölçekli aday taraması ve kapasite planı henüz yok. |
 | Sınıflar arası perceptual-duplicate kontrolü | Başlamadı | Kalibrasyondaki 35 seçilmiş cross-leaf aday tam tarama değildir; uyumlu kaynak grupları ölçekli olarak ayrıca aranmalı. |
 | 130.000 görüntü için augmentation-family grupları | Başlamadı | Henüz hiçbir nihai aile listesi yok. |
@@ -103,7 +104,8 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    ana modaliteyi doğrula: kan yayması, MRI, H&E histopatoloji, Pap smear ve CT.
    **Tamamlandı; 671/671 holdout çifti tek seferlik frozen-rule değerlendirmesinden geçti.**
 6. Aynı denetim protokolünü 26 alt sınıfın tamamına uygula. Modaliteye göre farklı karar kuralı
-   gerekebilir; hiçbir alt sınıf kapsam dışı bırakılamaz.
+   gerekebilir; hiçbir alt sınıf kapsam dışı bırakılamaz. **Aday üretimi v1 pilotu tamamlandı fakat
+   recall/aday-yükü dengesi tam taramaya yetmedi; v2 bekleniyor.**
 7. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
    denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
    yöntemiyle yap.

@@ -23,6 +23,7 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 - [research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md](research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md): 139 development çiftinin AI-destekli görsel kararları ve holdout koruması
 - [research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md](research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md): 671 development çiftinde ORB/RANSAC, phase correlation, ECC ve hizalanmış benzerlik pilotu
 - [research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md](research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md): dondurulmuş duplicate rule v1'in 671 holdout çiftindeki tek seferlik değerlendirmesi ve kesinti sonrası bütünlük doğrulaması
+- [research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md](research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md): 130.000 görüntü öncesi pHash/ResNet18 aday üretimi hız-recall pilotu
 - [research/DATASET_MASTER_AUDIT_TR.md](research/DATASET_MASTER_AUDIT_TR.md): veri setinin ana denetimi
 - [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
 - [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması
@@ -222,6 +223,23 @@ Sonuç: 547/547 aynı-kaynak bulundu, 120/124 bağımsız çift kesin negatif ay
 çifti güvenli biçimde `uncertain` kaldı; kesin karar verilen 667 çiftte hata yoktur. Bu bir
 duplicate-audit sonucudur, kanser sınıflandırma doğruluğu değildir. Ayrıntılar
 [`research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md`](research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md)
+dosyasındadır.
+
+### Tam veri taraması öncesi aday üretimi pilotu
+
+Pahalı duplicate doğrulayıcıyı milyarlarca çifte uygulamamak için pHash ve ResNet18 top-k retrieval
+şu komutla 1.748 kalibrasyon görüntüsünde karşılaştırıldı:
+
+```powershell
+$env:PYTHONUTF8="1"
+py -3.10 .\src\benchmark_candidate_generation.py --batch-size 32 --workers 4 --seed 42
+```
+
+Pilot, pHash ≤32'nin %100 recall için olası çiftlerin %94,5'ini geçirdiğini; ResNet18 top-50'nin
+daha ekonomik olmasına rağmen 1.094 pozitifin beşini kaçırdığını gösterdi. Bu nedenle tam 130.000
+görüntü taraması başlatılmadı. Önce parlaklık-normalize ve crop-dayanıklı candidate generator v2
+geliştirilecek. Ayrıntılar
+[`research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md`](research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md)
 dosyasındadır.
 
 ## Eğitim kodunun mevcut durumu
