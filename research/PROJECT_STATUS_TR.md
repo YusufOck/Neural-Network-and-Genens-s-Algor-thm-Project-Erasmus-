@@ -63,7 +63,9 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Diğer H&E histopatoloji alt sınıfları | Holdout tamamlandı | 313 çift; `uncertain` 0, kesin kararlarda hata 0. |
 | Ölçeklenebilir aday üretimi v1 | Pilot tamamlandı / tam taramaya kabul edilmedi | 1.748 kalibrasyon görüntüsü: pHash ≤32 %100 recall fakat çiftlerin %94,5'i; ResNet18 top-50 %99,54 recall ve 5 kaçırma. |
 | Ölçeklenebilir aday üretimi v2 | Kalibrasyon pilot kapısı geçti | 1.748 görüntüde robust top-10: 1.094/1.094 aynı-kaynak, 30/30 doğal çift; 18.012/224.926 (%8,01) aday. Tam veri sonucu değildir. |
-| Daha büyük retrieval/capacity pilotu | Başlamadı | V2'nin tam havuzda rank yoğunluğu ve frozen-rule maliyeti ölçülmeden 130.000 görüntü taranmayacak. |
+| Daha büyük retrieval/capacity pilotu | Pilot tamamlandı / robust top-10 kapısı geçmedi | 8.248 görüntüde top-10 1.092/1.094; iki `brightness_1_20` çifti rank 24/27. 122.211 aday = 14,82 çift/görüntü. |
+| Post-hoc pHash≤8 safety kontrolü | Exploratory tamamlandı / bağımsız doğrulama değil | `top-10 ∪ pHash≤8` iki kaçağı 817 ek adayla geri aldı; v2.1 hipotezi olarak yeni holdout bekliyor. |
+| Candidate Generator v2.1 kaynak-ayrık retrieval holdout | Başlamadı | V2.1 kuralı dondurulup mevcut kalibrasyon/distractor yollarıyla kesişmeyen yeni kontrollü kaynaklarda bir kez değerlendirilecek. |
 | Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Kalibrasyon bütün 26 yaprağı temsil ediyor; fakat 130.000 görüntülük ölçekli aday taraması henüz yapılmadı. |
 | Sınıflar arası perceptual-duplicate kontrolü | Başlamadı | Kalibrasyondaki 35 seçilmiş cross-leaf aday tam tarama değildir; uyumlu kaynak grupları ölçekli olarak ayrıca aranmalı. |
 | 130.000 görüntü için augmentation-family grupları | Başlamadı | Henüz hiçbir nihai aile listesi yok. |
@@ -107,8 +109,9 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    **Tamamlandı; 671/671 holdout çifti tek seferlik frozen-rule değerlendirmesinden geçti.**
 6. Aynı denetim protokolünü 26 alt sınıfın tamamına uygula. Modaliteye göre farklı karar kuralı
    gerekebilir; hiçbir alt sınıf kapsam dışı bırakılamaz. **Candidate generator v2 kalibrasyon
-   kapısını geçti; sırada daha büyük sınırlı retrieval/capacity pilotu vardır. Tam tarama henüz
-   başlamadı.**
+   kapısını geçti; 8.248 görüntülük scaled pilotta robust top-10 iki pozitif kaçırdı. Post-hoc
+   `top-10 ∪ pHash≤8` ikisini geri aldı; bu v2.1 hipotezi yeni kaynak-ayrık holdout'ta dondurulup
+   doğrulanmadan tam tarama başlamayacak.**
 7. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
    denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
    yöntemiyle yap.

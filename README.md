@@ -25,6 +25,7 @@ Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
 - [research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md](research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md): dondurulmuş duplicate rule v1'in 671 holdout çiftindeki tek seferlik değerlendirmesi ve kesinti sonrası bütünlük doğrulaması
 - [research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md](research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md): 130.000 görüntü öncesi pHash/ResNet18 aday üretimi hız-recall pilotu
 - [research/CANDIDATE_GENERATION_BENCHMARK_V2_TR.md](research/CANDIDATE_GENERATION_BENCHMARK_V2_TR.md): autocontrast/multi-crop robust ResNet18 top-k aday üretimi ve kalibrasyon kabul sonucu
+- [research/CANDIDATE_GENERATION_SCALED_PILOT_V1_TR.md](research/CANDIDATE_GENERATION_SCALED_PILOT_V1_TR.md): 8.248 görüntülük indeks-yoğunluğu pilotu, robust top-10 kaçırmaları ve post-hoc pHash≤8 safety-channel analizi
 - [research/DATASET_MASTER_AUDIT_TR.md](research/DATASET_MASTER_AUDIT_TR.md): veri setinin ana denetimi
 - [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
 - [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması
@@ -254,6 +255,29 @@ V2 kalibrasyonunda robust top-10, 1.094/1.094 aynı-kaynak referansını buldu v
 görüntülük pilot olduğundan tam tarama/family/split başlatılmadı. Sıradaki adım daha büyük sınırlı
 bir havuzda retrieval yoğunluğu ve uçtan uca hesap maliyetini ölçmektir. Ayrıntılar
 [`research/CANDIDATE_GENERATION_BENCHMARK_V2_TR.md`](research/CANDIDATE_GENERATION_BENCHMARK_V2_TR.md)
+dosyasındadır.
+
+### Candidate Generator v2 ölçekli kapasite pilotu
+
+V2'nin indeks büyüdüğünde bilinen akrabaları ilk 10'da tutup tutmadığı şu komutla ölçüldü:
+
+```powershell
+$env:PYTHONUTF8="1"
+py -3.10 .\src\benchmark_candidate_generation_scaled.py `
+  --stage-sizes 50,100,250 `
+  --batch-size 8 `
+  --retrieval-block-size 256 `
+  --seed 42
+```
+
+Maksimum 8.248 görüntülük stage'de robust top-10, 1.092/1.094 aynı-kaynak referansını buldu;
+iki `brightness_1_20` çifti rank 24 ve 27'ye düştü. Aday yükü 122.211 çift veya 14,82
+çift/görüntüydü. Bu nedenle önceden belirlenen recall kapısı geçmedi ve tam tarama başlatılmadı.
+
+Sonradan yapılan, açıkça post-hoc olarak işaretlenen `top-10 ∪ pHash≤8` kontrolü yalnız 817 ek
+çiftle iki kaçağı geri aldı. Bu birleşim Candidate Generator v2.1 hipotezidir; yeni ve kaynak-yolu
+ayrılmış holdout'ta dondurularak doğrulanmadan tam taramaya kullanılamaz. Ayrıntılar
+[`research/CANDIDATE_GENERATION_SCALED_PILOT_V1_TR.md`](research/CANDIDATE_GENERATION_SCALED_PILOT_V1_TR.md)
 dosyasındadır.
 
 ## Eğitim kodunun mevcut durumu
