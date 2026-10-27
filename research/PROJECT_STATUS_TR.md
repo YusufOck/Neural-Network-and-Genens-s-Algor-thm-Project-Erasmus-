@@ -1,6 +1,6 @@
 # NNGA proje durum kaydı
 
-Son güncelleme: 2026-10-26
+Son güncelleme: 2026-10-27
 
 Bu dosya, küçük bir pilotun yanlışlıkla bütün veri setinde tamamlanmış bir denetim gibi
 anlatılmasını önlemek için projenin tek durum kontrol listesidir. Bir adım ancak aşağıdaki
@@ -62,7 +62,9 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Diğer MRI alt sınıfları | Holdout tamamlandı | 75 çift; iki bağımsız çift güvenli `uncertain`, kesin kararlarda hata 0. |
 | Diğer H&E histopatoloji alt sınıfları | Holdout tamamlandı | 313 çift; `uncertain` 0, kesin kararlarda hata 0. |
 | Ölçeklenebilir aday üretimi v1 | Pilot tamamlandı / tam taramaya kabul edilmedi | 1.748 kalibrasyon görüntüsü: pHash ≤32 %100 recall fakat çiftlerin %94,5'i; ResNet18 top-50 %99,54 recall ve 5 kaçırma. |
-| Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Kalibrasyon/holdout doğrulandı; 130.000 görüntülük ölçekli aday taraması ve kapasite planı henüz yok. |
+| Ölçeklenebilir aday üretimi v2 | Kalibrasyon pilot kapısı geçti | 1.748 görüntüde robust top-10: 1.094/1.094 aynı-kaynak, 30/30 doğal çift; 18.012/224.926 (%8,01) aday. Tam veri sonucu değildir. |
+| Daha büyük retrieval/capacity pilotu | Başlamadı | V2'nin tam havuzda rank yoğunluğu ve frozen-rule maliyeti ölçülmeden 130.000 görüntü taranmayacak. |
+| Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Kalibrasyon bütün 26 yaprağı temsil ediyor; fakat 130.000 görüntülük ölçekli aday taraması henüz yapılmadı. |
 | Sınıflar arası perceptual-duplicate kontrolü | Başlamadı | Kalibrasyondaki 35 seçilmiş cross-leaf aday tam tarama değildir; uyumlu kaynak grupları ölçekli olarak ayrıca aranmalı. |
 | 130.000 görüntü için augmentation-family grupları | Başlamadı | Henüz hiçbir nihai aile listesi yok. |
 
@@ -104,8 +106,9 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    ana modaliteyi doğrula: kan yayması, MRI, H&E histopatoloji, Pap smear ve CT.
    **Tamamlandı; 671/671 holdout çifti tek seferlik frozen-rule değerlendirmesinden geçti.**
 6. Aynı denetim protokolünü 26 alt sınıfın tamamına uygula. Modaliteye göre farklı karar kuralı
-   gerekebilir; hiçbir alt sınıf kapsam dışı bırakılamaz. **Aday üretimi v1 pilotu tamamlandı fakat
-   recall/aday-yükü dengesi tam taramaya yetmedi; v2 bekleniyor.**
+   gerekebilir; hiçbir alt sınıf kapsam dışı bırakılamaz. **Candidate generator v2 kalibrasyon
+   kapısını geçti; sırada daha büyük sınırlı retrieval/capacity pilotu vardır. Tam tarama henüz
+   başlamadı.**
 7. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
    denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
    yöntemiyle yap.
