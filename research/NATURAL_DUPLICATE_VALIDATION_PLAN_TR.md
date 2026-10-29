@@ -2,7 +2,7 @@
 
 Tarih: 2026-10-29
 
-Durum: **Planlandı; çiftler seçilmedi ve görüntüler açılmadı.** Bu bir veri
+Durum: **345 çiftlik seçim manifesti donduruldu; görüntüler açılmadı.** Bu bir veri
 sızıntısı audit planıdır. Model eğitimi, family oluşturma veya train/validation/
 test split üretme adımı değildir.
 
@@ -123,5 +123,13 @@ bu sınırlamayı açıkça yazacaktır.
    kanalına mı, yoksa belgelenmiş artık-riskle throughput pilotuna mı gideceğine
    karar verilir.
 
-Şu anda yalnız plan tamamlanmıştır. 130.000 görüntülük tarama, family, split ve
-model eğitimi başlamamıştır.
+İlk üç adım 2026-10-29 tarihinde tamamlandı. Frozen config ve seçim kodu sonuçtan
+önce `f479f12` commit'iyle push edildi. Ardından 345/345 benzersiz çift ve Pair ID
+üretildi; 345 karar alanının tamamı boş, bütün dataset yolları mevcut ve review
+manifestinde skor/stratum sütunu yoktur. Seçim private manifest SHA-256 değeri
+`dc01803890352140c9e3465b86d144082850ebff735b73adc4f40a1ea97b86f0`, kör review
+manifest SHA-256 değeri
+`84ae0e9fa6d09cf6162d5ecbeec47cab82786217a3895d03c67ed8e55729da7c`'dir.
+
+Sıradaki adım score-blind temas sayfalarını oluşturmaktır. 130.000 görüntülük
+tarama, family, split ve model eğitimi başlamamıştır.

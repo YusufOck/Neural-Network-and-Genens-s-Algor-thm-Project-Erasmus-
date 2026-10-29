@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "selection_frozen_images_not_opened",
+  "experiment_type": "score_blind_natural_near_duplicate_audit_selection",
+  "counts": {
+    "dataset_images": 6604,
+    "selected_pairs": 345,
+    "unique_pairs": 345,
+    "unique_pair_ids": 345,
+    "blank_review_verdicts": 345,
+    "source_groups": 8,
+    "leaves": 26,
+    "by_stratum": {
+      "candidate_phash_supported": 57,
+      "candidate_robust_only": 96,
+      "outside_phash_distance14_16": 64,
+      "outside_random": 64,
+      "outside_robust_rank16_30": 64
+    },
+    "by_source_group": {
+      "all_blood_smear": 44,
+      "brain_ce_mri": 44,
+      "breast_histology": 37,
+      "cervix_pap_smear": 44,
+      "kidney_ct": 44,
+      "lung_colon_histology": 44,
+      "lymphoma_histology": 44,
+      "oral_histology": 44
+    }
+  },
+  "candidate_universe": {
+    "possible_dataset_pairs_within_source_group": 3093466,
+    "robust_top15_pairs": 132117,
+    "phash_radius12_pairs": 6079,
+    "intersection_pairs": 1548,
+    "v2_3_union_pairs": 136648,
+    "robust_rank16_30_outside_pairs": 107075,
+    "phash_distance14_16_outside_pairs": 20214
+  },
+  "retrieval_metadata": {
+    "device": "cuda",
+    "block_size": 256,
+    "seconds_total": 3.0402503999994224,
+    "seconds_by_source_group": {
+      "all_blood_smear": 0.6612371000001076,
+      "brain_ce_mri": 0.2775858999993943,
+      "breast_histology": 0.1477922000003673,
+      "cervix_pap_smear": 0.6940869000000021,
+      "kidney_ct": 0.14469289999942703,
+      "lung_colon_histology": 0.6782225000006292,
+      "lymphoma_histology": 0.28408239999953366,
+      "oral_histology": 0.15058249999947293
+    }
+  },
+  "integrity": {
+    "config_sha256": "983d80ebb10c1d03df2abfa56cd4df28559041795d7402dab84e592060991a5b",
+    "source_report_sha256": "0ede3f6ac3af8b006e3bbf706895169c180671b791a2e4aa116f15bcec6fa7dc",
+    "image_index_sha256": "4d96255d5a08001227c79d3b89a3763916e4103a0d6c8b9ddd7f5d9a6d448b46",
+    "robust_descriptors_sha256": "34917583efd8285be169ef45360d541608a98f06c07958b73ac0353c857e594a",
+    "phash_variants_sha256": "a79a74edebf41e7682719e0e7df289a022dc4f6156cfa12131190bfac6c109b6",
+    "builder_sha256": "cd6f123e5429d77ef9c1ac856231ffcaee688a7df02aee45fb5d03891e7303df",
+    "selection_private_sha256": "dc01803890352140c9e3465b86d144082850ebff735b73adc4f40a1ea97b86f0",
+    "review_manifest_sha256": "84ae0e9fa6d09cf6162d5ecbeec47cab82786217a3895d03c67ed8e55729da7c"
+  },
+  "limitations": [
+    "This is a duplicate-risk audit, not cancer-classification accuracy.",
+    "The sample cannot prove 100 percent natural near-duplicate recall over every unseen pair.",
+    "A confirmed same-source pair in an outside stratum blocks the proposed v2.3 rule from full scanning.",
+    "AI-assisted visual labels are not a clinical-expert gold standard."
+  ]
+}
