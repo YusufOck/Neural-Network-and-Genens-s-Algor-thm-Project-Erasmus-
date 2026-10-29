@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_natural_pair_selection",
+  "frozen_date": "2026-10-29",
+  "purpose": "Select a deterministic score-blind natural near-duplicate audit manifest before opening or labelling any selected image pair.",
+  "source": {
+    "holdout_root": "artifacts/audit/candidate_generator_v2_2_holdout",
+    "dataset_only": true,
+    "exclude_generated_controlled_transforms": true,
+    "expected_dataset_image_count": 6604,
+    "expected_source_group_count": 8,
+    "expected_leaf_count": 26
+  },
+  "v2_3_hypothesis": {
+    "robust_top_k": 15,
+    "phash_radius_inclusive": 12,
+    "search_scope": "within_compatible_source_group_only"
+  },
+  "sampling": {
+    "seed": 20261030,
+    "pair_id_prefix": "N",
+    "candidate_robust_only_per_source_group": 12,
+    "candidate_phash_supported_max_per_source_group": 8,
+    "candidate_phash_supported_target_per_channel": 4,
+    "outside_robust_rank_min": 16,
+    "outside_robust_rank_max": 30,
+    "outside_robust_per_source_group": 8,
+    "outside_phash_distance_min": 14,
+    "outside_phash_distance_max": 16,
+    "outside_phash_per_source_group": 8,
+    "outside_random_per_source_group": 8,
+    "expected_pair_count": 345
+  },
+  "blinding": {
+    "review_manifest_hides": [
+      "selection_stratum",
+      "phash_distance",
+      "robust_rank",
+      "robust_similarity",
+      "candidate_channel"
+    ],
+    "all_review_decision_fields_start_blank": true,
+    "images_must_not_be_opened_during_selection": true
+  },
+  "interpretation_limits": [
+    "This is a duplicate-risk audit, not cancer-classification accuracy.",
+    "The sample cannot prove 100 percent natural near-duplicate recall over every unseen pair.",
+    "A confirmed same-source pair in an outside stratum blocks the proposed v2.3 rule from full scanning.",
+    "AI-assisted visual labels are not a clinical-expert gold standard."
+  ]
+}
