@@ -2,7 +2,8 @@
 
 Tarih: 2026-10-29
 
-Durum: **345 çiftlik seçim manifesti donduruldu ve 58 score-blind temas sayfası hazır; görsel kararlar başlamadı.** Bu bir veri
+Durum: **345 çiftlik seçim manifesti donduruldu; 58 score-blind temas sayfasındaki
+345/345 çift incelendi ve görsel karar dosyası ayrıca dondurulmaya hazır.** Bu bir veri
 sızıntısı audit planıdır. Model eğitimi, family oluşturma veya train/validation/
 test split üretme adımı değildir.
 
@@ -137,6 +138,10 @@ satırı, Pair ID eşleşmeleri ve manifest/index hash'leri doğrulandı. İlk s
 yalnız düzen QA'sı için açıldı; çift kararı verilmedi. Sayfalarda yalnız Pair ID,
 source group ve L/R işareti görünür.
 
-Sıradaki adım 58 sayfadaki 345 çifti score-blind olarak inceleyip ayrı karar
-dosyasına kaydetmektir. 130.000 görüntülük tarama, family, split ve model eğitimi
-başlamamıştır.
+2026-10-29 tarihinde 345/345 çift skorlar açılmadan incelendi. Sonuç 21
+`same_source_candidate`, 322 `independent_lookalike` ve iki `uncertain` oldu.
+Karar kaynağı `research/natural_duplicate_visual_review_v1.csv`, ayrıntılı kayıt
+`research/NATURAL_DUPLICATE_VISUAL_REVIEW_V1_TR.md` dosyasındadır. Sıradaki adım
+bu karar kaynağını Git ile dondurduktan sonra private strata ve frozen duplicate
+rule v1 ile karşılaştırmaktır. 130.000 görüntülük tarama, family, split ve model
+eğitimi başlamamıştır.
