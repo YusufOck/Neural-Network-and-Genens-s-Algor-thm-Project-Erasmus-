@@ -2,7 +2,7 @@
 
 Tarih: 2026-10-29
 
-Durum: **345 çiftlik seçim manifesti donduruldu; görüntüler açılmadı.** Bu bir veri
+Durum: **345 çiftlik seçim manifesti donduruldu ve 58 score-blind temas sayfası hazır; görsel kararlar başlamadı.** Bu bir veri
 sızıntısı audit planıdır. Model eğitimi, family oluşturma veya train/validation/
 test split üretme adımı değildir.
 
@@ -131,5 +131,12 @@ manifestinde skor/stratum sütunu yoktur. Seçim private manifest SHA-256 değer
 manifest SHA-256 değeri
 `84ae0e9fa6d09cf6162d5ecbeec47cab82786217a3895d03c67ed8e55729da7c`'dir.
 
-Sıradaki adım score-blind temas sayfalarını oluşturmaktır. 130.000 görüntülük
-tarama, family, split ve model eğitimi başlamamıştır.
+Score-blind temas sayfaları `artifacts/audit/natural_duplicate_audit_v1/review/`
+altında 6 çift/sayfa ve 320 px kutularla üretildi. 58/58 sayfa, 345/345 indeks
+satırı, Pair ID eşleşmeleri ve manifest/index hash'leri doğrulandı. İlk sayfa
+yalnız düzen QA'sı için açıldı; çift kararı verilmedi. Sayfalarda yalnız Pair ID,
+source group ve L/R işareti görünür.
+
+Sıradaki adım 58 sayfadaki 345 çifti score-blind olarak inceleyip ayrı karar
+dosyasına kaydetmektir. 130.000 görüntülük tarama, family, split ve model eğitimi
+başlamamıştır.
