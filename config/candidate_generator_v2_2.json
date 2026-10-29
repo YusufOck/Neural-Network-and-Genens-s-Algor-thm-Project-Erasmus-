@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_second_prospective_controlled_holdout_evaluation",
+  "frozen_date": "2026-10-29",
+  "purpose": "Prospectively evaluate Candidate Generator v2.2 on a second source-path- and exact-content-disjoint controlled holdout before any full-dataset scan.",
+  "candidate_rule": {
+    "logic": "robust_four_channel_top15_union_flip_aware_phash_radius8",
+    "search_scope": "within_compatible_source_group_only",
+    "robust_retrieval": {
+      "architecture": "torchvision_resnet18_fc_identity",
+      "weights": "ResNet18_Weights.IMAGENET1K_V1",
+      "similarity": "exact_cosine_similarity",
+      "directionality": "union_of_directed_top_k_neighbors",
+      "top_k": 15,
+      "crop_ratio": 0.8,
+      "descriptor_channels": [
+        "raw_full_flip_mean",
+        "autocontrast_full_flip_mean",
+        "raw_multicrop_flip_mean",
+        "autocontrast_multicrop_flip_mean"
+      ]
+    },
+    "phash_retrieval": {
+      "hash_bits": 64,
+      "flip_aware": true,
+      "hamming_radius_inclusive": 8
+    }
+  },
+  "holdout_design": {
+    "seed": 20261029,
+    "leaf_count": 26,
+    "source_images_per_leaf": 4,
+    "distractors_per_leaf": 250,
+    "controlled_transforms": [
+      "rotate_minus_10",
+      "rotate_plus_10",
+      "shift_plus10_minus10",
+      "shear_factor_plus_0_10",
+      "zoom_out_0_90",
+      "zoom_in_1_10",
+      "horizontal_flip",
+      "brightness_0_20",
+      "brightness_1_20",
+      "combined_stress"
+    ],
+    "expected_source_image_count": 104,
+    "expected_controlled_positive_pair_count": 1040,
+    "expected_distractor_count": 6500,
+    "expected_index_image_count": 7644,
+    "exclusions": [
+      "all dataset paths present in the prior 8248-image scaled pilot index",
+      "all dataset paths present in the Candidate Generator v2.1 controlled holdout",
+      "all members of every SHA-256 exact-duplicate group from the 130000-image exact audit"
+    ]
+  },
+  "acceptance_gate": {
+    "controlled_same_source_recall": 1.0,
+    "minimum_recall_for_each_transform": 1.0,
+    "maximum_unique_candidate_pairs_per_indexed_image": 25.0
+  },
+  "interpretation_limits": [
+    "This is duplicate-candidate retrieval, not cancer-classification accuracy.",
+    "Controlled transformations establish known positives but do not establish clinical or patient-level generalization.",
+    "The dataset has no patient IDs or complete provenance, so path and exact-content disjointness cannot prove patient independence.",
+    "Passing this holdout does not authorize family construction, classifier splitting, model training, or a full 130000-image scan by itself."
+  ]
+}
