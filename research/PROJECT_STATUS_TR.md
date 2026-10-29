@@ -1,6 +1,6 @@
 # NNGA proje durum kaydı
 
-Son güncelleme: 2026-10-28
+Son güncelleme: 2026-10-29
 
 Bu dosya, küçük bir pilotun yanlışlıkla bütün veri setinde tamamlanmış bir denetim gibi
 anlatılmasını önlemek için projenin tek durum kontrol listesidir. Bir adım ancak aşağıdaki
@@ -66,7 +66,8 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Daha büyük retrieval/capacity pilotu | Pilot tamamlandı / robust top-10 kapısı geçmedi | 8.248 görüntüde top-10 1.092/1.094; iki `brightness_1_20` çifti rank 24/27. 122.211 aday = 14,82 çift/görüntü. |
 | Post-hoc pHash≤8 safety kontrolü | Exploratory tamamlandı / bağımsız doğrulama değil | `top-10 ∪ pHash≤8` iki scaled-pilot kaçağını 817 ek adayla geri aldı ve v2.1'i motive etti; sonraki frozen v2.1 holdout sonucu aşağıdadır. |
 | Candidate Generator v2.1 kaynak-ayrık retrieval holdout | Frozen holdout tamamlandı / kabul kapısı geçmedi | Önceki yollar ve exact gruplarla kesişmeyen 7.644 görüntüde v2.1 birleşimi 1.039/1.040 kontrollü pozitif buldu; tek `combined_stress` kaçağı nedeniyle tam-recall kapısı geçmedi. Yük 14,991 çift/görüntü. |
-| Candidate Generator v2.2 hipotezi | Post-hoc plan / henüz dondurulmadı | Tanısal kontrolde `robust top-15 ∪ pHash≤8` 1.040/1.040 ve 21,874 çift/görüntü sağladı. Bu sonuç geliştirme kanıtıdır; yeni kaynak-ayrık holdout doğrulaması olmadan tam taramaya kabul edilmez. |
+| Candidate Generator v2.2 ikinci kaynak-ayrık retrieval holdout | Frozen holdout tamamlandı / kabul kapısı geçmedi | Önceki scaled pilot ve v2.1 yollarıyla kesişmeyen 7.644 görüntüde `top-15 ∪ pHash≤8`, 1.039/1.040 kontrollü pozitifi buldu. Tek `brightness_1_20` kaçağı nedeniyle tam-recall kapısı geçmedi; yük 21,765 çift/görüntü. |
+| Candidate Generator v2.3 hipotezi | Post-hoc plan / dondurulmadı | V2.2 sonucu görüldükten sonraki tanısal kontrolde `top-15 ∪ pHash≤12`, 1.040/1.040 ve 22,501 çift/görüntü sağladı. Bu aynı holdout üzerindeki geliştirme kanıtıdır; bağımsız doğrulama veya tam-tarama izni değildir. |
 | Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Kalibrasyon bütün 26 yaprağı temsil ediyor; fakat 130.000 görüntülük ölçekli aday taraması henüz yapılmadı. |
 | Sınıflar arası perceptual-duplicate kontrolü | Başlamadı | Kalibrasyondaki 35 seçilmiş cross-leaf aday tam tarama değildir; uyumlu kaynak grupları ölçekli olarak ayrıca aranmalı. |
 | 130.000 görüntü için augmentation-family grupları | Başlamadı | Henüz hiçbir nihai aile listesi yok. |
@@ -111,10 +112,11 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 6. Aynı denetim protokolünü 26 alt sınıfın tamamına uygula. Modaliteye göre farklı karar kuralı
    gerekebilir; hiçbir alt sınıf kapsam dışı bırakılamaz. **Candidate generator v2 kalibrasyon
    kapısını geçti; 8.248 görüntülük scaled pilotta robust top-10 iki pozitif kaçırdı. Frozen v2.1
-   (`top-10 ∪ pHash≤8`) yeni 7.644 görüntülük kaynak-ayrık kontrollü holdout'ta 1.039/1.040 buldu
-   ve tek `combined_stress` çifti kaçırdığı için kapıyı geçmedi. Post-hoc top-15 birleşimi bu çifti
-   21,874 çift/görüntü yükle geri aldı; bu v2.2 hipotezi yeni holdout'ta dondurulup doğrulanmadan
-   tam tarama başlamayacak.**
+   (`top-10 ∪ pHash≤8`) ilk kaynak-ayrık holdout'ta 1.039/1.040 buldu ve tek `combined_stress`
+   çifti kaçırdı. Sonucu görmeden dondurulan v2.2 (`top-15 ∪ pHash≤8`) ikinci yeni 7.644
+   görüntülük holdout'ta yine 1.039/1.040 buldu; bu kez `brightness_1_20` çifti kaçtı. Post-hoc
+   `top-15 ∪ pHash≤12` aynı çifti 22,501 çift/görüntü yükle geri aldı, fakat bu yalnız v2.3
+   hipotezidir. Tam tarama başlamayacak.**
 7. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
    denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
    yöntemiyle yap.
