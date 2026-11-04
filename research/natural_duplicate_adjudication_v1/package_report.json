@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "adjudication_queue_prepared_decisions_blank",
+  "experiment_type": "near_duplicate_second_stage_review_preparation",
+  "counts": {
+    "input_pairs": 345,
+    "safe_consensus_pairs_excluded": 320,
+    "adjudication_pairs": 25,
+    "rendered_pair_views": 25,
+    "blank_adjudication_rows": 25,
+    "by_category": {
+      "direct_conflict": 2,
+      "rule_uncertain": 21,
+      "visual_uncertain": 2
+    },
+    "by_modality": {
+      "ct": 18,
+      "histopathology": 1,
+      "mri": 4,
+      "pap_smear": 2
+    }
+  },
+  "integrity": {
+    "unblinded_input_sha256": "00070315628d2ccf300e79fba31e4773adf5e35baa9a8bc9964c2ef3648f1a08",
+    "frozen_scores_input_sha256": "76d8e739a9a59b26e7ef8de44bdb534e5f8be06b90d748dbfb7774e8c62df3da",
+    "adjudication_queue_sha256": "113fe1ca33e5ab34863b9ae36b8ba52f2d75d7eb2a2e2633b21f6445e750ce2e",
+    "preparer_sha256": "6855b6dcc0f73499ee6f21ea8b1d97c12ee03366fd0fdd9b886a1faba69bb8de"
+  },
+  "decision_codes": {
+    "same_source": "Aynı 2B kaynak görüntünün dönüştürülmüş/augment edilmiş hali.",
+    "independent": "Farklı 2B görüntü veya farklı/komşu kesit.",
+    "uncertain": "Kanıt güvenli karar için yetersiz."
+  },
+  "guardrails": [
+    "Dondurulmuş score-blind visual review değiştirilmedi.",
+    "Frozen duplicate rule v1 değiştirilmedi.",
+    "Hazırlık aşamasında 25 nihai karar alanının tamamı boş bırakıldı.",
+    "Aynı hastaya ait olabilecek komşu CT kesitleri otomatik olarak aynı 2B görüntü ailesine bağlanmaz.",
+    "Bu paket duplicate family, classifier split veya model üretmez."
+  ]
+}
