@@ -7,6 +7,10 @@ dondurulmuş duplicate rule v1 ile 345/345 çift yerelde karşılaştırıldı.*
 veri sızıntısı denetimidir; kanser modeli eğitimi, duplicate family üretimi veya
 train/validation/test split değildir.
 
+Takip durumu (2026-11-04): 25 konsensüs-dışı çift ayrı score-aware adjudication
+aşamasında tamamlandı. Nihai referans 23 aynı-kaynak ve 322 bağımsız çifttir.
+Bkz. `research/NATURAL_DUPLICATE_ADJUDICATION_V1_RESULT_TR.md`.
+
 ## 1. Giriş bütünlüğü
 
 | Kaynak | SHA-256 |
@@ -115,11 +119,11 @@ Ham rapor SHA-256:
 
 ## 6. Sonraki kontrollü adım
 
-1. 25 çiftlik konsensüs dışı kuyruğu izlenebilir bir adjudication tablosuna
-   dönüştürmek.
-2. Özellikle `N000123` ve `N000206` için “aynı 2B görüntünün dönüşümü” ile
-   “benzer/komşu tıbbi kesit” ayrımını korumak.
-3. Ardından Candidate Generator v2.3'ü dondurup 130.000 görüntü taramasının
+1. 25 çiftlik konsensüs dışı kuyruğun adjudication'ı ayrı karar kaynağıyla
+   tamamlandı: 2 aynı-kaynak, 23 bağımsız.
+2. `N000123` aynı-kaynak; `N000206` benzer/komşu fakat farklı 2B CT kesiti
+   olarak sonuçlandı. Ayrıca `N000006` aynı-kaynak olarak geri kazanıldı.
+3. Şimdi Candidate Generator v2.3'ü dondurup 130.000 görüntü taramasının
    süre/depolama planını hazırlamak.
 4. Full candidate retrieval GPU/Colab'a taşınabilir; milyonlarca adayın
    ORB/ECC doğrulaması CPU ağırlıklı olduğu için ayrıca paralel ve aşamalı bir

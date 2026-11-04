@@ -68,7 +68,7 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Candidate Generator v2.1 kaynak-ayrık retrieval holdout | Frozen holdout tamamlandı / kabul kapısı geçmedi | Önceki yollar ve exact gruplarla kesişmeyen 7.644 görüntüde v2.1 birleşimi 1.039/1.040 kontrollü pozitif buldu; tek `combined_stress` kaçağı nedeniyle tam-recall kapısı geçmedi. Yük 14,991 çift/görüntü. |
 | Candidate Generator v2.2 ikinci kaynak-ayrık retrieval holdout | Frozen holdout tamamlandı / kabul kapısı geçmedi | Önceki scaled pilot ve v2.1 yollarıyla kesişmeyen 7.644 görüntüde `top-15 ∪ pHash≤8`, 1.039/1.040 kontrollü pozitifi buldu. Tek `brightness_1_20` kaçağı nedeniyle tam-recall kapısı geçmedi; yük 21,765 çift/görüntü. |
 | Candidate Generator v2.3 hipotezi | Post-hoc plan / dondurulmadı | V2.2 sonucu görüldükten sonraki tanısal kontrolde `top-15 ∪ pHash≤12`, 1.040/1.040 ve 22,501 çift/görüntü sağladı. Bu aynı holdout üzerindeki geliştirme kanıtıdır; bağımsız doğrulama veya tam-tarama izni değildir. |
-| Natural near-duplicate audit v1 | Challenge-set ve frozen-rule karşılaştırması tamamlandı / adjudication paketi hazır | 345/345 karar dondurulduktan sonra private strata açıldı. 21 görsel pozitifin tamamı candidate tarafında; 192 outside çiftte doğrulanmış pozitif 0. Frozen rule 21/21 pozitifi yakaladı; iki bağımsız çiftle çatıştı, 21 bağımsızı `uncertain` bıraktı. Güvenli konsensüs 21 aynı-kaynak ve 299 bağımsızdır. Kalan 25 çift Pair-ID görselleriyle kuyruğa alındı; 25/25 son-karar alanı henüz boştur. |
+| Natural near-duplicate audit v1 | Challenge-set, frozen-rule karşılaştırması ve ikinci-aşama adjudication tamamlandı | İlk güvenli konsensüs 21 aynı-kaynak ve 299 bağımsızdı. Kalan 25 çift score-aware, AI-destekli ve uzman-olmayan adjudication'da 2 aynı-kaynak + 23 bağımsız olarak sonuçlandı. Nihai 345 referans: 23 aynı-kaynak, 322 bağımsız, 0 belirsiz. Aynı-kaynakların 23/23'ü candidate tarafında; outside aynı-kaynak 0. Bu örneklenmiş challenge-set kanıtıdır, bütün doğal çiftlerde %100 recall garantisi değildir. |
 | Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Kalibrasyon bütün 26 yaprağı temsil ediyor; fakat 130.000 görüntülük ölçekli aday taraması henüz yapılmadı. |
 | Sınıflar arası perceptual-duplicate kontrolü | Başlamadı | Kalibrasyondaki 35 seçilmiş cross-leaf aday tam tarama değildir; uyumlu kaynak grupları ölçekli olarak ayrıca aranmalı. |
 | 130.000 görüntü için augmentation-family grupları | Başlamadı | Henüz hiçbir nihai aile listesi yok. |
@@ -118,8 +118,9 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    görüntülük holdout'ta yine 1.039/1.040 buldu; bu kez `brightness_1_20` çifti kaçtı. Post-hoc
    `top-15 ∪ pHash≤12` aynı çifti 22,501 çift/görüntü yükle geri aldı, fakat bu yalnız v2.3
    hipotezidir. Natural audit challenge kapısı daha sonra geçti; 25 konsensüs dışı
-   çift için izlenebilir adjudication paketi hazırlandı fakat karar alanları boştur.
-   Bu kararlar tamamlanmadan tam tarama başlamayacak.**
+   çift ayrı score-aware adjudication ile tamamlandı. Nihai 23 aynı-kaynak referansın
+   tamamı candidate bölgesinde, outside pozitif 0'dır. Bir sonraki adım v2.3'ü kod,
+   config ve hash ile dondurup tam tarama kapasite planını hazırlamaktır.**
 7. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
    denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
    yöntemiyle yap.

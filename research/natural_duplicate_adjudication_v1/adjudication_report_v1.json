@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "status": "natural_audit_v1_ai_assisted_adjudication_complete",
+  "experiment_type": "near_duplicate_second_stage_score_aware_adjudication",
+  "counts": {
+    "natural_audit_pairs": 345,
+    "safe_consensus_pairs": 320,
+    "adjudicated_pairs": 25,
+    "adjudication_verdicts": {
+      "independent": 23,
+      "same_source": 2
+    },
+    "final_references": {
+      "independent": 322,
+      "same_source": 23
+    },
+    "same_source_inside_candidate": 23,
+    "same_source_outside_candidate": 0
+  },
+  "rule_comparison_after_score_aware_adjudication": {
+    "matrix": {
+      "independent": {
+        "independent": 300,
+        "same_source": 1,
+        "uncertain": 21
+      },
+      "same_source": {
+        "same_source": 22,
+        "uncertain": 1
+      }
+    },
+    "same_source_recall": 0.9565217391304348,
+    "independent_recall": 0.9316770186335404,
+    "coverage": 0.936231884057971,
+    "decided_pair_accuracy": 0.9969040247678018,
+    "accuracy_counting_uncertain_as_not_correct": 0.9333333333333333
+  },
+  "integrity": {
+    "blank_queue_sha256": "113fe1ca33e5ab34863b9ae36b8ba52f2d75d7eb2a2e2633b21f6445e750ce2e",
+    "adjudication_decisions_sha256": "f61944040d5a1d145ad785bd99f4de3e33fd801e90f367566a352607f09b551b",
+    "frozen_scores_sha256": "76d8e739a9a59b26e7ef8de44bdb534e5f8be06b90d748dbfb7774e8c62df3da"
+  },
+  "limitations": [
+    "Adjudication Codex tarafından AI-destekli ve skorlar görünürken yapılmıştır; bağımsız uzman gold standard değildir.",
+    "Kural karşılaştırması adjudication sırasında kural kanıtları görüldüğü için bağımsız holdout performansı değildir.",
+    "Aynı hasta veya taramaya ait komşu kesitler yerel dosyalardan güvenilir biçimde gruplanamaz; karar hedefi aynı 2B kaynak görüntüdür.",
+    "345 çiftlik örneklem 3.093.466 olası doğal çiftin tamamını kapsamaz.",
+    "Bu çıktı duplicate family, classifier split veya kanser sınıflandırma modeli değildir."
+  ]
+}
