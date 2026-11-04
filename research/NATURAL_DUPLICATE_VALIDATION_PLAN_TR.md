@@ -2,8 +2,8 @@
 
 Tarih: 2026-10-29
 
-Durum: **345 çiftlik seçim manifesti donduruldu; 58 score-blind temas sayfasındaki
-345/345 çift incelendi ve görsel karar dosyası ayrıca dondurulmaya hazır.** Bu bir veri
+Durum: **345 çiftlik seçim manifesti ve score-blind kararlar donduruldu; private
+katmanlar açıldı ve 345/345 çift frozen duplicate rule v1 ile karşılaştırıldı.** Bu bir veri
 sızıntısı audit planıdır. Model eğitimi, family oluşturma veya train/validation/
 test split üretme adımı değildir.
 
@@ -141,7 +141,11 @@ source group ve L/R işareti görünür.
 2026-10-29 tarihinde 345/345 çift skorlar açılmadan incelendi. Sonuç 21
 `same_source_candidate`, 322 `independent_lookalike` ve iki `uncertain` oldu.
 Karar kaynağı `research/natural_duplicate_visual_review_v1.csv`, ayrıntılı kayıt
-`research/NATURAL_DUPLICATE_VISUAL_REVIEW_V1_TR.md` dosyasındadır. Sıradaki adım
-bu karar kaynağını Git ile dondurduktan sonra private strata ve frozen duplicate
-rule v1 ile karşılaştırmaktır. 130.000 görüntülük tarama, family, split ve model
-eğitimi başlamamıştır.
+`research/NATURAL_DUPLICATE_VISUAL_REVIEW_V1_TR.md` dosyasındadır. Karar kaynağı
+`da5f5ed` commit'iyle donduruldu. 2026-11-04 tarihinde private katmanlar açıldı:
+21 aynı-kaynak adayının tamamı candidate tarafında, outside challenge set içindeki
+192 çiftte doğrulanmış pozitif 0 bulundu. Frozen rule 21/21 görsel pozitifi yakaladı;
+iki görsel bağımsız çifte `same_source`, 21 bağımsız çifte güvenli `uncertain`
+verdi. Ayrıntı `research/NATURAL_DUPLICATE_AUDIT_V1_RESULT_TR.md` dosyasındadır.
+Sıradaki adım 25 konsensüs dışı çiftin adjudication kuyruğudur. 130.000 görüntülük
+tarama, family, split ve model eğitimi başlamamıştır.

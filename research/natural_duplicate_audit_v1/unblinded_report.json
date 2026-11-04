@@ -1,0 +1,102 @@
+{
+  "audit_name": "natural_duplicate_audit_v1",
+  "analysis_type": "frozen_score_blind_visual_decisions_unblinded_against_selection_strata",
+  "inputs": {
+    "private_selection": "research/natural_duplicate_audit_v1/selection_private.csv",
+    "private_selection_sha256": "dc01803890352140c9e3465b86d144082850ebff735b73adc4f40a1ea97b86f0",
+    "visual_decisions": "research/natural_duplicate_visual_review_v1.csv",
+    "visual_decisions_sha256": "91d857685ada7dbd6d3fb6e3add5a8fe914e3767389f1d37401a660ffd308bca"
+  },
+  "summary": {
+    "total_rows": 345,
+    "verdict_counts": {
+      "independent_lookalike": 322,
+      "same_source_candidate": 21,
+      "uncertain": 2
+    },
+    "audit_region_counts": {
+      "candidate": 153,
+      "outside": 192
+    },
+    "counts_by_stratum": {
+      "candidate_phash_supported": {
+        "independent_lookalike": 35,
+        "same_source_candidate": 21,
+        "uncertain": 1
+      },
+      "candidate_robust_only": {
+        "independent_lookalike": 95,
+        "same_source_candidate": 0,
+        "uncertain": 1
+      },
+      "outside_phash_distance14_16": {
+        "independent_lookalike": 64,
+        "same_source_candidate": 0,
+        "uncertain": 0
+      },
+      "outside_random": {
+        "independent_lookalike": 64,
+        "same_source_candidate": 0,
+        "uncertain": 0
+      },
+      "outside_robust_rank16_30": {
+        "independent_lookalike": 64,
+        "same_source_candidate": 0,
+        "uncertain": 0
+      }
+    },
+    "counts_by_source_group": {
+      "all_blood_smear": {
+        "independent_lookalike": 40,
+        "same_source_candidate": 4,
+        "uncertain": 0
+      },
+      "brain_ce_mri": {
+        "independent_lookalike": 43,
+        "same_source_candidate": 1,
+        "uncertain": 0
+      },
+      "breast_histology": {
+        "independent_lookalike": 37,
+        "same_source_candidate": 0,
+        "uncertain": 0
+      },
+      "cervix_pap_smear": {
+        "independent_lookalike": 39,
+        "same_source_candidate": 4,
+        "uncertain": 1
+      },
+      "kidney_ct": {
+        "independent_lookalike": 43,
+        "same_source_candidate": 0,
+        "uncertain": 1
+      },
+      "lung_colon_histology": {
+        "independent_lookalike": 39,
+        "same_source_candidate": 5,
+        "uncertain": 0
+      },
+      "lymphoma_histology": {
+        "independent_lookalike": 40,
+        "same_source_candidate": 4,
+        "uncertain": 0
+      },
+      "oral_histology": {
+        "independent_lookalike": 41,
+        "same_source_candidate": 3,
+        "uncertain": 0
+      }
+    },
+    "candidate_positive_count": 21,
+    "candidate_positive_yield_all": 0.13725490196078433,
+    "candidate_positive_yield_decided": 0.1390728476821192,
+    "outside_confirmed_positive_count": 0,
+    "outside_confirmed_positive_ids": [],
+    "uncertain_pair_ids": [
+      "N000252",
+      "N000337"
+    ],
+    "challenge_set_gate_passed": true,
+    "gate_interpretation": "İncelenen outside challenge set içinde doğrulanmış aynı-kaynak çift yok. Bu sonuç 3.093.466 olası çiftin tamamında yüzde 100 recall kanıtı değildir."
+  }
+}
