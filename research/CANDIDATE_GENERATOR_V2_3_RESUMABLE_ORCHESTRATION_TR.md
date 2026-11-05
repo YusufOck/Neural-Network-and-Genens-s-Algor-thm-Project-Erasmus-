@@ -135,8 +135,8 @@ resume'i reddeder.
 
 ## 8. Sıradaki kullanıcı adımı
 
-Tam retrieval henüz başlatılmayacaktır. Mehmet 8,62 GB `Multi Cancer.zip` dosyasını
-`MyDrive/NNGA_DATA` altına yükledi. Güncellenmiş notebook Colab'da T4 ile açılacak;
-ZIP çıkarma ve ortam kontrolünden sonra yalnız 52 görüntülük smoke bölümüne kadar
-çalıştırılacaktır. Smoke `run_report.json` ve `hash_manifest.json` birlikte
-incelendikten sonra full-run kararı ayrıca verilecektir.
+Tam retrieval henüz başlatılmadı. Mehmet'in 8,62 GB `Multi Cancer.zip` dosyası
+Colab'ın yerel diskine çıkarıldı ve 52 görüntülük T4 smoke tamamlandı. İndirilen
+`run_report.json` ve `hash_manifest.json` 15/15 bağımsız kontrolden geçti. Ayrıntılı
+kayıt `research/CANDIDATE_GENERATOR_V2_3_COLAB_SMOKE_TR.md` dosyasındadır. Bir sonraki
+karar, 130.000 görüntülük full-run'ı ayrı kullanıcı onayıyla açıp açmamaktır.
