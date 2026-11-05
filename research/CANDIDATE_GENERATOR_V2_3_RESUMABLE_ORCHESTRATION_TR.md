@@ -115,12 +115,19 @@ Proje test paketi: **97/97 geçti**.
 `notebooks/candidate_generator_v2_3_full_retrieval_colab.ipynb` şu sırayı zorlar:
 
 1. Google Drive bağlanır;
-2. repo klonlanır ve commit gösterilir;
-3. T4 GPU doğrulanır;
-4. exact-duplicate manifesti datasetten üretilir veya mevcut manifest doğrulanır;
-5. önce 52 görüntülük Colab smoke çalıştırılır;
-6. `run_report.json` ve `hash_manifest.json` Codex ile incelenir;
-7. ancak ayrı `AUTHORIZE_FULL_RUN=True` kararı verilirse full hücresi açılır.
+2. `MyDrive/NNGA_DATA/Multi Cancer.zip` arşivi en az 10 GiB boş alan kontrolünden
+   sonra Colab'ın hızlı `/content/NNGA_DATA` diskine çıkarılır;
+3. sekiz beklenen ana klasörü içeren dataset kökü iki olası ZIP yerleşiminden
+   otomatik bulunur;
+4. repo klonlanır ve commit gösterilir;
+5. T4 GPU doğrulanır;
+6. exact-duplicate manifesti datasetten üretilir veya mevcut manifest doğrulanır;
+7. önce 52 görüntülük Colab smoke çalıştırılır;
+8. `run_report.json` ve `hash_manifest.json` Codex ile incelenir;
+9. ancak ayrı `AUTHORIZE_FULL_RUN=True` kararı verilirse full hücresi açılır.
+
+ZIP başarıyla açılmadan tamamlanma işareti yazılmaz. Runtime tamamen kapanırsa geçici
+dataset yeniden çıkarılır; Drive'daki output/checkpoint artifact'ları korunur.
 
 Full çalışma kesilirse yeni output adı verilmez ve kod/argümanlar değiştirilmez;
 aynı hücre yeniden çalıştırılır. Contract veya ortam farklıysa runner güvenli biçimde
@@ -128,7 +135,8 @@ resume'i reddeder.
 
 ## 8. Sıradaki kullanıcı adımı
 
-Tam retrieval henüz başlatılmayacaktır. Mehmet önce dataset klasörünü Google Drive'a
-yerleştirecek, notebook'u Colab'da T4 ile açacak ve yalnız 52 görüntülük smoke bölümüne
-kadar çalıştıracaktır. Smoke `run_report.json` ve `hash_manifest.json` birlikte
+Tam retrieval henüz başlatılmayacaktır. Mehmet 8,62 GB `Multi Cancer.zip` dosyasını
+`MyDrive/NNGA_DATA` altına yükledi. Güncellenmiş notebook Colab'da T4 ile açılacak;
+ZIP çıkarma ve ortam kontrolünden sonra yalnız 52 görüntülük smoke bölümüne kadar
+çalıştırılacaktır. Smoke `run_report.json` ve `hash_manifest.json` birlikte
 incelendikten sonra full-run kararı ayrıca verilecektir.
