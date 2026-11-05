@@ -1,2 +1,9 @@
+# Keep scientific evidence and hash-pinned project files byte-stable on Windows.
+/.gitattributes text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.sha256 text eol=lf
+*.csv text eol=lf
+*.md text eol=lf
 *.pdf binary
 *.png binary

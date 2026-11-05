@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "status": "candidate_generator_v2_3_frozen_full_run_not_started",
+  "verification_type": "pre_full_run_configuration_and_capacity_freeze",
+  "candidate_rule": {
+    "logic": "robust_four_channel_top15_union_flip_aware_phash_radius12",
+    "search_scope": "within_compatible_source_group_only",
+    "pair_directionality": "canonical_undirected_union",
+    "cross_leaf_policy": "allowed_within_the_same_compatible_source_group",
+    "cross_source_group_policy": "forbidden",
+    "robust_retrieval": {
+      "architecture": "torchvision_resnet18_fc_identity",
+      "weights": "ResNet18_Weights.IMAGENET1K_V1",
+      "checkpoint_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "feature_dimension": 512,
+      "similarity": "exact_cosine_similarity",
+      "directionality": "union_of_directed_top_k_neighbors",
+      "top_k": 15,
+      "crop_ratio": 0.8,
+      "autocontrast_cutoff_percent": 1,
+      "spatial_views": [
+        "full",
+        "center",
+        "left",
+        "right",
+        "top",
+        "bottom"
+      ],
+      "orientation_pool": [
+        "original",
+        "horizontal_flip"
+      ],
+      "descriptor_channels": [
+        "raw_full_flip_mean",
+        "autocontrast_full_flip_mean",
+        "raw_multicrop_flip_mean",
+        "autocontrast_multicrop_flip_mean"
+      ]
+    },
+    "phash_retrieval": {
+      "hash_bits": 64,
+      "dct_input_size": 32,
+      "low_frequency_size": 8,
+      "median_threshold_excludes_dc": true,
+      "flip_aware": true,
+      "hamming_radius_inclusive": 12
+    }
+  },
+  "dataset_inventory": {
+    "dataset_root": "C:\\Users\\mehmet\\Desktop\\erasmus_ders\\NNGA\\archive\\Multi Cancer\\Multi Cancer",
+    "image_count": 130000,
+    "leaf_count": 26,
+    "source_group_count": 8,
+    "images_per_leaf": {
+      "all_benign": 5000,
+      "all_early": 5000,
+      "all_pre": 5000,
+      "all_pro": 5000,
+      "brain_glioma": 5000,
+      "brain_menin": 5000,
+      "brain_tumor": 5000,
+      "breast_benign": 5000,
+      "breast_malignant": 5000,
+      "cervix_dyk": 5000,
+      "cervix_koc": 5000,
+      "cervix_mep": 5000,
+      "cervix_pab": 5000,
+      "cervix_sfi": 5000,
+      "colon_aca": 5000,
+      "colon_bnt": 5000,
+      "kidney_normal": 5000,
+      "kidney_tumor": 5000,
+      "lung_aca": 5000,
+      "lung_bnt": 5000,
+      "lung_scc": 5000,
+      "lymph_cll": 5000,
+      "lymph_fl": 5000,
+      "lymph_mcl": 5000,
+      "oral_normal": 5000,
+      "oral_scc": 5000
+    }
+  },
+  "natural_evidence": {
+    "reference_count": 345,
+    "final_reference_counts": {
+      "independent": 322,
+      "same_source": 23
+    },
+    "same_source_inside_candidate": 23,
+    "same_source_outside_candidate": 0,
+    "sha256": "e9a2336ab954926adeafb891f7b3efc8963c149385d09c523fd4c130b9c21acd"
+  },
+  "v2_2_evidence": {
+    "status": "second_prospective_controlled_holdout_failed",
+    "image_count": 7644,
+    "positive_pair_count": 1040,
+    "frozen_v2_2_recall": 0.9990384615384615,
+    "frozen_v2_2_gate_passed": false,
+    "sha256": "0ede3f6ac3af8b006e3bbf706895169c180671b791a2e4aa116f15bcec6fa7dc"
+  },
+  "capacity_estimate": {
+    "estimated_candidate_pairs": 2925170,
+    "maximum_candidate_pairs_before_pause": 3250000,
+    "descriptor_bytes": 1064960000,
+    "phash_bytes": 2080000,
+    "serial_verification_seconds": 2384013.55,
+    "serial_verification_days": 27.592749421296293,
+    "ideal_eight_worker_days_without_overhead": 3.4490936776620367
+  },
+  "integrity": {
+    "frozen_config_sha256": "daef2f4d1c4199846a64b549a5070f5c8cc3f322cc949fb55dde2700ef2e3776",
+    "dependency_hashes": {
+      "src/benchmark_candidate_generation_v2.py": "ea4d95aa52d3bb882c0b5b58a950f006a18235243aedc46b14601ffe5c3df66c",
+      "src/benchmark_candidate_generation_scaled.py": "3be923f7e8c775406986ec60763547a148de4c97c45dc242271c9c43d92ea2e6",
+      "src/analyze_scaled_phash8_safety.py": "ed3d3cb0fd6499c30cd691f17dfe304d717e0500f9f38baf71d6d5ad4ac7cab8",
+      "src/benchmark_candidate_generation.py": "49d97550df679cf99dd0bc36d6bc75de63850e637ec1967a7cc3f22e674c81e7",
+      "src/data_index.py": "330f54c7de2f9a959800fb1fc983075cd0740630b26451e05c0d840e13fbcc35",
+      "config/duplicate_audit_groups.json": "89b05e66e52d7e1b844fecd83f6b3ace6b4d6c255582361ae1f702f0577c963f",
+      "config/duplicate_rule_v1.json": "5ffa80daa6e6ab0eb5f3ac179073de2f0f018325310310b33adc4c137710b645"
+    },
+    "resnet18_checkpoint": {
+      "path": "C:\\Users\\mehmet\\.cache\\torch\\hub\\checkpoints\\resnet18-f37072fd.pth",
+      "sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "weights": "ResNet18_Weights.IMAGENET1K_V1"
+    },
+    "verifier_sha256": "fada82b856c74f48bf625f76fa213842b036fce2da0edfba66c080b901f6efac"
+  },
+  "next_step": "Create a Colab/local orchestration notebook that refuses changed hashes, then benchmark one bounded shard before the 130000-image retrieval.",
+  "limitations": [
+    "Candidate retrieval is a high-recall shortlist, not a duplicate decision and not cancer-classification accuracy.",
+    "The v2.3 pHash radius was selected after the v2.2 controlled miss; the later natural challenge set supports but does not prove full recall.",
+    "The 345-pair natural audit does not cover all 3,093,466 possible pairs in its source pool or all possible pairs in the full dataset.",
+    "The dataset lacks patient and scan identifiers, so patient-level leakage cannot be guaranteed away.",
+    "Adjacent medical slices are treated as distinct 2D source images unless an actual transformed-copy relationship is demonstrated.",
+    "No family, train/validation/test split, classifier training, or clinical claim is authorized by this frozen candidate rule alone."
+  ]
+}

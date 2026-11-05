@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_full_dataset_candidate_retrieval",
+  "frozen_date": "2026-11-04",
+  "purpose": "Freeze Candidate Generator v2.3 after controlled-holdout development and a score-blind natural challenge-set audit, before any 130000-image retrieval run.",
+  "candidate_rule": {
+    "logic": "robust_four_channel_top15_union_flip_aware_phash_radius12",
+    "search_scope": "within_compatible_source_group_only",
+    "pair_directionality": "canonical_undirected_union",
+    "cross_leaf_policy": "allowed_within_the_same_compatible_source_group",
+    "cross_source_group_policy": "forbidden",
+    "robust_retrieval": {
+      "architecture": "torchvision_resnet18_fc_identity",
+      "weights": "ResNet18_Weights.IMAGENET1K_V1",
+      "checkpoint_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "feature_dimension": 512,
+      "similarity": "exact_cosine_similarity",
+      "directionality": "union_of_directed_top_k_neighbors",
+      "top_k": 15,
+      "crop_ratio": 0.8,
+      "autocontrast_cutoff_percent": 1,
+      "spatial_views": [
+        "full",
+        "center",
+        "left",
+        "right",
+        "top",
+        "bottom"
+      ],
+      "orientation_pool": [
+        "original",
+        "horizontal_flip"
+      ],
+      "descriptor_channels": [
+        "raw_full_flip_mean",
+        "autocontrast_full_flip_mean",
+        "raw_multicrop_flip_mean",
+        "autocontrast_multicrop_flip_mean"
+      ]
+    },
+    "phash_retrieval": {
+      "hash_bits": 64,
+      "dct_input_size": 32,
+      "low_frequency_size": 8,
+      "median_threshold_excludes_dc": true,
+      "flip_aware": true,
+      "hamming_radius_inclusive": 12
+    }
+  },
+  "full_run_scope": {
+    "expected_dataset_images": 130000,
+    "expected_leaf_count": 26,
+    "expected_images_per_leaf": 5000,
+    "expected_source_group_count": 8,
+    "dataset_order": "sorted_relative_path",
+    "decode_rule": "decode_by_file_content_not_filename_extension",
+    "accepted_extensions": [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".bmp",
+      ".tif",
+      ".tiff"
+    ],
+    "excluded_name_suffixes": [
+      ".bak.jpg"
+    ]
+  },
+  "integrity_dependencies": {
+    "src/benchmark_candidate_generation_v2.py": "ea4d95aa52d3bb882c0b5b58a950f006a18235243aedc46b14601ffe5c3df66c",
+    "src/benchmark_candidate_generation_scaled.py": "3be923f7e8c775406986ec60763547a148de4c97c45dc242271c9c43d92ea2e6",
+    "src/analyze_scaled_phash8_safety.py": "ed3d3cb0fd6499c30cd691f17dfe304d717e0500f9f38baf71d6d5ad4ac7cab8",
+    "src/benchmark_candidate_generation.py": "49d97550df679cf99dd0bc36d6bc75de63850e637ec1967a7cc3f22e674c81e7",
+    "src/data_index.py": "330f54c7de2f9a959800fb1fc983075cd0740630b26451e05c0d840e13fbcc35",
+    "config/duplicate_audit_groups.json": "89b05e66e52d7e1b844fecd83f6b3ace6b4d6c255582361ae1f702f0577c963f",
+    "config/duplicate_rule_v1.json": "5ffa80daa6e6ab0eb5f3ac179073de2f0f018325310310b33adc4c137710b645"
+  },
+  "evidence": {
+    "candidate_generator_v2_2_config_sha256": "85c5d0791439694b96a84b155a2d0fe95379dc2b2ce04a7369d5061b25a29953",
+    "candidate_generator_v2_2_evaluation_report_sha256": "0ede3f6ac3af8b006e3bbf706895169c180671b791a2e4aa116f15bcec6fa7dc",
+    "v2_2_posthoc_radius12_controlled_positive_hits": 1040,
+    "v2_2_posthoc_radius12_controlled_positive_count": 1040,
+    "v2_2_posthoc_radius12_candidate_pairs": 172000,
+    "v2_2_posthoc_radius12_pairs_per_image": 22.5013082155939,
+    "natural_adjudication_report_sha256": "4fe42b42b26a058a62add97729a0bde7e0d0a5a9cc9f1ef1b5a532299ea88882",
+    "natural_final_references_sha256": "e9a2336ab954926adeafb891f7b3efc8963c149385d09c523fd4c130b9c21acd",
+    "natural_reference_count": 345,
+    "natural_same_source_inside_candidate": 23,
+    "natural_same_source_outside_candidate": 0
+  },
+  "full_run_integrity_gate": {
+    "require_all_dependency_hashes": true,
+    "require_resnet18_checkpoint_hash": true,
+    "require_exact_dataset_inventory": true,
+    "require_no_cross_source_group_candidate": true,
+    "require_unique_canonical_candidate_pairs": true,
+    "require_all_exact_duplicate_pairs_in_candidate_union": true,
+    "maximum_unique_candidate_pairs_per_indexed_image_before_verification_pause": 25.0,
+    "on_gate_failure": "stop_before_frozen_rule_verification_and_report"
+  },
+  "execution_contract": {
+    "stages": [
+      "deterministic_image_index",
+      "phash_variants",
+      "four_channel_resnet18_descriptors",
+      "within_group_robust_top15_retrieval",
+      "within_group_phash_radius12_retrieval",
+      "canonical_union_manifest",
+      "integrity_report"
+    ],
+    "resume_policy": "resume_only_from_hash_verified_stage_artifacts",
+    "overwrite_policy": "refuse_existing_final_outputs",
+    "full_candidate_verification": "separate_frozen_duplicate_rule_v1_cpu_shards_after_capacity_benchmark",
+    "family_construction": "forbidden_in_candidate_generation_stage",
+    "classifier_split": "forbidden_in_candidate_generation_stage",
+    "model_training": "forbidden_in_candidate_generation_stage"
+  },
+  "capacity_plan_basis": {
+    "estimated_unique_pairs_per_image": 22.5013082155939,
+    "estimated_full_unique_candidate_pairs": 2925170,
+    "maximum_pairs_at_integrity_gate": 3250000,
+    "four_descriptor_float32_bytes": 1064960000,
+    "two_uint64_phash_arrays_bytes": 2080000,
+    "measured_frozen_scorer_seconds_per_pair": 0.815,
+    "estimated_serial_verification_days": 27.5927500629882,
+    "warning": "These are linear capacity estimates, not measurements from the full 130000-image run."
+  },
+  "interpretation_limits": [
+    "Candidate retrieval is a high-recall shortlist, not a duplicate decision and not cancer-classification accuracy.",
+    "The v2.3 pHash radius was selected after the v2.2 controlled miss; the later natural challenge set supports but does not prove full recall.",
+    "The 345-pair natural audit does not cover all 3,093,466 possible pairs in its source pool or all possible pairs in the full dataset.",
+    "The dataset lacks patient and scan identifiers, so patient-level leakage cannot be guaranteed away.",
+    "Adjacent medical slices are treated as distinct 2D source images unless an actual transformed-copy relationship is demonstrated.",
+    "No family, train/validation/test split, classifier training, or clinical claim is authorized by this frozen candidate rule alone."
+  ]
+}
