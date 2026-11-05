@@ -1,6 +1,6 @@
 # NNGA proje durum kaydı
 
-Son güncelleme: 2026-11-04
+Son güncelleme: 2026-11-05
 
 Bu dosya, küçük bir pilotun yanlışlıkla bütün veri setinde tamamlanmış bir denetim gibi
 anlatılmasını önlemek için projenin tek durum kontrol listesidir. Bir adım ancak aşağıdaki
@@ -68,6 +68,7 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Candidate Generator v2.1 kaynak-ayrık retrieval holdout | Frozen holdout tamamlandı / kabul kapısı geçmedi | Önceki yollar ve exact gruplarla kesişmeyen 7.644 görüntüde v2.1 birleşimi 1.039/1.040 kontrollü pozitif buldu; tek `combined_stress` kaçağı nedeniyle tam-recall kapısı geçmedi. Yük 14,991 çift/görüntü. |
 | Candidate Generator v2.2 ikinci kaynak-ayrık retrieval holdout | Frozen holdout tamamlandı / kabul kapısı geçmedi | Önceki scaled pilot ve v2.1 yollarıyla kesişmeyen 7.644 görüntüde `top-15 ∪ pHash≤8`, 1.039/1.040 kontrollü pozitifi buldu. Tek `brightness_1_20` kaçağı nedeniyle tam-recall kapısı geçmedi; yük 21,765 çift/görüntü. |
 | Candidate Generator v2.3 | Config/kod bağımlılıkları donduruldu ve freeze doğrulaması geçti / tam retrieval başlamadı | `top-15 ∪ pHash≤12` kuralı config SHA-256 `daef2f4d…e3776` ile sabitlendi. 130.000/26/8 envanteri, yedi kaynak hash'i, ResNet18 checkpoint'i ve 23-inside/0-outside doğal kanıt doğrulandı. Yaklaşık 2,93 milyon aday ve 27,59 seri CPU günü kapasite tahminidir; full-run ölçümü değildir. |
+| V2.3 Colab/local çalıştırıcı ve throughput shard | Pilot tamamlandı / tam retrieval başlamadı | Hash-korumalı notebook ve tek uygulama script'i hazırlandı. Yerel RTX 3050'de 26×10=260 görüntü: 3.169 birleşik aday, 12,188 çift/görüntü, source-group dışı çift 0; descriptor 17,139 saniye. Hash manifesti ve çıktı şekilleri doğrulandı. Bu küçük-shard sonucu full-run süre/adet tahmini veya model metriği değildir. |
 | Natural near-duplicate audit v1 | Challenge-set, frozen-rule karşılaştırması ve ikinci-aşama adjudication tamamlandı | İlk güvenli konsensüs 21 aynı-kaynak ve 299 bağımsızdı. Kalan 25 çift score-aware, AI-destekli ve uzman-olmayan adjudication'da 2 aynı-kaynak + 23 bağımsız olarak sonuçlandı. Nihai 345 referans: 23 aynı-kaynak, 322 bağımsız, 0 belirsiz. Aynı-kaynakların 23/23'ü candidate tarafında; outside aynı-kaynak 0. Bu örneklenmiş challenge-set kanıtıdır, bütün doğal çiftlerde %100 recall garantisi değildir. |
 | Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Kalibrasyon bütün 26 yaprağı temsil ediyor; fakat 130.000 görüntülük ölçekli aday taraması henüz yapılmadı. |
 | Sınıflar arası perceptual-duplicate kontrolü | Başlamadı | Kalibrasyondaki 35 seçilmiş cross-leaf aday tam tarama değildir; uyumlu kaynak grupları ölçekli olarak ayrıca aranmalı. |
@@ -121,8 +122,10 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    çift ayrı score-aware adjudication ile tamamlandı. Nihai 23 aynı-kaynak referansın
    tamamı candidate bölgesinde, outside pozitif 0'dır. V2.3 config, yedi kod/config
    bağımlılığı ve ResNet18 checkpoint hash'iyle donduruldu; 130.000/26/8 envanteri
-   doğrulandı. Tam retrieval başlamadı. Bir sonraki adım hash-korumalı Colab/local
-   orchestration ve küçük throughput shard'ıdır.**
+   doğrulandı. Hash-korumalı Colab/local notebook ve 260 görüntülük throughput shard
+   tamamlandı; 3.169 aday, 12,188 çift/görüntü ve source-group dışı 0 çift ölçüldü.
+   Tam retrieval başlamadı. Bir sonraki adım tam retrieval için parçalı/resumable
+   orchestration tasarlayıp test etmektir.**
 7. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
    denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
    yöntemiyle yap.
