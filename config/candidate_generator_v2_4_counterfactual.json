@@ -51,8 +51,9 @@
     "required_cross_source_group_pairs": 0
   },
   "integrity_dependencies": {
+    "hash_mode": "utf8_text_normalized_lf_sha256",
     "research/natural_duplicate_adjudication_v1/final_pair_references_v1.csv": "e9a2336ab954926adeafb891f7b3efc8963c149385d09c523fd4c130b9c21acd",
-    "research/natural_duplicate_audit_v1/unblinded_pair_results.csv": "00070315628d2ccf300e79fba31e4773adf5e35baa9a8bc9964c2ef3648f1a08",
+    "research/natural_duplicate_audit_v1/unblinded_pair_results.csv": "f3b4736c10464d4b324072dc90b3aec892a36540e01d75ca263fd587b29c946f",
     "research/candidate_generator_v2_4_controlled_reference_summary.json": "8eb327ef6c0cc968d35a532a0cb7490bb0089ffd279a044c924717b53192ca61"
   },
   "evidence_domains": {

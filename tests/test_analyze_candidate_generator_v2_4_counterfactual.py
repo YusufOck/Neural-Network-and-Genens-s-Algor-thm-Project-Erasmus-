@@ -22,6 +22,7 @@ from analyze_candidate_generator_v2_4_counterfactual import (
     is_inside,
     load_frozen_config,
     membership_count,
+    normalized_text_sha256,
     proposed_group_union,
 )
 
@@ -131,6 +132,17 @@ class V24CounterfactualTests(unittest.TestCase):
             loaded, actual = load_frozen_config(config)
             self.assertEqual(loaded, payload)
             self.assertEqual(actual, digest)
+
+    def test_text_dependency_hash_is_line_ending_independent(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            lf_path = Path(temporary) / "lf.csv"
+            crlf_path = Path(temporary) / "crlf.csv"
+            lf_path.write_bytes(b"a,b\n1,2\n")
+            crlf_path.write_bytes(b"a,b\r\n1,2\r\n")
+            self.assertEqual(
+                normalized_text_sha256(lf_path),
+                normalized_text_sha256(crlf_path),
+            )
 
     def test_report_location_guard(self) -> None:
         root = Path("/tmp/frozen")

@@ -27,7 +27,7 @@ Kaynak: `config/candidate_generator_v2_4_counterfactual.json`
 
 Config SHA-256:
 
-`440080b44279d6515202f3f91a5da31b20be755e432ec514bb71617f9c32ecea`
+`ee3d2c1e76d096af406e3dc8b0e6a15b4e42297b8c05cd703692e4520c92cb71`
 
 Kural:
 
@@ -83,6 +83,8 @@ bu 23 çiftin gerçek full-index pair key'lerini yeni birleşimde ayrıca kontro
 `src/analyze_candidate_generator_v2_4_counterfactual.py`:
 
 - v2.4 config hash'ini doğrular;
+- Git/Colab ve Windows arasında bilimsel içeriği değiştirmeyen CRLF/LF farklarını
+  UTF-8 metni LF'ye normalize ederek doğrular;
 - v2.3 run-contract ve 1.107 stage envanterini doğrular;
 - kullandığı image-index, 32 robust ve 1.022 pHash retrieval artifact'ının SHA-256
   değerlerini kontrol eder;

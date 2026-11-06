@@ -84,6 +84,15 @@ def file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def normalized_text_sha256(path: Path) -> str:
+    """Hash UTF-8 text after normalizing CRLF/CR line endings to LF."""
+
+    raw = path.read_bytes()
+    raw.decode("utf-8")
+    normalized = raw.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(normalized).hexdigest()
+
+
 def load_frozen_config(path: Path) -> tuple[dict[str, object], str]:
     if not path.is_file():
         raise FileNotFoundError(f"Counterfactual config not found: {path}")
@@ -393,6 +402,8 @@ def analyze(
     disabled_groups = set(rule["phash_disabled_source_groups"])  # type: ignore[index]
     if phash_groups & disabled_groups or phash_groups | disabled_groups != all_groups:
         raise ValueError("Configured pHash enabled/disabled groups do not partition all groups.")
+    if config["integrity_dependencies"].get("hash_mode") != "utf8_text_normalized_lf_sha256":  # type: ignore[union-attr]
+        raise ValueError("Unsupported integrity-dependency hash mode.")
 
     dependency_paths = {
         "research/natural_duplicate_adjudication_v1/final_pair_references_v1.csv": natural_reference_path,
@@ -403,7 +414,7 @@ def analyze(
         if not path.is_file():
             raise FileNotFoundError(f"Integrity dependency not found: {path}")
         expected = config["integrity_dependencies"][relative]  # type: ignore[index]
-        actual = file_sha256(path)
+        actual = normalized_text_sha256(path)
         if actual != expected:
             raise ValueError(
                 f"Integrity dependency hash mismatch for {relative}: "
@@ -577,8 +588,12 @@ def analyze(
             "misses": len(exact_missing_indices),
         },
         "natural_same_source_reference": {
-            "reference_file_sha256": file_sha256(natural_reference_path),
-            "unblinded_results_sha256": file_sha256(natural_result_path),
+            "reference_file_normalized_lf_sha256": normalized_text_sha256(
+                natural_reference_path
+            ),
+            "unblinded_results_normalized_lf_sha256": normalized_text_sha256(
+                natural_result_path
+            ),
             "references": len(natural_ids),
             "v2_3_hits": baseline_natural_hits,
             "v2_4_hits": natural_hits,
