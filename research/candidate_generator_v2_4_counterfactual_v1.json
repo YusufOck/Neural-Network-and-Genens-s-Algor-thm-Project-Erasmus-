@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "status": "candidate_generator_v2_4_counterfactual_evaluation_complete",
+  "experiment_type": "read_only_predeclared_modality_aware_ablation",
+  "does_not_modify_v2_3_artifacts": true,
+  "not_a_duplicate_decision": true,
+  "does_not_authorize_family_split_or_training": true,
+  "config": {
+    "path_name": "candidate_generator_v2_4_counterfactual.json",
+    "sha256": "ee3d2c1e76d096af406e3dc8b0e6a15b4e42297b8c05cd703692e4520c92cb71"
+  },
+  "v2_3_input": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifact_count": 1107,
+    "stage_counts": {
+      "descriptor_generation": 26,
+      "index": 1,
+      "phash_generation": 26,
+      "phash_retrieval": 1022,
+      "robust_retrieval": 32
+    },
+    "hash_verified_candidate_artifact_count": 1055,
+    "image_count": 130000,
+    "source_group_count": 8
+  },
+  "candidate_load": {
+    "v2_3_union_pairs": 4621932,
+    "v2_3_pairs_per_image": 35.55332307692308,
+    "v2_4_counterfactual_pairs": 2491553,
+    "v2_4_pairs_per_image": 19.165792307692307,
+    "removed_pairs": 2130379,
+    "pause_gate_pairs_per_image": 25.0
+  },
+  "exact_duplicate_reference": {
+    "normalized_manifest_sha256": "e8a27465513e948d2cf7a012a4d2eaebea2dd97d8f5c313299f81eb86780ee4a",
+    "references": 1393,
+    "hits": 1393,
+    "misses": 0
+  },
+  "natural_same_source_reference": {
+    "reference_file_normalized_lf_sha256": "e9a2336ab954926adeafb891f7b3efc8963c149385d09c523fd4c130b9c21acd",
+    "unblinded_results_normalized_lf_sha256": "f3b4736c10464d4b324072dc90b3aec892a36540e01d75ca263fd587b29c946f",
+    "references": 23,
+    "v2_3_hits": 22,
+    "v2_4_hits": 22,
+    "misses": 1,
+    "missing_pair_ids": [
+      "N000123"
+    ],
+    "by_source_group": {
+      "all_blood_smear": { "references": 4, "hits": 4 },
+      "brain_ce_mri": { "references": 1, "hits": 1 },
+      "breast_histology": { "references": 0, "hits": 0 },
+      "cervix_pap_smear": { "references": 5, "hits": 4 },
+      "kidney_ct": { "references": 0, "hits": 0 },
+      "lung_colon_histology": { "references": 6, "hits": 6 },
+      "lymphoma_histology": { "references": 4, "hits": 4 },
+      "oral_histology": { "references": 3, "hits": 3 }
+    },
+    "limitation": "AI-assisted non-expert sampled reference; not proof of full natural recall."
+  },
+  "controlled_positive_reference": {
+    "summary_file_sha256": "8eb327ef6c0cc968d35a532a0cb7490bb0089ffd279a044c924717b53192ca61",
+    "source_metrics_sha256": "7af0a6d8d031512be085179eb94150ecd4cf1d581f9d7ddc2473bc4def018139",
+    "raw_metrics_reverified_in_this_run": false,
+    "references": 1040,
+    "robust_top15_hits": 1036,
+    "v2_3_hits": 1040,
+    "hits": 1040,
+    "misses": 0,
+    "by_source_group": {
+      "all_blood_smear": { "references": 160, "robust_top15_hits": 156, "phash_radius12_hits": 92, "v2_3_union_hits": 160, "v2_4_counterfactual_hits": 160 },
+      "brain_ce_mri": { "references": 120, "robust_top15_hits": 120, "phash_radius12_hits": 86, "v2_3_union_hits": 120, "v2_4_counterfactual_hits": 120 },
+      "breast_histology": { "references": 80, "robust_top15_hits": 80, "phash_radius12_hits": 46, "v2_3_union_hits": 80, "v2_4_counterfactual_hits": 80 },
+      "cervix_pap_smear": { "references": 200, "robust_top15_hits": 200, "phash_radius12_hits": 128, "v2_3_union_hits": 200, "v2_4_counterfactual_hits": 200 },
+      "kidney_ct": { "references": 80, "robust_top15_hits": 80, "phash_radius12_hits": 60, "v2_3_union_hits": 80, "v2_4_counterfactual_hits": 80 },
+      "lung_colon_histology": { "references": 200, "robust_top15_hits": 200, "phash_radius12_hits": 121, "v2_3_union_hits": 200, "v2_4_counterfactual_hits": 200 },
+      "lymphoma_histology": { "references": 120, "robust_top15_hits": 120, "phash_radius12_hits": 59, "v2_3_union_hits": 120, "v2_4_counterfactual_hits": 120 },
+      "oral_histology": { "references": 80, "robust_top15_hits": 80, "phash_radius12_hits": 46, "v2_3_union_hits": 80, "v2_4_counterfactual_hits": 80 }
+    },
+    "evaluation_note": "This tracked summary was derived from the frozen 1040-row metrics before the full-artifact counterfactual. Generated images are outside the full index."
+  },
+  "by_source_group": {
+    "all_blood_smear": { "image_count": 20000, "phash_enabled": true, "robust_unique_pairs": 420502, "phash_unique_pairs": 14991, "exact_pairs_in_group": 0, "v2_3_union_pairs": 422718, "v2_4_counterfactual_pairs": 422718, "dropped_v2_3_pairs": 0, "exact_pairs_present_in_proposal": 0, "v2_4_pairs_per_image": 21.1359 },
+    "brain_ce_mri": { "image_count": 15000, "phash_enabled": false, "robust_unique_pairs": 272808, "phash_unique_pairs": 1614804, "exact_pairs_in_group": 0, "v2_3_union_pairs": 1858745, "v2_4_counterfactual_pairs": 272808, "dropped_v2_3_pairs": 1585937, "exact_pairs_present_in_proposal": 0, "v2_4_pairs_per_image": 18.1872 },
+    "breast_histology": { "image_count": 10000, "phash_enabled": true, "robust_unique_pairs": 277583, "phash_unique_pairs": 578, "exact_pairs_in_group": 0, "v2_3_union_pairs": 277878, "v2_4_counterfactual_pairs": 277878, "dropped_v2_3_pairs": 0, "exact_pairs_present_in_proposal": 0, "v2_4_pairs_per_image": 27.7878 },
+    "cervix_pap_smear": { "image_count": 25000, "phash_enabled": true, "robust_unique_pairs": 355588, "phash_unique_pairs": 68770, "exact_pairs_in_group": 0, "v2_3_union_pairs": 378508, "v2_4_counterfactual_pairs": 378508, "dropped_v2_3_pairs": 0, "exact_pairs_present_in_proposal": 0, "v2_4_pairs_per_image": 15.14032 },
+    "kidney_ct": { "image_count": 10000, "phash_enabled": false, "robust_unique_pairs": 115349, "phash_unique_pairs": 607838, "exact_pairs_in_group": 75, "v2_3_union_pairs": 659791, "v2_4_counterfactual_pairs": 115349, "dropped_v2_3_pairs": 544442, "exact_pairs_present_in_proposal": 75, "v2_4_pairs_per_image": 11.5349 },
+    "lung_colon_histology": { "image_count": 25000, "phash_enabled": true, "robust_unique_pairs": 459991, "phash_unique_pairs": 21349, "exact_pairs_in_group": 1318, "v2_3_union_pairs": 461152, "v2_4_counterfactual_pairs": 461152, "dropped_v2_3_pairs": 0, "exact_pairs_present_in_proposal": 1318, "v2_4_pairs_per_image": 18.44608 },
+    "lymphoma_histology": { "image_count": 15000, "phash_enabled": true, "robust_unique_pairs": 334378, "phash_unique_pairs": 10403, "exact_pairs_in_group": 0, "v2_3_union_pairs": 339509, "v2_4_counterfactual_pairs": 339509, "dropped_v2_3_pairs": 0, "exact_pairs_present_in_proposal": 0, "v2_4_pairs_per_image": 22.633933333333335 },
+    "oral_histology": { "image_count": 10000, "phash_enabled": true, "robust_unique_pairs": 218883, "phash_unique_pairs": 6575, "exact_pairs_in_group": 0, "v2_3_union_pairs": 223631, "v2_4_counterfactual_pairs": 223631, "dropped_v2_3_pairs": 0, "exact_pairs_present_in_proposal": 0, "v2_4_pairs_per_image": 22.3631 }
+  },
+  "acceptance_gates": {
+    "exact_duplicate_recall": true,
+    "natural_same_source_recall": false,
+    "controlled_positive_recall": true,
+    "candidate_load": true,
+    "cross_source_group_pairs": true,
+    "all_passed": false
+  },
+  "decision": "FAIL: keep v2.3 paused; the predeclared v2.4 counterfactual missed at least one acceptance gate."
+}

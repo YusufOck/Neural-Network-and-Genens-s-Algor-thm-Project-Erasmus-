@@ -3,8 +3,9 @@
 Tarih: 2026-11-06
 
 Durum: **Kural tam artifact değerlendirmesinden önce JSON + SHA-256 ile donduruldu.
-Analiz kodu ve yerel testleri hazır; 130.000 görüntülük mevcut v2.3 artifact'ları üzerinde
-salt-okunur değerlendirme henüz çalıştırılmadı.**
+Salt-okunur tam-artifact değerlendirmesi daha sonra tamamlandı ve doğal-referans kapısını
+22/23 ile geçemedi. Bu dosya predeclared planı korur; sonuç
+`research/CANDIDATE_GENERATOR_V2_4_COUNTERFACTUAL_RESULT_TR.md` içindedir.**
 
 ## 1. Bu adımın amacı
 
@@ -74,9 +75,10 @@ bu iki grupta pHash'in kaldırılması bu kontrollü referansları kaybetmez. Ro
 kaçırdığı dört kontrollü örnek ALL kan yayması grubundadır; v2.4 bu grupta pHash'i
 koruduğu için 1.040/1.040 toplam korunur.
 
-Nihai doğal audit referansındaki 23 aynı-kaynak çiftin 23/23'ü de robust top-15
-alanındadır. Buna `brain_ce_mri` içindeki `N000239` da dahildir. Tam değerlendirme
-bu 23 çiftin gerçek full-index pair key'lerini yeni birleşimde ayrıca kontrol edecektir.
+Nihai doğal audit referansındaki 23 aynı-kaynak çiftin 23/23'ü 6.604 gerçek görüntülük
+audit indeksinde robust top-15 alanındadır. Buna `brain_ce_mri` içindeki `N000239` da
+dahildir. Bu, full-index sonucu değildir; tam değerlendirme bu 23 çiftin gerçek
+130.000-görüntülük pair key'lerini yeni birleşimde ayrıca kontrol edecektir.
 
 ## 5. Analiz aracının güvenlik özellikleri
 
@@ -102,8 +104,9 @@ yaklaşık 2.491.553 aday veya 19,166 çift/görüntüdür. Exact çiftlerin zor
 birleşimi nedeniyle gerçek sayı mevcut artifact'lar okunmadan kesin sonuç olarak
 yazılamaz.
 
-Bu yüzden 19,166 yalnız bir beklentidir. Rapor üretildikten ve hash/kapılar
-doğrulandıktan sonra `reproduced` sonuç sayılabilir.
+Bu yüzden 19,166 bu plan yazıldığında yalnız bir beklentiydi. Daha sonraki tam-artifact
+raporu 2.491.553 aday ve 19,1658 çift/görüntüyü doğruladı; ancak doğal referans kapısı
+22/23 olduğu için v2.4 kabul edilmedi.
 
 ## 7. Kesinti ve kredi güvenliği
 
