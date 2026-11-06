@@ -123,7 +123,7 @@ def unique_pair_keys(parts: Iterable[np.ndarray]) -> np.ndarray:
 def read_csv(path: Path) -> list[dict[str, str]]:
     if not path.is_file():
         raise FileNotFoundError(f"Required reference file not found: {path}")
-    with path.open("r", encoding="utf-8", newline="") as handle:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
         return list(csv.DictReader(handle))
 
 

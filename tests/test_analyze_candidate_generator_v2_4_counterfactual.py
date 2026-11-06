@@ -22,8 +22,10 @@ from analyze_candidate_generator_v2_4_counterfactual import (
     is_inside,
     load_frozen_config,
     membership_count,
+    natural_positive_keys,
     normalized_text_sha256,
     proposed_group_union,
+    read_csv,
 )
 
 
@@ -143,6 +145,47 @@ class V24CounterfactualTests(unittest.TestCase):
                 normalized_text_sha256(lf_path),
                 normalized_text_sha256(crlf_path),
             )
+
+    def test_csv_reader_strips_optional_utf8_bom(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "bom.csv"
+            path.write_bytes(b"\xef\xbb\xbfpair_id,value\nP1,x\n")
+            rows = read_csv(path)
+            self.assertEqual(rows, [{"pair_id": "P1", "value": "x"}])
+
+    def test_real_natural_positive_join_reads_all_23_pairs(self) -> None:
+        references = read_csv(
+            ROOT
+            / "research"
+            / "natural_duplicate_adjudication_v1"
+            / "final_pair_references_v1.csv"
+        )
+        results = read_csv(
+            ROOT
+            / "research"
+            / "natural_duplicate_audit_v1"
+            / "unblinded_pair_results.csv"
+        )
+        positive_ids = {
+            row["pair_id"]
+            for row in references
+            if row["final_reference"] == "same_source"
+        }
+        positive_results = [row for row in results if row["pair_id"] in positive_ids]
+        paths = sorted(
+            {
+                path
+                for row in positive_results
+                for path in (row["left_path"], row["right_path"])
+            }
+        )
+        index_by_relative = {path: index for index, path in enumerate(paths)}
+        pair_ids, source_groups, keys = natural_positive_keys(
+            references, results, index_by_relative
+        )
+        self.assertEqual(len(pair_ids), 23)
+        self.assertEqual(len(source_groups), 23)
+        self.assertEqual(len(keys), 23)
 
     def test_report_location_guard(self) -> None:
         root = Path("/tmp/frozen")

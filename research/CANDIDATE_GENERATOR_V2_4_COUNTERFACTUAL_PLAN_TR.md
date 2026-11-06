@@ -85,6 +85,7 @@ bu 23 çiftin gerçek full-index pair key'lerini yeni birleşimde ayrıca kontro
 - v2.4 config hash'ini doğrular;
 - Git/Colab ve Windows arasında bilimsel içeriği değiştirmeyen CRLF/LF farklarını
   UTF-8 metni LF'ye normalize ederek doğrular;
+- UTF-8 BOM bulunan veya bulunmayan CSV başlıklarını aynı alan adlarıyla okur;
 - v2.3 run-contract ve 1.107 stage envanterini doğrular;
 - kullandığı image-index, 32 robust ve 1.022 pHash retrieval artifact'ının SHA-256
   değerlerini kontrol eder;
