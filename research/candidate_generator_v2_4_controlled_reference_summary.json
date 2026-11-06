@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "status": "derived_from_frozen_v2_2_positive_pair_metrics_before_v2_4_full_artifact_evaluation",
+  "source_metrics": {
+    "repository_relative_path": "artifacts/audit/candidate_generator_v2_2_holdout/evaluation/positive_pair_metrics.csv",
+    "sha256": "7af0a6d8d031512be085179eb94150ecd4cf1d581f9d7ddc2473bc4def018139",
+    "row_count": 1040
+  },
+  "counterfactual_policy": {
+    "robust_top15_all_source_groups": true,
+    "phash_radius_inclusive": 12,
+    "phash_disabled_source_groups": [
+      "brain_ce_mri",
+      "kidney_ct"
+    ]
+  },
+  "totals": {
+    "references": 1040,
+    "robust_top15_hits": 1036,
+    "v2_3_union_hits": 1040,
+    "v2_4_counterfactual_hits": 1040
+  },
+  "by_source_group": {
+    "all_blood_smear": {
+      "references": 160,
+      "robust_top15_hits": 156,
+      "phash_radius12_hits": 92,
+      "v2_3_union_hits": 160,
+      "v2_4_counterfactual_hits": 160
+    },
+    "brain_ce_mri": {
+      "references": 120,
+      "robust_top15_hits": 120,
+      "phash_radius12_hits": 86,
+      "v2_3_union_hits": 120,
+      "v2_4_counterfactual_hits": 120
+    },
+    "breast_histology": {
+      "references": 80,
+      "robust_top15_hits": 80,
+      "phash_radius12_hits": 46,
+      "v2_3_union_hits": 80,
+      "v2_4_counterfactual_hits": 80
+    },
+    "cervix_pap_smear": {
+      "references": 200,
+      "robust_top15_hits": 200,
+      "phash_radius12_hits": 128,
+      "v2_3_union_hits": 200,
+      "v2_4_counterfactual_hits": 200
+    },
+    "kidney_ct": {
+      "references": 80,
+      "robust_top15_hits": 80,
+      "phash_radius12_hits": 60,
+      "v2_3_union_hits": 80,
+      "v2_4_counterfactual_hits": 80
+    },
+    "lung_colon_histology": {
+      "references": 200,
+      "robust_top15_hits": 200,
+      "phash_radius12_hits": 121,
+      "v2_3_union_hits": 200,
+      "v2_4_counterfactual_hits": 200
+    },
+    "lymphoma_histology": {
+      "references": 120,
+      "robust_top15_hits": 120,
+      "phash_radius12_hits": 59,
+      "v2_3_union_hits": 120,
+      "v2_4_counterfactual_hits": 120
+    },
+    "oral_histology": {
+      "references": 80,
+      "robust_top15_hits": 80,
+      "phash_radius12_hits": 46,
+      "v2_3_union_hits": 80,
+      "v2_4_counterfactual_hits": 80
+    }
+  },
+  "interpretation": "This compact tracked summary preserves only retrieval-gate counts. The generated holdout images are not part of the 130000-image full index, and these controlled transformations are not natural duplicate evidence."
+}

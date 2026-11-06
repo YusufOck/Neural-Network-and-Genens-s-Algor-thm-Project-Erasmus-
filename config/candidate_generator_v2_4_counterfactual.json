@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "status": "predeclared_counterfactual_before_full_artifact_evaluation",
+  "declared_date": "2026-11-06",
+  "purpose": "Test a modality-aware candidate rule read-only against the completed Candidate Generator v2.3 retrieval artifacts and frozen reference positives.",
+  "base_rule": {
+    "name": "candidate_generator_v2_3",
+    "config_sha256": "daef2f4d1c4199846a64b549a5070f5c8cc3f322cc949fb55dde2700ef2e3776",
+    "full_run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261"
+  },
+  "counterfactual_rule": {
+    "logic": "robust_four_channel_top15_all_groups_union_phash_radius12_selected_groups_union_exact_sha256_all_groups",
+    "search_scope": "within_compatible_source_group_only",
+    "robust_top15_source_groups": [
+      "all_blood_smear",
+      "brain_ce_mri",
+      "breast_histology",
+      "cervix_pap_smear",
+      "kidney_ct",
+      "lung_colon_histology",
+      "lymphoma_histology",
+      "oral_histology"
+    ],
+    "phash_radius12_source_groups": [
+      "all_blood_smear",
+      "breast_histology",
+      "cervix_pap_smear",
+      "lung_colon_histology",
+      "lymphoma_histology",
+      "oral_histology"
+    ],
+    "phash_disabled_source_groups": [
+      "brain_ce_mri",
+      "kidney_ct"
+    ],
+    "exact_sha256_policy": "mandatory_global_union",
+    "cross_source_group_policy": "forbidden"
+  },
+  "predeclared_acceptance_gates": {
+    "expected_image_count": 130000,
+    "expected_source_group_count": 8,
+    "expected_registered_v2_3_artifacts": 1107,
+    "expected_v2_3_union_pairs": 4621932,
+    "expected_exact_duplicate_pairs": 1393,
+    "required_exact_duplicate_hits": 1393,
+    "expected_natural_same_source_references": 23,
+    "required_natural_same_source_hits": 23,
+    "expected_controlled_positive_references": 1040,
+    "required_controlled_positive_hits": 1040,
+    "maximum_candidate_pairs_per_image": 25.0,
+    "required_cross_source_group_pairs": 0
+  },
+  "integrity_dependencies": {
+    "research/natural_duplicate_adjudication_v1/final_pair_references_v1.csv": "e9a2336ab954926adeafb891f7b3efc8963c149385d09c523fd4c130b9c21acd",
+    "research/natural_duplicate_audit_v1/unblinded_pair_results.csv": "00070315628d2ccf300e79fba31e4773adf5e35baa9a8bc9964c2ef3648f1a08",
+    "research/candidate_generator_v2_4_controlled_reference_summary.json": "8eb327ef6c0cc968d35a532a0cb7490bb0089ffd279a044c924717b53192ca61"
+  },
+  "evidence_domains": {
+    "full_artifact_capacity": "The 130000-image v2.3 retrieval artifacts measure candidate load without rescoring images.",
+    "natural_reference": "The 23 AI-assisted, non-expert same-source references are checked by actual full-index pair membership.",
+    "controlled_reference": "The 1040 generated-transform positives are evaluated from their saved holdout metrics because generated images are not members of the 130000-image full index.",
+    "exact_reference": "Every pair implied by the normalized SHA-256 duplicate manifest is explicitly unioned and checked."
+  },
+  "forbidden_actions": [
+    "modify_or_overwrite_v2_3_stage_artifacts",
+    "run_frozen_duplicate_scorer",
+    "construct_duplicate_families",
+    "create_train_validation_test_split",
+    "train_classifier"
+  ],
+  "interpretation_limits": [
+    "Passing this counterfactual is evidence for accepting a candidate-shortlist rule, not a duplicate decision or cancer-classification result.",
+    "The 23 natural references do not prove full natural-near-duplicate recall across all possible dataset pairs.",
+    "The controlled positives reuse a known transformation suite and must be reported separately from natural evidence.",
+    "A passing report does not authorize scoring, family construction, splitting, or training without a separate explicit checkpoint."
+  ]
+}
