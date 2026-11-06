@@ -2,10 +2,13 @@
 
 Tarih: 2026-11-04
 
-Durum: **V2.3 config, yöntem bağımlılıkları ve ResNet18 checkpoint hash'iyle
-donduruldu ve yerelde doğrulandı. 130.000 görüntülük retrieval henüz
-başlatılmadı.** Duplicate family, train/validation/test split veya model eğitimi
-yoktur.
+Durum: **Bu belge v2.3 çalıştırılmadan önceki freeze ve kapasite planını
+kaydeder.** Daha sonra 130.000 görüntülük retrieval çalıştırılmış, 1.107 pre-final
+artifact tamamlanmış ve gerçek yük 4.621.932 aday = 35,553 çift/görüntü
+ölçülmüştür. Bu, dondurulmuş 25 sınırını geçtiği için finalleştirme bilinçli
+olarak durmuştur. Güncel sonuç `research/CANDIDATE_GENERATOR_V2_3_FULL_LOAD_GATE_TR.md`
+dosyasındadır. Duplicate family, train/validation/test split veya model eğitimi
+hâlâ yoktur.
 
 ## 1. “Dondurmak” ne demektir?
 

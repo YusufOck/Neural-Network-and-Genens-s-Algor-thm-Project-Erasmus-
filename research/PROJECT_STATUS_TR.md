@@ -1,6 +1,6 @@
 # NNGA proje durum kaydı
 
-Son güncelleme: 2026-11-05
+Son güncelleme: 2026-11-06
 
 Bu dosya, küçük bir pilotun yanlışlıkla bütün veri setinde tamamlanmış bir denetim gibi
 anlatılmasını önlemek için projenin tek durum kontrol listesidir. Bir adım ancak aşağıdaki
@@ -67,12 +67,13 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Post-hoc pHash≤8 safety kontrolü | Exploratory tamamlandı / bağımsız doğrulama değil | `top-10 ∪ pHash≤8` iki scaled-pilot kaçağını 817 ek adayla geri aldı ve v2.1'i motive etti; sonraki frozen v2.1 holdout sonucu aşağıdadır. |
 | Candidate Generator v2.1 kaynak-ayrık retrieval holdout | Frozen holdout tamamlandı / kabul kapısı geçmedi | Önceki yollar ve exact gruplarla kesişmeyen 7.644 görüntüde v2.1 birleşimi 1.039/1.040 kontrollü pozitif buldu; tek `combined_stress` kaçağı nedeniyle tam-recall kapısı geçmedi. Yük 14,991 çift/görüntü. |
 | Candidate Generator v2.2 ikinci kaynak-ayrık retrieval holdout | Frozen holdout tamamlandı / kabul kapısı geçmedi | Önceki scaled pilot ve v2.1 yollarıyla kesişmeyen 7.644 görüntüde `top-15 ∪ pHash≤8`, 1.039/1.040 kontrollü pozitifi buldu. Tek `brightness_1_20` kaçağı nedeniyle tam-recall kapısı geçmedi; yük 21,765 çift/görüntü. |
-| Candidate Generator v2.3 | Config/kod bağımlılıkları donduruldu ve freeze doğrulaması geçti / tam retrieval başlamadı | `top-15 ∪ pHash≤12` kuralı config SHA-256 `daef2f4d…e3776` ile sabitlendi. 130.000/26/8 envanteri, yedi kaynak hash'i, ResNet18 checkpoint'i ve 23-inside/0-outside doğal kanıt doğrulandı. Yaklaşık 2,93 milyon aday ve 27,59 seri CPU günü kapasite tahminidir; full-run ölçümü değildir. |
-| V2.3 Colab/local çalıştırıcı ve throughput shard | Pilot tamamlandı / tam retrieval başlamadı | Hash-korumalı notebook ve tek uygulama script'i hazırlandı. Yerel RTX 3050'de 26×10=260 görüntü: 3.169 birleşik aday, 12,188 çift/görüntü, source-group dışı çift 0; descriptor 17,139 saniye. Hash manifesti ve çıktı şekilleri doğrulandı. Bu küçük-shard sonucu full-run süre/adet tahmini veya model metriği değildir. |
-| V2.3 resumable full-retrieval orchestration | Colab/T4 smoke tamamlandı / tam retrieval başlamadı | Leaf/source-group/blok artifact'ları SHA-256 ile kaydeden runner hazır. Yerel kesinti-resume testi tamamlandı. Colab/T4 üzerinde 26×2=52 görüntülük smoke 166 aday ve sıfır cross-group çiftle tamamlandı; 95 rapor-dışı artifact üretildi. İndirilen rapor ve hash manifesti 15/15 bağımsız kontrolden geçti. Smoke'ta beklenen exact çift 0 olduğundan eksik-exact=0 recall kanıtı değildir. Full kapsam ayrı onay anahtarıyla kilitli; 97/97 proje testi geçti. |
+| Candidate Generator v2.3 | Tam retrieval ara aşamaları tamamlandı / yük kapısında durdu | `top-15 ∪ pHash≤12` kuralıyla 130.000 görüntünün 1.107 hash-kayıtlı retrieval artifact'ı tamamlandı. Salt-okunur birleşim 4.621.932 aday = 35,553 çift/görüntü buldu ve dondurulmuş 25 sınırını geçtiği için final candidate dosyaları bilinçli olarak yazılmadı. 1.393/1.393 exact çift kapsandı. Brain MRI + kidney CT, pHash-only yükün %98,32'sini oluşturuyor. |
+| V2.3 Colab/local çalıştırıcı ve throughput shard | Pilot tamamlandı / tarihsel preflight | Hash-korumalı notebook ve tek uygulama script'i hazırlandı. Yerel RTX 3050'de 26×10=260 görüntü: 3.169 birleşik aday, 12,188 çift/görüntü, source-group dışı çift 0; descriptor 17,139 saniye. Hash manifesti ve çıktı şekilleri doğrulandı. Bu küçük-shard sonucu full-run süre/adet tahmini veya model metriği değildir; sonraki tam çalışma ayrı satırlardadır. |
+| V2.3 resumable full-retrieval orchestration | Tam retrieval çalıştırıldı / güvenli resume doğrulandı | Colab kesintisinden sonra aynı contract ile 1.107 artifact doğrulanıp yeniden hesaplanmadan kullanıldı. Descriptor, pHash, robust ve pHash-block retrieval tamamdır; finalleştirme 35,553 çift/görüntü yük kapısında güvenli biçimde durdu. Bu, veri kaybı veya bozuk run değildir. |
+| V2.3 tam-veri yük tanısı | Tüm kapsamda doğrulandı / kapı geçmedi | İndirilen salt-okunur JSON'un SHA-256'sı `be990ff9…b298cb`. Global ve sekiz grup toplamları, union formülleri, 1.107 stage sayısı, 1.393/1.393 exact kapsamı ve 43,598 günlük seri süre hesabı bağımsız yeniden hesaplandı. Ayrıntı: `research/CANDIDATE_GENERATOR_V2_3_FULL_LOAD_GATE_TR.md`. |
 | Natural near-duplicate audit v1 | Challenge-set, frozen-rule karşılaştırması ve ikinci-aşama adjudication tamamlandı | İlk güvenli konsensüs 21 aynı-kaynak ve 299 bağımsızdı. Kalan 25 çift score-aware, AI-destekli ve uzman-olmayan adjudication'da 2 aynı-kaynak + 23 bağımsız olarak sonuçlandı. Nihai 345 referans: 23 aynı-kaynak, 322 bağımsız, 0 belirsiz. Aynı-kaynakların 23/23'ü candidate tarafında; outside aynı-kaynak 0. Bu örneklenmiş challenge-set kanıtıdır, bütün doğal çiftlerde %100 recall garantisi değildir. |
-| Yöntemin 26 alt sınıfın tamamına uygulanması | Başlamadı | Kalibrasyon bütün 26 yaprağı temsil ediyor; fakat 130.000 görüntülük ölçekli aday taraması henüz yapılmadı. |
-| Sınıflar arası perceptual-duplicate kontrolü | Başlamadı | Kalibrasyondaki 35 seçilmiş cross-leaf aday tam tarama değildir; uyumlu kaynak grupları ölçekli olarak ayrıca aranmalı. |
+| Yöntemin 26 alt sınıfın tamamına uygulanması | Retrieval tamamlandı / duplicate scoring başlamadı | 130.000 görüntünün 26 yaprağı descriptor ve pHash retrieval'dan geçti; birleşim yük kapısında durdu. Modality-aware v2.4 doğrulanmadan 4,62 milyon çift skorlanmayacak. |
+| Sınıflar arası perceptual-duplicate kontrolü | Candidate retrieval tamamlandı / karar verilmedi | Aynı uyumlu kaynak grubu içindeki cross-leaf çiftlere izin veren tam retrieval çalıştı; fakat candidate olmak duplicate kararı değildir ve frozen scorer henüz uygulanmadı. |
 | 130.000 görüntü için augmentation-family grupları | Başlamadı | Henüz hiçbir nihai aile listesi yok. |
 
 ## 4. Split durumu
@@ -128,11 +129,18 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    Parçalı/resumable full-retrieval orchestration yerel 26 görüntülük kesinti-devam
    smoke testini geçti. Dataset ZIP'i Drive'a yüklendi; Colab/T4 üzerinde 52
    görüntülük ortam smoke'u tamamlandı ve artifact'ları 15/15 kontrolden geçti.
-   Tam retrieval başlamadı. Bir sonraki karar, 130.000 görüntülük resumable full
-   candidate retrieval'i açık kullanıcı onayıyla başlatıp başlatmamaktır.**
+   Yetkilendirilen tam retrieval 130.000 görüntüde çalıştı ve 1.107 ara artifact'ı
+   tamamladı. Salt-okunur tanı 4.621.932 union aday = 35,553 çift/görüntü ölçtü;
+   bu, dondurulmuş 25 sınırını geçtiği için finalleştirme doğru biçimde durdu.
+   Exact kapsam 1.393/1.393'tür. Brain MRI ve kidney CT birlikte pHash-only yükün
+   %98,32'sini üretmiştir. Bir sonraki karar, mevcut artifact'ları değiştirmeden
+   modality-aware v2.4 karşı-olgusal hipotezini tanımlayıp referans pozitiflerde
+   doğrulamaktır.**
 7. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
    denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
-   yöntemiyle yap.
+   yöntemiyle yap. **Uyumlu source-group içi cross-leaf candidate retrieval tam kapsamda
+   çalıştı; ancak modality-aware kural doğrulanmadığı ve scorer uygulanmadığı için duplicate
+   kararları henüz oluşmadı.**
 8. Exact ve doğrulanmış yakın-kopyaları aile gruplarına dönüştür.
 9. Aileleri bölmeden sabit 70/15/15 manifestleri oluştur ve kesişim testini yap.
 10. Ancak bundan sonra adil model eğitimi ve karşılaştırmasına geç.

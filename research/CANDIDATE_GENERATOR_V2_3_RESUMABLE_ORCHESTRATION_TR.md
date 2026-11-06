@@ -2,10 +2,12 @@
 
 Tarih: 2026-11-05
 
-Durum: **Tam retrieval için hash-korumalı, parçalı ve resume edilebilir çalıştırıcı
-hazırlandı; yerelde gerçek görüntülerle kesinti-devam smoke testi geçti. Tam
-130.000 görüntülük retrieval başlatılmadı.** Duplicate-rule scoring, family,
-train/validation/test split ve model eğitimi yoktur.
+Durum: **Hash-korumalı ve resume edilebilir çalıştırıcıyla tam 130.000 görüntülük
+retrieval'ın 1.107 pre-final artifact'ı tamamlandı. Colab kesintisi sonrasında
+artifact'lar doğrulanıp tekrar hesaplanmadan kullanıldı. Finalleştirme, ölçülen
+35,553 çift/görüntü yükü dondurulmuş 25 sınırını geçtiği için bilinçli olarak
+durdu.** Duplicate-rule scoring, family, train/validation/test split ve model
+eğitimi yoktur.
 
 ## 1. Neden yeni bir çalıştırıcı gerekti?
 
@@ -133,10 +135,19 @@ Full çalışma kesilirse yeni output adı verilmez ve kod/argümanlar değişti
 aynı hücre yeniden çalıştırılır. Contract veya ortam farklıysa runner güvenli biçimde
 resume'i reddeder.
 
-## 8. Sıradaki kullanıcı adımı
+## 8. Tam çalışma sonrası durum
 
-Tam retrieval henüz başlatılmadı. Mehmet'in 8,62 GB `Multi Cancer.zip` dosyası
-Colab'ın yerel diskine çıkarıldı ve 52 görüntülük T4 smoke tamamlandı. İndirilen
-`run_report.json` ve `hash_manifest.json` 15/15 bağımsız kontrolden geçti. Ayrıntılı
-kayıt `research/CANDIDATE_GENERATOR_V2_3_COLAB_SMOKE_TR.md` dosyasındadır. Bir sonraki
-karar, 130.000 görüntülük full-run'ı ayrı kullanıcı onayıyla açıp açmamaktır.
+Mehmet'in açık onayından sonra tam retrieval başlatıldı. İlk Colab oturumu sona erse
+de Drive'daki 1.107 hash-kayıtlı artifact korundu. Aynı run contract ile yapılan
+resume, tamamlanmış aşamaları doğrulayıp atladı. Final union 4.621.932 candidate,
+yani 35,553 çift/görüntü çıktı. Bu sayı dondurulmuş 25 sınırını geçtiği için runner
+final CSV/NPZ/rapor dosyalarını yazmadan durdu.
+
+Salt-okunur tanı, 1.393/1.393 exact çiftin kapsandığını ve aşırı pHash-only yükün
+%98,3169'unun brain MRI ile kidney CT'den geldiğini gösterdi. İndirilen JSON'un
+toplamları ve süre hesabı yerelde bağımsız yeniden hesaplandı. Ayrıntılı kayıt:
+`research/CANDIDATE_GENERATOR_V2_3_FULL_LOAD_GATE_TR.md`.
+
+Sıradaki adım, mevcut artifact'ları değiştirmeden modality-aware v2.4 hipotezini
+tanımlamak ve referans pozitiflerde recall/yük karşılaştırması yapmaktır. Kullanıcı
+onayı olmadan yeni kural, scoring, family, split veya model eğitimi başlatılmaz.
