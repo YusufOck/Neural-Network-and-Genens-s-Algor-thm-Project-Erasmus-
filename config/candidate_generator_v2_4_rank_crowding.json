@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "predeclared_before_full_rank_diagnostic",
+  "experiment_type": "read_only_full_index_rank_crowding_diagnostic",
+  "purpose": "Measure N000123's exact directed ranks in the four frozen robust descriptor channels and exact bounded top-K candidate-load projections before any v2.5 proposal.",
+  "integrity_dependencies": {
+    "analyzer_sha256": "bcdafcb1c3a1df1d6b464c1fa4578ab3de1237ca6bb6eb06470e5008edab4484"
+  },
+  "target_pair": {
+    "pair_id": "N000123",
+    "source_group": "cervix_pap_smear",
+    "left_path": "Cervical Cancer/cervix_dyk/cervix_dyk_4875.jpg",
+    "right_path": "Cervical Cancer/cervix_dyk/cervix_dyk_3040.jpg",
+    "phash_distance_from_audit": 34,
+    "audit_index_best_robust_union_rank": 1,
+    "adjudicated_reference": "same_source"
+  },
+  "top_k_grid": [15, 20, 25, 30, 40, 50, 75, 100],
+  "expected_full_artifact_state": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifacts": 1107,
+    "image_count": 130000,
+    "target_group_image_count": 25000,
+    "target_group_descriptor_artifacts": 5,
+    "target_group_robust_artifacts": 4,
+    "target_group_phash_artifacts": 196,
+    "target_group_robust_top15_pairs": 355588,
+    "target_group_phash_pairs": 68770,
+    "target_group_union_top15_pairs": 378508,
+    "target_pair_in_phash_radius12": false,
+    "v2_4_counterfactual_pairs": 2491553
+  },
+  "invariants": {
+    "descriptor_channels": [
+      "raw_full_flip_mean",
+      "autocontrast_full_flip_mean",
+      "raw_multicrop_flip_mean",
+      "autocontrast_multicrop_flip_mean"
+    ],
+    "recomputed_top15_must_equal_frozen_robust_artifact_union": true,
+    "top15_full_projection_must_equal_verified_v2_4_count": true,
+    "report_must_be_outside_v2_3_output_directory": true
+  },
+  "forbidden_actions": [
+    "modify_v2_3_artifacts",
+    "choose_or_freeze_v2_5_rule",
+    "duplicate_decision_scoring",
+    "family_construction",
+    "train_validation_test_split",
+    "classifier_training"
+  ]
+}
