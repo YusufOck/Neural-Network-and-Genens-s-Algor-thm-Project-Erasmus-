@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_v2_5_prospective_pair_selection",
+  "declared_date": "2026-11-09",
+  "experiment_type": "score_blind_full_index_prospective_natural_audit_selection",
+  "purpose": "Prospectively validate a cervix-only robust top-40 candidate policy without reusing N000123 as independent acceptance evidence.",
+  "candidate_rule": {
+    "logic": "group_specific_robust_topk_union_phash_radius12_selected_groups_union_exact_sha256",
+    "search_scope": "within_compatible_source_group_only",
+    "robust_top_k_by_group": {
+      "all_blood_smear": 15,
+      "brain_ce_mri": 15,
+      "breast_histology": 15,
+      "cervix_pap_smear": 40,
+      "kidney_ct": 15,
+      "lung_colon_histology": 15,
+      "lymphoma_histology": 15,
+      "oral_histology": 15
+    },
+    "phash_radius_inclusive": 12,
+    "phash_radius12_source_groups": [
+      "all_blood_smear",
+      "breast_histology",
+      "cervix_pap_smear",
+      "lung_colon_histology",
+      "lymphoma_histology",
+      "oral_histology"
+    ],
+    "phash_disabled_source_groups": [
+      "brain_ce_mri",
+      "kidney_ct"
+    ],
+    "exact_sha256_policy": "mandatory_global_union",
+    "cross_source_group_policy": "forbidden"
+  },
+  "sampling": {
+    "seed": 20261109,
+    "pair_id_prefix": "V25N",
+    "maximum_pair_count": 256,
+    "candidate_robust_edge_per_group": 8,
+    "candidate_new_cervix_rank16_30": 16,
+    "outside_robust_per_group": 8,
+    "outside_phash_max_per_enabled_group": 8,
+    "outside_random_per_group": 8,
+    "selection_priority": [
+      "outside_robust_boundary",
+      "outside_phash_13_16",
+      "outside_random",
+      "candidate_new_cervix_rank16_30",
+      "candidate_robust_edge"
+    ],
+    "one_pair_per_image": true,
+    "do_not_backfill_sparse_strata": true
+  },
+  "expected_full_state": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifacts": 1107,
+    "image_count": 130000,
+    "v2_4_full_pairs": 2491553,
+    "v2_5_full_pairs": 2994870,
+    "cervix_v2_4_union_pairs": 378508,
+    "cervix_v2_5_union_pairs": 881825,
+    "maximum_pairs_per_image": 25.0,
+    "expected_exact_reference_pairs": 1393,
+    "expected_controlled_positive_references": 1040,
+    "expected_regression_natural_references": 23
+  },
+  "predeclared_acceptance_gates": {
+    "required_exact_reference_hits": 1393,
+    "required_controlled_positive_hits": 1040,
+    "required_regression_natural_hits": 23,
+    "required_new_outside_same_source_pairs": 0,
+    "required_unresolved_outside_uncertain_pairs": 0,
+    "required_cross_source_group_pairs": 0,
+    "required_full_candidate_pairs": 2994870,
+    "maximum_candidate_pairs_per_image": 25.0
+  },
+  "evidence_roles": {
+    "development": "N000123 motivated cervix top-40 and cannot be counted as prospective success.",
+    "regression": "The previous 23 natural positives must remain covered but are not an independent acceptance set.",
+    "prospective": "Only the new path-disjoint score-blind outside strata can pass or fail the new natural-risk gate."
+  },
+  "integrity_dependencies": {
+    "builder_sha256": "865342f0eab1730b7bd0042b4bc9946784f3e1bfc75f591fcf2a72108c160c59",
+    "exclusion_manifest_path": "research/candidate_generator_v2_5_excluded_paths_v1.json",
+    "exclusion_manifest_sha256": "bc90f337d0058648c27312886cd407177a7e329a85373b13c58f4ab68bf38c3f",
+    "tracked_evidence_sha256": {
+      "research/candidate_generator_v2_4_counterfactual_v1.json": "4bd51e7714db113e54efce6b132bf228e91ff8a9c2e1e4b4cfeac49d2cef6220",
+      "research/candidate_generator_v2_4_rank_crowding_v1.json": "4e71e5a0a08fd75c7e029566a7a7571876818dc455b2f9f5bc867403fbed5a89"
+    }
+  },
+  "blinding": {
+    "review_manifest_hides": [
+      "selection_stratum",
+      "v2_5_candidate",
+      "robust_acceptance_k",
+      "robust_best_rank",
+      "robust_rank_lower_bound",
+      "phash_enabled",
+      "phash_distance",
+      "phash_radius12"
+    ],
+    "all_review_decision_fields_start_blank": true,
+    "images_must_not_be_opened_during_selection": true,
+    "private_strata_open_only_after_visual_decisions_are_frozen": true
+  },
+  "forbidden_actions": [
+    "modify_v2_3_artifacts",
+    "open_or_render_selected_images_before_selection_freeze",
+    "assign_visual_verdicts_during_selection",
+    "run_duplicate_scorer",
+    "construct_duplicate_families",
+    "create_train_validation_test_split",
+    "train_classifier"
+  ],
+  "interpretation_limits": [
+    "A same-source pair in any new outside stratum rejects v2.5.",
+    "Zero sampled outside positives cannot prove 100 percent recall over all possible pairs.",
+    "AI-assisted visual decisions are not a clinical-expert gold standard.",
+    "Passing selection integrity does not mean the visual prospective audit has passed."
+  ]
+}
