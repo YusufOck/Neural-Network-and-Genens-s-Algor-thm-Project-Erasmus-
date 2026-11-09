@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "status": "candidate_generator_v2_4_rank_crowding_diagnostic_complete",
+  "experiment_type": "read_only_predeclared_full_index_rank_diagnostic",
+  "does_not_modify_v2_3_artifacts": true,
+  "not_a_v2_5_rule": true,
+  "not_a_duplicate_decision": true,
+  "does_not_authorize_family_split_or_training": true,
+  "config": {
+    "path_name": "candidate_generator_v2_4_rank_crowding.json",
+    "sha256": "c5073b99fcafcbfc87e691a8250d818ffc39ac2f7de8c8635e3c9c7bba867ab7",
+    "analyzer_sha256": "bcdafcb1c3a1df1d6b464c1fa4578ab3de1237ca6bb6eb06470e5008edab4484"
+  },
+  "input": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifact_count": 1107,
+    "stage_counts": {
+      "descriptor_generation": 26,
+      "index": 1,
+      "phash_generation": 26,
+      "phash_retrieval": 1022,
+      "robust_retrieval": 32
+    },
+    "verified_artifacts_in_this_diagnostic": 206,
+    "image_count": 130000,
+    "target_group": "cervix_pap_smear",
+    "target_group_image_count": 25000,
+    "device": "cuda",
+    "block_size": 256
+  },
+  "target_pair": {
+    "pair_id": "N000123",
+    "left_path": "Cervical Cancer/cervix_dyk/cervix_dyk_4875.jpg",
+    "right_path": "Cervical Cancer/cervix_dyk/cervix_dyk_3040.jpg",
+    "left_global_index": 49874,
+    "right_global_index": 48039,
+    "phash_distance_from_audit": 34,
+    "present_in_full_phash_radius12": false,
+    "minimum_required_robust_top_k": 34,
+    "recovered_within_predeclared_grid": true,
+    "by_descriptor_channel": {
+      "raw_full_flip_mean": {
+        "cosine_similarity": 0.8634274005889893,
+        "left_to_right_rank": 532,
+        "right_to_left_rank": 377,
+        "best_directed_rank": 377,
+        "unique_pairs_at_max_k": 1675032
+      },
+      "autocontrast_full_flip_mean": {
+        "cosine_similarity": 0.8878695964813232,
+        "left_to_right_rank": 152,
+        "right_to_left_rank": 66,
+        "best_directed_rank": 66,
+        "unique_pairs_at_max_k": 1682616
+      },
+      "raw_multicrop_flip_mean": {
+        "cosine_similarity": 0.905169665813446,
+        "left_to_right_rank": 63,
+        "right_to_left_rank": 206,
+        "best_directed_rank": 63,
+        "unique_pairs_at_max_k": 1656607
+      },
+      "autocontrast_multicrop_flip_mean": {
+        "cosine_similarity": 0.9196021556854248,
+        "left_to_right_rank": 34,
+        "right_to_left_rank": 56,
+        "best_directed_rank": 34,
+        "unique_pairs_at_max_k": 1668632
+      }
+    }
+  },
+  "candidate_load_projections": [
+    {
+      "top_k": 15,
+      "target_pair_recovered": false,
+      "target_group_robust_pairs": 355588,
+      "target_group_union_with_phash_pairs": 378508,
+      "full_counterfactual_pairs": 2491553,
+      "full_pairs_per_image": 19.165792307692307,
+      "passes_25_pairs_per_image_capacity": true
+    },
+    {
+      "top_k": 20,
+      "target_pair_recovered": false,
+      "target_group_robust_pairs": 432306,
+      "target_group_union_with_phash_pairs": 454003,
+      "full_counterfactual_pairs": 2567048,
+      "full_pairs_per_image": 19.746523076923076,
+      "passes_25_pairs_per_image_capacity": true
+    },
+    {
+      "top_k": 25,
+      "target_pair_recovered": false,
+      "target_group_robust_pairs": 507946,
+      "target_group_union_with_phash_pairs": 528940,
+      "full_counterfactual_pairs": 2641985,
+      "full_pairs_per_image": 20.322961538461538,
+      "passes_25_pairs_per_image_capacity": true
+    },
+    {
+      "top_k": 30,
+      "target_pair_recovered": false,
+      "target_group_robust_pairs": 596143,
+      "target_group_union_with_phash_pairs": 616710,
+      "full_counterfactual_pairs": 2729755,
+      "full_pairs_per_image": 20.998115384615385,
+      "passes_25_pairs_per_image_capacity": true
+    },
+    {
+      "top_k": 40,
+      "target_pair_recovered": true,
+      "target_group_robust_pairs": 861743,
+      "target_group_union_with_phash_pairs": 881825,
+      "full_counterfactual_pairs": 2994870,
+      "full_pairs_per_image": 23.03746153846154,
+      "passes_25_pairs_per_image_capacity": true
+    },
+    {
+      "top_k": 50,
+      "target_pair_recovered": true,
+      "target_group_robust_pairs": 1255565,
+      "target_group_union_with_phash_pairs": 1275387,
+      "full_counterfactual_pairs": 3388432,
+      "full_pairs_per_image": 26.06486153846154,
+      "passes_25_pairs_per_image_capacity": false
+    },
+    {
+      "top_k": 75,
+      "target_pair_recovered": true,
+      "target_group_robust_pairs": 2258292,
+      "target_group_union_with_phash_pairs": 2277723,
+      "full_counterfactual_pairs": 4390768,
+      "full_pairs_per_image": 33.77513846153846,
+      "passes_25_pairs_per_image_capacity": false
+    },
+    {
+      "top_k": 100,
+      "target_pair_recovered": true,
+      "target_group_robust_pairs": 3208184,
+      "target_group_union_with_phash_pairs": 3227379,
+      "full_counterfactual_pairs": 5340424,
+      "full_pairs_per_image": 41.08018461538462,
+      "passes_25_pairs_per_image_capacity": false
+    }
+  ],
+  "baseline_reproduction": {
+    "stored_robust_top15_pairs": 355588,
+    "recomputed_robust_top15_pairs": 355588,
+    "stored_phash_pairs": 68770,
+    "v2_4_full_pairs": 2491553,
+    "all_matched": true
+  },
+  "decision": "DIAGNOSTIC COMPLETE: review measured ranks and bounded load projections before predeclaring any v2.5 rule."
+}
