@@ -1,7 +1,9 @@
 # Candidate Generator v2.5 — Prospective Audit Freeze Kaydı
 
-Tarih: 2026-11-09  
-İşlem türü: Kod/config hazırlığı ve sonuç öncesi hash freeze  
+Tarih: 2026-11-09
+
+İşlem türü: Kod/config hazırlığı ve sonuç öncesi hash freeze
+
 Durum: Hazır; full selection henüz çalıştırılmadı ve hiçbir görüntü açılmadı
 
 ## Dondurulan aday politikası
@@ -82,4 +84,3 @@ Yeni bir Colab/T4 çalıştırıcısı hazırlanıp yalnız full selection çal�
 
 Bu üç seçim artifact'ı hash ile doğrulanıp GitHub'a dondurulmadan hiçbir seçili görüntü
 açılmayacak veya render edilmeyecektir. Colab selection çalışması için ayrıca Mehmet onayı gerekir.
-
