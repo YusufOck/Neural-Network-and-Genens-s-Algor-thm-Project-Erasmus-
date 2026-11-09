@@ -118,4 +118,3 @@ Artifact'lar GitHub'da dondurulduktan sonra yalnız `review_manifest.csv` kullan
 temas sayfaları render edilecektir. Renderer private CSV'yi okumamalı ve kartlarda yalnız Pair ID,
 source group ve iki görüntüyü göstermelidir. Görsel kararlar tamamlanıp ayrıca dondurulmadan private
 stratum/skorlar açılmayacaktır.
-
