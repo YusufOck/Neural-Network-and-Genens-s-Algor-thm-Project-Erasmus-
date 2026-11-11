@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "status": "predeclared_before_v2_6_missed_pair_rank_diagnostic",
+  "declared_date": "2026-11-11",
+  "experiment_type": "read_only_full_index_multi_pair_rank_diagnostic",
+  "purpose": "Measure exact full-index directed ranks for all 16 frozen v2.5 outside positives and bounded candidate-load projections before proposing any v2.6 rule.",
+  "audit_source": {
+    "unblinded_pair_results": "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_pair_results.csv",
+    "unblinded_report": "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_report.json",
+    "required_audit_region": "outside",
+    "required_visual_verdict": "same_source_candidate",
+    "required_pair_count": 16
+  },
+  "top_k_grid": [15, 20, 25, 30, 40, 50, 75, 100],
+  "target_group_state": {
+    "brain_ce_mri": {
+      "image_count": 15000,
+      "descriptor_artifacts": 3,
+      "robust_artifacts": 4,
+      "robust_top15_pairs": 272808,
+      "phash_enabled": false,
+      "phash_artifacts": 0,
+      "phash_pairs": 0,
+      "current_v2_5_union_pairs": 272808
+    },
+    "kidney_ct": {
+      "image_count": 10000,
+      "descriptor_artifacts": 2,
+      "robust_artifacts": 4,
+      "robust_top15_pairs": 115349,
+      "phash_enabled": false,
+      "phash_artifacts": 0,
+      "phash_pairs": 0,
+      "current_v2_5_union_pairs": 115349
+    },
+    "lymphoma_histology": {
+      "image_count": 15000,
+      "descriptor_artifacts": 3,
+      "robust_artifacts": 4,
+      "robust_top15_pairs": 334378,
+      "phash_enabled": true,
+      "phash_artifacts": 118,
+      "phash_pairs": 10403,
+      "current_v2_5_union_pairs": 339509
+    }
+  },
+  "target_pairs": [
+    {
+      "pair_id": "V25N000070",
+      "source_group": "brain_ce_mri",
+      "left_path": "Brain Cancer/brain_tumor/brain_tumor_1800.jpg",
+      "right_path": "Brain Cancer/brain_tumor/brain_tumor_4544.jpg",
+      "selection_stratum": "outside_random",
+      "phash_distance": 18,
+      "audit_robust_best_rank": null,
+      "audit_robust_rank_lower_bound": 31
+    },
+    {
+      "pair_id": "V25N000071",
+      "source_group": "brain_ce_mri",
+      "left_path": "Brain Cancer/brain_menin/brain_menin_4233.jpg",
+      "right_path": "Brain Cancer/brain_menin/brain_menin_4330.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 20,
+      "audit_robust_best_rank": 30,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000084",
+      "source_group": "kidney_ct",
+      "left_path": "Kidney Cancer/kidney_normal/kidney_normal_2102.jpg",
+      "right_path": "Kidney Cancer/kidney_normal/kidney_normal_3652.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 10,
+      "audit_robust_best_rank": 25,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000098",
+      "source_group": "kidney_ct",
+      "left_path": "Kidney Cancer/kidney_tumor/kidney_tumor_0186.jpg",
+      "right_path": "Kidney Cancer/kidney_tumor/kidney_tumor_4996.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 24,
+      "audit_robust_best_rank": 20,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000103",
+      "source_group": "kidney_ct",
+      "left_path": "Kidney Cancer/kidney_normal/kidney_normal_0278.jpg",
+      "right_path": "Kidney Cancer/kidney_normal/kidney_normal_0292.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 12,
+      "audit_robust_best_rank": 20,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000107",
+      "source_group": "brain_ce_mri",
+      "left_path": "Brain Cancer/brain_menin/brain_menin_4385.jpg",
+      "right_path": "Brain Cancer/brain_menin/brain_menin_4734.jpg",
+      "selection_stratum": "outside_random",
+      "phash_distance": 26,
+      "audit_robust_best_rank": null,
+      "audit_robust_rank_lower_bound": 31
+    },
+    {
+      "pair_id": "V25N000113",
+      "source_group": "kidney_ct",
+      "left_path": "Kidney Cancer/kidney_tumor/kidney_tumor_1973.jpg",
+      "right_path": "Kidney Cancer/kidney_tumor/kidney_tumor_2161.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 16,
+      "audit_robust_best_rank": 28,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000125",
+      "source_group": "lymphoma_histology",
+      "left_path": "Lymphoma/lymph_fl/lymph_fl_1008.jpg",
+      "right_path": "Lymphoma/lymph_fl/lymph_fl_3588.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 32,
+      "audit_robust_best_rank": 28,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000142",
+      "source_group": "lymphoma_histology",
+      "left_path": "Lymphoma/lymph_cll/lymph_cll_0950.jpg",
+      "right_path": "Lymphoma/lymph_cll/lymph_cll_4124.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 28,
+      "audit_robust_best_rank": 24,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000145",
+      "source_group": "lymphoma_histology",
+      "left_path": "Lymphoma/lymph_mcl/lymph_mcl_0670.jpg",
+      "right_path": "Lymphoma/lymph_mcl/lymph_mcl_1567.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 32,
+      "audit_robust_best_rank": 22,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000183",
+      "source_group": "brain_ce_mri",
+      "left_path": "Brain Cancer/brain_tumor/brain_tumor_0853.jpg",
+      "right_path": "Brain Cancer/brain_tumor/brain_tumor_1540.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 20,
+      "audit_robust_best_rank": 18,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000185",
+      "source_group": "kidney_ct",
+      "left_path": "Kidney Cancer/kidney_normal/kidney_normal_4767.jpg",
+      "right_path": "Kidney Cancer/kidney_normal/kidney_normal_4789.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 12,
+      "audit_robust_best_rank": 26,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000198",
+      "source_group": "brain_ce_mri",
+      "left_path": "Brain Cancer/brain_tumor/brain_tumor_2334.jpg",
+      "right_path": "Brain Cancer/brain_tumor/brain_tumor_4597.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 24,
+      "audit_robust_best_rank": 18,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000212",
+      "source_group": "kidney_ct",
+      "left_path": "Kidney Cancer/kidney_normal/kidney_normal_0307.jpg",
+      "right_path": "Kidney Cancer/kidney_normal/kidney_normal_0346.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 6,
+      "audit_robust_best_rank": 24,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000229",
+      "source_group": "brain_ce_mri",
+      "left_path": "Brain Cancer/brain_menin/brain_menin_0973.jpg",
+      "right_path": "Brain Cancer/brain_menin/brain_menin_4741.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 26,
+      "audit_robust_best_rank": 18,
+      "audit_robust_rank_lower_bound": null
+    },
+    {
+      "pair_id": "V25N000254",
+      "source_group": "lymphoma_histology",
+      "left_path": "Lymphoma/lymph_mcl/lymph_mcl_2891.jpg",
+      "right_path": "Lymphoma/lymph_mcl/lymph_mcl_4575.jpg",
+      "selection_stratum": "outside_robust_boundary",
+      "phash_distance": 22,
+      "audit_robust_best_rank": 29,
+      "audit_robust_rank_lower_bound": null
+    }
+  ],
+  "expected_full_artifact_state": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifacts": 1107,
+    "image_count": 130000,
+    "v2_5_full_pairs": 2994870,
+    "maximum_pairs_per_image": 25.0
+  },
+  "integrity_dependencies": {
+    "analyzer_sha256": "774f61d4542c3efe7ec23f62f2fa085b3fcb786c33fc5ae1c546894d3569707b",
+    "rank_helper_sha256": "bcdafcb1c3a1df1d6b464c1fa4578ab3de1237ca6bb6eb06470e5008edab4484",
+    "tracked_file_sha256": {
+      "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_pair_results.csv": "28a387c57e8b96c85f51b375c7c105dacb187b07e82bfba446d8d481e507958c",
+      "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_report.json": "14d9df6ff3f03da9d9555324625e9934df274f568a736bfa669b0cb321cfbb01",
+      "research/candidate_generator_v2_5_prospective_selection_v1/selection_report.json": "0d07aa5a91a7cd0c21f6bd35f1e0899016247dbf7768eb0c3557041a809eb33b",
+      "src/analyze_candidate_generator_v2_4_rank_crowding.py": "bcdafcb1c3a1df1d6b464c1fa4578ab3de1237ca6bb6eb06470e5008edab4484"
+    }
+  },
+  "invariants": {
+    "recomputed_top15_must_equal_frozen_robust_artifact_union": true,
+    "all_16_targets_must_equal_frozen_outside_positives": true,
+    "report_must_be_outside_v2_3_output_directory": true,
+    "grid_is_diagnostic_only": true
+  },
+  "forbidden_actions": [
+    "modify_v2_3_artifacts",
+    "select_or_freeze_v2_6_rule",
+    "change_frozen_visual_decisions",
+    "duplicate_decision_scoring",
+    "family_construction",
+    "train_validation_test_split",
+    "classifier_training"
+  ]
+}
