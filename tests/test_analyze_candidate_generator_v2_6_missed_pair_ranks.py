@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sys
 import unittest
+import json
 from pathlib import Path
 
 import numpy as np
@@ -16,6 +17,77 @@ import analyze_candidate_generator_v2_6_missed_pair_ranks as diagnostic
 
 
 class V26MissedPairRankDiagnosticTests(unittest.TestCase):
+    def test_real_drive_report_matches_frozen_contract_and_arithmetic(self) -> None:
+        report_path = (
+            ROOT
+            / "research"
+            / "candidate_generator_v2_6_missed_pair_rank_diagnostic_v1.json"
+        )
+        self.assertEqual(
+            diagnostic.file_sha256(report_path),
+            "88902b9c3810e6f3d945208e96a7d35a3d60a5352eaed98b8dfa60658cd6973f",
+        )
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        self.assertEqual(
+            report["status"],
+            "candidate_generator_v2_6_missed_pair_rank_diagnostic_complete",
+        )
+        self.assertEqual(report["input"]["registered_artifact_count"], 1107)
+        self.assertEqual(report["input"]["verified_artifacts_in_this_diagnostic"], 139)
+        self.assertEqual(report["input"]["target_pair_count"], 16)
+
+        expected = {
+            "brain_ce_mri": (6, 2076, None),
+            "kidney_ct": (6, 28, 30),
+            "lymphoma_histology": (4, 29, 30),
+        }
+        base_full = 2_994_870
+        image_count = 130_000
+        current_group_total = 0
+        for group, (pair_count, minimum_k, first_grid) in expected.items():
+            result = report["by_source_group"][group]
+            self.assertEqual(result["target_pair_count"], pair_count)
+            self.assertEqual(result["minimum_k_covering_all_observed_targets"], minimum_k)
+            self.assertEqual(result["first_predeclared_grid_k_covering_all"], first_grid)
+            self.assertTrue(result["baseline_reproduction"]["all_matched"])
+            current_union = result["baseline_reproduction"]["current_v2_5_group_union_pairs"]
+            current_group_total += current_union
+            previous_union = -1
+            for projection in result["candidate_load_projections"]:
+                union = projection["target_group_union_pairs"]
+                self.assertGreater(union, previous_union)
+                previous_union = union
+                full = base_full - current_union + union
+                self.assertEqual(projection["full_pairs_if_only_this_group_changed"], full)
+                self.assertAlmostEqual(projection["full_pairs_per_image"], full / image_count)
+                self.assertEqual(
+                    projection["passes_25_pairs_per_image_capacity"],
+                    full / image_count <= 25.0,
+                )
+            for target in result["target_pairs"]:
+                channel_minimum = min(
+                    channel["best_directed_rank"]
+                    for channel in target["by_descriptor_channel"].values()
+                )
+                self.assertEqual(target["minimum_required_robust_top_k"], channel_minimum)
+
+        for projection in report["common_k_candidate_load_projections"]:
+            projected_total = sum(projection["projected_union_pairs_by_group"].values())
+            full = base_full - current_group_total + projected_total
+            self.assertEqual(projection["full_candidate_pairs"], full)
+            self.assertAlmostEqual(projection["full_pairs_per_image"], full / image_count)
+            self.assertEqual(
+                projection["passes_25_pairs_per_image_capacity"],
+                full / image_count <= 25.0,
+            )
+            self.assertFalse(projection["all_16_targets_recovered"])
+
+        brain_pairs = {
+            row["pair_id"]: row
+            for row in report["by_source_group"]["brain_ce_mri"]["target_pairs"]
+        }
+        self.assertEqual(brain_pairs["V25N000107"]["minimum_required_robust_top_k"], 2076)
+
     def test_frozen_config_and_dependencies_match(self) -> None:
         config, config_hash = diagnostic.load_config(
             ROOT / "config" / "candidate_generator_v2_6_missed_pair_rank_diagnostic.json"

@@ -1,0 +1,994 @@
+{
+  "schema_version": 1,
+  "status": "candidate_generator_v2_6_missed_pair_rank_diagnostic_complete",
+  "experiment_type": "read_only_predeclared_full_index_multi_pair_rank_diagnostic",
+  "does_not_modify_v2_3_artifacts": true,
+  "not_a_v2_6_rule": true,
+  "not_a_duplicate_decision": true,
+  "does_not_authorize_family_split_or_training": true,
+  "config": {
+    "path_name": "candidate_generator_v2_6_missed_pair_rank_diagnostic.json",
+    "sha256": "21c6e164c0d2b9f28bb654d9534622ec75d5b99f14b93912cde260d8477645f7",
+    "analyzer_sha256": "774f61d4542c3efe7ec23f62f2fa085b3fcb786c33fc5ae1c546894d3569707b"
+  },
+  "input": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifact_count": 1107,
+    "stage_counts": {
+      "descriptor_generation": 26,
+      "index": 1,
+      "phash_generation": 26,
+      "phash_retrieval": 1022,
+      "robust_retrieval": 32
+    },
+    "verified_artifacts_in_this_diagnostic": 139,
+    "image_count": 130000,
+    "target_pair_count": 16,
+    "target_groups": [
+      "brain_ce_mri",
+      "kidney_ct",
+      "lymphoma_histology"
+    ],
+    "device": "cuda",
+    "block_size": 256
+  },
+  "by_source_group": {
+    "brain_ce_mri": {
+      "image_count": 15000,
+      "target_pair_count": 6,
+      "phash_enabled": false,
+      "target_pairs": [
+        {
+          "pair_id": "V25N000070",
+          "left_path": "Brain Cancer/brain_tumor/brain_tumor_1800.jpg",
+          "right_path": "Brain Cancer/brain_tumor/brain_tumor_4544.jpg",
+          "selection_stratum": "outside_random",
+          "phash_distance": 18,
+          "audit_robust_best_rank": null,
+          "audit_robust_rank_lower_bound": 31,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9045578837394714,
+              "left_to_right_rank": 182,
+              "right_to_left_rank": 528,
+              "best_directed_rank": 182
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.9071615934371948,
+              "left_to_right_rank": 140,
+              "right_to_left_rank": 578,
+              "best_directed_rank": 140
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.8928213119506836,
+              "left_to_right_rank": 894,
+              "right_to_left_rank": 1266,
+              "best_directed_rank": 894
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.8941760063171387,
+              "left_to_right_rank": 971,
+              "right_to_left_rank": 1655,
+              "best_directed_rank": 971
+            }
+          },
+          "minimum_required_robust_top_k": 140
+        },
+        {
+          "pair_id": "V25N000071",
+          "left_path": "Brain Cancer/brain_menin/brain_menin_4233.jpg",
+          "right_path": "Brain Cancer/brain_menin/brain_menin_4330.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 20,
+          "audit_robust_best_rank": 30,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9029204845428467,
+              "left_to_right_rank": 121,
+              "right_to_left_rank": 206,
+              "best_directed_rank": 121
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.9092084169387817,
+              "left_to_right_rank": 76,
+              "right_to_left_rank": 90,
+              "best_directed_rank": 76
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9292891025543213,
+              "left_to_right_rank": 86,
+              "right_to_left_rank": 30,
+              "best_directed_rank": 30
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.924871027469635,
+              "left_to_right_rank": 152,
+              "right_to_left_rank": 38,
+              "best_directed_rank": 38
+            }
+          },
+          "minimum_required_robust_top_k": 30
+        },
+        {
+          "pair_id": "V25N000107",
+          "left_path": "Brain Cancer/brain_menin/brain_menin_4385.jpg",
+          "right_path": "Brain Cancer/brain_menin/brain_menin_4734.jpg",
+          "selection_stratum": "outside_random",
+          "phash_distance": 26,
+          "audit_robust_best_rank": null,
+          "audit_robust_rank_lower_bound": 31,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.8692209720611572,
+              "left_to_right_rank": 2076,
+              "right_to_left_rank": 2365,
+              "best_directed_rank": 2076
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.8722846508026123,
+              "left_to_right_rank": 2482,
+              "right_to_left_rank": 2880,
+              "best_directed_rank": 2482
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.8515965342521667,
+              "left_to_right_rank": 3458,
+              "right_to_left_rank": 8811,
+              "best_directed_rank": 3458
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.8528656363487244,
+              "left_to_right_rank": 5135,
+              "right_to_left_rank": 9654,
+              "best_directed_rank": 5135
+            }
+          },
+          "minimum_required_robust_top_k": 2076
+        },
+        {
+          "pair_id": "V25N000183",
+          "left_path": "Brain Cancer/brain_tumor/brain_tumor_0853.jpg",
+          "right_path": "Brain Cancer/brain_tumor/brain_tumor_1540.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 20,
+          "audit_robust_best_rank": 18,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9304250478744507,
+              "left_to_right_rank": 30,
+              "right_to_left_rank": 149,
+              "best_directed_rank": 30
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.942105770111084,
+              "left_to_right_rank": 18,
+              "right_to_left_rank": 36,
+              "best_directed_rank": 18
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9338098764419556,
+              "left_to_right_rank": 70,
+              "right_to_left_rank": 150,
+              "best_directed_rank": 70
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9432267546653748,
+              "left_to_right_rank": 41,
+              "right_to_left_rank": 54,
+              "best_directed_rank": 41
+            }
+          },
+          "minimum_required_robust_top_k": 18
+        },
+        {
+          "pair_id": "V25N000198",
+          "left_path": "Brain Cancer/brain_tumor/brain_tumor_2334.jpg",
+          "right_path": "Brain Cancer/brain_tumor/brain_tumor_4597.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 24,
+          "audit_robust_best_rank": 18,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9051285982131958,
+              "left_to_right_rank": 256,
+              "right_to_left_rank": 147,
+              "best_directed_rank": 147
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.8944131135940552,
+              "left_to_right_rank": 471,
+              "right_to_left_rank": 548,
+              "best_directed_rank": 471
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9394115805625916,
+              "left_to_right_rank": 33,
+              "right_to_left_rank": 38,
+              "best_directed_rank": 33
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9400423765182495,
+              "left_to_right_rank": 18,
+              "right_to_left_rank": 85,
+              "best_directed_rank": 18
+            }
+          },
+          "minimum_required_robust_top_k": 18
+        },
+        {
+          "pair_id": "V25N000229",
+          "left_path": "Brain Cancer/brain_menin/brain_menin_0973.jpg",
+          "right_path": "Brain Cancer/brain_menin/brain_menin_4741.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 26,
+          "audit_robust_best_rank": 18,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.8993407487869263,
+              "left_to_right_rank": 219,
+              "right_to_left_rank": 282,
+              "best_directed_rank": 219
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.900300145149231,
+              "left_to_right_rank": 515,
+              "right_to_left_rank": 530,
+              "best_directed_rank": 515
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9251458644866943,
+              "left_to_right_rank": 43,
+              "right_to_left_rank": 196,
+              "best_directed_rank": 43
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9347710609436035,
+              "left_to_right_rank": 18,
+              "right_to_left_rank": 94,
+              "best_directed_rank": 18
+            }
+          },
+          "minimum_required_robust_top_k": 18
+        }
+      ],
+      "minimum_k_covering_all_observed_targets": 2076,
+      "first_predeclared_grid_k_covering_all": null,
+      "candidate_load_projections": [
+        {
+          "top_k": 15,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 272808,
+          "target_group_union_pairs": 272808,
+          "full_pairs_if_only_this_group_changed": 2994870,
+          "full_pairs_per_image": 23.03746153846154,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 20,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 382650,
+          "target_group_union_pairs": 382650,
+          "full_pairs_if_only_this_group_changed": 3104712,
+          "full_pairs_per_image": 23.8824,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 25,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 491196,
+          "target_group_union_pairs": 491196,
+          "full_pairs_if_only_this_group_changed": 3213258,
+          "full_pairs_per_image": 24.71736923076923,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 30,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 598902,
+          "target_group_union_pairs": 598902,
+          "full_pairs_if_only_this_group_changed": 3320964,
+          "full_pairs_per_image": 25.54587692307692,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 40,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 809470,
+          "target_group_union_pairs": 809470,
+          "full_pairs_if_only_this_group_changed": 3531532,
+          "full_pairs_per_image": 27.16563076923077,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 50,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 1016048,
+          "target_group_union_pairs": 1016048,
+          "full_pairs_if_only_this_group_changed": 3738110,
+          "full_pairs_per_image": 28.75469230769231,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 75,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 1511872,
+          "target_group_union_pairs": 1511872,
+          "full_pairs_if_only_this_group_changed": 4233934,
+          "full_pairs_per_image": 32.56872307692308,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 100,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 1986945,
+          "target_group_union_pairs": 1986945,
+          "full_pairs_if_only_this_group_changed": 4709007,
+          "full_pairs_per_image": 36.22313076923077,
+          "passes_25_pairs_per_image_capacity": false
+        }
+      ],
+      "baseline_reproduction": {
+        "stored_robust_top15_pairs": 272808,
+        "recomputed_robust_top15_pairs": 272808,
+        "stored_phash_pairs_used_by_policy": 0,
+        "current_v2_5_group_union_pairs": 272808,
+        "all_matched": true
+      }
+    },
+    "kidney_ct": {
+      "image_count": 10000,
+      "target_pair_count": 6,
+      "phash_enabled": false,
+      "target_pairs": [
+        {
+          "pair_id": "V25N000084",
+          "left_path": "Kidney Cancer/kidney_normal/kidney_normal_2102.jpg",
+          "right_path": "Kidney Cancer/kidney_normal/kidney_normal_3652.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 10,
+          "audit_robust_best_rank": 25,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9208099842071533,
+              "left_to_right_rank": 41,
+              "right_to_left_rank": 25,
+              "best_directed_rank": 25
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.9208099842071533,
+              "left_to_right_rank": 41,
+              "right_to_left_rank": 25,
+              "best_directed_rank": 25
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.917421817779541,
+              "left_to_right_rank": 277,
+              "right_to_left_rank": 49,
+              "best_directed_rank": 49
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.917421817779541,
+              "left_to_right_rank": 277,
+              "right_to_left_rank": 49,
+              "best_directed_rank": 49
+            }
+          },
+          "minimum_required_robust_top_k": 25
+        },
+        {
+          "pair_id": "V25N000098",
+          "left_path": "Kidney Cancer/kidney_tumor/kidney_tumor_0186.jpg",
+          "right_path": "Kidney Cancer/kidney_tumor/kidney_tumor_4996.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 24,
+          "audit_robust_best_rank": 20,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9604149460792542,
+              "left_to_right_rank": 20,
+              "right_to_left_rank": 45,
+              "best_directed_rank": 20
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.9604304432868958,
+              "left_to_right_rank": 20,
+              "right_to_left_rank": 45,
+              "best_directed_rank": 20
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9507891535758972,
+              "left_to_right_rank": 29,
+              "right_to_left_rank": 38,
+              "best_directed_rank": 29
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9508622884750366,
+              "left_to_right_rank": 29,
+              "right_to_left_rank": 37,
+              "best_directed_rank": 29
+            }
+          },
+          "minimum_required_robust_top_k": 20
+        },
+        {
+          "pair_id": "V25N000103",
+          "left_path": "Kidney Cancer/kidney_normal/kidney_normal_0278.jpg",
+          "right_path": "Kidney Cancer/kidney_normal/kidney_normal_0292.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 12,
+          "audit_robust_best_rank": 20,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9416751265525818,
+              "left_to_right_rank": 25,
+              "right_to_left_rank": 22,
+              "best_directed_rank": 22
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.9416751265525818,
+              "left_to_right_rank": 25,
+              "right_to_left_rank": 22,
+              "best_directed_rank": 22
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9504744410514832,
+              "left_to_right_rank": 23,
+              "right_to_left_rank": 20,
+              "best_directed_rank": 20
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9504744410514832,
+              "left_to_right_rank": 23,
+              "right_to_left_rank": 20,
+              "best_directed_rank": 20
+            }
+          },
+          "minimum_required_robust_top_k": 20
+        },
+        {
+          "pair_id": "V25N000113",
+          "left_path": "Kidney Cancer/kidney_tumor/kidney_tumor_1973.jpg",
+          "right_path": "Kidney Cancer/kidney_tumor/kidney_tumor_2161.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 16,
+          "audit_robust_best_rank": 28,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9435001611709595,
+              "left_to_right_rank": 87,
+              "right_to_left_rank": 40,
+              "best_directed_rank": 40
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.9458302855491638,
+              "left_to_right_rank": 71,
+              "right_to_left_rank": 39,
+              "best_directed_rank": 39
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9486281275749207,
+              "left_to_right_rank": 29,
+              "right_to_left_rank": 46,
+              "best_directed_rank": 29
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9496105909347534,
+              "left_to_right_rank": 28,
+              "right_to_left_rank": 42,
+              "best_directed_rank": 28
+            }
+          },
+          "minimum_required_robust_top_k": 28
+        },
+        {
+          "pair_id": "V25N000185",
+          "left_path": "Kidney Cancer/kidney_normal/kidney_normal_4767.jpg",
+          "right_path": "Kidney Cancer/kidney_normal/kidney_normal_4789.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 12,
+          "audit_robust_best_rank": 26,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9680176973342896,
+              "left_to_right_rank": 26,
+              "right_to_left_rank": 34,
+              "best_directed_rank": 26
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.9680544137954712,
+              "left_to_right_rank": 26,
+              "right_to_left_rank": 34,
+              "best_directed_rank": 26
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9569777250289917,
+              "left_to_right_rank": 35,
+              "right_to_left_rank": 57,
+              "best_directed_rank": 35
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9574106335639954,
+              "left_to_right_rank": 33,
+              "right_to_left_rank": 55,
+              "best_directed_rank": 33
+            }
+          },
+          "minimum_required_robust_top_k": 26
+        },
+        {
+          "pair_id": "V25N000212",
+          "left_path": "Kidney Cancer/kidney_normal/kidney_normal_0307.jpg",
+          "right_path": "Kidney Cancer/kidney_normal/kidney_normal_0346.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 6,
+          "audit_robust_best_rank": 24,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9347137808799744,
+              "left_to_right_rank": 36,
+              "right_to_left_rank": 50,
+              "best_directed_rank": 36
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.9339643716812134,
+              "left_to_right_rank": 37,
+              "right_to_left_rank": 49,
+              "best_directed_rank": 37
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9472240805625916,
+              "left_to_right_rank": 32,
+              "right_to_left_rank": 24,
+              "best_directed_rank": 24
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9474571943283081,
+              "left_to_right_rank": 30,
+              "right_to_left_rank": 25,
+              "best_directed_rank": 25
+            }
+          },
+          "minimum_required_robust_top_k": 24
+        }
+      ],
+      "minimum_k_covering_all_observed_targets": 28,
+      "first_predeclared_grid_k_covering_all": 30,
+      "candidate_load_projections": [
+        {
+          "top_k": 15,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 115349,
+          "target_group_union_pairs": 115349,
+          "full_pairs_if_only_this_group_changed": 2994870,
+          "full_pairs_per_image": 23.03746153846154,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 20,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 152696,
+          "target_group_union_pairs": 152696,
+          "full_pairs_if_only_this_group_changed": 3032217,
+          "full_pairs_per_image": 23.324746153846153,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 25,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 191301,
+          "target_group_union_pairs": 191301,
+          "full_pairs_if_only_this_group_changed": 3070822,
+          "full_pairs_per_image": 23.62170769230769,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 30,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 231428,
+          "target_group_union_pairs": 231428,
+          "full_pairs_if_only_this_group_changed": 3110949,
+          "full_pairs_per_image": 23.930376923076924,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 40,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 314036,
+          "target_group_union_pairs": 314036,
+          "full_pairs_if_only_this_group_changed": 3193557,
+          "full_pairs_per_image": 24.565823076923078,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 50,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 398801,
+          "target_group_union_pairs": 398801,
+          "full_pairs_if_only_this_group_changed": 3278322,
+          "full_pairs_per_image": 25.217861538461538,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 75,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 617165,
+          "target_group_union_pairs": 617165,
+          "full_pairs_if_only_this_group_changed": 3496686,
+          "full_pairs_per_image": 26.897584615384616,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 100,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 847474,
+          "target_group_union_pairs": 847474,
+          "full_pairs_if_only_this_group_changed": 3726995,
+          "full_pairs_per_image": 28.669192307692306,
+          "passes_25_pairs_per_image_capacity": false
+        }
+      ],
+      "baseline_reproduction": {
+        "stored_robust_top15_pairs": 115349,
+        "recomputed_robust_top15_pairs": 115349,
+        "stored_phash_pairs_used_by_policy": 0,
+        "current_v2_5_group_union_pairs": 115349,
+        "all_matched": true
+      }
+    },
+    "lymphoma_histology": {
+      "image_count": 15000,
+      "target_pair_count": 4,
+      "phash_enabled": true,
+      "target_pairs": [
+        {
+          "pair_id": "V25N000125",
+          "left_path": "Lymphoma/lymph_fl/lymph_fl_1008.jpg",
+          "right_path": "Lymphoma/lymph_fl/lymph_fl_3588.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 32,
+          "audit_robust_best_rank": 28,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.920102596282959,
+              "left_to_right_rank": 70,
+              "right_to_left_rank": 199,
+              "best_directed_rank": 70
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.9213443994522095,
+              "left_to_right_rank": 75,
+              "right_to_left_rank": 157,
+              "best_directed_rank": 75
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9491506218910217,
+              "left_to_right_rank": 71,
+              "right_to_left_rank": 193,
+              "best_directed_rank": 71
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9553645849227905,
+              "left_to_right_rank": 28,
+              "right_to_left_rank": 164,
+              "best_directed_rank": 28
+            }
+          },
+          "minimum_required_robust_top_k": 28
+        },
+        {
+          "pair_id": "V25N000142",
+          "left_path": "Lymphoma/lymph_cll/lymph_cll_0950.jpg",
+          "right_path": "Lymphoma/lymph_cll/lymph_cll_4124.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 28,
+          "audit_robust_best_rank": 24,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.8739377856254578,
+              "left_to_right_rank": 3305,
+              "right_to_left_rank": 1610,
+              "best_directed_rank": 1610
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.7703726887702942,
+              "left_to_right_rank": 9525,
+              "right_to_left_rank": 7136,
+              "best_directed_rank": 7136
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9662477970123291,
+              "left_to_right_rank": 40,
+              "right_to_left_rank": 24,
+              "best_directed_rank": 24
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9666532278060913,
+              "left_to_right_rank": 29,
+              "right_to_left_rank": 24,
+              "best_directed_rank": 24
+            }
+          },
+          "minimum_required_robust_top_k": 24
+        },
+        {
+          "pair_id": "V25N000145",
+          "left_path": "Lymphoma/lymph_mcl/lymph_mcl_0670.jpg",
+          "right_path": "Lymphoma/lymph_mcl/lymph_mcl_1567.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 32,
+          "audit_robust_best_rank": 22,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.8740493059158325,
+              "left_to_right_rank": 2162,
+              "right_to_left_rank": 3467,
+              "best_directed_rank": 2162
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.8690817952156067,
+              "left_to_right_rank": 3730,
+              "right_to_left_rank": 3602,
+              "best_directed_rank": 3602
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9748380184173584,
+              "left_to_right_rank": 22,
+              "right_to_left_rank": 30,
+              "best_directed_rank": 22
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9682748913764954,
+              "left_to_right_rank": 63,
+              "right_to_left_rank": 71,
+              "best_directed_rank": 63
+            }
+          },
+          "minimum_required_robust_top_k": 22
+        },
+        {
+          "pair_id": "V25N000254",
+          "left_path": "Lymphoma/lymph_mcl/lymph_mcl_2891.jpg",
+          "right_path": "Lymphoma/lymph_mcl/lymph_mcl_4575.jpg",
+          "selection_stratum": "outside_robust_boundary",
+          "phash_distance": 22,
+          "audit_robust_best_rank": 29,
+          "audit_robust_rank_lower_bound": null,
+          "by_descriptor_channel": {
+            "raw_full_flip_mean": {
+              "cosine_similarity": 0.9168661832809448,
+              "left_to_right_rank": 1144,
+              "right_to_left_rank": 2455,
+              "best_directed_rank": 1144
+            },
+            "autocontrast_full_flip_mean": {
+              "cosine_similarity": 0.8615014553070068,
+              "left_to_right_rank": 3947,
+              "right_to_left_rank": 6319,
+              "best_directed_rank": 3947
+            },
+            "raw_multicrop_flip_mean": {
+              "cosine_similarity": 0.9777778387069702,
+              "left_to_right_rank": 29,
+              "right_to_left_rank": 35,
+              "best_directed_rank": 29
+            },
+            "autocontrast_multicrop_flip_mean": {
+              "cosine_similarity": 0.9624419808387756,
+              "left_to_right_rank": 74,
+              "right_to_left_rank": 78,
+              "best_directed_rank": 74
+            }
+          },
+          "minimum_required_robust_top_k": 29
+        }
+      ],
+      "minimum_k_covering_all_observed_targets": 29,
+      "first_predeclared_grid_k_covering_all": 30,
+      "candidate_load_projections": [
+        {
+          "top_k": 15,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 334378,
+          "target_group_union_pairs": 339509,
+          "full_pairs_if_only_this_group_changed": 2994870,
+          "full_pairs_per_image": 23.03746153846154,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 20,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 451933,
+          "target_group_union_pairs": 456874,
+          "full_pairs_if_only_this_group_changed": 3112235,
+          "full_pairs_per_image": 23.940269230769232,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 25,
+          "all_group_targets_recovered": false,
+          "target_group_robust_pairs": 571656,
+          "target_group_union_pairs": 576466,
+          "full_pairs_if_only_this_group_changed": 3231827,
+          "full_pairs_per_image": 24.860207692307693,
+          "passes_25_pairs_per_image_capacity": true
+        },
+        {
+          "top_k": 30,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 693369,
+          "target_group_union_pairs": 698080,
+          "full_pairs_if_only_this_group_changed": 3353441,
+          "full_pairs_per_image": 25.7957,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 40,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 945787,
+          "target_group_union_pairs": 950384,
+          "full_pairs_if_only_this_group_changed": 3605745,
+          "full_pairs_per_image": 27.7365,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 50,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 1207951,
+          "target_group_union_pairs": 1212477,
+          "full_pairs_if_only_this_group_changed": 3867838,
+          "full_pairs_per_image": 29.7526,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 75,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 1879235,
+          "target_group_union_pairs": 1883646,
+          "full_pairs_if_only_this_group_changed": 4539007,
+          "full_pairs_per_image": 34.915438461538464,
+          "passes_25_pairs_per_image_capacity": false
+        },
+        {
+          "top_k": 100,
+          "all_group_targets_recovered": true,
+          "target_group_robust_pairs": 2537963,
+          "target_group_union_pairs": 2542284,
+          "full_pairs_if_only_this_group_changed": 5197645,
+          "full_pairs_per_image": 39.981884615384615,
+          "passes_25_pairs_per_image_capacity": false
+        }
+      ],
+      "baseline_reproduction": {
+        "stored_robust_top15_pairs": 334378,
+        "recomputed_robust_top15_pairs": 334378,
+        "stored_phash_pairs_used_by_policy": 10403,
+        "current_v2_5_group_union_pairs": 339509,
+        "all_matched": true
+      }
+    }
+  },
+  "common_k_candidate_load_projections": [
+    {
+      "common_top_k": 15,
+      "all_16_targets_recovered": false,
+      "projected_union_pairs_by_group": {
+        "brain_ce_mri": 272808,
+        "kidney_ct": 115349,
+        "lymphoma_histology": 339509
+      },
+      "full_candidate_pairs": 2994870,
+      "full_pairs_per_image": 23.03746153846154,
+      "passes_25_pairs_per_image_capacity": true
+    },
+    {
+      "common_top_k": 20,
+      "all_16_targets_recovered": false,
+      "projected_union_pairs_by_group": {
+        "brain_ce_mri": 382650,
+        "kidney_ct": 152696,
+        "lymphoma_histology": 456874
+      },
+      "full_candidate_pairs": 3259424,
+      "full_pairs_per_image": 25.072492307692308,
+      "passes_25_pairs_per_image_capacity": false
+    },
+    {
+      "common_top_k": 25,
+      "all_16_targets_recovered": false,
+      "projected_union_pairs_by_group": {
+        "brain_ce_mri": 491196,
+        "kidney_ct": 191301,
+        "lymphoma_histology": 576466
+      },
+      "full_candidate_pairs": 3526167,
+      "full_pairs_per_image": 27.12436153846154,
+      "passes_25_pairs_per_image_capacity": false
+    },
+    {
+      "common_top_k": 30,
+      "all_16_targets_recovered": false,
+      "projected_union_pairs_by_group": {
+        "brain_ce_mri": 598902,
+        "kidney_ct": 231428,
+        "lymphoma_histology": 698080
+      },
+      "full_candidate_pairs": 3795614,
+      "full_pairs_per_image": 29.197030769230768,
+      "passes_25_pairs_per_image_capacity": false
+    },
+    {
+      "common_top_k": 40,
+      "all_16_targets_recovered": false,
+      "projected_union_pairs_by_group": {
+        "brain_ce_mri": 809470,
+        "kidney_ct": 314036,
+        "lymphoma_histology": 950384
+      },
+      "full_candidate_pairs": 4341094,
+      "full_pairs_per_image": 33.39303076923077,
+      "passes_25_pairs_per_image_capacity": false
+    },
+    {
+      "common_top_k": 50,
+      "all_16_targets_recovered": false,
+      "projected_union_pairs_by_group": {
+        "brain_ce_mri": 1016048,
+        "kidney_ct": 398801,
+        "lymphoma_histology": 1212477
+      },
+      "full_candidate_pairs": 4894530,
+      "full_pairs_per_image": 37.65023076923077,
+      "passes_25_pairs_per_image_capacity": false
+    },
+    {
+      "common_top_k": 75,
+      "all_16_targets_recovered": false,
+      "projected_union_pairs_by_group": {
+        "brain_ce_mri": 1511872,
+        "kidney_ct": 617165,
+        "lymphoma_histology": 1883646
+      },
+      "full_candidate_pairs": 6279887,
+      "full_pairs_per_image": 48.306823076923074,
+      "passes_25_pairs_per_image_capacity": false
+    },
+    {
+      "common_top_k": 100,
+      "all_16_targets_recovered": false,
+      "projected_union_pairs_by_group": {
+        "brain_ce_mri": 1986945,
+        "kidney_ct": 847474,
+        "lymphoma_histology": 2542284
+      },
+      "full_candidate_pairs": 7643907,
+      "full_pairs_per_image": 58.799284615384614,
+      "passes_25_pairs_per_image_capacity": false
+    }
+  ],
+  "diagnostic_only_first_grid_profile": {
+    "top_k_by_group": {
+      "brain_ce_mri": null,
+      "kidney_ct": 30,
+      "lymphoma_histology": 30
+    },
+    "all_targets_recovered_within_grid": false,
+    "full_candidate_pairs": null,
+    "full_pairs_per_image": null,
+    "passes_25_pairs_per_image_capacity": null,
+    "warning": "Observed-target recovery profile is diagnostic evidence, not a selected v2.6 rule."
+  },
+  "decision": "DIAGNOSTIC COMPLETE: review ranks and load projections before predeclaring any v2.6 rule."
+}
