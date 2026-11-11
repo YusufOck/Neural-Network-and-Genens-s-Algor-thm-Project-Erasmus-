@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "status": "candidate_generator_v2_5_prospective_audit_unblinded_complete",
+  "experiment_type": "predeclared_score_blind_prospective_natural_audit_gate_evaluation",
+  "visual_decisions_were_frozen_before_unblinding": true,
+  "does_not_modify_visual_decisions": true,
+  "does_not_score_candidates_or_create_split": true,
+  "inputs": {
+    "config": {
+      "path": "config/candidate_generator_v2_5_prospective_audit.json",
+      "sha256": "2c4213d34c70991550b85ec2d4699a0c7cf49b804904cc9bb3b4d7518d8fe745"
+    },
+    "private_selection": {
+      "path": "research/candidate_generator_v2_5_prospective_selection_v1/selection_private.csv",
+      "sha256": "b2b5da720ef256bc0c04a2aa788c4ff96de6ae372b1efd14997bbf45e9c4c462"
+    },
+    "public_manifest": {
+      "path": "research/candidate_generator_v2_5_prospective_selection_v1/review_manifest.csv",
+      "sha256": "b551ef6bea86ee62c9fc831a48dd0b662a99344f25da7ec9ed550a2a27103bfb"
+    },
+    "selection_report": {
+      "path": "research/candidate_generator_v2_5_prospective_selection_v1/selection_report.json",
+      "sha256": "0d07aa5a91a7cd0c21f6bd35f1e0899016247dbf7768eb0c3557041a809eb33b"
+    },
+    "visual_decisions": {
+      "path": "research/candidate_generator_v2_5_visual_review_v1.csv",
+      "sha256": "711bfd27668ca1f64eba8627d0973cf27561b577d2d72871cbd16b89e7b3a173"
+    },
+    "v2_4_report": {
+      "path": "research/candidate_generator_v2_4_counterfactual_v1.json",
+      "sha256": "4bd51e7714db113e54efce6b132bf228e91ff8a9c2e1e4b4cfeac49d2cef6220"
+    },
+    "rank_report": {
+      "path": "research/candidate_generator_v2_4_rank_crowding_v1.json",
+      "sha256": "4e71e5a0a08fd75c7e029566a7a7571876818dc455b2f9f5bc867403fbed5a89"
+    }
+  },
+  "integrity": {
+    "expected_rows": 256,
+    "joined_rows": 256,
+    "pair_ids_unique_and_equal": true,
+    "private_public_identity_fields_equal": true,
+    "source_group_paths_consistent": true,
+    "frozen_input_hashes_verified": true
+  },
+  "visual_audit": {
+    "total_pairs": 256,
+    "verdict_counts": {
+      "independent_lookalike": 219,
+      "same_source_candidate": 36,
+      "uncertain": 1
+    },
+    "region_counts": {
+      "candidate": 80,
+      "outside": 176
+    },
+    "counts_by_stratum": {
+      "candidate_new_cervix_rank16_30": {
+        "independent_lookalike": 5,
+        "same_source_candidate": 11,
+        "uncertain": 0
+      },
+      "candidate_robust_edge": {
+        "independent_lookalike": 54,
+        "same_source_candidate": 9,
+        "uncertain": 1
+      },
+      "outside_phash_13_16": {
+        "independent_lookalike": 48,
+        "same_source_candidate": 0,
+        "uncertain": 0
+      },
+      "outside_random": {
+        "independent_lookalike": 62,
+        "same_source_candidate": 2,
+        "uncertain": 0
+      },
+      "outside_robust_boundary": {
+        "independent_lookalike": 50,
+        "same_source_candidate": 14,
+        "uncertain": 0
+      }
+    },
+    "counts_by_source_group": {
+      "all_blood_smear": {
+        "independent_lookalike": 31,
+        "same_source_candidate": 0,
+        "uncertain": 1
+      },
+      "brain_ce_mri": {
+        "independent_lookalike": 16,
+        "same_source_candidate": 8,
+        "uncertain": 0
+      },
+      "breast_histology": {
+        "independent_lookalike": 32,
+        "same_source_candidate": 0,
+        "uncertain": 0
+      },
+      "cervix_pap_smear": {
+        "independent_lookalike": 36,
+        "same_source_candidate": 12,
+        "uncertain": 0
+      },
+      "kidney_ct": {
+        "independent_lookalike": 13,
+        "same_source_candidate": 11,
+        "uncertain": 0
+      },
+      "lung_colon_histology": {
+        "independent_lookalike": 32,
+        "same_source_candidate": 0,
+        "uncertain": 0
+      },
+      "lymphoma_histology": {
+        "independent_lookalike": 27,
+        "same_source_candidate": 5,
+        "uncertain": 0
+      },
+      "oral_histology": {
+        "independent_lookalike": 32,
+        "same_source_candidate": 0,
+        "uncertain": 0
+      }
+    },
+    "candidate_same_source_count": 20,
+    "candidate_same_source_pair_ids": [
+      "V25N000011",
+      "V25N000012",
+      "V25N000024",
+      "V25N000060",
+      "V25N000075",
+      "V25N000097",
+      "V25N000116",
+      "V25N000120",
+      "V25N000135",
+      "V25N000151",
+      "V25N000152",
+      "V25N000154",
+      "V25N000159",
+      "V25N000170",
+      "V25N000174",
+      "V25N000177",
+      "V25N000187",
+      "V25N000221",
+      "V25N000224",
+      "V25N000245"
+    ],
+    "candidate_uncertain_count": 1,
+    "candidate_uncertain_pair_ids": [
+      "V25N000227"
+    ],
+    "outside_same_source_count": 16,
+    "outside_same_source_pair_ids": [
+      "V25N000070",
+      "V25N000071",
+      "V25N000084",
+      "V25N000098",
+      "V25N000103",
+      "V25N000107",
+      "V25N000113",
+      "V25N000125",
+      "V25N000142",
+      "V25N000145",
+      "V25N000183",
+      "V25N000185",
+      "V25N000198",
+      "V25N000212",
+      "V25N000229",
+      "V25N000254"
+    ],
+    "outside_same_source_by_group": {
+      "brain_ce_mri": 6,
+      "kidney_ct": 6,
+      "lymphoma_histology": 4
+    },
+    "outside_uncertain_count": 0,
+    "outside_uncertain_pair_ids": []
+  },
+  "observed_gate_values": {
+    "exact_reference_hits": 1393,
+    "controlled_positive_hits": 1040,
+    "regression_natural_hits": 23,
+    "new_outside_same_source_pairs": 16,
+    "unresolved_outside_uncertain_pairs": 0,
+    "cross_source_group_pairs": 0,
+    "full_candidate_pairs": 2994870,
+    "candidate_pairs_per_image": 23.03746153846154,
+    "v2_4_baseline_pairs": 2491553
+  },
+  "acceptance_gates": {
+    "exact_reference_recall": true,
+    "controlled_positive_recall": true,
+    "regression_natural_recall": true,
+    "new_outside_same_source": false,
+    "unresolved_outside_uncertain": true,
+    "cross_source_group_pairs": true,
+    "full_candidate_pairs": true,
+    "candidate_load": true,
+    "v2_4_baseline_reproduction": true,
+    "all_passed": false
+  },
+  "decision": "FAIL: reject v2.5; do not score candidates, construct families, split data, or train a classifier under this rule.",
+  "limitations": [
+    "The visual labels are AI-assisted non-expert leakage-audit decisions, not clinical ground truth.",
+    "The sampled challenge set does not measure every possible image pair.",
+    "A failed gate rejects this v2.5 rule; it does not justify changing frozen visual decisions after unblinding."
+  ]
+}
