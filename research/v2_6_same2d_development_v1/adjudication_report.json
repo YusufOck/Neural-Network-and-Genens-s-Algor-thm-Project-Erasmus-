@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "v2_6_same2d_development_adjudication_complete",
+  "experiment_type": "ai_assisted_nonexpert_development_adjudication",
+  "does_not_rewrite_v2_5": true,
+  "not_a_new_holdout": true,
+  "does_not_create_family_split_or_model": true,
+  "input_scores_sha256": "9d84d5fd75c64cda1883c414f38d2d1c71ad6e86daa7ea98852d0c6292b2f6e4",
+  "pair_count": 16,
+  "rule_decision_counts": {
+    "independent": 7,
+    "same_source": 4,
+    "uncertain": 5
+  },
+  "adjudicated_pair_count": 5,
+  "final_reference_counts": {
+    "independent": 12,
+    "same_source": 4
+  },
+  "same_source_pair_ids": [
+    "V25N000103",
+    "V25N000142",
+    "V25N000145",
+    "V25N000254"
+  ],
+  "independent_pair_ids": [
+    "V25N000070",
+    "V25N000071",
+    "V25N000084",
+    "V25N000098",
+    "V25N000107",
+    "V25N000113",
+    "V25N000125",
+    "V25N000183",
+    "V25N000185",
+    "V25N000198",
+    "V25N000212",
+    "V25N000229"
+  ],
+  "uncertain_pair_ids": [],
+  "limitation": "Development-only, AI-assisted non-expert same-2D references; not a clinical or patient-level gold standard."
+}

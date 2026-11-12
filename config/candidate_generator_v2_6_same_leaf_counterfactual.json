@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "status": "predeclared_before_v2_6_same_leaf_counterfactual",
+  "declared_date": "2026-11-12",
+  "experiment_type": "read_only_full_index_same_leaf_counterfactual",
+  "purpose": "Measure the load of a narrow same-leaf robust-rank 16-30 extension that targets the four confirmed same-2D development misses without expanding brain MRI or all cross-leaf pairs.",
+  "leakage_family_target": {
+    "path": "config/leakage_family_target_v1.json",
+    "sha256": "25c46dec6a912896ad22a6832dbc1ffee40e37650766d970453b4a110840d150"
+  },
+  "proposal": {
+    "baseline": "candidate_generator_v2_5_full_union",
+    "preserve_all_existing_v2_5_pairs": true,
+    "preserve_cross_leaf_robust_top15": true,
+    "same_leaf_extension_groups": [
+      "kidney_ct",
+      "lymphoma_histology"
+    ],
+    "same_leaf_extension_min_rank_exclusive": 15,
+    "same_leaf_extension_top_k": 30,
+    "brain_ce_mri_extension": "none_after_same2d_adjudication",
+    "exact_duplicate_union_remains_mandatory": true
+  },
+  "same2d_reference": {
+    "path": "research/v2_6_same2d_development_v1/final_pair_references.csv",
+    "sha256": "e5b93fd2eafed45ccdb535ecd2be0c87f6f4e1893666053fea6a60e933579bca",
+    "path_source": "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_pair_results.csv",
+    "path_source_sha256": "28a387c57e8b96c85f51b375c7c105dacb187b07e82bfba446d8d481e507958c",
+    "role": "development_only_not_prospective_validation",
+    "same_source_pair_ids": [
+      "V25N000103",
+      "V25N000142",
+      "V25N000145",
+      "V25N000254"
+    ]
+  },
+  "target_group_state": {
+    "kidney_ct": {
+      "image_count": 10000,
+      "descriptor_artifacts": 2,
+      "robust_artifacts": 4,
+      "robust_top15_pairs": 115349,
+      "phash_enabled": false,
+      "phash_artifacts": 0,
+      "phash_pairs": 0,
+      "current_v2_5_union_pairs": 115349
+    },
+    "lymphoma_histology": {
+      "image_count": 15000,
+      "descriptor_artifacts": 3,
+      "robust_artifacts": 4,
+      "robust_top15_pairs": 334378,
+      "phash_enabled": true,
+      "phash_artifacts": 118,
+      "phash_pairs": 10403,
+      "current_v2_5_union_pairs": 339509
+    }
+  },
+  "expected_full_artifact_state": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifacts": 1107,
+    "image_count": 130000,
+    "v2_5_full_pairs": 2994870,
+    "maximum_pairs_per_image": 25.0
+  },
+  "acceptance_gates_for_this_diagnostic_only": {
+    "reproduce_frozen_top15_for_both_groups": true,
+    "recover_4_of_4_development_same2d_pairs": true,
+    "maximum_pairs_per_image": 25.0
+  },
+  "next_gate_if_diagnostic_passes": "new_path_disjoint_score_blind_prospective_audit",
+  "integrity_dependencies": {
+    "analyzer_sha256": "8044e0d91d319ce359a78a72847a3adb8025166ddf9a323c6474a437cb2a9453",
+    "tracked_file_sha256": {
+      "config/leakage_family_target_v1.json": "25c46dec6a912896ad22a6832dbc1ffee40e37650766d970453b4a110840d150",
+      "research/v2_6_same2d_development_v1/final_pair_references.csv": "e5b93fd2eafed45ccdb535ecd2be0c87f6f4e1893666053fea6a60e933579bca",
+      "research/v2_6_same2d_development_v1/adjudication_report.json": "d6175cfc008bc42a606ad24d0ea18fbbde25612066955ad59c4a2a0a901b989c",
+      "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_pair_results.csv": "28a387c57e8b96c85f51b375c7c105dacb187b07e82bfba446d8d481e507958c",
+      "research/candidate_generator_v2_6_missed_pair_rank_diagnostic_v1.json": "88902b9c3810e6f3d945208e96a7d35a3d60a5352eaed98b8dfa60658cd6973f"
+    }
+  },
+  "invariants": {
+    "read_only_existing_v2_3_artifacts": true,
+    "recomputed_top15_must_equal_frozen_artifact_union": true,
+    "development_references_cannot_be_called_prospective_validation": true,
+    "report_must_be_outside_v2_3_output_directory": true
+  },
+  "forbidden_actions": [
+    "modify_v2_3_artifacts",
+    "accept_v2_6_from_development_recall_alone",
+    "duplicate_scoring",
+    "family_construction",
+    "train_validation_test_split",
+    "classifier_training",
+    "claim_patient_level_leakage_control"
+  ]
+}

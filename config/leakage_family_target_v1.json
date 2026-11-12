@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "target_id": "same_2d_augmentation_family_v1",
+  "status": "frozen_by_mehmet_before_accelerated_split_pipeline",
+  "approved_date": "2026-11-12",
+  "purpose": "Keep transformations derived from the same two-dimensional source image in one classifier split while documenting that patient/scan/series separation cannot be guaranteed without metadata.",
+  "same_family_when": [
+    "file_bytes_are_exactly_identical",
+    "the_same_2d_source_content_is_preserved_under_rotation_flip_translation_or_resizing",
+    "the_same_2d_source_content_is_preserved_under_brightness_contrast_or_color_change",
+    "the_same_2d_source_content_is_preserved_under_crop_or_composition_of_these_augmentations"
+  ],
+  "not_automatically_same_family_when": [
+    "different_mri_or_ct_slices_from_a_possible_common_patient_scan_or_series",
+    "different_histology_fields_or_crops_without_repeatable_one_to_one_tissue_landmarks",
+    "same_organ_diagnosis_or_visual_style_only",
+    "high_embedding_similarity_without_same_2d_content_evidence"
+  ],
+  "decision_codes": {
+    "same_source": "Same 2D source content or an augmentation derived from it; create a family edge.",
+    "independent": "Different 2D source content; do not create a family edge.",
+    "uncertain": "Evidence is insufficient; do not create an automatic family edge and route to adjudication."
+  },
+  "metadata_limitation": {
+    "patient_scan_series_ids_available": false,
+    "claim_forbidden": "complete_patient_level_leakage_exclusion",
+    "required_report_statement": "Patient/scan/series identifiers are unavailable, so residual patient-level overlap cannot be ruled out. The leakage-aware split controls exact copies and detected same-2D augmentation families."
+  },
+  "evidence_policy": {
+    "exact_sha256": "automatic_same_source",
+    "frozen_duplicate_rule_v1": "automatic_only_when_decision_is_same_source",
+    "rule_uncertain": "manual_adjudication_required_before_family_edge",
+    "visual_similarity_alone": "not_an_automatic_family_edge"
+  },
+  "frozen_dependencies": {
+    "duplicate_rule_v1_sha256": "5ffa80daa6e6ab0eb5f3ac179073de2f0f018325310310b33adc4c137710b645",
+    "scorer_sha256": "ac9f0a1538a24615bea6fac530806c1536aefb3ad0916fd3f2895d8ca4af513f",
+    "v2_5_unblinded_pairs_sha256": "28a387c57e8b96c85f51b375c7c105dacb187b07e82bfba446d8d481e507958c",
+    "v2_6_rank_report_sha256": "88902b9c3810e6f3d945208e96a7d35a3d60a5352eaed98b8dfa60658cd6973f"
+  },
+  "historical_evidence_note": "The frozen v2.5 result remains failed under its broader acquisition-family visual interpretation. This target applies prospectively to the accelerated split pipeline and does not rewrite v2.5 decisions.",
+  "forbidden_claims": [
+    "patient_identity_is_known",
+    "all_slices_from_one_patient_are_grouped",
+    "clinical_duplicate_detection",
+    "zero_residual_patient_level_leakage"
+  ]
+}

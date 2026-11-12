@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "status": "v2_6_same2d_development_scoring_complete",
+  "experiment_type": "small_development_reassessment_under_frozen_same_2d_target",
+  "not_a_new_holdout": true,
+  "does_not_rewrite_v2_5": true,
+  "does_not_create_family_split_or_model": true,
+  "inputs": {
+    "family_target_sha256": "25c46dec6a912896ad22a6832dbc1ffee40e37650766d970453b4a110840d150",
+    "v2_5_unblinded_pairs_sha256": "28a387c57e8b96c85f51b375c7c105dacb187b07e82bfba446d8d481e507958c",
+    "v2_6_rank_report_sha256": "88902b9c3810e6f3d945208e96a7d35a3d60a5352eaed98b8dfa60658cd6973f",
+    "scorer_sha256": "ac9f0a1538a24615bea6fac530806c1536aefb3ad0916fd3f2895d8ca4af513f",
+    "duplicate_rule_v1_sha256": "5ffa80daa6e6ab0eb5f3ac179073de2f0f018325310310b33adc4c137710b645",
+    "dataset_root": "C:\\Users\\mehmet\\Desktop\\erasmus_ders\\NNGA\\archive\\Multi Cancer\\Multi Cancer"
+  },
+  "scorer_parameters": {
+    "image_size": 256,
+    "orb_features": 4000,
+    "ratio_test": 0.78,
+    "ransac_threshold": 3.0,
+    "ecc_iterations": 100
+  },
+  "pair_count": 16,
+  "decision_counts": {
+    "independent": 7,
+    "same_source": 4,
+    "uncertain": 5
+  },
+  "decision_path_counts": {
+    "conservative_independent": 7,
+    "strong_geometry": 4,
+    "uncertain": 5
+  },
+  "decision_counts_by_source_group": {
+    "brain_ce_mri": {
+      "independent": 6
+    },
+    "kidney_ct": {
+      "same_source": 1,
+      "uncertain": 5
+    },
+    "lymphoma_histology": {
+      "independent": 1,
+      "same_source": 3
+    }
+  },
+  "same_source_pair_ids": [
+    "V25N000103",
+    "V25N000142",
+    "V25N000145",
+    "V25N000254"
+  ],
+  "independent_pair_ids": [
+    "V25N000070",
+    "V25N000071",
+    "V25N000107",
+    "V25N000125",
+    "V25N000183",
+    "V25N000198",
+    "V25N000229"
+  ],
+  "uncertain_pair_ids": [
+    "V25N000084",
+    "V25N000098",
+    "V25N000113",
+    "V25N000185",
+    "V25N000212"
+  ],
+  "timing": {
+    "total_elapsed_seconds": 12.694817499999772,
+    "mean_pair_seconds": 0.7884,
+    "median_pair_seconds": 0.5921000000000001,
+    "maximum_pair_seconds": 2.584
+  },
+  "interpretation": "Frozen-rule decisions are development evidence under the approved same-2D target. Uncertain rows require separate adjudication; historical v2.5 labels remain unchanged."
+}

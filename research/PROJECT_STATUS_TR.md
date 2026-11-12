@@ -1,6 +1,6 @@
 # NNGA proje durum kaydı
 
-Son güncelleme: 2026-11-11
+Son güncelleme: 2026-11-12
 
 Bu dosya, küçük bir pilotun yanlışlıkla bütün veri setinde tamamlanmış bir denetim gibi
 anlatılmasını önlemek için projenin tek durum kontrol listesidir. Bir adım ancak aşağıdaki
@@ -72,13 +72,15 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | N000123 full-index rank-crowding tanısı | Tam-kapsam salt-okunur tanı tamamlandı / v2.5 seçilmedi | Dört kanalın full 25.000-serviks rank'ları ölçüldü; `N000123` için en iyi yön autocontrast+multicrop kanalında rank 34'tür. Önceden tanımlanmış grid içinde ilk kapsayan K=40, 2.994.870 aday = 23,037 çift/görüntü ile kapasiteyi geçmez; K=50 26,065 ile geçer. Frozen K=15 robust 355.588 ve full v2.4 2.491.553 birebir yeniden üretildi. 42/42 bağımsız kontrol geçti. Bu tek-pair tanısı K=40'ı v2.5 olarak kabul ettirmez; scoring/family/split/training başlamadı. Ayrıntı: `research/CANDIDATE_GENERATOR_V2_4_RANK_CROWDING_RESULT_TR.md`. |
 | Candidate Generator v2.5 prospective doğrulama | Tamamlandı / kabul kapısı geçmedi | Dondurulmuş 256 görsel karar private strata ile tek seferlik açıldı: candidate bölgesinde 20 aynı-kaynak + 59 bağımsız + 1 belirsiz; outside bölgesinde 16 aynı-kaynak + 160 bağımsız + 0 belirsiz bulundu. Önceden gerekli outside aynı-kaynak sayısı 0 olduğu için V2.5 reddedildi. Outside kaçaklar brain MRI 6, kidney CT 6 ve lymphoma histology 4'tür. Diğer sekiz kapı geçti; 137/137 test başarılı. Scoring/family/split/training başlamadı. Ayrıntı: `research/CANDIDATE_GENERATOR_V2_5_PROSPECTIVE_AUDIT_RESULT_TR.md`. |
 | V2.6 16-kaçak full-index rank tanısı | Tamamlandı / top-K yükseltme yolu uygun değil | Colab/T4 tanısı 139 artifact'ı doğruladı ve frozen top-15 union'ları birebir yeniden üretti. Altı brain MRI hedefini kapsayan minimum K=2.076; grid içinde recovery yoktur. Kidney minimum K=28 ve lymphoma K=29'dur, fakat lymphoma K=30 tek başına yükü 25,796 çift/görüntüye çıkarır. Üç gruba ortak K=20 bile 25,072 ile kapasiteyi aşar ve 16 hedefi kapsamaz. Rapor SHA-256 `88902b9c…6973f`; 142/142 test geçti. V2.6 seçilmedi; family tanımının same-2D augmentation ile patient/series arasında açıkça ayrılması gerekiyor. Ayrıntı: `research/CANDIDATE_GENERATOR_V2_6_MISSED_PAIR_RANK_DIAGNOSTIC_RESULT_TR.md`. |
+| Same-2D leakage-family hedefi ve 16-çift geliştirme adjudication'ı | Tamamlandı / hedef donduruldu | `same_2d_augmentation_family_v1` Mehmet'in onayıyla donduruldu. Dondurulmuş scorer/rule 16 çiftte önce 4 aynı-kaynak, 7 bağımsız ve 5 belirsiz üretti; beş CT belirsizi orijinal çözünürlükte ayrı adjudication ile bağımsız kabul edildi. Nihai geliştirme referansı 4 aynı-2D + 12 bağımsız + 0 belirsizdir. K=2.076 isteyen MRI çifti farklı 2D kesit olduğu için same-2D hedefinde recall zorunluluğu değildir. Final CSV SHA-256 `e5b93fd2…79bca`; bu hasta-düzeyi gold standard değildir. Ayrıntı: `research/V2_6_SAME2D_DEVELOPMENT_RESULT_TR.md`. |
+| V2.6 aynı-leaf rank 16–30 karşı-olgusalı | Config/kod donduruldu / tam artifact koşusu bekliyor | V2.5 union korunarak yalnız Kidney CT ve Lymphoma histology aynı-leaf rank 16–30 çiftlerini ekleyen salt-okunur hipotez donduruldu. Config SHA-256 `75fad585…c3ef6d`; yerel yardımcı testleri 3/3 geçti. Bu koşu yalnız yük ve 4/4 geliştirme kapsamını ölçecek; prospective doğrulama olmadan kural/family/split kabul edilmeyecek. |
 | V2.3 Colab/local çalıştırıcı ve throughput shard | Pilot tamamlandı / tarihsel preflight | Hash-korumalı notebook ve tek uygulama script'i hazırlandı. Yerel RTX 3050'de 26×10=260 görüntü: 3.169 birleşik aday, 12,188 çift/görüntü, source-group dışı çift 0; descriptor 17,139 saniye. Hash manifesti ve çıktı şekilleri doğrulandı. Bu küçük-shard sonucu full-run süre/adet tahmini veya model metriği değildir; sonraki tam çalışma ayrı satırlardadır. |
 | V2.3 resumable full-retrieval orchestration | Tam retrieval çalıştırıldı / güvenli resume doğrulandı | Colab kesintisinden sonra aynı contract ile 1.107 artifact doğrulanıp yeniden hesaplanmadan kullanıldı. Descriptor, pHash, robust ve pHash-block retrieval tamamdır; finalleştirme 35,553 çift/görüntü yük kapısında güvenli biçimde durdu. Bu, veri kaybı veya bozuk run değildir. |
 | V2.3 tam-veri yük tanısı | Tüm kapsamda doğrulandı / kapı geçmedi | İndirilen salt-okunur JSON'un SHA-256'sı `be990ff9…b298cb`. Global ve sekiz grup toplamları, union formülleri, 1.107 stage sayısı, 1.393/1.393 exact kapsamı ve 43,598 günlük seri süre hesabı bağımsız yeniden hesaplandı. Ayrıntı: `research/CANDIDATE_GENERATOR_V2_3_FULL_LOAD_GATE_TR.md`. |
 | Natural near-duplicate audit v1 | Challenge-set, frozen-rule karşılaştırması ve ikinci-aşama adjudication tamamlandı | İlk güvenli konsensüs 21 aynı-kaynak ve 299 bağımsızdı. Kalan 25 çift score-aware, AI-destekli ve uzman-olmayan adjudication'da 2 aynı-kaynak + 23 bağımsız olarak sonuçlandı. Nihai 345 referans: 23 aynı-kaynak, 322 bağımsız, 0 belirsiz. Aynı-kaynakların 23/23'ü 6.604-görüntülük audit indeksinde candidate tarafındaydı; full 130.000 indeksinde `N000123` top-15 dışında kaldı ve v2.3/v2.4 üyeliği 22/23 oldu. Bu örneklenmiş challenge-set kanıtıdır, bütün doğal çiftlerde %100 recall garantisi değildir. |
 | Yöntemin 26 alt sınıfın tamamına uygulanması | Retrieval tamamlandı / duplicate scoring başlamadı | 130.000 görüntünün 26 yaprağı descriptor ve pHash retrieval'dan geçti; birleşim yük kapısında durdu. Modality-aware v2.4 doğrulanmadan 4,62 milyon çift skorlanmayacak. |
 | Sınıflar arası perceptual-duplicate kontrolü | Candidate retrieval tamamlandı / karar verilmedi | Aynı uyumlu kaynak grubu içindeki cross-leaf çiftlere izin veren tam retrieval çalıştı; fakat candidate olmak duplicate kararı değildir ve frozen scorer henüz uygulanmadı. |
-| 130.000 görüntü için augmentation-family grupları | Başlamadı | Henüz hiçbir nihai aile listesi yok. |
+| 130.000 görüntü için augmentation-family grupları | Başlamadı; hedef tanımı donduruldu | Same-2D aile hedefi nettir fakat tam candidate kuralı prospective kapıyı geçmediği için henüz hiçbir nihai aile listesi yok. |
 
 ## 4. Split durumu
 
@@ -143,9 +145,14 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    ölçüldü. Grid içinde K=40 çifti 23,037 çift/görüntü yükle geri getirirken K=50
    26,065 ile kapasiteyi geçti. Prospective V2.5 deneyi daha sonra 176 outside çiftte 16
    aynı-kaynak kaçağı bulduğu için reddedildi. Kaçaklar brain MRI (6), kidney CT (6) ve
-   lymphoma histology (4) gruplarındadır. Bu 16 çift artık yalnız development kanıtıdır;
-   sonraki adım full-index rank tanısı, sonuç görülmeden dondurulmuş V2.6 kuralı ve yeni
-   path-disjoint doğrulamadır.**
+   lymphoma histology (4) gruplarındadır. Bu 16 çift artık yalnız development kanıtıdır.
+   Full-index rank tanısı basit K artışının uygun olmadığını gösterdi. Mehmet'in onayıyla
+   same-2D augmentation-family hedefi donduruldu; frozen scorer/rule ve ayrı adjudication
+   sonunda bu 16 çiftin yalnız dördü aynı-2D, on ikisi bağımsız bulundu. Dört gerçek kaçak
+   Kidney/Lymphoma aynı-leaf robust K<=30 içindedir. Sonuç görülmeden dondurulan dar V2.6
+   hipotezi, V2.5 union'a yalnız bu iki grupta aynı-leaf rank 16–30 çiftlerini ekler.
+   Sıradaki koşu bunun tam-artifact yük tanısıdır; geçerse yeni path-disjoint score-blind
+   prospective doğrulama yapılacaktır.**
 7. Uyumlu görüntü modaliteleri/kaynakları arasında sınıflar arası perceptual-duplicate adaylarını
    denetle. Bunu bütün 130.000 dosyanın kör `N²` karşılaştırması yerine doğrulanmış aday-arama
    yöntemiyle yap. **Uyumlu source-group içi cross-leaf candidate retrieval tam kapsamda
