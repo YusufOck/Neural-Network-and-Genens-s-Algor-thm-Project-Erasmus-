@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "status": "candidate_generator_v2_6_same_leaf_counterfactual_complete",
+  "experiment_type": "read_only_predeclared_same_leaf_counterfactual",
+  "does_not_modify_v2_3_artifacts": true,
+  "development_evidence_only": true,
+  "does_not_authorize_scoring_family_split_or_training": true,
+  "config": {
+    "path_name": "candidate_generator_v2_6_same_leaf_counterfactual.json",
+    "sha256": "75fad585725d9f3a88d2dd3ee1bcff00433c53fc26c8be6c8be330cb1ec3ef6d",
+    "analyzer_sha256": "8044e0d91d319ce359a78a72847a3adb8025166ddf9a323c6474a437cb2a9453"
+  },
+  "input": {
+    "registered_artifact_count": 1107,
+    "verified_artifacts_in_this_run": 132,
+    "image_count": 130000,
+    "device": "cuda",
+    "block_size": 256
+  },
+  "proposal": {
+    "baseline": "candidate_generator_v2_5_full_union",
+    "preserve_all_existing_v2_5_pairs": true,
+    "preserve_cross_leaf_robust_top15": true,
+    "same_leaf_extension_groups": [
+      "kidney_ct",
+      "lymphoma_histology"
+    ],
+    "same_leaf_extension_min_rank_exclusive": 15,
+    "same_leaf_extension_top_k": 30,
+    "brain_ce_mri_extension": "none_after_same2d_adjudication",
+    "exact_duplicate_union_remains_mandatory": true
+  },
+  "by_source_group": {
+    "kidney_ct": {
+      "image_count": 10000,
+      "current_v2_5_union_pairs": 115349,
+      "same_leaf_rank16_30_additions": 112337,
+      "proposed_group_union_pairs": 227686
+    },
+    "lymphoma_histology": {
+      "image_count": 15000,
+      "current_v2_5_union_pairs": 339509,
+      "same_leaf_rank16_30_additions": 249922,
+      "proposed_group_union_pairs": 589431
+    }
+  },
+  "candidate_load": {
+    "v2_5_baseline_pairs": 2994870,
+    "new_same_leaf_pairs": 362259,
+    "proposed_full_pairs": 3357129,
+    "pairs_per_image": 25.82406923076923,
+    "maximum_pairs_per_image": 25.0
+  },
+  "development_same2d_reference": {
+    "pair_ids": [
+      "V25N000103",
+      "V25N000142",
+      "V25N000145",
+      "V25N000254"
+    ],
+    "hits": 4,
+    "missed_pair_ids": [],
+    "limitation": "These four pairs motivated the proposal and are not prospective validation."
+  },
+  "acceptance_gates": {
+    "development_same2d_reference_recall": true,
+    "candidate_load": false,
+    "top15_baseline_reproduced": true,
+    "all_diagnostic_gates_passed": false
+  },
+  "decision": "DIAGNOSTIC FAIL: do not proceed to prospective audit or family construction."
+}

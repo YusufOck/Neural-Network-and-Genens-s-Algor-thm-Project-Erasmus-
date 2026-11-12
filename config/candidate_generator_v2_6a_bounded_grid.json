@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "status": "predeclared_before_v2_6a_bounded_grid_diagnostic",
+  "declared_date": "2026-11-12",
+  "experiment_type": "read_only_full_index_bounded_same_leaf_channel_grid",
+  "purpose": "Find whether a bounded group/channel profile can retain the four confirmed same-2D development pairs while respecting the frozen 25 pairs/image capacity gate.",
+  "baseline": "candidate_generator_v2_5_full_union",
+  "target_groups": [
+    "kidney_ct",
+    "lymphoma_histology"
+  ],
+  "rejected_v2_6_report": {
+    "path": "research/candidate_generator_v2_6_same_leaf_counterfactual_v1.json",
+    "sha256": "1a3d1bedf5072633c69dc2335139a4beb19d6a41cc60dda203dadf21abf540f9",
+    "result": "4_of_4_development_pairs_but_25.824069_pairs_per_image"
+  },
+  "same2d_reference": {
+    "path": "research/v2_6_same2d_development_v1/final_pair_references.csv",
+    "sha256": "e5b93fd2eafed45ccdb535ecd2be0c87f6f4e1893666053fea6a60e933579bca",
+    "path_source": "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_pair_results.csv",
+    "path_source_sha256": "28a387c57e8b96c85f51b375c7c105dacb187b07e82bfba446d8d481e507958c",
+    "role": "development_only_not_prospective_validation",
+    "same_source_pair_ids": [
+      "V25N000103",
+      "V25N000142",
+      "V25N000145",
+      "V25N000254"
+    ]
+  },
+  "bounded_profiles": [
+    {
+      "profile_id": "all_channels_group_minimum",
+      "description": "Use all four descriptor channels with the smallest group K values known to recover the four development pairs.",
+      "groups": {
+        "kidney_ct": {
+          "top_k": 20,
+          "channels": [
+            "raw_full_flip_mean",
+            "autocontrast_full_flip_mean",
+            "raw_multicrop_flip_mean",
+            "autocontrast_multicrop_flip_mean"
+          ]
+        },
+        "lymphoma_histology": {
+          "top_k": 29,
+          "channels": [
+            "raw_full_flip_mean",
+            "autocontrast_full_flip_mean",
+            "raw_multicrop_flip_mean",
+            "autocontrast_multicrop_flip_mean"
+          ]
+        }
+      }
+    },
+    {
+      "profile_id": "kidney_all_lymphoma_raw_multicrop",
+      "description": "Keep all four Kidney channels but extend Lymphoma only in the raw multicrop channel that retrieves all three Lymphoma development positives.",
+      "groups": {
+        "kidney_ct": {
+          "top_k": 20,
+          "channels": [
+            "raw_full_flip_mean",
+            "autocontrast_full_flip_mean",
+            "raw_multicrop_flip_mean",
+            "autocontrast_multicrop_flip_mean"
+          ]
+        },
+        "lymphoma_histology": {
+          "top_k": 29,
+          "channels": [
+            "raw_multicrop_flip_mean"
+          ]
+        }
+      }
+    },
+    {
+      "profile_id": "raw_multicrop_only_group_minimum",
+      "description": "Extend only raw multicrop in both groups at the smallest K values that retrieve the four development positives.",
+      "groups": {
+        "kidney_ct": {
+          "top_k": 20,
+          "channels": [
+            "raw_multicrop_flip_mean"
+          ]
+        },
+        "lymphoma_histology": {
+          "top_k": 29,
+          "channels": [
+            "raw_multicrop_flip_mean"
+          ]
+        }
+      }
+    }
+  ],
+  "selection_policy": {
+    "development_gate": "recover_all_4_same2d_pairs",
+    "capacity_gate": "full_pairs_per_image_lte_25",
+    "tie_break": "maximum_candidate_coverage_under_capacity_then_config_order",
+    "meaning": "A selected profile is only the hypothesis for a new path-disjoint prospective audit."
+  },
+  "target_group_state": {
+    "kidney_ct": {
+      "image_count": 10000,
+      "robust_top15_pairs": 115349,
+      "phash_enabled": false,
+      "phash_pairs": 0,
+      "current_v2_5_union_pairs": 115349
+    },
+    "lymphoma_histology": {
+      "image_count": 15000,
+      "robust_top15_pairs": 334378,
+      "phash_enabled": true,
+      "phash_pairs": 10403,
+      "current_v2_5_union_pairs": 339509
+    }
+  },
+  "expected_full_artifact_state": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifacts": 1107,
+    "image_count": 130000,
+    "v2_5_full_pairs": 2994870,
+    "maximum_pairs_per_image": 25.0
+  },
+  "integrity_dependencies": {
+    "analyzer_sha256": "7c7f41cc5b6d41c5699cf809a0fff8bab0faff1ebb15ead94e8a6c35aa750a20",
+    "tracked_file_sha256": {
+      "config/leakage_family_target_v1.json": "25c46dec6a912896ad22a6832dbc1ffee40e37650766d970453b4a110840d150",
+      "research/v2_6_same2d_development_v1/final_pair_references.csv": "e5b93fd2eafed45ccdb535ecd2be0c87f6f4e1893666053fea6a60e933579bca",
+      "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_pair_results.csv": "28a387c57e8b96c85f51b375c7c105dacb187b07e82bfba446d8d481e507958c",
+      "research/candidate_generator_v2_6_missed_pair_rank_diagnostic_v1.json": "88902b9c3810e6f3d945208e96a7d35a3d60a5352eaed98b8dfa60658cd6973f",
+      "research/candidate_generator_v2_6_same_leaf_counterfactual_v1.json": "1a3d1bedf5072633c69dc2335139a4beb19d6a41cc60dda203dadf21abf540f9"
+    }
+  },
+  "invariants": {
+    "read_only_existing_v2_3_artifacts": true,
+    "recomputed_top15_must_equal_frozen_artifact_union": true,
+    "profile_selection_policy_frozen_before_load_results": true,
+    "development_references_cannot_be_called_prospective_validation": true,
+    "report_must_be_outside_v2_3_output_directory": true
+  },
+  "forbidden_actions": [
+    "modify_v2_3_artifacts",
+    "accept_candidate_rule_from_development_grid_alone",
+    "duplicate_scoring",
+    "family_construction",
+    "train_validation_test_split",
+    "classifier_training",
+    "claim_patient_level_leakage_control"
+  ]
+}
