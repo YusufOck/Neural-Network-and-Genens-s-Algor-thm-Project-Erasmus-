@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "status": "v2_6b_prospective_selection_frozen_images_not_opened",
+  "experiment_type": "score_blind_path_disjoint_selected_profile_audit",
+  "does_not_open_images": true,
+  "does_not_score_duplicates": true,
+  "does_not_authorize_family_split_or_training": true,
+  "config_sha256": "964bf13d3cd73ecc29e777775a8a9f64af94ada86bec5cc191f1f770032ff6c4",
+  "input": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifacts": 1107,
+    "verified_artifacts": 137,
+    "image_count": 130000,
+    "excluded_paths": 23434,
+    "eligible_images": 106566,
+    "device": "cuda"
+  },
+  "candidate_policy": {
+    "selected_profile": "kidney_all_lymphoma_raw_multicrop",
+    "full_candidate_pairs": 3116598,
+    "pairs_per_image": 23.97383076923077,
+    "by_source_group": {
+      "kidney_ct": {
+        "current_v2_5_union_pairs": 115349,
+        "new_same_leaf_pairs": 36825,
+        "proposed_group_union_pairs": 152174
+      },
+      "lymphoma_histology": {
+        "current_v2_5_union_pairs": 339509,
+        "new_same_leaf_pairs": 84903,
+        "proposed_group_union_pairs": 424412
+      }
+    }
+  },
+  "selection": {
+    "selected_pairs": 160,
+    "unique_images": 320,
+    "blank_review_verdicts": 160,
+    "target_by_stratum": {
+      "outside_selected_boundary": 64,
+      "outside_alternate_channel": 32,
+      "outside_random_same_leaf": 32,
+      "candidate_new_extension": 32
+    },
+    "actual_by_stratum": {
+      "candidate_new_extension": 32,
+      "outside_alternate_channel": 32,
+      "outside_random_same_leaf": 32,
+      "outside_selected_boundary": 64
+    },
+    "shortfall_by_stratum": {
+      "outside_selected_boundary": 0,
+      "outside_alternate_channel": 0,
+      "outside_random_same_leaf": 0,
+      "candidate_new_extension": 0
+    },
+    "by_source_group": {
+      "kidney_ct": 64,
+      "lymphoma_histology": 96
+    }
+  },
+  "integrity": {
+    "builder_sha256": "ac478d311d149ae72fabba976a80ea881dfedad0a3f0c6fd6cb486d151e5a551",
+    "stage_manifest_sha256": "43cd114568ab74be6d83a0c32c67676d77a442dbb7ec2214a9d7bbc9fbf7d3a3",
+    "combined_excluded_paths_sha256": "28a3c575e61a303548cadc9473edb35f1c23af1f8cf5cc159bf8f90d247254ba",
+    "selection_private_sha256": "549e12b57daac220fbfd631f2717c28f5b78370f42fb713afdb746e176a7f955",
+    "review_manifest_sha256": "f961d5e92eb4da2b581852e8151834ff16deaa245a3d7e6e35fb819acd4fb099"
+  },
+  "decision": "SELECTION FROZEN: inspect report/hashes only; commit the private and blank review manifests before opening any selected image."
+}
