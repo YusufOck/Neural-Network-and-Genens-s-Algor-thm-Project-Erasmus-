@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_v2_6b_prospective_pair_selection",
+  "declared_date": "2026-11-13",
+  "experiment_type": "score_blind_path_disjoint_selected_profile_audit",
+  "purpose": "Prospectively test the v2.6a-selected Kidney/Lymphoma extension on paths disjoint from all earlier development and v2.5 prospective-audit images.",
+  "candidate_rule": {
+    "selected_profile": "kidney_all_lymphoma_raw_multicrop",
+    "baseline": "preserve_complete_v2_5_union",
+    "extension_groups": [
+      "kidney_ct",
+      "lymphoma_histology"
+    ],
+    "selected_extension_by_group": {
+      "kidney_ct": {
+        "top_k": 20,
+        "channels": [
+          "raw_full_flip_mean",
+          "autocontrast_full_flip_mean",
+          "raw_multicrop_flip_mean",
+          "autocontrast_multicrop_flip_mean"
+        ],
+        "same_leaf_only": true,
+        "phash_enabled": false,
+        "outside_boundary_max_rank": 30
+      },
+      "lymphoma_histology": {
+        "top_k": 29,
+        "channels": [
+          "raw_multicrop_flip_mean"
+        ],
+        "same_leaf_only": true,
+        "phash_enabled": true,
+        "outside_boundary_max_rank": 40
+      }
+    },
+    "preserve_cross_leaf_robust_top15": true,
+    "preserve_v2_5_phash_policy": true,
+    "exact_sha256_policy": "mandatory_global_union",
+    "cross_source_group_policy": "forbidden"
+  },
+  "sampling": {
+    "seed": 20261113,
+    "pair_id_prefix": "V26P",
+    "total_pair_count": 160,
+    "outside_selected_boundary_per_group": 32,
+    "outside_alternate_channel_lymphoma": 32,
+    "outside_random_same_leaf_per_group": 16,
+    "candidate_new_extension_per_group": 16,
+    "outside_pair_count": 128,
+    "candidate_pair_count": 32,
+    "one_pair_per_image": true,
+    "selection_priority": [
+      "outside_selected_boundary",
+      "outside_alternate_channel",
+      "outside_random_same_leaf",
+      "candidate_new_extension"
+    ],
+    "do_not_backfill_sparse_strata": true
+  },
+  "path_exclusions": {
+    "base_manifest_path": "research/candidate_generator_v2_5_excluded_paths_v1.json",
+    "base_manifest_sha256": "bc90f337d0058648c27312886cd407177a7e329a85373b13c58f4ab68bf38c3f",
+    "base_excluded_path_count": 22922,
+    "prior_review_manifest_path": "research/candidate_generator_v2_5_prospective_selection_v1/review_manifest.csv",
+    "prior_review_manifest_sha256": "b551ef6bea86ee62c9fc831a48dd0b662a99344f25da7ec9ed550a2a27103bfb",
+    "prior_pair_count": 256,
+    "prior_unique_path_count": 512,
+    "prior_overlap_with_base": 0,
+    "combined_excluded_path_count": 23434,
+    "combined_paths_sha256": "28a3c575e61a303548cadc9473edb35f1c23af1f8cf5cc159bf8f90d247254ba",
+    "expected_eligible_images": 106566
+  },
+  "expected_full_state": {
+    "run_contract_sha256": "6c4884d25da3f5d2af2b6d64522b3a78af08db5e05e9ce99e4b13d12686a5261",
+    "registered_artifacts": 1107,
+    "image_count": 130000,
+    "v2_5_full_pairs": 2994870,
+    "selected_profile_full_pairs": 3116598,
+    "selected_profile_pairs_per_image": 23.97383076923077,
+    "maximum_pairs_per_image": 25.0,
+    "selected_profile_by_group": {
+      "kidney_ct": {
+        "current_v2_5_union_pairs": 115349,
+        "new_same_leaf_pairs": 36825,
+        "proposed_group_union_pairs": 152174
+      },
+      "lymphoma_histology": {
+        "current_v2_5_union_pairs": 339509,
+        "new_same_leaf_pairs": 84903,
+        "proposed_group_union_pairs": 424412
+      }
+    },
+    "expected_exact_reference_hits": 1393,
+    "expected_controlled_positive_hits": 1040,
+    "expected_regression_natural_hits": 23,
+    "expected_development_same2d_hits": 4
+  },
+  "predeclared_acceptance_gates": {
+    "required_exact_reference_hits": 1393,
+    "required_controlled_positive_hits": 1040,
+    "required_regression_natural_hits": 23,
+    "required_development_same2d_hits": 4,
+    "required_new_outside_same2d_pairs": 0,
+    "required_unresolved_outside_uncertain_pairs": 0,
+    "required_cross_source_group_pairs": 0,
+    "required_full_candidate_pairs": 3116598,
+    "maximum_candidate_pairs_per_image": 25.0
+  },
+  "evidence_roles": {
+    "development": "The four V25 same-2D pairs selected the bounded profile and cannot count as prospective success.",
+    "regression": "Prior exact, controlled and natural references must remain covered because v2.6b only adds to v2.5.",
+    "prospective": "Only the 128 new path-disjoint score-blind outside pairs can pass or fail the new same-2D natural-risk gate."
+  },
+  "integrity_dependencies": {
+    "builder_sha256": "ac478d311d149ae72fabba976a80ea881dfedad0a3f0c6fd6cb486d151e5a551",
+    "tracked_file_sha256": {
+      "config/candidate_generator_v2_6a_bounded_grid.json": "580d8d7bd43891c988c3b405b894993a9580d0801f0ff0bf172887350ba88804",
+      "config/candidate_generator_v2_5_prospective_audit.json": "2c4213d34c70991550b85ec2d4699a0c7cf49b804904cc9bb3b4d7518d8fe745",
+      "config/leakage_family_target_v1.json": "25c46dec6a912896ad22a6832dbc1ffee40e37650766d970453b4a110840d150",
+      "research/candidate_generator_v2_6a_bounded_grid_v1.json": "1b678e715e509e038193175b9c363c3ad20b32ba1ab3e10617e0ec5887591bf7",
+      "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_report.json": "14d9df6ff3f03da9d9555324625e9934df274f568a736bfa669b0cb321cfbb01"
+    }
+  },
+  "blinding": {
+    "review_manifest_hides": [
+      "selection_stratum",
+      "v2_6b_candidate",
+      "candidate_reason",
+      "selected_extension_channels",
+      "selected_extension_top_k",
+      "selected_extension_best_rank",
+      "all_channel_best_rank",
+      "raw_multicrop_best_rank",
+      "phash_enabled",
+      "phash_distance",
+      "phash_radius12"
+    ],
+    "all_review_decision_fields_start_blank": true,
+    "images_must_not_be_opened_during_selection": true,
+    "private_strata_open_only_after_visual_decisions_are_frozen": true
+  },
+  "forbidden_actions": [
+    "modify_v2_3_artifacts",
+    "reuse_any_prior_audit_image",
+    "open_or_render_selected_images_before_selection_freeze",
+    "assign_visual_verdicts_during_selection",
+    "open_private_strata_before_visual_decisions_are_frozen",
+    "run_duplicate_scorer",
+    "construct_duplicate_families",
+    "create_train_validation_test_split",
+    "train_classifier",
+    "claim_patient_level_leakage_control"
+  ],
+  "interpretation_limits": [
+    "A confirmed same-2D pair in any new outside stratum rejects the selected profile.",
+    "Zero sampled outside positives cannot prove 100 percent recall over all possible pairs.",
+    "AI-assisted visual decisions are not a clinical-expert gold standard.",
+    "Passing selection integrity does not mean the prospective visual audit has passed."
+  ]
+}

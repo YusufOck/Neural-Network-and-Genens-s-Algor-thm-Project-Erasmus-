@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "status": "candidate_generator_v2_6a_bounded_grid_diagnostic_complete",
+  "experiment_type": "read_only_predeclared_bounded_same_leaf_channel_grid",
+  "does_not_modify_v2_3_artifacts": true,
+  "development_evidence_only": true,
+  "does_not_authorize_scoring_family_split_or_training": true,
+  "config": {
+    "path_name": "candidate_generator_v2_6a_bounded_grid.json",
+    "sha256": "580d8d7bd43891c988c3b405b894993a9580d0801f0ff0bf172887350ba88804",
+    "analyzer_sha256": "7c7f41cc5b6d41c5699cf809a0fff8bab0faff1ebb15ead94e8a6c35aa750a20"
+  },
+  "input": {
+    "registered_artifact_count": 1107,
+    "verified_artifacts_in_this_run": 132,
+    "image_count": 130000,
+    "device": "cuda",
+    "block_size": 256,
+    "v2_6_rejected_report_sha256": "1a3d1bedf5072633c69dc2335139a4beb19d6a41cc60dda203dadf21abf540f9"
+  },
+  "selection_policy": {
+    "development_gate": "recover_all_4_same2d_pairs",
+    "capacity_gate": "full_pairs_per_image_lte_25",
+    "tie_break": "maximum_candidate_coverage_under_capacity_then_config_order",
+    "meaning": "A selected profile is only the hypothesis for a new path-disjoint prospective audit."
+  },
+  "development_same2d_pair_ids": [
+    "V25N000103",
+    "V25N000142",
+    "V25N000145",
+    "V25N000254"
+  ],
+  "profiles": [
+    {
+      "profile_id": "all_channels_group_minimum",
+      "description": "Use all four descriptor channels with the smallest group K values known to recover the four development pairs.",
+      "by_source_group": {
+        "kidney_ct": {
+          "top_k": 20,
+          "channels": [
+            "raw_full_flip_mean",
+            "autocontrast_full_flip_mean",
+            "raw_multicrop_flip_mean",
+            "autocontrast_multicrop_flip_mean"
+          ],
+          "current_v2_5_union_pairs": 115349,
+          "new_same_leaf_pairs": 36825,
+          "proposed_group_union_pairs": 152174
+        },
+        "lymphoma_histology": {
+          "top_k": 29,
+          "channels": [
+            "raw_full_flip_mean",
+            "autocontrast_full_flip_mean",
+            "raw_multicrop_flip_mean",
+            "autocontrast_multicrop_flip_mean"
+          ],
+          "current_v2_5_union_pairs": 339509,
+          "new_same_leaf_pairs": 233530,
+          "proposed_group_union_pairs": 573039
+        }
+      },
+      "new_same_leaf_pairs": 270355,
+      "full_candidate_pairs": 3265225,
+      "pairs_per_image": 25.117115384615385,
+      "development_same2d_hits": 4,
+      "development_same2d_missed_pair_ids": [],
+      "development_same2d_reference_recall": true,
+      "candidate_load_passed": false
+    },
+    {
+      "profile_id": "kidney_all_lymphoma_raw_multicrop",
+      "description": "Keep all four Kidney channels but extend Lymphoma only in the raw multicrop channel that retrieves all three Lymphoma development positives.",
+      "by_source_group": {
+        "kidney_ct": {
+          "top_k": 20,
+          "channels": [
+            "raw_full_flip_mean",
+            "autocontrast_full_flip_mean",
+            "raw_multicrop_flip_mean",
+            "autocontrast_multicrop_flip_mean"
+          ],
+          "current_v2_5_union_pairs": 115349,
+          "new_same_leaf_pairs": 36825,
+          "proposed_group_union_pairs": 152174
+        },
+        "lymphoma_histology": {
+          "top_k": 29,
+          "channels": [
+            "raw_multicrop_flip_mean"
+          ],
+          "current_v2_5_union_pairs": 339509,
+          "new_same_leaf_pairs": 84903,
+          "proposed_group_union_pairs": 424412
+        }
+      },
+      "new_same_leaf_pairs": 121728,
+      "full_candidate_pairs": 3116598,
+      "pairs_per_image": 23.97383076923077,
+      "development_same2d_hits": 4,
+      "development_same2d_missed_pair_ids": [],
+      "development_same2d_reference_recall": true,
+      "candidate_load_passed": true
+    },
+    {
+      "profile_id": "raw_multicrop_only_group_minimum",
+      "description": "Extend only raw multicrop in both groups at the smallest K values that retrieve the four development positives.",
+      "by_source_group": {
+        "kidney_ct": {
+          "top_k": 20,
+          "channels": [
+            "raw_multicrop_flip_mean"
+          ],
+          "current_v2_5_union_pairs": 115349,
+          "new_same_leaf_pairs": 19264,
+          "proposed_group_union_pairs": 134613
+        },
+        "lymphoma_histology": {
+          "top_k": 29,
+          "channels": [
+            "raw_multicrop_flip_mean"
+          ],
+          "current_v2_5_union_pairs": 339509,
+          "new_same_leaf_pairs": 84903,
+          "proposed_group_union_pairs": 424412
+        }
+      },
+      "new_same_leaf_pairs": 104167,
+      "full_candidate_pairs": 3099037,
+      "pairs_per_image": 23.838746153846152,
+      "development_same2d_hits": 4,
+      "development_same2d_missed_pair_ids": [],
+      "development_same2d_reference_recall": true,
+      "candidate_load_passed": true
+    }
+  ],
+  "selected_development_profile": "kidney_all_lymphoma_raw_multicrop",
+  "acceptance_gates": {
+    "top15_baseline_reproduced": true,
+    "at_least_one_profile_recovers_4_of_4": true,
+    "at_least_one_recall_profile_within_capacity": true,
+    "all_diagnostic_gates_passed": true
+  },
+  "limitation": "The four same-2D pairs are development evidence that defined this bounded grid. A selected profile is only a prospective-audit hypothesis, not an accepted rule.",
+  "decision": "DIAGNOSTIC PASS: freeze the selected profile and prepare a new path-disjoint score-blind prospective audit before candidate acceptance."
+}
