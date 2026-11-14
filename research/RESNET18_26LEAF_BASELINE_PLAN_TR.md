@@ -1,6 +1,6 @@
 # ResNet18 26-Leaf Baseline — Dondurulmuş Çalıştırma Planı
 
-Tarih: 2026-11-14  
+Tarih: 2026-11-14
 Durum: Notebook ve resume altyapısı hazır; tam eğitim **henüz başlatılmadı**.
 
 ## Deney türü ve amacı
