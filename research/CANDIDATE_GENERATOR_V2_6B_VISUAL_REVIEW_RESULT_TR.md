@@ -1,7 +1,9 @@
 # Candidate Generator v2.6b — Kör Görsel İnceleme Sonucu
 
-Tarih: 2026-11-14  
-Deney türü: path-disjoint, score-blind prospective görsel denetim  
+Tarih: 2026-11-14
+
+Deney türü: path-disjoint, score-blind prospective görsel denetim
+
 Hedef: `same_2d_augmentation_family_v1`
 
 ## Bu adımda ne yapıldı?
