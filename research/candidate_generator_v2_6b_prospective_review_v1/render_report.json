@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "status": "v2_6b_score_blind_contact_sheets_rendered_not_reviewed",
+  "does_not_read_private_manifest": true,
+  "does_not_assign_visual_decisions": true,
+  "counts": {
+    "pair_count": 160,
+    "unique_images": 320,
+    "sheet_count": 27,
+    "index_count": 160,
+    "blank_review_verdict_count": 160
+  },
+  "layout": {
+    "pairs_per_page": 6,
+    "thumb_size": 320,
+    "visible_metadata": [
+      "pair_id",
+      "source_group",
+      "left_right_marker"
+    ],
+    "hidden_private_fields": [
+      "candidate_membership",
+      "descriptor_channel",
+      "phash_distance",
+      "phash_enabled",
+      "robust_acceptance_k",
+      "robust_best_rank",
+      "robust_rank_lower_bound",
+      "selection_stratum",
+      "v2_6b_candidate"
+    ]
+  },
+  "integrity": {
+    "selection_report_sha256": "3d00f465a7fbdf89065bf47f373d87d7d14fb9a10710e36a37dc171979a031cc",
+    "review_manifest_sha256": "f961d5e92eb4da2b581852e8151834ff16deaa245a3d7e6e35fb819acd4fb099",
+    "renderer_sha256": "588c1acea9f2836a5c82fac00e21a053c2544e9066fb1f80dfbd9f53be94642e",
+    "sheet_index_sha256": "10017781293121f525a180af95d1ce9672a95ad7121eb2243b3fa8310180e288",
+    "sheet_sha256": {
+      "contact_sheets/v2_6b_prospective_page_001.png": "5f8a3497b22524c507a48eb4b7ef0e2aaa9107c05a3055935b08fd3f3f20c58e",
+      "contact_sheets/v2_6b_prospective_page_002.png": "f43abc44899e16c6b21f95e06171c769bb021c5a9afdb5ee7f6000b5a3781b61",
+      "contact_sheets/v2_6b_prospective_page_003.png": "dc8e09a2fb6e583c8210a752de77bca33e60713af30a4dad68f3b2ea02bcb30c",
+      "contact_sheets/v2_6b_prospective_page_004.png": "cf941f0c60aafff5ab55d8359f5d467e4a3dedab4c25efe037bc2cb6c6deaa07",
+      "contact_sheets/v2_6b_prospective_page_005.png": "fa0f6b1f7b773c19bd29e79d70a2a60a37d69f7036c02a530f027b8918eea658",
+      "contact_sheets/v2_6b_prospective_page_006.png": "68731bc642a98663b468cd57a0cd2603f239e4bca9b9a82a19bcc0e6b7055497",
+      "contact_sheets/v2_6b_prospective_page_007.png": "2687b9f2044769f058ab48c3824db931b48c000cac2cd64e249f78a195fa59d1",
+      "contact_sheets/v2_6b_prospective_page_008.png": "35b5cf1dd0411324db21c878aa95d5985ea167eb3347e28de6bdd176f7d6b8ba",
+      "contact_sheets/v2_6b_prospective_page_009.png": "35c1cbb96123219fb10f692f21079aaad358472e616b5f124f6e60d26a9f8ba4",
+      "contact_sheets/v2_6b_prospective_page_010.png": "1fc63cbbd97194f7d1ab2413e1c48d27cb05fdbc4fa602cb13668531e955dec6",
+      "contact_sheets/v2_6b_prospective_page_011.png": "4205676f130e27b574bb5d60377a73eda2fad03b9e14a6daa61bd33797296771",
+      "contact_sheets/v2_6b_prospective_page_012.png": "f906a10ed2ced9344d88878a3313cc827aa99e645092277c983c864affd2ba6f",
+      "contact_sheets/v2_6b_prospective_page_013.png": "bf202ae8ba0f1637547459281fdf7ca040fd1a8685c172e514635235d717c273",
+      "contact_sheets/v2_6b_prospective_page_014.png": "80ef551eba5ac9fb95b9af87c6ca42b09571457370f6c3a6c79d81f4030cfc5e",
+      "contact_sheets/v2_6b_prospective_page_015.png": "e3f1efdd539c9cc63e22911079c9eb995a59f32ea332cfa2fbcaee26fd077bd7",
+      "contact_sheets/v2_6b_prospective_page_016.png": "ef2da7d2b7d5efffa7c4ef254d3f9f4282b53f2c7dd1f2f90c40797deacd2f94",
+      "contact_sheets/v2_6b_prospective_page_017.png": "30c16f463e215f27a4ea0a00ae83bfd60fd246cca7d2203faecc815e6ae1e7e6",
+      "contact_sheets/v2_6b_prospective_page_018.png": "587a30b5b660c06f96a15f4aadc8134a8c1f05b4f02218f1df1639b5d45b5a9e",
+      "contact_sheets/v2_6b_prospective_page_019.png": "a6cfc15d4778a7a149018f42a23865344acdb2b6678a6fed6b14c538b2d807c9",
+      "contact_sheets/v2_6b_prospective_page_020.png": "1baec7d79ac49cd65b84ec1fc76d7db78d1f66e0baf9cf8341ffaa4ac215792e",
+      "contact_sheets/v2_6b_prospective_page_021.png": "3cd12adf2c2b13784ab2700b634beb394e939890c9ba287a5a337115c9a8b56d",
+      "contact_sheets/v2_6b_prospective_page_022.png": "b056d5c41bdfe8efe3d692cbf0aa7e37b755faa8f274c09d0131e9165f1b1fd9",
+      "contact_sheets/v2_6b_prospective_page_023.png": "7fd62d4ae5e3747015ea5d14298e25c784a71a5dc8de133de07bb718fa2b1a4c",
+      "contact_sheets/v2_6b_prospective_page_024.png": "128f64b7383bfc0197ced17f8951eb12816aa08da90eab317de86cd560421be5",
+      "contact_sheets/v2_6b_prospective_page_025.png": "1d57e56d96e1bb26fdea691fefeb1f29901e830d9cea8ea9f63655340a7c270d",
+      "contact_sheets/v2_6b_prospective_page_026.png": "43b6a64770943de6e43ee7a5ae263b7f8cad23b26a334734914295c6d37bbe2a",
+      "contact_sheets/v2_6b_prospective_page_027.png": "57bdb69f9bf8a317df4237266bfe1f85d3b7c521f17a524def00f7f6fa8c70df"
+    }
+  },
+  "decision": "RENDER COMPLETE, NOT REVIEWED: freeze this package before recording verdicts."
+}
+
