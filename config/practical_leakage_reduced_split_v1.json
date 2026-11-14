@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "frozen_before_practical_split_generation",
+  "declared_date": "2026-11-14",
+  "experiment_type": "deadline_aware_known_family_grouped_split",
+  "name": "practical_leakage_reduced_split_v1",
+  "seed": 42,
+  "ratios": {
+    "train": 0.70,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "stratify_by": "26_leaf_labels",
+  "family_policy": {
+    "exact_sha256_groups": "always_same_split",
+    "confirmed_same_source_review_pairs": "always_same_split",
+    "uncertain_review_pairs": "conservatively_same_split",
+    "transitive_components": true,
+    "patient_or_series_claim": false
+  },
+  "evidence": {
+    "exact_duplicates": {
+      "path": "artifacts/audit/exact_duplicates.json",
+      "sha256": "4d3740b27f0737c042f9eb57e7da4f9a6e8646e33946e89a544e1bb0df561d17"
+    },
+    "natural_final_references": {
+      "path": "research/natural_duplicate_adjudication_v1/final_pair_references_v1.csv",
+      "normalized_text_sha256": "9ad5304342241a5d7643c7580061176b6075209b84f49991e3b3b9a4814bba9f"
+    },
+    "natural_pair_paths": {
+      "path": "research/natural_duplicate_audit_v1/unblinded_pair_results.csv",
+      "normalized_text_sha256": "f3b4736c10464d4b324072dc90b3aec892a36540e01d75ca263fd587b29c946f"
+    },
+    "v2_5_unblinded_pairs": {
+      "path": "research/candidate_generator_v2_5_prospective_audit_v1/unblinded_pair_results.csv",
+      "normalized_text_sha256": "28a387c57e8b96c85f51b375c7c105dacb187b07e82bfba446d8d481e507958c"
+    },
+    "v2_6_same2d_final_references": {
+      "path": "research/v2_6_same2d_development_v1/final_pair_references.csv",
+      "normalized_text_sha256": "e5b93fd2eafed45ccdb535ecd2be0c87f6f4e1893666053fea6a60e933579bca"
+    },
+    "v2_6b_unblinded_pairs": {
+      "path": "research/candidate_generator_v2_6b_prospective_audit_v1/unblinded_pair_results.csv",
+      "normalized_text_sha256": "e56de9ecd58d7254ea5f22eabb2cf35f1829581d61c869ea6e10bdc456ef891e"
+    }
+  },
+  "acceptance_invariants": {
+    "expected_images": 130000,
+    "expected_leaves": 26,
+    "expected_images_per_leaf": 5000,
+    "required_split_counts_per_leaf": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "maximum_cross_split_exact_groups": 0,
+    "maximum_cross_split_review_links": 0,
+    "maximum_missing_or_duplicate_paths": 0
+  },
+  "interpretation": {
+    "allowed_claim": "Fixed 26-leaf stratified split that keeps every known exact/review-linked family together.",
+    "forbidden_claim": "Guaranteed removal of every unknown near duplicate or patient/series relative.",
+    "reason": "Repeated prospective audits showed that zero-miss natural retrieval could not be established within the delivery-time and scoring-capacity constraints."
+  }
+}

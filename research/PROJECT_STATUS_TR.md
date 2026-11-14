@@ -82,22 +82,22 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | Natural near-duplicate audit v1 | Challenge-set, frozen-rule karşılaştırması ve ikinci-aşama adjudication tamamlandı | İlk güvenli konsensüs 21 aynı-kaynak ve 299 bağımsızdı. Kalan 25 çift score-aware, AI-destekli ve uzman-olmayan adjudication'da 2 aynı-kaynak + 23 bağımsız olarak sonuçlandı. Nihai 345 referans: 23 aynı-kaynak, 322 bağımsız, 0 belirsiz. Aynı-kaynakların 23/23'ü 6.604-görüntülük audit indeksinde candidate tarafındaydı; full 130.000 indeksinde `N000123` top-15 dışında kaldı ve v2.3/v2.4 üyeliği 22/23 oldu. Bu örneklenmiş challenge-set kanıtıdır, bütün doğal çiftlerde %100 recall garantisi değildir. |
 | Yöntemin 26 alt sınıfın tamamına uygulanması | Retrieval tamamlandı / duplicate scoring başlamadı | 130.000 görüntünün 26 yaprağı descriptor ve pHash retrieval'dan geçti; birleşim yük kapısında durdu. Modality-aware v2.4 doğrulanmadan 4,62 milyon çift skorlanmayacak. |
 | Sınıflar arası perceptual-duplicate kontrolü | Candidate retrieval tamamlandı / karar verilmedi | Aynı uyumlu kaynak grubu içindeki cross-leaf çiftlere izin veren tam retrieval çalıştı; fakat candidate olmak duplicate kararı değildir ve frozen scorer henüz uygulanmadı. |
-| 130.000 görüntü için augmentation-family grupları | Başlamadı; hedef tanımı donduruldu | Same-2D aile hedefi nettir fakat tam candidate kuralı prospective kapıyı geçmediği için henüz hiçbir nihai aile listesi yok. |
+| 130.000 görüntü için practical known-family componentleri | Tamamlandı / kapsamı sınırlı | Bütün exact gruplar ve frozen auditlerden gelen 85 benzersiz doğrulanmış/ihtiyatlı bağlantı transitif componentlere çevrildi. 128.560 component vardır; 1.402'si çok görüntülüdür. Bilinmeyen bütün same-2D veya patient/series bağları bulunmuş sayılmaz. |
 
 ## 4. Split durumu
 
 | İş | Durum | Neden |
 |---|---|---|
-| Sabit naive 70/15/15 manifest | Başlamadı | Önce hedef ve veri protokolü kesinleştirilecek. Eski pilotların rastgele split'i final manifest değildir. |
-| Exact-duplicate-aware manifest | Başlamadı | SHA-256 grupları hazır fakat kalıcı manifest üretilmedi. |
-| Near-duplicate-family-aware manifest | Başlamadı | Yakın-kopya aileleri henüz oluşturulmadı. |
-| Split sızıntı doğrulaması | Başlamadı | Manifestler oluştuktan sonra train/validation/test arasında aile kesişimi 0 olmalı. |
+| Sabit naive 70/15/15 manifest | Başlamadı / yalnız literature-comparison için opsiyonel | Eski pilotların rastgele split'i final manifest değildir. Ana deney artık aşağıdaki sabit practical manifesti kullanacaktır. |
+| Exact-duplicate-aware manifest | Tamamlandı | 130.000 görüntünün bütün 1.318 exact grubu aynı splitte tutuldu; cross-split exact grup 0. |
+| Practical known-family-aware manifest | Tamamlandı / ana deney split'i | Exact gruplar ve 85 benzersiz doğrulanmış/ihtiyatlı review bağlantısı transitif componentlere dönüştürüldü. 26 leaf'in her birinde 3.500/750/750; toplam 91.000/19.500/19.500. Manifest SHA-256 `999bf7a9…cf171`. Bu bilinmeyen bütün near-duplicate veya patient/series bağlarını garanti etmez. |
+| Split sızıntı doğrulaması | Bilinen aileler için tamamlandı | Cross-split exact=0, review edge=0, family component=0; 130.000 yol tam bir kez mevcut ve ikinci üretimde manifest hash'i değişmedi. Ayrıntı: `research/PRACTICAL_LEAKAGE_REDUCED_SPLIT_V1_TR.md`. |
 
 ## 5. Model ve sonraki aşamalar
 
 | İş | Durum | Açıklama |
 |---|---|---|
-| Trainer altyapısı | Teknik temel var; final hazır değil | 8/26 hedef ve dört mimari destekleniyor; split ve kayıt eksikleri var. |
+| Trainer altyapısı | Sabit manifest yükleme hazır; diğer final kayıt geliştirmeleri sürüyor | 8/26 hedef ve dört mimari destekleniyor. `--split-manifest` ile practical manifest sıkı doğrulanarak yükleniyor ve her model aynı split'i kullanabiliyor. Derived 8-parent metrikleri ve per-image prediction export henüz eklenmedi. |
 | SmallCNN smoke test | Smoke test tamamlandı | Yalnızca sistemin uçtan uca çalıştığını gösterir; performans sonucu değildir. |
 | ResNet18 8-grup pilotu | Pilot tamamlandı | Rastgele image-level split nedeniyle final sonuç değildir. |
 | DenseNet121 26-sınıf küçük reproduction | Pilot/reproduction tamamlandı | Küçük örnek ve rastgele split; final sonuç değildir. |

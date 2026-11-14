@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 import random
+import shutil
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
@@ -33,6 +34,7 @@ from data_index import (
     select_max_per_label,
     target_label,
 )
+from fixed_split_manifest import load_fixed_split_manifest
 
 
 class RecordDataset(Dataset):
@@ -108,7 +110,17 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
-    parser.add_argument("--max-per-class", type=int, default=2000)
+    parser.add_argument(
+        "--max-per-class",
+        type=int,
+        default=None,
+        help="Pilot icin label basina ust sinir; sabit manifest ile kullanilamaz",
+    )
+    parser.add_argument(
+        "--split-manifest",
+        default=None,
+        help="Onceden uretilmis sabit train/val/test manifesti",
+    )
     parser.add_argument("--num-workers", type=int, default=2)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--pretrained", action="store_true")
@@ -312,15 +324,25 @@ def main() -> None:
     seed_everything(args.seed)
     dataset_root = resolve_dataset_root(args.data_dir)
     records = discover_records(dataset_root)
-    records = select_max_per_label(
-        records, args.max_per_class, args.seed, args.target_level
-    )
+    if args.split_manifest:
+        if args.max_per_class is not None:
+            raise ValueError("Sabit split manifesti ile --max-per-class birlikte kullanilamaz")
+        fixed_splits = load_fixed_split_manifest(
+            records, dataset_root, Path(args.split_manifest).resolve()
+        )
+        train_records = fixed_splits["train"]
+        val_records = fixed_splits["val"]
+        test_records = fixed_splits["test"]
+    else:
+        records = select_max_per_label(
+            records, args.max_per_class, args.seed, args.target_level
+        )
+        train_records, val_records, test_records = split_records(
+            records, args.seed, args.target_level
+        )
 
     class_names = sorted({target_label(record, args.target_level) for record in records})
     class_to_index = {name: index for index, name in enumerate(class_names)}
-    train_records, val_records, test_records = split_records(
-        records, args.seed, args.target_level
-    )
 
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     output_dir = Path(args.output_dir).resolve() if args.output_dir else (
@@ -434,31 +456,34 @@ def main() -> None:
         writer = csv.DictWriter(handle, fieldnames=list(history[0]))
         writer.writeheader()
         writer.writerows(history)
-    split_rows = []
-    for split_name, split_records_list in (
-        ("train", train_records),
-        ("val", val_records),
-        ("test", test_records),
-    ):
-        for record in split_records_list:
-            split_rows.append(
-                {
-                    "split": split_name,
-                    "label": target_label(record, args.target_level),
-                    "main_class": record.main_class,
-                    "subclass": record.subclass,
-                    "path": str(record.path),
-                }
+    if args.split_manifest:
+        shutil.copyfile(Path(args.split_manifest).resolve(), output_dir / "split_manifest.csv")
+    else:
+        split_rows = []
+        for split_name, split_records_list in (
+            ("train", train_records),
+            ("val", val_records),
+            ("test", test_records),
+        ):
+            for record in split_records_list:
+                split_rows.append(
+                    {
+                        "split": split_name,
+                        "label": target_label(record, args.target_level),
+                        "main_class": record.main_class,
+                        "subclass": record.subclass,
+                        "path": str(record.path),
+                    }
+                )
+        with (output_dir / "split_manifest.csv").open(
+            "w", newline="", encoding="utf-8"
+        ) as handle:
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=["split", "label", "main_class", "subclass", "path"],
             )
-    with (output_dir / "split_manifest.csv").open(
-        "w", newline="", encoding="utf-8"
-    ) as handle:
-        writer = csv.DictWriter(
-            handle,
-            fieldnames=["split", "label", "main_class", "subclass", "path"],
-        )
-        writer.writeheader()
-        writer.writerows(split_rows)
+            writer.writeheader()
+            writer.writerows(split_rows)
     with (output_dir / "test_metrics.json").open("w", encoding="utf-8") as handle:
         json.dump(test_summary, handle, indent=2, ensure_ascii=False)
     report = classification_report(

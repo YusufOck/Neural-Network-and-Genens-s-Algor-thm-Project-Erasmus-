@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "status": "practical_leakage_reduced_split_v1_complete",
+  "experiment_type": "fixed_known_family_grouped_split",
+  "dataset_root": "C:\\Users\\mehmet\\Desktop\\erasmus_ders\\NNGA\\archive\\Multi Cancer\\Multi Cancer",
+  "policy": {
+    "seed": 42,
+    "ratios": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "stratify_by": "subclass",
+    "claim": "Fixed 26-leaf stratified split that keeps every known exact/review-linked family together.",
+    "forbidden_claim": "Guaranteed removal of every unknown near duplicate or patient/series relative."
+  },
+  "input": {
+    "images": 130000,
+    "leaves": 26,
+    "exact_groups": 1318,
+    "review_edges_unique": 85,
+    "review_edges_by_source": {
+      "natural_confirmed_same_source": 23,
+      "v2_5_review_same_source": 36,
+      "v2_5_review_uncertain_conservative": 1,
+      "v2_6_confirmed_same2d": 4,
+      "v2_6b_confirmed_same2d": 24,
+      "v2_6b_uncertain_conservative": 1
+    }
+  },
+  "families": {
+    "total_components": 128560,
+    "multi_image_components": 1402,
+    "images_in_multi_image_components": 2842,
+    "maximum_component_size": 4
+  },
+  "split_counts": {
+    "train": 91000,
+    "val": 19500,
+    "test": 19500
+  },
+  "split_counts_by_leaf": {
+    "all_benign": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "all_early": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "all_pre": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "all_pro": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "brain_glioma": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "brain_menin": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "brain_tumor": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "breast_benign": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "breast_malignant": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_dyk": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_koc": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_mep": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_pab": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_sfi": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "colon_aca": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "colon_bnt": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "kidney_normal": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "kidney_tumor": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lung_aca": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lung_bnt": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lung_scc": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lymph_cll": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lymph_fl": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lymph_mcl": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "oral_normal": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "oral_scc": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    }
+  },
+  "targets_by_leaf": {
+    "all_benign": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "all_early": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "all_pre": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "all_pro": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "brain_glioma": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "brain_menin": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "brain_tumor": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "breast_benign": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "breast_malignant": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_dyk": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_koc": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_mep": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_pab": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "cervix_sfi": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "colon_aca": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "colon_bnt": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "kidney_normal": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "kidney_tumor": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lung_aca": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lung_bnt": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lung_scc": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lymph_cll": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lymph_fl": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "lymph_mcl": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "oral_normal": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    },
+    "oral_scc": {
+      "train": 3500,
+      "val": 750,
+      "test": 750
+    }
+  },
+  "invariants": {
+    "all_images_once": true,
+    "all_26_leaves_present": true,
+    "exact_split_counts_per_leaf": true,
+    "cross_split_exact_groups": 0,
+    "cross_split_review_edges": 0,
+    "cross_split_family_components": 0,
+    "all_passed": true
+  },
+  "limitations": [
+    "This split groups every known exact and reviewed relation, not every unknown near duplicate.",
+    "The dataset has no patient/series IDs, so patient-level separation cannot be claimed.",
+    "Conservative uncertain links may keep two independent images together; this cannot create train-test leakage."
+  ],
+  "artifacts": {
+    "config_path": "config/practical_leakage_reduced_split_v1.json",
+    "config_sha256": "e83fa291c75ed518228a3f484c065d19be13fc327bcdd0cf42b380c623d9ab0e",
+    "manifest_path": "research/splits/practical_leakage_reduced_split_v1.csv",
+    "manifest_sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171"
+  }
+}
