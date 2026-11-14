@@ -101,7 +101,8 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | SmallCNN smoke test | Smoke test tamamlandı | Yalnızca sistemin uçtan uca çalıştığını gösterir; performans sonucu değildir. |
 | ResNet18 8-grup pilotu | Pilot tamamlandı | Rastgele image-level split nedeniyle final sonuç değildir. |
 | DenseNet121 26-sınıf küçük reproduction | Pilot/reproduction tamamlandı | Küçük örnek ve rastgele split; final sonuç değildir. |
-| Adil model karşılaştırması | Başlamadı / çalıştırılmaya hazır | Sabit practical leakage-reduced split ve trainer kayıtları hazır. İlk tam koşu pretrained ResNet18 26-leaf baseline olacaktır; ayrı çalıştırma onayı bekleniyor. |
+| ResNet18 26-leaf tam baseline | Notebook hazır / eğitim başlamadı | Frozen split hash kontrolü, T4 ortam kontrolü, en fazla 15 epoch, validation macro-F1 checkpoint seçimi, patience=4 ve epoch-level resume içeren Colab notebook'u hazırlandı. Yerel resume smoke epoch 1'i tekrarlamadan epoch 2'ye geçti. Gerçek eğitim hücresi kilitli; henüz full metric yok. Ayrıntı: `research/RESNET18_26LEAF_BASELINE_PLAN_TR.md`. |
+| Adil model karşılaştırması | Başlamadı / ilk baseline bekleniyor | Sabit practical leakage-reduced split ve trainer kayıtları hazır. İlk tam koşu pretrained ResNet18 26-leaf baseline olacaktır. |
 | Genetik algoritma | Başlamadı | Stabil baseline sonrasına bırakıldı. |
 | Grad-CAM | Başlamadı | Final/seçilmiş modellerden sonra. |
 | Rapor ve sunum | Başlamadı; kanıtlar birikiyor | Denetim raporları daha sonra ana rapora girdi olacak. |

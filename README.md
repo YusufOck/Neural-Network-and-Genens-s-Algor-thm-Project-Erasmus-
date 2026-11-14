@@ -301,6 +301,12 @@ Smoke metriği proje performansı değildir. İlk raporlanabilir adım, ayrı on
 manifestli pretrained ResNet18 26-leaf baseline'ıdır. Ayrıntı:
 [`research/TRAINER_HARDENING_V1_TR.md`](research/TRAINER_HARDENING_V1_TR.md).
 
+İlk tam baseline için Colab/T4 notebook'u hazırlanmıştır:
+[`notebooks/resnet18_26leaf_baseline_colab.ipynb`](notebooks/resnet18_26leaf_baseline_colab.ipynb).
+Deney sözleşmesi, kesinti sonrası resume davranışı ve beklenen çıktılar
+[`research/RESNET18_26LEAF_BASELINE_PLAN_TR.md`](research/RESNET18_26LEAF_BASELINE_PLAN_TR.md)
+dosyasındadır. Tam eğitim henüz başlatılmamıştır.
+
 ## GitHub kapsamı
 
 Depoya kod, yapılandırma ve araştırma notları gönderilir. Aşağıdakiler yerelde tutulur:

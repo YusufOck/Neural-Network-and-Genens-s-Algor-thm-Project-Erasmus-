@@ -149,10 +149,15 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--experiment-type",
-        choices=["pilot", "reproduction", "ablation", "final"],
+        choices=["pilot", "baseline", "reproduction", "ablation", "final"],
         default="pilot",
     )
     parser.add_argument("--smoke-test", action="store_true")
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Ayni output klasorundeki last_checkpoint.pth dosyasindan devam et",
+    )
     return parser.parse_args()
 
 
@@ -338,6 +343,23 @@ def save_confusion_matrix(targets, predictions, class_names, output_path):
     plt.close(fig)
 
 
+def write_history(history: Sequence[dict], output_path: Path) -> None:
+    if not history:
+        return
+    temporary = output_path.with_suffix(output_path.suffix + ".tmp")
+    with temporary.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(history[0]))
+        writer.writeheader()
+        writer.writerows(history)
+    temporary.replace(output_path)
+
+
+def save_last_checkpoint(path: Path, payload: dict) -> None:
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    torch.save(payload, temporary)
+    temporary.replace(path)
+
+
 def main() -> None:
     args = parse_args()
     if args.smoke_test:
@@ -353,6 +375,7 @@ def main() -> None:
     seed_everything(args.seed)
     dataset_root = resolve_dataset_root(args.data_dir)
     records = discover_records(dataset_root)
+    manifest_sha256 = None
     if args.split_manifest:
         if args.max_per_class is not None:
             raise ValueError("Sabit split manifesti ile --max-per-class birlikte kullanilamaz")
@@ -447,8 +470,50 @@ def main() -> None:
     best_val_f1 = -1.0
     best_epoch = 0
     epochs_without_improvement = 0
+    start_epoch = 1
     best_path = output_dir / "best_model.pth"
-    for epoch in range(1, args.epochs + 1):
+    last_path = output_dir / "last_checkpoint.pth"
+    training_contract = {
+        "model": args.model,
+        "target_level": args.target_level,
+        "class_names": class_names,
+        "pretrained": args.pretrained,
+        "fine_tune": args.fine_tune,
+        "image_size": args.image_size,
+        "normalization": args.normalization,
+        "augmentation": args.augmentation,
+        "learning_rate": args.learning_rate,
+        "weight_decay": args.weight_decay,
+        "batch_size": args.batch_size,
+        "seed": args.seed,
+        "split_manifest_sha256": manifest_sha256,
+    }
+    if args.resume:
+        if not last_path.is_file():
+            raise FileNotFoundError(f"Resume checkpoint bulunamadi: {last_path}")
+        resume_state = torch.load(last_path, map_location="cpu", weights_only=False)
+        if resume_state.get("training_contract") != training_contract:
+            raise ValueError("Resume checkpoint eğitim sozlesmesi mevcut argumanlarla uyusmuyor")
+        model.load_state_dict(resume_state["model_state_dict"])
+        optimizer.load_state_dict(resume_state["optimizer_state_dict"])
+        scheduler.load_state_dict(resume_state["scheduler_state_dict"])
+        history = resume_state["history"]
+        best_val_f1 = resume_state["best_val_f1"]
+        best_epoch = resume_state["best_epoch"]
+        epochs_without_improvement = resume_state["epochs_without_improvement"]
+        start_epoch = resume_state["epoch"] + 1
+        random.setstate(resume_state["python_random_state"])
+        np.random.set_state(resume_state["numpy_random_state"])
+        torch.set_rng_state(resume_state["torch_random_state"])
+        if device.type == "cuda" and resume_state["cuda_random_states"] is not None:
+            torch.cuda.set_rng_state_all(resume_state["cuda_random_states"])
+        print(f"Resume: epoch {start_epoch} ile devam edilecek")
+    elif last_path.exists():
+        raise FileExistsError(
+            f"Mevcut last checkpoint ezilmeyecek: {last_path}. Devam icin --resume kullan."
+        )
+
+    for epoch in range(start_epoch, args.epochs + 1):
         print(f"Epoch {epoch}/{args.epochs}")
         train_metrics = run_epoch(model, loaders["train"], criterion, device, optimizer)
         val_metrics = run_epoch(model, loaders["val"], criterion, device)
@@ -464,6 +529,7 @@ def main() -> None:
         }
         history.append(row)
         print(json.dumps(row, indent=2))
+        should_stop = False
         if val_metrics["macro_f1"] > best_val_f1:
             best_val_f1 = val_metrics["macro_f1"]
             best_epoch = epoch
@@ -482,11 +548,34 @@ def main() -> None:
                 args.early_stopping_patience > 0
                 and epochs_without_improvement >= args.early_stopping_patience
             ):
-                print(
-                    "Erken durdurma: validation macro-F1 "
-                    f"{args.early_stopping_patience} epoch boyunca iyilesmedi."
-                )
-                break
+                should_stop = True
+        write_history(history, output_dir / "history.csv")
+        save_last_checkpoint(
+            last_path,
+            {
+                "training_contract": training_contract,
+                "epoch": epoch,
+                "model_state_dict": model.state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+                "scheduler_state_dict": scheduler.state_dict(),
+                "history": history,
+                "best_val_f1": best_val_f1,
+                "best_epoch": best_epoch,
+                "epochs_without_improvement": epochs_without_improvement,
+                "python_random_state": random.getstate(),
+                "numpy_random_state": np.random.get_state(),
+                "torch_random_state": torch.get_rng_state(),
+                "cuda_random_states": (
+                    torch.cuda.get_rng_state_all() if device.type == "cuda" else None
+                ),
+            },
+        )
+        if should_stop:
+            print(
+                "Erken durdurma: validation macro-F1 "
+                f"{args.early_stopping_patience} epoch boyunca iyilesmedi."
+            )
+            break
 
     checkpoint = torch.load(best_path, map_location=device, weights_only=True)
     model.load_state_dict(checkpoint["model_state_dict"])
@@ -521,10 +610,7 @@ def main() -> None:
         "warning": "Metrics are educational and are not evidence of clinical validity.",
     }
 
-    with (output_dir / "history.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(history[0]))
-        writer.writeheader()
-        writer.writerows(history)
+    write_history(history, output_dir / "history.csv")
     if args.split_manifest:
         source_manifest = manifest_path
         copied_manifest = output_dir / "split_manifest.csv"
