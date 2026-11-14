@@ -44,4 +44,3 @@ farklı ve ayrı raporlanacaktır.
 İlk tam baseline için pretrained ResNet18, 26 leaf hedefi ve frozen practical manifest kullanılacak.
 Model seçimi yalnız validation macro-F1 ile yapılacak; test seti en iyi checkpoint yüklendikten sonra
 bir kez değerlendirilecek. Bu tam eğitim ayrı kullanıcı onayı ve Colab/T4 çalışma komutu gerektirir.
-
