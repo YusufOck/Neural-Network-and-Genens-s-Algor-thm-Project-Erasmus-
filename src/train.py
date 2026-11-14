@@ -16,7 +16,6 @@ import torch
 from PIL import Image
 from sklearn.metrics import (
     accuracy_score,
-    balanced_accuracy_score,
     classification_report,
     confusion_matrix,
     f1_score,
@@ -35,6 +34,19 @@ from data_index import (
     target_label,
 )
 from fixed_split_manifest import load_fixed_split_manifest
+from training_support import (
+    build_subclass_parent_map,
+    classification_metrics,
+    derive_parent_predictions,
+    prediction_rows,
+    save_learning_curves,
+    set_training_mode,
+    sha256_file,
+    write_prediction_csv,
+)
+
+
+FROZEN_SPLIT_SHA256 = "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171"
 
 
 class RecordDataset(Dataset):
@@ -58,7 +70,7 @@ class RecordDataset(Dataset):
         with Image.open(record.path) as image:
             image = image.convert("RGB")
         label = target_label(record, self.target_level)
-        return self.transform(image), self.class_to_index[label]
+        return self.transform(image), self.class_to_index[label], index
 
 
 class SmallCNN(nn.Module):
@@ -123,6 +135,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--num-workers", type=int, default=2)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--early-stopping-patience",
+        type=int,
+        default=4,
+        help="Validation macro-F1 iyilesmezse beklenecek epoch; 0 erken durdurmayi kapatir",
+    )
     parser.add_argument("--pretrained", action="store_true")
     parser.add_argument(
         "--fine-tune",
@@ -250,14 +268,16 @@ def class_weight_tensor(records, class_to_index, target_level, device):
     return torch.tensor(weights, dtype=torch.float32, device=device)
 
 
-def run_epoch(model, loader, criterion, device, optimizer=None):
+def run_epoch(model, loader, criterion, device, optimizer=None, collect_outputs=False):
     training = optimizer is not None
-    model.train(training)
+    set_training_mode(model, training)
     total_loss = 0.0
     all_targets: List[int] = []
     all_predictions: List[int] = []
+    all_record_indices: List[int] = []
+    all_probabilities: List[List[float]] = []
 
-    for batch_index, (inputs, targets) in enumerate(loader, start=1):
+    for batch_index, (inputs, targets, record_indices) in enumerate(loader, start=1):
         inputs = inputs.to(device, non_blocking=True)
         targets = targets.to(device, non_blocking=True)
         if training:
@@ -273,17 +293,26 @@ def run_epoch(model, loader, criterion, device, optimizer=None):
         total_loss += loss.item() * inputs.size(0)
         all_targets.extend(targets.detach().cpu().tolist())
         all_predictions.extend(outputs.argmax(dim=1).detach().cpu().tolist())
+        if collect_outputs:
+            all_record_indices.extend(record_indices.tolist())
+            all_probabilities.extend(
+                torch.softmax(outputs, dim=1).detach().cpu().tolist()
+            )
 
         if training and (batch_index % 50 == 0 or batch_index == len(loader)):
             print(f"  batch {batch_index}/{len(loader)}")
 
-    return {
+    result = {
         "loss": total_loss / len(loader.dataset),
         "accuracy": accuracy_score(all_targets, all_predictions),
         "macro_f1": f1_score(all_targets, all_predictions, average="macro", zero_division=0),
         "targets": all_targets,
         "predictions": all_predictions,
     }
+    if collect_outputs:
+        result["record_indices"] = all_record_indices
+        result["probabilities"] = all_probabilities
+    return result
 
 
 def save_confusion_matrix(targets, predictions, class_names, output_path):
@@ -327,8 +356,15 @@ def main() -> None:
     if args.split_manifest:
         if args.max_per_class is not None:
             raise ValueError("Sabit split manifesti ile --max-per-class birlikte kullanilamaz")
+        manifest_path = Path(args.split_manifest).resolve()
+        manifest_sha256 = sha256_file(manifest_path)
+        if manifest_sha256 != FROZEN_SPLIT_SHA256:
+            raise ValueError(
+                "Split manifest SHA-256 dondurulmus proje manifestiyle eslesmiyor: "
+                f"{manifest_sha256}"
+            )
         fixed_splits = load_fixed_split_manifest(
-            records, dataset_root, Path(args.split_manifest).resolve()
+            records, dataset_root, manifest_path
         )
         train_records = fixed_splits["train"]
         val_records = fixed_splits["val"]
@@ -343,6 +379,10 @@ def main() -> None:
 
     class_names = sorted({target_label(record, args.target_level) for record in records})
     class_to_index = {name: index for index, name in enumerate(class_names)}
+    if args.target_level == "subclass":
+        label_to_parent = build_subclass_parent_map(records)
+    else:
+        label_to_parent = {name: name for name in class_names}
 
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     output_dir = Path(args.output_dir).resolve() if args.output_dir else (
@@ -405,6 +445,8 @@ def main() -> None:
 
     history = []
     best_val_f1 = -1.0
+    best_epoch = 0
+    epochs_without_improvement = 0
     best_path = output_dir / "best_model.pth"
     for epoch in range(1, args.epochs + 1):
         print(f"Epoch {epoch}/{args.epochs}")
@@ -424,6 +466,8 @@ def main() -> None:
         print(json.dumps(row, indent=2))
         if val_metrics["macro_f1"] > best_val_f1:
             best_val_f1 = val_metrics["macro_f1"]
+            best_epoch = epoch
+            epochs_without_improvement = 0
             torch.save(
                 {
                     "model_state_dict": model.state_dict(),
@@ -432,20 +476,45 @@ def main() -> None:
                 },
                 best_path,
             )
+        else:
+            epochs_without_improvement += 1
+            if (
+                args.early_stopping_patience > 0
+                and epochs_without_improvement >= args.early_stopping_patience
+            ):
+                print(
+                    "Erken durdurma: validation macro-F1 "
+                    f"{args.early_stopping_patience} epoch boyunca iyilesmedi."
+                )
+                break
 
-    checkpoint = torch.load(best_path, map_location=device)
+    checkpoint = torch.load(best_path, map_location=device, weights_only=True)
     model.load_state_dict(checkpoint["model_state_dict"])
-    test_metrics = run_epoch(model, loaders["test"], criterion, device)
+    test_metrics = run_epoch(
+        model, loaders["test"], criterion, device, collect_outputs=True
+    )
+    leaf_metrics = classification_metrics(
+        test_metrics["targets"], test_metrics["predictions"]
+    )
+    parent_metrics = derive_parent_predictions(
+        test_metrics["targets"],
+        test_metrics["predictions"],
+        class_names,
+        label_to_parent,
+    )
     test_summary = {
         "experiment_type": args.experiment_type,
         "model": args.model,
         "target_level": args.target_level,
         "loss": test_metrics["loss"],
-        "accuracy": test_metrics["accuracy"],
-        "macro_f1": test_metrics["macro_f1"],
-        "balanced_accuracy": balanced_accuracy_score(
-            test_metrics["targets"], test_metrics["predictions"]
-        ),
+        "best_epoch": best_epoch,
+        "best_validation_macro_f1": best_val_f1,
+        "epochs_completed": len(history),
+        "leaf_metrics": leaf_metrics,
+        "parent_metrics": {
+            key: parent_metrics[key]
+            for key in ("accuracy", "macro_f1", "balanced_accuracy", "class_names")
+        },
         "class_names": class_names,
         "dataset_root": str(dataset_root),
         "split_sizes": {name: len(dataset) for name, dataset in datasets.items()},
@@ -457,7 +526,17 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(history)
     if args.split_manifest:
-        shutil.copyfile(Path(args.split_manifest).resolve(), output_dir / "split_manifest.csv")
+        source_manifest = manifest_path
+        copied_manifest = output_dir / "split_manifest.csv"
+        shutil.copyfile(source_manifest, copied_manifest)
+        source_hash = sha256_file(source_manifest)
+        copied_hash = sha256_file(copied_manifest)
+        if copied_hash != source_hash:
+            raise RuntimeError("Kopyalanan split manifestinin SHA-256 degeri degisti")
+        test_summary["split_manifest"] = {
+            "source": str(source_manifest),
+            "sha256": source_hash,
+        }
     else:
         split_rows = []
         for split_name, split_records_list in (
@@ -486,27 +565,80 @@ def main() -> None:
             writer.writerows(split_rows)
     with (output_dir / "test_metrics.json").open("w", encoding="utf-8") as handle:
         json.dump(test_summary, handle, indent=2, ensure_ascii=False)
-    report = classification_report(
+    leaf_report = classification_report(
         test_metrics["targets"],
         test_metrics["predictions"],
         labels=list(range(len(class_names))),
         target_names=class_names,
         zero_division=0,
     )
-    (output_dir / "classification_report.txt").write_text(report, encoding="utf-8")
+    (output_dir / "leaf_classification_report.txt").write_text(
+        leaf_report, encoding="utf-8"
+    )
+    parent_report = classification_report(
+        parent_metrics["targets"],
+        parent_metrics["predictions"],
+        labels=list(range(len(parent_metrics["class_names"]))),
+        target_names=parent_metrics["class_names"],
+        zero_division=0,
+    )
+    (output_dir / "parent_classification_report.txt").write_text(
+        parent_report, encoding="utf-8"
+    )
+    report_json = {
+        "leaf": classification_report(
+            test_metrics["targets"],
+            test_metrics["predictions"],
+            labels=list(range(len(class_names))),
+            target_names=class_names,
+            zero_division=0,
+            output_dict=True,
+        ),
+        "parent": classification_report(
+            parent_metrics["targets"],
+            parent_metrics["predictions"],
+            labels=list(range(len(parent_metrics["class_names"]))),
+            target_names=parent_metrics["class_names"],
+            zero_division=0,
+            output_dict=True,
+        ),
+    }
+    (output_dir / "classification_reports.json").write_text(
+        json.dumps(report_json, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
     save_confusion_matrix(
         test_metrics["targets"],
         test_metrics["predictions"],
         class_names,
-        output_dir / "confusion_matrix.png",
+        output_dir / "leaf_confusion_matrix.png",
     )
+    save_confusion_matrix(
+        parent_metrics["targets"],
+        parent_metrics["predictions"],
+        parent_metrics["class_names"],
+        output_dir / "parent_confusion_matrix.png",
+    )
+    save_learning_curves(history, output_dir / "learning_curves.png")
+    test_prediction_rows = prediction_rows(
+        test_records,
+        test_metrics["record_indices"],
+        test_metrics["targets"],
+        test_metrics["predictions"],
+        test_metrics["probabilities"],
+        class_names,
+        label_to_parent,
+        dataset_root,
+    )
+    write_prediction_csv(test_prediction_rows, output_dir / "test_predictions.csv")
     (output_dir / "run_config.json").write_text(
         json.dumps(vars(args), indent=2, ensure_ascii=False), encoding="utf-8"
     )
 
     print("Test sonuçları:")
     print(json.dumps(test_summary, indent=2, ensure_ascii=False))
-    print(report)
+    print(leaf_report)
+    print("Turetilmis 8 ust grup raporu:")
+    print(parent_report)
     print(f"Çıktı klasörü: {output_dir}")
 
 

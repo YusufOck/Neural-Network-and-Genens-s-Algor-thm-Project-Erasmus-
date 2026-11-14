@@ -282,17 +282,24 @@ dosyasındadır.
 
 ## Eğitim kodunun mevcut durumu
 
-`src/train.py` şu modelleri destekleyen bir temel uygulamadır:
+`src/train.py` şu modelleri destekleyen kontrollü eğitim uygulamasıdır:
 
 - SmallCNN
 - ResNet18
 - DenseNet121
 - EfficientNet-B0
 
-Mevcut kod küçük smoke test/pilotlar çalıştırabilmiştir; ancak henüz nihai deney için hazır
-değildir. Sabit ve kopya-farkındalıklı split manifesti oluşturulmadan yeni model karşılaştırması
-başlatılmayacaktır. Nihai değerlendirmede accuracy yanında macro-F1, balanced accuracy, sınıf
-başına recall ve confusion matrix kullanılacaktır.
+Ana deney split'i `research/splits/practical_leakage_reduced_split_v1.csv` olarak dondurulmuştur.
+Trainer bu manifestin SHA-256 değerini eğitim başlamadan doğrular. 26 leaf tahmininden sekiz parent
+sonucu türetir; iki seviyede accuracy, macro-F1, balanced accuracy, sınıf raporu ve confusion matrix
+üretir. Ayrıca test görüntüsü bazında tahmin/olasılık CSV'si, öğrenme eğrileri, en iyi validation
+macro-F1 checkpoint'i ve erken durdurma kaydı oluşturur. Dondurulmuş pretrained omurgalardaki
+BatchNorm istatistikleri de sabit tutulur.
+
+2026-11-14 tarihli altyapı smoke testi başarıyla tamamlanmış ve tam test paketi 186/186 geçmiştir.
+Smoke metriği proje performansı değildir. İlk raporlanabilir adım, ayrı onayla çalıştırılacak sabit
+manifestli pretrained ResNet18 26-leaf baseline'ıdır. Ayrıntı:
+[`research/TRAINER_HARDENING_V1_TR.md`](research/TRAINER_HARDENING_V1_TR.md).
 
 ## GitHub kapsamı
 

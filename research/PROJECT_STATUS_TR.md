@@ -97,11 +97,11 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 
 | İş | Durum | Açıklama |
 |---|---|---|
-| Trainer altyapısı | Sabit manifest yükleme hazır; diğer final kayıt geliştirmeleri sürüyor | 8/26 hedef ve dört mimari destekleniyor. `--split-manifest` ile practical manifest sıkı doğrulanarak yükleniyor ve her model aynı split'i kullanabiliyor. Derived 8-parent metrikleri ve per-image prediction export henüz eklenmedi. |
+| Trainer altyapısı | Tamamlandı / tam eğitim başlamadı | 8/26 hedef ve dört mimari destekleniyor. Frozen practical manifest eğitim öncesi SHA-256 ile doğrulanıyor. 26 leaf tahminlerinden sekiz parent metriği, görüntü bazlı tahmin/olasılık CSV'si, iki seviyeli rapor/confusion matrix, öğrenme eğrileri, erken durdurma ve frozen-BatchNorm davranışı eklendi. Altyapı smoke testi geçti; 186/186 test başarılı. Smoke metriği final sonuç değildir. Ayrıntı: `research/TRAINER_HARDENING_V1_TR.md`. |
 | SmallCNN smoke test | Smoke test tamamlandı | Yalnızca sistemin uçtan uca çalıştığını gösterir; performans sonucu değildir. |
 | ResNet18 8-grup pilotu | Pilot tamamlandı | Rastgele image-level split nedeniyle final sonuç değildir. |
 | DenseNet121 26-sınıf küçük reproduction | Pilot/reproduction tamamlandı | Küçük örnek ve rastgele split; final sonuç değildir. |
-| Adil model karşılaştırması | Başlamadı | Sabit leakage-aware split bekleniyor. |
+| Adil model karşılaştırması | Başlamadı / çalıştırılmaya hazır | Sabit practical leakage-reduced split ve trainer kayıtları hazır. İlk tam koşu pretrained ResNet18 26-leaf baseline olacaktır; ayrı çalıştırma onayı bekleniyor. |
 | Genetik algoritma | Başlamadı | Stabil baseline sonrasına bırakıldı. |
 | Grad-CAM | Başlamadı | Final/seçilmiş modellerden sonra. |
 | Rapor ve sunum | Başlamadı; kanıtlar birikiyor | Denetim raporları daha sonra ana rapora girdi olacak. |
