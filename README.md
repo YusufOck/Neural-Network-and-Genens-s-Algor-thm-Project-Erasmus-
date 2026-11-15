@@ -297,15 +297,22 @@ macro-F1 checkpoint'i ve erken durdurma kaydı oluşturur. Dondurulmuş pretrain
 BatchNorm istatistikleri de sabit tutulur.
 
 2026-11-14 tarihli altyapı smoke testi başarıyla tamamlanmış ve tam test paketi 186/186 geçmiştir.
-Smoke metriği proje performansı değildir. İlk raporlanabilir adım, ayrı onayla çalıştırılacak sabit
-manifestli pretrained ResNet18 26-leaf baseline'ıdır. Ayrıntı:
+Smoke metriği proje performansı değildir. Ayrıntı:
 [`research/TRAINER_HARDENING_V1_TR.md`](research/TRAINER_HARDENING_V1_TR.md).
 
 İlk tam baseline için Colab/T4 notebook'u hazırlanmıştır:
 [`notebooks/resnet18_26leaf_baseline_colab.ipynb`](notebooks/resnet18_26leaf_baseline_colab.ipynb).
 Deney sözleşmesi, kesinti sonrası resume davranışı ve beklenen çıktılar
 [`research/RESNET18_26LEAF_BASELINE_PLAN_TR.md`](research/RESNET18_26LEAF_BASELINE_PLAN_TR.md)
-dosyasındadır. Tam eğitim henüz başlatılmamıştır.
+dosyasındadır.
+
+İlk tam koşu 2026-11-15 tarihinde Colab/T4 üzerinde tamamlandı. Frozen-head ResNet18, sabit
+91.000/19.500/19.500 manifestte 26 leaf için test accuracy `0,913026`, macro-F1 `0,912455` ve
+balanced accuracy `0,913026` üretti. Türetilmiş sekiz parent grup accuracy'si `0,997744` olsa da
+bu kanser var/yok veya evre doğruluğu değildir; üst veri-seti/organ-modalite grubu doğruluğudur.
+İndirilen artifact paketi hash, manifest, 19.500 benzersiz test tahmini ve metrik aritmetiğiyle
+yerelde doğrulandı. Ayrıntı:
+[`research/RESNET18_26LEAF_BASELINE_RESULT_TR.md`](research/RESNET18_26LEAF_BASELINE_RESULT_TR.md).
 
 ## GitHub kapsamı
 

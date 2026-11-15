@@ -1,0 +1,1059 @@
+Cihaz: cuda
+GPU: Tesla T4
+Deney türü: baseline
+Hedef seviyesi: subclass (26 sınıf)
+Kayıt sayısı: 130000 | train=91000, val=19500, test=19500
+Sınıflar: ['all_benign', 'all_early', 'all_pre', 'all_pro', 'brain_glioma', 'brain_menin', 'brain_tumor', 'breast_benign', 'breast_malignant', 'cervix_dyk', 'cervix_koc', 'cervix_mep', 'cervix_pab', 'cervix_sfi', 'colon_aca', 'colon_bnt', 'kidney_normal', 'kidney_tumor', 'lung_aca', 'lung_bnt', 'lung_scc', 'lymph_cll', 'lymph_fl', 'lymph_mcl', 'oral_normal', 'oral_scc']
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:431: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+Downloading: "https://download.pytorch.org/models/resnet18-f37072fd.pth" to /root/.cache/torch/hub/checkpoints/resnet18-f37072fd.pth
+
+  0%|          | 0.00/44.7M [00:00<?, ?B/s]
+ 17%|█▋        | 7.62M/44.7M [00:00<00:00, 79.7MB/s]
+ 61%|██████    | 27.1M/44.7M [00:00<00:00, 152MB/s] 
+100%|██████████| 44.7M/44.7M [00:00<00:00, 160MB/s]
+Epoch 1/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 1,
+  "train_loss": 0.5355977059432439,
+  "train_accuracy": 0.8094175824175824,
+  "train_macro_f1": 0.8088610311328251,
+  "val_loss": 0.28975798494903704,
+  "val_accuracy": 0.8922051282051282,
+  "val_macro_f1": 0.8916130659761989
+}
+Epoch 2/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 2,
+  "train_loss": 0.37537596423809344,
+  "train_accuracy": 0.8533406593406594,
+  "train_macro_f1": 0.8530549311593456,
+  "val_loss": 0.25479634447305055,
+  "val_accuracy": 0.901948717948718,
+  "val_macro_f1": 0.9016752354072561
+}
+Epoch 3/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 3,
+  "train_loss": 0.36079389142990115,
+  "train_accuracy": 0.858021978021978,
+  "train_macro_f1": 0.8577964241547955,
+  "val_loss": 0.24650355775291338,
+  "val_accuracy": 0.9052820512820513,
+  "val_macro_f1": 0.9047356014811451
+}
+Epoch 4/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 4,
+  "train_loss": 0.35755527389442526,
+  "train_accuracy": 0.8584395604395605,
+  "train_macro_f1": 0.8582649001965232,
+  "val_loss": 0.2541320873347517,
+  "val_accuracy": 0.8987692307692308,
+  "val_macro_f1": 0.8965892412300551
+}
+Epoch 5/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 5,
+  "train_loss": 0.3556357773555504,
+  "train_accuracy": 0.8598021978021978,
+  "train_macro_f1": 0.859599778749718,
+  "val_loss": 0.2518258128441058,
+  "val_accuracy": 0.8951282051282051,
+  "val_macro_f1": 0.8905505534486866
+}
+Epoch 6/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 6,
+  "train_loss": 0.35069447963316364,
+  "train_accuracy": 0.8611428571428571,
+  "train_macro_f1": 0.860918162185341,
+  "val_loss": 0.2477812292933082,
+  "val_accuracy": 0.8996923076923077,
+  "val_macro_f1": 0.8980022856866838
+}
+Epoch 7/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 7,
+  "train_loss": 0.3328278634312389,
+  "train_accuracy": 0.8672857142857143,
+  "train_macro_f1": 0.8670931622835553,
+  "val_loss": 0.21675325830947034,
+  "val_accuracy": 0.9156410256410257,
+  "val_macro_f1": 0.9152790459117983
+}
+Epoch 8/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 8,
+  "train_loss": 0.32702903425562513,
+  "train_accuracy": 0.8691318681318682,
+  "train_macro_f1": 0.8689347218416036,
+  "val_loss": 0.21794039781062674,
+  "val_accuracy": 0.9137948717948718,
+  "val_macro_f1": 0.9134260964915115
+}
+Epoch 9/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 9,
+  "train_loss": 0.32129019619868354,
+  "train_accuracy": 0.871978021978022,
+  "train_macro_f1": 0.871779440356411,
+  "val_loss": 0.21217474695136293,
+  "val_accuracy": 0.9181538461538462,
+  "val_macro_f1": 0.9177273209031045
+}
+Epoch 10/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 10,
+  "train_loss": 0.32073910514273485,
+  "train_accuracy": 0.871978021978022,
+  "train_macro_f1": 0.8717888117070693,
+  "val_loss": 0.20969445406399573,
+  "val_accuracy": 0.9174871794871795,
+  "val_macro_f1": 0.9173778931588519
+}
+Epoch 11/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 11,
+  "train_loss": 0.31803439512357606,
+  "train_accuracy": 0.8732747252747253,
+  "train_macro_f1": 0.8730955434329808,
+  "val_loss": 0.21404059397137892,
+  "val_accuracy": 0.9173333333333333,
+  "val_macro_f1": 0.9168507037613487
+}
+Epoch 12/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 12,
+  "train_loss": 0.3178736548633366,
+  "train_accuracy": 0.8722087912087912,
+  "train_macro_f1": 0.8720163556935666,
+  "val_loss": 0.22658455283624324,
+  "val_accuracy": 0.911025641025641,
+  "val_macro_f1": 0.9107149708787762
+}
+Epoch 13/15
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+  batch 50/2844
+  batch 100/2844
+  batch 150/2844
+  batch 200/2844
+  batch 250/2844
+  batch 300/2844
+  batch 350/2844
+  batch 400/2844
+  batch 450/2844
+  batch 500/2844
+  batch 550/2844
+  batch 600/2844
+  batch 650/2844
+  batch 700/2844
+  batch 750/2844
+  batch 800/2844
+  batch 850/2844
+  batch 900/2844
+  batch 950/2844
+  batch 1000/2844
+  batch 1050/2844
+  batch 1100/2844
+  batch 1150/2844
+  batch 1200/2844
+  batch 1250/2844
+  batch 1300/2844
+  batch 1350/2844
+  batch 1400/2844
+  batch 1450/2844
+  batch 1500/2844
+  batch 1550/2844
+  batch 1600/2844
+  batch 1650/2844
+  batch 1700/2844
+  batch 1750/2844
+  batch 1800/2844
+  batch 1850/2844
+  batch 1900/2844
+  batch 1950/2844
+  batch 2000/2844
+  batch 2050/2844
+  batch 2100/2844
+  batch 2150/2844
+  batch 2200/2844
+  batch 2250/2844
+  batch 2300/2844
+  batch 2350/2844
+  batch 2400/2844
+  batch 2450/2844
+  batch 2500/2844
+  batch 2550/2844
+  batch 2600/2844
+  batch 2650/2844
+  batch 2700/2844
+  batch 2750/2844
+  batch 2800/2844
+  batch 2844/2844
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+{
+  "epoch": 13,
+  "train_loss": 0.311683028113711,
+  "train_accuracy": 0.875065934065934,
+  "train_macro_f1": 0.8748468416067141,
+  "val_loss": 0.21419466583788968,
+  "val_accuracy": 0.9134358974358975,
+  "val_macro_f1": 0.9129111481930952
+}
+Erken durdurma: validation macro-F1 4 epoch boyunca iyilesmedi.
+/usr/local/lib/python3.13/dist-packages/torch/utils/data/dataloader.py:437: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+Test sonuçları:
+{
+  "experiment_type": "baseline",
+  "model": "resnet18",
+  "target_level": "subclass",
+  "loss": 0.21644027769322005,
+  "best_epoch": 9,
+  "best_validation_macro_f1": 0.9177273209031045,
+  "epochs_completed": 13,
+  "leaf_metrics": {
+    "accuracy": 0.913025641025641,
+    "macro_f1": 0.9124547963089866,
+    "balanced_accuracy": 0.913025641025641
+  },
+  "parent_metrics": {
+    "accuracy": 0.9977435897435898,
+    "macro_f1": 0.9967559156318221,
+    "balanced_accuracy": 0.9964611111111111,
+    "class_names": [
+      "ALL",
+      "Brain Cancer",
+      "Breast Cancer",
+      "Cervical Cancer",
+      "Kidney Cancer",
+      "Lung and Colon Cancer",
+      "Lymphoma",
+      "Oral Cancer"
+    ]
+  },
+  "class_names": [
+    "all_benign",
+    "all_early",
+    "all_pre",
+    "all_pro",
+    "brain_glioma",
+    "brain_menin",
+    "brain_tumor",
+    "breast_benign",
+    "breast_malignant",
+    "cervix_dyk",
+    "cervix_koc",
+    "cervix_mep",
+    "cervix_pab",
+    "cervix_sfi",
+    "colon_aca",
+    "colon_bnt",
+    "kidney_normal",
+    "kidney_tumor",
+    "lung_aca",
+    "lung_bnt",
+    "lung_scc",
+    "lymph_cll",
+    "lymph_fl",
+    "lymph_mcl",
+    "oral_normal",
+    "oral_scc"
+  ],
+  "dataset_root": "/content/NNGA_DATA/Multi Cancer/Multi Cancer",
+  "split_sizes": {
+    "train": 91000,
+    "val": 19500,
+    "test": 19500
+  },
+  "warning": "Metrics are educational and are not evidence of clinical validity.",
+  "split_manifest": {
+    "source": "/content/NNGA/research/splits/practical_leakage_reduced_split_v1.csv",
+    "sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171"
+  }
+}
+                  precision    recall  f1-score   support
+
+      all_benign       0.94      0.98      0.96       750
+       all_early       0.94      0.93      0.94       750
+         all_pre       0.98      0.96      0.97       750
+         all_pro       0.99      0.99      0.99       750
+    brain_glioma       0.97      0.93      0.95       750
+     brain_menin       0.91      0.87      0.89       750
+     brain_tumor       0.90      0.97      0.93       750
+   breast_benign       0.93      0.98      0.96       750
+breast_malignant       0.98      0.95      0.97       750
+      cervix_dyk       0.90      0.91      0.90       750
+      cervix_koc       0.86      0.88      0.87       750
+      cervix_mep       0.94      0.88      0.91       750
+      cervix_pab       0.99      0.99      0.99       750
+      cervix_sfi       0.95      0.97      0.96       750
+       colon_aca       0.98      0.99      0.98       750
+       colon_bnt       1.00      0.99      1.00       750
+   kidney_normal       0.98      0.95      0.96       750
+    kidney_tumor       0.95      0.98      0.96       750
+        lung_aca       0.94      0.91      0.92       750
+        lung_bnt       0.99      1.00      0.99       750
+        lung_scc       0.91      0.94      0.93       750
+       lymph_cll       0.73      0.86      0.79       750
+        lymph_fl       0.76      0.79      0.77       750
+       lymph_mcl       0.80      0.63      0.71       750
+     oral_normal       0.81      0.69      0.74       750
+        oral_scc       0.74      0.82      0.78       750
+
+        accuracy                           0.91     19500
+       macro avg       0.91      0.91      0.91     19500
+    weighted avg       0.91      0.91      0.91     19500
+
+Turetilmis 8 ust grup raporu:
+                       precision    recall  f1-score   support
+
+                  ALL       1.00      1.00      1.00      3000
+         Brain Cancer       1.00      1.00      1.00      2250
+        Breast Cancer       0.98      0.99      0.99      1500
+      Cervical Cancer       1.00      1.00      1.00      3750
+        Kidney Cancer       1.00      1.00      1.00      1500
+Lung and Colon Cancer       1.00      1.00      1.00      3750
+             Lymphoma       1.00      1.00      1.00      2250
+          Oral Cancer       1.00      0.98      0.99      1500
+
+             accuracy                           1.00     19500
+            macro avg       1.00      1.00      1.00     19500
+         weighted avg       1.00      1.00      1.00     19500
+
+Çıktı klasörü: /content/drive/MyDrive/NNGA_OUTPUTS/resnet18_26leaf_baseline_v1

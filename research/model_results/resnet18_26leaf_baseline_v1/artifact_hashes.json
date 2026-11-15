@@ -1,0 +1,50 @@
+{
+  "test_metrics.json": {
+    "sha256": "8143fab62c4bb81e192b0ef8cafcda79b683c2680ca471d829c42534a62c6be1",
+    "size_bytes": 1611
+  },
+  "history.csv": {
+    "sha256": "f8c53783f49c5ee86e990a37179a1ce5d5f511585be2418d43c8913fbe2e0efa",
+    "size_bytes": 1616
+  },
+  "classification_reports.json": {
+    "sha256": "972aa6aefc35c3e8b53104e071f589577d6c6c0d98752365ca2ebee078f2507d",
+    "size_bytes": 6071
+  },
+  "test_predictions.csv": {
+    "sha256": "f19431c6bfd2fc00129ddac8ab08d52a7ea6be100edf812b162869580a463bc9",
+    "size_bytes": 22264520
+  },
+  "leaf_confusion_matrix.png": {
+    "sha256": "6508a0da5b390cc6d14f85fcc61ab564d8ee1cc11e448ce5c7163afbad60ad92",
+    "size_bytes": 270584
+  },
+  "parent_confusion_matrix.png": {
+    "sha256": "faccc978dde28f6d9cab1f67d5edc650a72c87ea28978370e7f64f132d66c4cb",
+    "size_bytes": 143525
+  },
+  "learning_curves.png": {
+    "sha256": "aaa3a4157e247434ab1de9637d56e66e957482dd527b9d1ac8854c542e2af539",
+    "size_bytes": 118884
+  },
+  "split_manifest.csv": {
+    "sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171",
+    "size_bytes": 14492392
+  },
+  "run_config.json": {
+    "sha256": "ee5daa12772cd25b42d366dadceee743267d5a5e6821d8c18ca5ec101fd1154b",
+    "size_bytes": 671
+  },
+  "best_model.pth": {
+    "sha256": "20613069067825ea0dfa30e2242678b863cd0acd7b9be3c5b88f265d39285177",
+    "size_bytes": 44840395
+  },
+  "last_checkpoint.pth": {
+    "sha256": "3ded48f4850d9c3374abb976b70acc021a0b504a3776cdffe8094430d9018e6a",
+    "size_bytes": 44965467
+  },
+  "resnet18_26leaf_baseline_v1_console.log": {
+    "sha256": "ad8ef0f0d9ef2715809bb22a97a3cfc64a423b7d0543a7793d6d52c37bb70b2c",
+    "size_bytes": 35013
+  }
+}

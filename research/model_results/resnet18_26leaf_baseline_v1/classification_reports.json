@@ -1,0 +1,236 @@
+{
+  "leaf": {
+    "all_benign": {
+      "precision": 0.9396662387676509,
+      "recall": 0.976,
+      "f1-score": 0.9574885546108568,
+      "support": 750.0
+    },
+    "all_early": {
+      "precision": 0.9434724091520862,
+      "recall": 0.9346666666666666,
+      "f1-score": 0.9390488948425988,
+      "support": 750.0
+    },
+    "all_pre": {
+      "precision": 0.9835390946502057,
+      "recall": 0.956,
+      "f1-score": 0.9695740365111561,
+      "support": 750.0
+    },
+    "all_pro": {
+      "precision": 0.9933244325767691,
+      "recall": 0.992,
+      "f1-score": 0.9926617745163442,
+      "support": 750.0
+    },
+    "brain_glioma": {
+      "precision": 0.9654218533886584,
+      "recall": 0.9306666666666666,
+      "f1-score": 0.9477257298031229,
+      "support": 750.0
+    },
+    "brain_menin": {
+      "precision": 0.9129213483146067,
+      "recall": 0.8666666666666667,
+      "f1-score": 0.8891928864569083,
+      "support": 750.0
+    },
+    "brain_tumor": {
+      "precision": 0.8968058968058968,
+      "recall": 0.9733333333333334,
+      "f1-score": 0.9335038363171355,
+      "support": 750.0
+    },
+    "breast_benign": {
+      "precision": 0.9338422391857506,
+      "recall": 0.9786666666666667,
+      "f1-score": 0.9557291666666666,
+      "support": 750.0
+    },
+    "breast_malignant": {
+      "precision": 0.9834254143646409,
+      "recall": 0.9493333333333334,
+      "f1-score": 0.966078697421981,
+      "support": 750.0
+    },
+    "cervix_dyk": {
+      "precision": 0.8952879581151832,
+      "recall": 0.912,
+      "f1-score": 0.9035667107001321,
+      "support": 750.0
+    },
+    "cervix_koc": {
+      "precision": 0.8627450980392157,
+      "recall": 0.88,
+      "f1-score": 0.8712871287128713,
+      "support": 750.0
+    },
+    "cervix_mep": {
+      "precision": 0.9442857142857143,
+      "recall": 0.8813333333333333,
+      "f1-score": 0.9117241379310345,
+      "support": 750.0
+    },
+    "cervix_pab": {
+      "precision": 0.9893190921228304,
+      "recall": 0.988,
+      "f1-score": 0.9886591060707138,
+      "support": 750.0
+    },
+    "cervix_sfi": {
+      "precision": 0.9481193255512321,
+      "recall": 0.9746666666666667,
+      "f1-score": 0.9612097304404996,
+      "support": 750.0
+    },
+    "colon_aca": {
+      "precision": 0.9775725593667546,
+      "recall": 0.988,
+      "f1-score": 0.9827586206896551,
+      "support": 750.0
+    },
+    "colon_bnt": {
+      "precision": 0.9973226238286479,
+      "recall": 0.9933333333333333,
+      "f1-score": 0.9953239812959251,
+      "support": 750.0
+    },
+    "kidney_normal": {
+      "precision": 0.9752407152682255,
+      "recall": 0.9453333333333334,
+      "f1-score": 0.960054163845633,
+      "support": 750.0
+    },
+    "kidney_tumor": {
+      "precision": 0.9457364341085271,
+      "recall": 0.976,
+      "f1-score": 0.9606299212598425,
+      "support": 750.0
+    },
+    "lung_aca": {
+      "precision": 0.941908713692946,
+      "recall": 0.908,
+      "f1-score": 0.924643584521385,
+      "support": 750.0
+    },
+    "lung_bnt": {
+      "precision": 0.9894319682959049,
+      "recall": 0.9986666666666667,
+      "f1-score": 0.9940278699402787,
+      "support": 750.0
+    },
+    "lung_scc": {
+      "precision": 0.910025706940874,
+      "recall": 0.944,
+      "f1-score": 0.9267015706806283,
+      "support": 750.0
+    },
+    "lymph_cll": {
+      "precision": 0.7337883959044369,
+      "recall": 0.86,
+      "f1-score": 0.7918968692449355,
+      "support": 750.0
+    },
+    "lymph_fl": {
+      "precision": 0.756066411238825,
+      "recall": 0.7893333333333333,
+      "f1-score": 0.7723418134377038,
+      "support": 750.0
+    },
+    "lymph_mcl": {
+      "precision": 0.8030560271646859,
+      "recall": 0.6306666666666667,
+      "f1-score": 0.7064973861090366,
+      "support": 750.0
+    },
+    "oral_normal": {
+      "precision": 0.809076682316119,
+      "recall": 0.6893333333333334,
+      "f1-score": 0.7444204463642908,
+      "support": 750.0
+    },
+    "oral_scc": {
+      "precision": 0.7362768496420048,
+      "recall": 0.8226666666666667,
+      "f1-score": 0.7770780856423174,
+      "support": 750.0
+    },
+    "accuracy": 0.913025641025641,
+    "macro avg": {
+      "precision": 0.9141415078110919,
+      "recall": 0.913025641025641,
+      "f1-score": 0.9124547963089866,
+      "support": 19500.0
+    },
+    "weighted avg": {
+      "precision": 0.9141415078110919,
+      "recall": 0.913025641025641,
+      "f1-score": 0.9124547963089868,
+      "support": 19500.0
+    }
+  },
+  "parent": {
+    "ALL": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 3000.0
+    },
+    "Brain Cancer": {
+      "precision": 1.0,
+      "recall": 0.9995555555555555,
+      "f1-score": 0.9997777283840854,
+      "support": 2250.0
+    },
+    "Breast Cancer": {
+      "precision": 0.9847682119205298,
+      "recall": 0.9913333333333333,
+      "f1-score": 0.9880398671096345,
+      "support": 1500.0
+    },
+    "Cervical Cancer": {
+      "precision": 1.0,
+      "recall": 0.9997333333333334,
+      "f1-score": 0.9998666488865182,
+      "support": 3750.0
+    },
+    "Kidney Cancer": {
+      "precision": 0.9993337774816788,
+      "recall": 1.0,
+      "f1-score": 0.9996667777407531,
+      "support": 1500.0
+    },
+    "Lung and Colon Cancer": {
+      "precision": 0.996279564177518,
+      "recall": 0.9997333333333334,
+      "f1-score": 0.9980034606681751,
+      "support": 3750.0
+    },
+    "Lymphoma": {
+      "precision": 0.9995557529986673,
+      "recall": 1.0,
+      "f1-score": 0.9997778271495223,
+      "support": 2250.0
+    },
+    "Oral Cancer": {
+      "precision": 0.996614759647935,
+      "recall": 0.9813333333333333,
+      "f1-score": 0.9889150151158885,
+      "support": 1500.0
+    },
+    "accuracy": 0.9977435897435898,
+    "macro avg": {
+      "precision": 0.9970690082782911,
+      "recall": 0.996461111111111,
+      "f1-score": 0.9967559156318222,
+      "support": 19500.0
+    },
+    "weighted avg": {
+      "precision": 0.9977499453070723,
+      "recall": 0.9977435897435898,
+      "f1-score": 0.9977407897810324,
+      "support": 19500.0
+    }
+  }
+}

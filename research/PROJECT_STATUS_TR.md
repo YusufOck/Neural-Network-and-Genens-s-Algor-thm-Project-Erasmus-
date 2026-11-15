@@ -97,12 +97,12 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 
 | İş | Durum | Açıklama |
 |---|---|---|
-| Trainer altyapısı | Tamamlandı / tam eğitim başlamadı | 8/26 hedef ve dört mimari destekleniyor. Frozen practical manifest eğitim öncesi SHA-256 ile doğrulanıyor. 26 leaf tahminlerinden sekiz parent metriği, görüntü bazlı tahmin/olasılık CSV'si, iki seviyeli rapor/confusion matrix, öğrenme eğrileri, erken durdurma ve frozen-BatchNorm davranışı eklendi. Altyapı smoke testi geçti; 186/186 test başarılı. Smoke metriği final sonuç değildir. Ayrıntı: `research/TRAINER_HARDENING_V1_TR.md`. |
+| Trainer altyapısı | Tamamlandı / ilk tam koşuda doğrulandı | 8/26 hedef ve dört mimari destekleniyor. Frozen practical manifest eğitim öncesi SHA-256 ile doğrulanıyor. 26 leaf tahminlerinden sekiz parent metriği, görüntü bazlı tahmin/olasılık CSV'si, iki seviyeli rapor/confusion matrix, öğrenme eğrileri, erken durdurma ve frozen-BatchNorm davranışı ilk tam baseline'da çalıştı. Ayrıntı: `research/TRAINER_HARDENING_V1_TR.md`. |
 | SmallCNN smoke test | Smoke test tamamlandı | Yalnızca sistemin uçtan uca çalıştığını gösterir; performans sonucu değildir. |
 | ResNet18 8-grup pilotu | Pilot tamamlandı | Rastgele image-level split nedeniyle final sonuç değildir. |
 | DenseNet121 26-sınıf küçük reproduction | Pilot/reproduction tamamlandı | Küçük örnek ve rastgele split; final sonuç değildir. |
-| ResNet18 26-leaf tam baseline | Notebook hazır / eğitim başlamadı | Frozen split hash kontrolü, T4 ortam kontrolü, en fazla 15 epoch, validation macro-F1 checkpoint seçimi, patience=4 ve epoch-level resume içeren Colab notebook'u hazırlandı. Yerel resume smoke epoch 1'i tekrarlamadan epoch 2'ye geçti. Gerçek eğitim hücresi kilitli; henüz full metric yok. Ayrıntı: `research/RESNET18_26LEAF_BASELINE_PLAN_TR.md`. |
-| Adil model karşılaştırması | Başlamadı / ilk baseline bekleniyor | Sabit practical leakage-reduced split ve trainer kayıtları hazır. İlk tam koşu pretrained ResNet18 26-leaf baseline olacaktır. |
+| ResNet18 26-leaf tam baseline | Tamamlandı / artifact paketi yerelde doğrulandı | Pretrained frozen-head ResNet18, sabit split ve seed 42 ile 13 epoch çalıştı; epoch 9 validation macro-F1 ile seçildi. Test leaf accuracy `0,913026`, macro-F1 `0,912455`, balanced accuracy `0,913026`; parent accuracy `0,997744`. 19.500 benzersiz test tahmini, manifest hash'i ve iç artifact hash'leri doğrulandı. Parent sonucu klinik kanser doğruluğu değildir. Ayrıntı: `research/RESNET18_26LEAF_BASELINE_RESULT_TR.md`. |
+| Adil model karşılaştırması | İlk baseline tamamlandı / ikinci deney seçilecek | Bütün sonraki modeller aynı practical leakage-reduced manifesti kullanacak. Sıradaki karşılaştırma, baseline yorumu öğrenildikten sonra ayrıca onaylanacak; test seti hiperparametre seçmek için kullanılmayacak. |
 | Genetik algoritma | Başlamadı | Stabil baseline sonrasına bırakıldı. |
 | Grad-CAM | Başlamadı | Final/seçilmiş modellerden sonra. |
 | Rapor ve sunum | Başlamadı; kanıtlar birikiyor | Denetim raporları daha sonra ana rapora girdi olacak. |
