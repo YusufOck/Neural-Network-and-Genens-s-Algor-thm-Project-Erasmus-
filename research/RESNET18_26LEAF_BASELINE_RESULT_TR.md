@@ -1,7 +1,9 @@
 # ResNet18 26-Leaf Baseline Sonucu
 
-Tarih: 2026-11-15  
-Durum: Tam kapsamlı Colab/T4 koşusu tamamlandı ve indirilen artifact paketi yerelde doğrulandı.  
+Tarih: 2026-11-15
+
+Durum: Tam kapsamlı Colab/T4 koşusu tamamlandı ve indirilen artifact paketi yerelde doğrulandı.
+
 Deney türü: Raporlanabilir ilk sabit-split baseline; klinik doğrulama değildir.
 
 ## Deney sözleşmesi
