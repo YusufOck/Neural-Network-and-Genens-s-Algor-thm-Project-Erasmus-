@@ -314,6 +314,14 @@ bu kanser var/yok veya evre doğruluğu değildir; üst veri-seti/organ-modalite
 yerelde doğrulandı. Ayrıntı:
 [`research/RESNET18_26LEAF_BASELINE_RESULT_TR.md`](research/RESNET18_26LEAF_BASELINE_RESULT_TR.md).
 
+Aynı sabit split üzerinde sıfırdan eğitilen SmallCNN karşılaştırması 2026-11-16 tarihinde
+tamamlandı. Epoch 25 validation macro-F1 ile seçildi; test leaf accuracy `0,955846`, macro-F1
+`0,955916` ve balanced accuracy `0,955846` oldu. Aynı 19.500 test görüntüsünde frozen-head
+ResNet18'e göre accuracy farkı `+4,282`, macro-F1 farkı `+4,346` yüzde puandır. Bu veri-setine özgü
+bir karşılaştırmadır; klinik tanı veya genel mimari üstünlük iddiası değildir. Paket hash'leri,
+split, tahminler ve metrik aritmetiği yerelde doğrulandı. Ayrıntı:
+[`research/SMALLCNN_26LEAF_BASELINE_RESULT_TR.md`](research/SMALLCNN_26LEAF_BASELINE_RESULT_TR.md).
+
 ## GitHub kapsamı
 
 Depoya kod, yapılandırma ve araştırma notları gönderilir. Aşağıdakiler yerelde tutulur:

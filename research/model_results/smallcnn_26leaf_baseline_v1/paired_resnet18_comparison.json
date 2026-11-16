@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "status": "verified_posthoc_paired_comparison",
+  "comparison_date": "2026-11-16",
+  "same_test_paths": true,
+  "test_rows": 19500,
+  "smallcnn_review_package_sha256": "9d5294332a25b9fd4909c6f1c9964f795ff549abd639b85ac0a32a9a2500eb33",
+  "resnet18_review_package_sha256": "e7e4e40a081af1fb2afdb261e4cb4169e51f91741322ad38717106651a79c24c",
+  "leaf_metrics": {
+    "smallcnn_accuracy": 0.9558461538461539,
+    "resnet18_accuracy": 0.913025641025641,
+    "accuracy_difference": 0.0428205128205129,
+    "smallcnn_macro_f1": 0.9559161452741036,
+    "resnet18_macro_f1": 0.9124547963089866,
+    "macro_f1_difference": 0.043461348965117
+  },
+  "paired_leaf_correctness": {
+    "both_correct": 17288,
+    "both_wrong": 345,
+    "smallcnn_only_correct": 1351,
+    "resnet18_only_correct": 516,
+    "smallcnn_net_correct_gain": 835,
+    "mcnemar_exact_two_sided_p": 6.09e-86,
+    "mcnemar_log10_p": -85.215
+  },
+  "parent_correctness": {
+    "smallcnn_only_correct": 41,
+    "resnet18_only_correct": 12,
+    "mcnemar_exact_two_sided_p": 0.0000817
+  },
+  "interpretation_limit": "Post-hoc same-test paired comparison; not proof of clinical or cross-dataset generalization."
+}

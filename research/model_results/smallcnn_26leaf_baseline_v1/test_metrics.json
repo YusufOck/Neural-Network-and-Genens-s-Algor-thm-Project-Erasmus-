@@ -1,0 +1,68 @@
+{
+  "experiment_type": "baseline",
+  "model": "small_cnn",
+  "target_level": "subclass",
+  "loss": 0.12207853088176882,
+  "best_epoch": 25,
+  "best_validation_macro_f1": 0.9555660466026159,
+  "epochs_completed": 25,
+  "leaf_metrics": {
+    "accuracy": 0.9558461538461539,
+    "macro_f1": 0.9559161452741036,
+    "balanced_accuracy": 0.9558461538461539
+  },
+  "parent_metrics": {
+    "accuracy": 0.9992307692307693,
+    "macro_f1": 0.9989836814621866,
+    "balanced_accuracy": 0.9988,
+    "class_names": [
+      "ALL",
+      "Brain Cancer",
+      "Breast Cancer",
+      "Cervical Cancer",
+      "Kidney Cancer",
+      "Lung and Colon Cancer",
+      "Lymphoma",
+      "Oral Cancer"
+    ]
+  },
+  "class_names": [
+    "all_benign",
+    "all_early",
+    "all_pre",
+    "all_pro",
+    "brain_glioma",
+    "brain_menin",
+    "brain_tumor",
+    "breast_benign",
+    "breast_malignant",
+    "cervix_dyk",
+    "cervix_koc",
+    "cervix_mep",
+    "cervix_pab",
+    "cervix_sfi",
+    "colon_aca",
+    "colon_bnt",
+    "kidney_normal",
+    "kidney_tumor",
+    "lung_aca",
+    "lung_bnt",
+    "lung_scc",
+    "lymph_cll",
+    "lymph_fl",
+    "lymph_mcl",
+    "oral_normal",
+    "oral_scc"
+  ],
+  "dataset_root": "/content/NNGA_DATA/Multi Cancer/Multi Cancer",
+  "split_sizes": {
+    "train": 91000,
+    "val": 19500,
+    "test": 19500
+  },
+  "warning": "Metrics are educational and are not evidence of clinical validity.",
+  "split_manifest": {
+    "source": "/content/NNGA/research/splits/practical_leakage_reduced_split_v1.csv",
+    "sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171"
+  }
+}

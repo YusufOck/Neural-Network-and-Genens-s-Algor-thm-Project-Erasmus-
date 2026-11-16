@@ -1,0 +1,57 @@
+{
+  "best_model.pth": {
+    "sha256": "66b8858d202c83980166fc784d95d9a175e2c217dfccabb8845544d1efba224e",
+    "size_bytes": 399605,
+    "included_in_review_package": false
+  },
+  "last_checkpoint.pth": {
+    "sha256": "e73d6400588366be25c8916d9e210c9adc468594a80ee45757d74c2bd8828344",
+    "size_bytes": 1205254,
+    "included_in_review_package": false
+  },
+  "history.csv": {
+    "sha256": "4930a11f56560be84dada474a32386b29c903557b56c47de966d2f5d2d276425",
+    "size_bytes": 3036,
+    "included_in_review_package": true
+  },
+  "test_metrics.json": {
+    "sha256": "ef622bcff313e1f2c06f36b93a508cfc850c87573b713e0bcdc989974ab08cae",
+    "size_bytes": 1603,
+    "included_in_review_package": true
+  },
+  "test_predictions.csv": {
+    "sha256": "d92ee05a143b7a74328f0e462630e55847cf4c1b51a7f0807527ba943d97667c",
+    "size_bytes": 22265002,
+    "included_in_review_package": true
+  },
+  "classification_reports.json": {
+    "sha256": "59f94e25d5a7772cc20d6e4dd59ec024126b3b559a7753ad9709db611d85a654",
+    "size_bytes": 6013,
+    "included_in_review_package": true
+  },
+  "leaf_confusion_matrix.png": {
+    "sha256": "b12c9777e7783bf471878bbf7e013a66fc3ff4c0ed406f29c7eea68c42780321",
+    "size_bytes": 259052,
+    "included_in_review_package": true
+  },
+  "parent_confusion_matrix.png": {
+    "sha256": "8eeeda70c7250147c54ad37c7fcb7c2f6c910c0c11fc3388e77dcc8acf22fe49",
+    "size_bytes": 142453,
+    "included_in_review_package": true
+  },
+  "learning_curves.png": {
+    "sha256": "60ec3fca01671e3faa88cc2f1127a2b6f50a75ee1ace2bbe6910d84d2e1bcf0d",
+    "size_bytes": 138284,
+    "included_in_review_package": true
+  },
+  "split_manifest.csv": {
+    "sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171",
+    "size_bytes": 14492392,
+    "included_in_review_package": true
+  },
+  "run_config.json": {
+    "sha256": "7042b2a09d7a2c38f1bf4622f2118013b1b89b9db42f1228bf0cd13e7bcc44d0",
+    "size_bytes": 672,
+    "included_in_review_package": true
+  }
+}

@@ -36,6 +36,10 @@ class SmallCNNBaselineNotebookTests(unittest.TestCase):
         self.assertIn("command.append('--resume')", self.code)
         self.assertIn("not RESUME_RUN", self.code)
         self.assertIn("log_mode = 'a' if RESUME_RUN else 'w'", self.code)
+        self.assertIn("COMPLETED_RUN = all", self.code)
+        self.assertNotIn(
+            "assert not (OUTPUT_DIR / 'test_metrics.json').exists()", self.code
+        )
 
     def test_frozen_smallcnn_contract_is_explicit(self) -> None:
         required_fragments = (
@@ -73,6 +77,7 @@ class SmallCNNBaselineNotebookTests(unittest.TestCase):
             "learning_curves.png",
             "split_manifest.csv",
             "artifact_hashes.json",
+            "smallcnn_26leaf_baseline_v1_console.log",
         ):
             self.assertIn(artifact, self.code)
 

@@ -1,0 +1,23 @@
+{
+  "data_dir": "/content/NNGA_DATA/Multi Cancer/Multi Cancer",
+  "output_dir": "/content/drive/MyDrive/NNGA_OUTPUTS/smallcnn_26leaf_baseline_v1",
+  "model": "small_cnn",
+  "target_level": "subclass",
+  "epochs": 25,
+  "batch_size": 32,
+  "image_size": 224,
+  "normalization": "imagenet",
+  "augmentation": "minimal",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "max_per_class": null,
+  "split_manifest": "/content/NNGA/research/splits/practical_leakage_reduced_split_v1.csv",
+  "num_workers": 4,
+  "seed": 42,
+  "early_stopping_patience": 5,
+  "pretrained": false,
+  "fine_tune": false,
+  "experiment_type": "baseline",
+  "smoke_test": false,
+  "resume": true
+}
