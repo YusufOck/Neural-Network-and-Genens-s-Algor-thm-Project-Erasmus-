@@ -158,6 +158,19 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Ayni output klasorundeki last_checkpoint.pth dosyasindan devam et",
     )
+    parser.add_argument(
+        "--init-checkpoint",
+        default=None,
+        help=(
+            "Yeni bir deneyin model agirliklarini bu best_model.pth dosyasindan baslatir; "
+            "optimizer/history tasinmaz"
+        ),
+    )
+    parser.add_argument(
+        "--init-checkpoint-sha256",
+        default=None,
+        help="Init checkpoint icin beklenen SHA-256; verilirse yuklemeden once zorunlu dogrulanir",
+    )
     return parser.parse_args()
 
 
@@ -360,6 +373,39 @@ def save_last_checkpoint(path: Path, payload: dict) -> None:
     temporary.replace(path)
 
 
+def validate_initial_checkpoint(
+    checkpoint_path: Path,
+    expected_sha256: str | None,
+    expected_model: str,
+    expected_target_level: str,
+    expected_class_names: Sequence[str],
+) -> tuple[dict, str]:
+    """Validate a prior best checkpoint before it initializes a new experiment."""
+
+    if not checkpoint_path.is_file():
+        raise FileNotFoundError(f"Init checkpoint bulunamadi: {checkpoint_path}")
+    actual_sha256 = sha256_file(checkpoint_path)
+    if expected_sha256 and actual_sha256 != expected_sha256.lower():
+        raise ValueError(
+            "Init checkpoint SHA-256 beklenen degerle eslesmiyor: "
+            f"expected={expected_sha256.lower()}, actual={actual_sha256}"
+        )
+    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
+    if "model_state_dict" not in checkpoint:
+        raise ValueError("Init checkpoint model_state_dict icermiyor")
+    checkpoint_class_names = checkpoint.get("class_names")
+    if checkpoint_class_names != list(expected_class_names):
+        raise ValueError("Init checkpoint sinif sirasi mevcut deneyle eslesmiyor")
+    checkpoint_args = checkpoint.get("args")
+    if not isinstance(checkpoint_args, dict):
+        raise ValueError("Init checkpoint deney argumanlarini icermiyor")
+    if checkpoint_args.get("model") != expected_model:
+        raise ValueError("Init checkpoint model mimarisi mevcut deneyle eslesmiyor")
+    if checkpoint_args.get("target_level") != expected_target_level:
+        raise ValueError("Init checkpoint hedef seviyesi mevcut deneyle eslesmiyor")
+    return checkpoint, actual_sha256
+
+
 def main() -> None:
     args = parse_args()
     if args.smoke_test:
@@ -453,6 +499,33 @@ def main() -> None:
     }
 
     model = build_model(args.model, len(class_names), args.pretrained, args.fine_tune).to(device)
+    initialization = {
+        "type": "default_model_initialization",
+        "checkpoint_sha256": None,
+    }
+    initial_checkpoint = None
+    if args.init_checkpoint:
+        init_checkpoint_path = Path(args.init_checkpoint).resolve()
+        initial_checkpoint, init_checkpoint_sha256 = validate_initial_checkpoint(
+            init_checkpoint_path,
+            args.init_checkpoint_sha256,
+            args.model,
+            args.target_level,
+            class_names,
+        )
+        initialization = {
+            "type": "prior_best_checkpoint",
+            "checkpoint_path": str(init_checkpoint_path),
+            "checkpoint_sha256": init_checkpoint_sha256,
+        }
+        if not args.resume:
+            model.load_state_dict(initial_checkpoint["model_state_dict"], strict=True)
+            print(
+                "Yeni deney agirliklari onceki best checkpoint'ten baslatildi: "
+                f"{init_checkpoint_sha256}"
+            )
+    elif args.init_checkpoint_sha256:
+        raise ValueError("--init-checkpoint-sha256 icin --init-checkpoint de verilmelidir")
     criterion = nn.CrossEntropyLoss(
         weight=class_weight_tensor(
             train_records, class_to_index, args.target_level, device
@@ -487,6 +560,7 @@ def main() -> None:
         "batch_size": args.batch_size,
         "seed": args.seed,
         "split_manifest_sha256": manifest_sha256,
+        "init_checkpoint_sha256": initialization["checkpoint_sha256"],
     }
     if args.resume:
         if not last_path.is_file():
@@ -607,6 +681,11 @@ def main() -> None:
         "class_names": class_names,
         "dataset_root": str(dataset_root),
         "split_sizes": {name: len(dataset) for name, dataset in datasets.items()},
+        "initialization": initialization,
+        "trainable_parameter_count": sum(
+            parameter.numel() for parameter in model.parameters() if parameter.requires_grad
+        ),
+        "total_parameter_count": sum(parameter.numel() for parameter in model.parameters()),
         "warning": "Metrics are educational and are not evidence of clinical validity.",
     }
 

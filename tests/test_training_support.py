@@ -5,10 +5,12 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import torch
 from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
+from torchvision import models
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +25,7 @@ from training_support import (  # noqa: E402
     sha256_file,
     write_prediction_csv,
 )
-from train import run_epoch  # noqa: E402
+from train import build_model, run_epoch, validate_initial_checkpoint  # noqa: E402
 
 
 class TrainingSupportTests(unittest.TestCase):
@@ -104,6 +106,61 @@ class TrainingSupportTests(unittest.TestCase):
         self.assertEqual(result["record_indices"], [7, 4])
         self.assertEqual(len(result["probabilities"]), 2)
         self.assertAlmostEqual(sum(result["probabilities"][0]), 1.0, places=6)
+
+    def test_initial_checkpoint_is_hash_and_contract_validated(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "best_model.pth"
+            source_model = nn.Linear(3, 2)
+            torch.save(
+                {
+                    "model_state_dict": source_model.state_dict(),
+                    "class_names": ["a", "b"],
+                    "args": {"model": "linear", "target_level": "subclass"},
+                },
+                path,
+            )
+            expected_hash = sha256_file(path)
+            checkpoint, actual_hash = validate_initial_checkpoint(
+                path,
+                expected_hash,
+                "linear",
+                "subclass",
+                ["a", "b"],
+            )
+            self.assertEqual(actual_hash, expected_hash)
+            self.assertIn("model_state_dict", checkpoint)
+            with self.assertRaisesRegex(ValueError, "SHA-256"):
+                validate_initial_checkpoint(
+                    path, "0" * 64, "linear", "subclass", ["a", "b"]
+                )
+            with self.assertRaisesRegex(ValueError, "sinif sirasi"):
+                validate_initial_checkpoint(
+                    path, expected_hash, "linear", "subclass", ["b", "a"]
+                )
+
+    def test_resnet18_last_block_fine_tuning_only_unfreezes_layer4_and_head(self) -> None:
+        original_resnet18 = models.resnet18
+
+        def local_resnet18(*, weights):
+            return original_resnet18(weights=None)
+
+        with patch("train.models.resnet18", side_effect=local_resnet18):
+            model = build_model("resnet18", 26, pretrained=True, fine_tune=True)
+        trainable_names = {
+            name for name, parameter in model.named_parameters() if parameter.requires_grad
+        }
+        self.assertTrue(any(name.startswith("layer4.") for name in trainable_names))
+        self.assertTrue(any(name.startswith("fc.") for name in trainable_names))
+        self.assertFalse(any(name.startswith("layer3.") for name in trainable_names))
+        self.assertFalse(any(name.startswith("conv1.") for name in trainable_names))
+        self.assertEqual(
+            sum(
+                parameter.numel()
+                for parameter in model.parameters()
+                if parameter.requires_grad
+            ),
+            8_407_066,
+        )
 
 
 if __name__ == "__main__":
