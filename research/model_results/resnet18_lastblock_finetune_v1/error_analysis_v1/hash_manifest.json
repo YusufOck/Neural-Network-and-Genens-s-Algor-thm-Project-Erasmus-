@@ -1,7 +1,7 @@
 {
   "contact_sheet_index.csv": {
-    "sha256": "b2f759588e35af8cfb26682b1dc948a813b76aa3cb52a55d5d0ae91d5b6b12d5",
-    "size_bytes": 4002
+    "sha256": "cd1e72c4b0c5dfade286fbf5db163eacf3b11e41b7ef350f113a3febb44655ef",
+    "size_bytes": 3932
   },
   "contact_sheets/error_sheet_001.png": {
     "sha256": "841059e320f7c1a4153e73778d229f86e7c208424af1cf4ba912409e2c1042b8",
@@ -52,19 +52,19 @@
     "size_bytes": 309934
   },
   "error_rows.csv": {
-    "sha256": "a607573e91aabfbda093afd8d38d60b9e3a62e9b3f68dd79f3ed3df2acdfa966",
-    "size_bytes": 81018
+    "sha256": "0d81e81694c65c144c51797f5b69e2274b99d02ff272c3254c8532f84e9754b0",
+    "size_bytes": 80948
   },
   "reliability_bins.csv": {
-    "sha256": "4794a23cf2acb974f13d3226196f4418d2e52b7b42870aedc0a83373ad7bf6bb",
-    "size_bytes": 1306
+    "sha256": "a4e2f34cd0eafde6e7e5b7fe448f484c2f1acdd75032fc2683cdc8780c9af6e5",
+    "size_bytes": 1290
   },
   "reliability_diagram.png": {
     "sha256": "fdff7b9f74176ea222470ea8b5a74bc0754b7f5dd104363bd715a6b3d366296b",
     "size_bytes": 67399
   },
   "summary.json": {
-    "sha256": "b14642939f3b859763332490873e277a724ecd56c935753536b7780050b85655",
-    "size_bytes": 4100
+    "sha256": "5e0c9931f0c44af9e56a6959e9fbff6eedbf664440eda55d5cd7b05d2e33ee57",
+    "size_bytes": 3955
   }
 }

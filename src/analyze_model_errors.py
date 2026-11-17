@@ -273,9 +273,17 @@ def write_csv(path: Path, rows: Sequence[dict]) -> None:
     if not rows:
         raise ValueError(f"Bos CSV yazilamaz: {path}")
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(
+            handle, fieldnames=list(rows[0]), lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(rows)
+
+
+def write_json(path: Path, value: dict) -> None:
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        json.dump(value, handle, indent=2, ensure_ascii=False)
+        handle.write("\n")
 
 
 def save_reliability_plot(calibration_rows: Sequence[dict], output_path: Path) -> None:
@@ -415,13 +423,9 @@ def analyze(
             "This audit does not remove residual unknown near-duplicate or modality shortcut risk.",
         ],
     }
-    (output_dir / "summary.json").write_text(
-        json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
-    )
+    write_json(output_dir / "summary.json", summary)
     hash_manifest = build_hash_manifest(output_dir)
-    (output_dir / "hash_manifest.json").write_text(
-        json.dumps(hash_manifest, indent=2, ensure_ascii=False), encoding="utf-8"
-    )
+    write_json(output_dir / "hash_manifest.json", hash_manifest)
     return summary
 
 

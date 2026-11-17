@@ -109,6 +109,14 @@ class AnalyzeModelErrorsTests(unittest.TestCase):
             self.assertTrue((output / "contact_sheets/error_sheet_001.png").is_file())
             self.assertTrue((output / "reliability_diagram.png").is_file())
             self.assertTrue((output / "hash_manifest.json").is_file())
+            for relative in (
+                "error_rows.csv",
+                "contact_sheet_index.csv",
+                "reliability_bins.csv",
+                "summary.json",
+                "hash_manifest.json",
+            ):
+                self.assertNotIn(b"\r\n", (output / relative).read_bytes())
             with (output / "error_rows.csv").open(encoding="utf-8", newline="") as handle:
                 errors = list(csv.DictReader(handle))
             self.assertEqual(errors[0]["priority_reason"], "cross_parent_error")
