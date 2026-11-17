@@ -166,7 +166,10 @@ korunmalıdır.
 
 ## Sonraki kontrollü adım
 
-Yeni mimariyi otomatik başlatmak yerine önce 69 hatanın, özellikle oral çiftlerinin ve yüksek
-confidence hatalarının örnekleri incelenmelidir. Ardından seçilecek modeller için Grad-CAM ve
-confidence/calibration analizi hazırlanabilir. DenseNet121/EfficientNet-B0 veya GA deneyi ancak
-ayrı hipotez, bütçe ve onayla başlatılmalıdır.
+69 hata ve test-seti kalibrasyonu artık salt-okunur audit ile incelendi. Hataların 34'ü oral
+normal/SCC arasındadır; 23 yanlış >=0,90, yedi yanlış >=0,99 confidence taşır. ECE `0,001032`,
+top-2 accuracy `0,999949` ölçüldü; global ECE'nin kolay ve çok yüksek-confidence örneklerce
+baskılandığı ayrıca kaydedildi. Ayrıntı: `research/RESNET18_LASTBLOCK_ERROR_ANALYSIS_V1_TR.md`.
+
+Bir sonraki kontrollü adım, örnekleri önceden dondurulmuş bir Grad-CAM audit'i tasarlamaktır.
+DenseNet121/EfficientNet-B0 veya GA deneyi ancak ayrı hipotez, bütçe ve onayla başlatılmalıdır.

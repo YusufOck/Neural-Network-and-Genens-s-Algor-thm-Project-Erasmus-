@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "status": "model_error_analysis_v1_complete",
+  "analysis_type": "read_only_post_training_error_and_calibration_audit",
+  "not_model_training": true,
+  "input": {
+    "review_package": "C:\\Users\\mehmet\\Downloads\\resnet18_lastblock_finetune_v1_review_package.zip",
+    "review_package_sha256": "702e1b019b64f8fb2e97a85fa409978ce6c70302bab5d17c8c0cb7fe7c74456f",
+    "dataset_root": "C:\\Users\\mehmet\\Desktop\\erasmus_ders\\NNGA\\archive\\Multi Cancer\\Multi Cancer",
+    "prediction_rows": 19500,
+    "class_count": 26
+  },
+  "model_result": {
+    "best_epoch": 11,
+    "leaf_metrics": {
+      "accuracy": 0.9964615384615385,
+      "macro_f1": 0.9964624118758975,
+      "balanced_accuracy": 0.9964615384615385
+    },
+    "parent_metrics": {
+      "accuracy": 0.9998974358974358,
+      "macro_f1": 0.9998583449950755,
+      "balanced_accuracy": 0.9998833333333333,
+      "class_names": [
+        "ALL",
+        "Brain Cancer",
+        "Breast Cancer",
+        "Cervical Cancer",
+        "Kidney Cancer",
+        "Lung and Colon Cancer",
+        "Lymphoma",
+        "Oral Cancer"
+      ]
+    }
+  },
+  "errors": {
+    "leaf_error_count": 69,
+    "parent_error_count": 2,
+    "leaf_wrong_parent_correct_count": 67,
+    "contact_sheet_count": 12,
+    "top_leaf_confusions": [
+      {
+        "true_leaf": "oral_normal",
+        "predicted_leaf": "oral_scc",
+        "count": 18
+      },
+      {
+        "true_leaf": "oral_scc",
+        "predicted_leaf": "oral_normal",
+        "count": 16
+      },
+      {
+        "true_leaf": "breast_benign",
+        "predicted_leaf": "breast_malignant",
+        "count": 7
+      },
+      {
+        "true_leaf": "lymph_mcl",
+        "predicted_leaf": "lymph_cll",
+        "count": 5
+      },
+      {
+        "true_leaf": "brain_glioma",
+        "predicted_leaf": "brain_menin",
+        "count": 4
+      },
+      {
+        "true_leaf": "brain_menin",
+        "predicted_leaf": "brain_tumor",
+        "count": 4
+      },
+      {
+        "true_leaf": "lung_scc",
+        "predicted_leaf": "lung_aca",
+        "count": 3
+      },
+      {
+        "true_leaf": "lymph_cll",
+        "predicted_leaf": "lymph_mcl",
+        "count": 3
+      },
+      {
+        "true_leaf": "brain_tumor",
+        "predicted_leaf": "brain_menin",
+        "count": 3
+      },
+      {
+        "true_leaf": "lung_scc",
+        "predicted_leaf": "breast_malignant",
+        "count": 1
+      },
+      {
+        "true_leaf": "breast_benign",
+        "predicted_leaf": "oral_normal",
+        "count": 1
+      },
+      {
+        "true_leaf": "cervix_mep",
+        "predicted_leaf": "cervix_koc",
+        "count": 1
+      },
+      {
+        "true_leaf": "breast_malignant",
+        "predicted_leaf": "breast_benign",
+        "count": 1
+      },
+      {
+        "true_leaf": "cervix_sfi",
+        "predicted_leaf": "cervix_koc",
+        "count": 1
+      },
+      {
+        "true_leaf": "lung_aca",
+        "predicted_leaf": "lung_scc",
+        "count": 1
+      }
+    ],
+    "cross_parent_confusions": [
+      {
+        "true_parent": "Lung and Colon Cancer",
+        "predicted_parent": "Breast Cancer",
+        "count": 1
+      },
+      {
+        "true_parent": "Breast Cancer",
+        "predicted_parent": "Oral Cancer",
+        "count": 1
+      }
+    ]
+  },
+  "calibration": {
+    "bin_count": 15,
+    "expected_calibration_error": 0.0010316914075459227,
+    "negative_log_likelihood": 0.010892514678499573,
+    "multiclass_brier_score": 0.005629716504006977,
+    "top2_accuracy": 0.999948717948718,
+    "mean_confidence_correct": 0.9976816135067302,
+    "mean_confidence_error": 0.7914090173831885,
+    "error_confidence_at_least_0_90": 23,
+    "error_confidence_at_least_0_99": 7
+  },
+  "limitations": [
+    "Calibration is measured on the already-used shared benchmark test set.",
+    "Confidence is not clinical certainty.",
+    "This audit does not remove residual unknown near-duplicate or modality shortcut risk."
+  ]
+}

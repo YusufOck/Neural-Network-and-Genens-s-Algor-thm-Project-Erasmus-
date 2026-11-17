@@ -1,0 +1,70 @@
+{
+  "contact_sheet_index.csv": {
+    "sha256": "b2f759588e35af8cfb26682b1dc948a813b76aa3cb52a55d5d0ae91d5b6b12d5",
+    "size_bytes": 4002
+  },
+  "contact_sheets/error_sheet_001.png": {
+    "sha256": "841059e320f7c1a4153e73778d229f86e7c208424af1cf4ba912409e2c1042b8",
+    "size_bytes": 646520
+  },
+  "contact_sheets/error_sheet_002.png": {
+    "sha256": "b7bc071f30a1550e1739c9157f1464796d8478a456f14b5e7453952099ecc92b",
+    "size_bytes": 749377
+  },
+  "contact_sheets/error_sheet_003.png": {
+    "sha256": "46858ed289bd85fdf3a0ddb782aa108c6b37484f37d04ea7f2ed20b5369a2b4a",
+    "size_bytes": 688554
+  },
+  "contact_sheets/error_sheet_004.png": {
+    "sha256": "e9cf9d834d8bd82e18d559dd478aee0dfb9c3d14247bc037c85e1d059f473d86",
+    "size_bytes": 763601
+  },
+  "contact_sheets/error_sheet_005.png": {
+    "sha256": "20db5450426f5a85510e6a6fec5d0a130d44e81a0aff43ab26a13287eddf2d35",
+    "size_bytes": 830590
+  },
+  "contact_sheets/error_sheet_006.png": {
+    "sha256": "0e4c6df372da174c0c8603e3b8ddd3e43044ea5fb26eb159ce266d581fbfcbb1",
+    "size_bytes": 800025
+  },
+  "contact_sheets/error_sheet_007.png": {
+    "sha256": "706e30e1aad9c287c30549e5c85c3713336291bde8d4295e243c34f2f7bab6c6",
+    "size_bytes": 805408
+  },
+  "contact_sheets/error_sheet_008.png": {
+    "sha256": "48f09ba8c0cb2f7cfb7e11d94ae188dd9b8e94d1583161dbdf57598141aa7f12",
+    "size_bytes": 792140
+  },
+  "contact_sheets/error_sheet_009.png": {
+    "sha256": "5371c1101ab3a138b51f0bc1501150a45477320ee40fca9c0c8b2308b384dc13",
+    "size_bytes": 871457
+  },
+  "contact_sheets/error_sheet_010.png": {
+    "sha256": "a1e97ef9ddfa0011aac909b27dedddb24ff5a5246e9d91bc00484435ca9ceb7b",
+    "size_bytes": 759691
+  },
+  "contact_sheets/error_sheet_011.png": {
+    "sha256": "a2c39371c6dc44b1e15c13a27087a22b0951b5040b242767bb102ebd1b8f7731",
+    "size_bytes": 813011
+  },
+  "contact_sheets/error_sheet_012.png": {
+    "sha256": "57b6c5dbb0d0ea40970cd799a548157685562a31d640d35fcaf703b4cde1696d",
+    "size_bytes": 309934
+  },
+  "error_rows.csv": {
+    "sha256": "a607573e91aabfbda093afd8d38d60b9e3a62e9b3f68dd79f3ed3df2acdfa966",
+    "size_bytes": 81018
+  },
+  "reliability_bins.csv": {
+    "sha256": "4794a23cf2acb974f13d3226196f4418d2e52b7b42870aedc0a83373ad7bf6bb",
+    "size_bytes": 1306
+  },
+  "reliability_diagram.png": {
+    "sha256": "fdff7b9f74176ea222470ea8b5a74bc0754b7f5dd104363bd715a6b3d366296b",
+    "size_bytes": 67399
+  },
+  "summary.json": {
+    "sha256": "b14642939f3b859763332490873e277a724ecd56c935753536b7780050b85655",
+    "size_bytes": 4100
+  }
+}
