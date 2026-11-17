@@ -1,7 +1,8 @@
 # ResNet18 Last-Block Fine-Tuning Kontrollü Ablation Planı
 
 Tarih: 2026-11-17  
-Durum: **Kod, kilitli Colab notebook'u ve doğrulama testleri hazır; tam eğitim başlatılmadı.**
+Durum: **Plan uygulandı; tam eğitim ve bağımsız artifact doğrulaması tamamlandı.** Sonuç:
+`research/RESNET18_LASTBLOCK_FINETUNE_RESULT_TR.md`.
 
 ## Araştırma sorusu
 

@@ -103,8 +103,8 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
 | DenseNet121 26-sınıf küçük reproduction | Pilot/reproduction tamamlandı | Küçük örnek ve rastgele split; final sonuç değildir. |
 | ResNet18 26-leaf tam baseline | Tamamlandı / artifact paketi yerelde doğrulandı | Pretrained frozen-head ResNet18, sabit split ve seed 42 ile 13 epoch çalıştı; epoch 9 validation macro-F1 ile seçildi. Test leaf accuracy `0,913026`, macro-F1 `0,912455`, balanced accuracy `0,913026`; parent accuracy `0,997744`. 19.500 benzersiz test tahmini, manifest hash'i ve iç artifact hash'leri doğrulandı. Parent sonucu klinik kanser doğruluğu değildir. Ayrıntı: `research/RESNET18_26LEAF_BASELINE_RESULT_TR.md`. |
 | SmallCNN 26-leaf baseline | Tamamlandı / artifact paketi yerelde doğrulandı | Sıfırdan öğrenen yaklaşık 97 bin parametreli SmallCNN, aynı frozen manifest ve seed 42 ile 25 epoch çalıştı; epoch 25 validation macro-F1 ile seçildi. Test leaf accuracy `0,955846`, macro-F1 `0,955916`, balanced accuracy `0,955846`; parent accuracy `0,999231`. Split, 19.500 tahmin, metrik aritmetiği ve artifact hash'leri doğrulandı. Ayrıntı: `research/SMALLCNN_26LEAF_BASELINE_RESULT_TR.md`. |
-| Adil model karşılaştırması | İki baseline tamamlandı | Aynı 19.500 test görüntüsünde SmallCNN leaf accuracy'de `+4,282` ve macro-F1'da `+4,346` yüzde puan öndedir; yalnız SmallCNN'in doğru bildiği 1.351, yalnız ResNet18'in doğru bildiği 516 görüntü vardır. Bu, frozen-head ResNet18'e karşı veri-setine özgü sonuçtur; klinik üstünlük değildir. Sonraki deney ayrı onaylı ResNet18 last-block fine-tuning olabilir. |
-| ResNet18 last-block fine-tuning | Hazırlık tamamlandı / tam eğitim başlamadı | Önceki epoch-9 best checkpoint yalnız başlangıç ağırlığıdır; yeni optimizer/history ile yalnız `layer4 + fc` eğitilecektir. Aynı frozen split, LR `0,0001`, en fazla 12 epoch ve patience 4 sözleşmesi kilitlendi. Init-checkpoint hash/mimari/sınıf doğrulaması, resume ayrımı, Colab notebook'u ve testler hazırdır. Ayrıntı: `research/RESNET18_LASTBLOCK_FINETUNE_PLAN_TR.md`. |
+| Adil model karşılaştırması | İki baseline + bir kontrollü ablation tamamlandı | Aynı 19.500 test yolunda last-block ResNet18 leaf accuracy/macro-F1 `0,996462/0,996462` ile SmallCNN'in `0,955846/0,955916` ve frozen-head ResNet18'in `0,913026/0,912455` sonuçlarının üzerindedir. Fine-tune yalnız-correct sayısı SmallCNN'e karşı 832 (tersi 40), frozen-head modele karşı 1.660'tır (tersi 33). Bu shared-benchmark ve veri-setine özgü sonuçtur; klinik ya da dış veri üstünlüğü değildir. |
+| ResNet18 last-block fine-tuning | Tamamlandı / artifact paketi yerelde doğrulandı | Önceki epoch-9 best checkpointten yeni optimizer/history ile yalnız `layer4 + fc` eğitildi. Epoch 11 validation macro-F1 ile seçildi. Test leaf accuracy `0,996462`, macro-F1 `0,996462`; parent accuracy `0,999897`. 19.500 test yolu, split/init hash'leri, artifact hash'leri, olasılıklar ve metrik aritmetiği doğrulandı. Sonuç shared-benchmark ablation'dır; klinik doğrulama değildir. Ayrıntı: `research/RESNET18_LASTBLOCK_FINETUNE_RESULT_TR.md`. |
 | Genetik algoritma | Başlamadı | Stabil baseline sonrasına bırakıldı. |
 | Grad-CAM | Başlamadı | Final/seçilmiş modellerden sonra. |
 | Rapor ve sunum | Başlamadı; kanıtlar birikiyor | Denetim raporları daha sonra ana rapora girdi olacak. |
@@ -172,8 +172,8 @@ Bu bölümdeki sonuçlar yalnızca iki sınıfa değil, 130.000 kabul edilen gö
    26 leaf'in her birinde 3.500/750/750, toplam 91.000/19.500/19.500; cross-split exact/review/
    component kesişimi sıfırdır. Frozen manifest SHA-256 `999bf7a9...cf171`'dir.**
 10. Ancak bundan sonra adil model eğitimi ve karşılaştırmasına geç. **Başlandı; aynı manifestte
-    ResNet18 frozen-head ve SmallCNN tam baseline'ları tamamlandı. ResNet18 last-block ablation
-    altyapısı hazır, tam run henüz başlamadı.**
+    ResNet18 frozen-head ve SmallCNN tam baseline'ları ile ResNet18 last-block ablation tamamlandı.
+    Üç koşunun 19.500 test yolu birebir aynıdır; yeni deneyler yine ayrı sözleşme/onay gerektirir.**
 
 Bir pilotta bulunan eşik veya kural, yukarıdaki 2–5. adımlarda doğrulanmadan bütün veri setine
 uygulanamaz. Buna karşılık, nihai split hazırlanırken 26 alt sınıftan hiçbiri yalnızca pilotta yer

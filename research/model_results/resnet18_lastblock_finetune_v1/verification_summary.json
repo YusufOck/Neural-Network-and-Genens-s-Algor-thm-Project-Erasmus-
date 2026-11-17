@@ -1,0 +1,39 @@
+{
+  "status": "resnet18_lastblock_finetune_v1_independently_verified",
+  "review_zip": {
+    "size_bytes": 6532295,
+    "sha256": "702e1b019b64f8fb2e97a85fa409978ce6c70302bab5d17c8c0cb7fe7c74456f"
+  },
+  "integrity": {
+    "packaged_manifest_entries_checked": 11,
+    "packaged_hash_or_size_failures": 0,
+    "external_artifact_records_present": 3,
+    "return_code": 0
+  },
+  "prediction_audit": {
+    "rows": 19500,
+    "unique_paths": 19500,
+    "missing_frozen_test_paths": 0,
+    "unexpected_paths": 0,
+    "support_per_leaf": 750,
+    "probability_schema_mismatches": 0,
+    "argmax_mismatches": 0,
+    "confidence_mismatches": 0,
+    "leaf_correct": 19431,
+    "leaf_errors": 69,
+    "parent_correct": 19498,
+    "parent_errors": 2,
+    "leaf_wrong_parent_correct": 67
+  },
+  "metric_recalculation": {
+    "accuracy": 0.9964615384615385,
+    "macro_f1": 0.9964624118758975,
+    "balanced_accuracy": 0.9964615384615383
+  },
+  "limitations": [
+    "shared benchmark test already observed in earlier model comparisons",
+    "known-family-grouped split does not guarantee all unknown near duplicates or patient/series separation",
+    "source/modality shortcut risk remains",
+    "single seed and no external clinical dataset"
+  ]
+}
