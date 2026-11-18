@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "status": "ga_random_search_v1_frozen_before_execution",
+  "experiment_type": "bounded_equal_budget_hyperparameter_search",
+  "authorization_token": "FROZEN_GA_RANDOM_SEARCH_V1",
+  "model_contract": {
+    "model": "resnet18",
+    "target_level": "subclass",
+    "pretrained": true,
+    "fine_tune": true,
+    "trainable_scope": "layer4_plus_fc",
+    "image_size": 224,
+    "normalization": "imagenet",
+    "augmentation": "minimal",
+    "batch_size": 32,
+    "seed": 42,
+    "optimizer": "AdamW",
+    "scheduler": "ReduceLROnPlateau",
+    "epochs_per_trial": 4,
+    "early_stopping_patience": 0,
+    "fitness": "best_validation_macro_f1"
+  },
+  "frozen_inputs": {
+    "split_manifest_sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171",
+    "proxy_manifest_sha256": "fd6a55def92aa5f3582679ef0be35bde6fcb722be00fb508db9a86a7030aff03",
+    "init_checkpoint_sha256": "20613069067825ea0dfa30e2242678b863cd0acd7b9be3c5b88f265d39285177",
+    "proxy_counts": {
+      "train": 9100,
+      "val": 3900,
+      "test": 0,
+      "train_per_leaf": 350,
+      "val_per_leaf": 150,
+      "leaf_count": 26
+    }
+  },
+  "search_space": {
+    "learning_rate": {
+      "scale": "log10",
+      "minimum": 0.00001,
+      "maximum": 0.0003
+    },
+    "weight_decay": {
+      "scale": "log10",
+      "minimum": 0.000001,
+      "maximum": 0.001
+    },
+    "dropout": {
+      "scale": "linear",
+      "minimum": 0.1,
+      "maximum": 0.5
+    }
+  },
+  "equal_budget": {
+    "ga_trials": 12,
+    "random_trials": 12,
+    "population_size": 4,
+    "ga_rounds": 3
+  },
+  "ga": {
+    "seed": 20261118,
+    "tournament_size": 2,
+    "mutation_probability_per_gene": 0.35,
+    "mutation_sigma_fraction": 0.15,
+    "crossover": "uniform_gene_wise",
+    "elitism": "best_so_far_is_preserved_in_archive_but_not_reevaluated"
+  },
+  "random_search": {
+    "seed": 20261119,
+    "sampling": "independent_log_or_linear_uniform"
+  },
+  "test_policy": {
+    "test_opened_during_search": false,
+    "final_confirmation_in_this_run": false,
+    "note": "Winners are selected only by proxy validation macro-F1. Full-data confirmation is a separately approved stage."
+  },
+  "limitations": [
+    "Four proxy epochs may rank fast-learning configurations above slower ones.",
+    "The proxy is balanced and deterministic but smaller than the full train/validation partitions.",
+    "The shared test set has been used by earlier completed experiments and is not an untouched external test.",
+    "This search is dataset-specific and not clinical validation."
+  ]
+}

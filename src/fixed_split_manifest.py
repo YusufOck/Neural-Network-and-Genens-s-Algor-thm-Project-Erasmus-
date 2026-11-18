@@ -62,3 +62,80 @@ def load_fixed_split_manifest(
                 f"{split} splitinde leaf kapsami eksik; eksik={sorted(leaves - split_leaves)}"
             )
     return split_records
+
+
+def load_search_proxy_manifest(
+    fixed_splits: Dict[str, list[ImageRecord]],
+    dataset_root: Path,
+    manifest_path: Path,
+) -> Dict[str, list[ImageRecord]]:
+    """Load a train/validation-only subset of an already validated fixed split.
+
+    The proxy is intentionally unable to introduce test images or move a path between
+    partitions. It is used only for bounded hyperparameter-search trials.
+    """
+
+    source_by_split: Dict[str, Dict[str, ImageRecord]] = {}
+    for split in ("train", "val", "test"):
+        source_by_split[split] = {
+            record.path.relative_to(dataset_root).as_posix(): record
+            for record in fixed_splits[split]
+        }
+
+    selected: Dict[str, list[ImageRecord]] = {"train": [], "val": []}
+    seen: set[str] = set()
+    with manifest_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        required = {
+            "relative_path",
+            "main_class",
+            "subclass",
+            "split",
+            "family_id",
+        }
+        if reader.fieldnames is None or not required.issubset(reader.fieldnames):
+            raise ValueError(f"Search proxy manifest alanlari eksik: {manifest_path}")
+        for row in reader:
+            relative = row["relative_path"].replace("\\", "/")
+            if relative in seen:
+                raise ValueError(f"Search proxy manifestte tekrarlanan path: {relative}")
+            seen.add(relative)
+            split = row["split"]
+            if split not in selected:
+                raise ValueError(
+                    "Search proxy yalniz train/val satirlari icerebilir; "
+                    f"split={split!r}, path={relative}"
+                )
+            if relative not in source_by_split[split]:
+                source_split = next(
+                    (
+                        name
+                        for name, paths in source_by_split.items()
+                        if relative in paths
+                    ),
+                    None,
+                )
+                raise ValueError(
+                    "Search proxy path'i dondurulmus split bolumunu degistiriyor veya dataset "
+                    f"disinda: path={relative}, proxy={split}, source={source_split}"
+                )
+            record = source_by_split[split][relative]
+            if row["main_class"] != record.main_class or row["subclass"] != record.subclass:
+                raise ValueError(f"Search proxy metadata uyusmazligi: {relative}")
+            if not row["family_id"].strip():
+                raise ValueError(f"Search proxy bos family_id: {relative}")
+            selected[split].append(record)
+
+    expected_leaves = {
+        record.subclass
+        for split in ("train", "val", "test")
+        for record in fixed_splits[split]
+    }
+    for split, records in selected.items():
+        leaves = {record.subclass for record in records}
+        if leaves != expected_leaves:
+            raise ValueError(
+                f"Search proxy {split} leaf kapsami eksik; "
+                f"eksik={sorted(expected_leaves - leaves)}"
+            )
+    return selected

@@ -13,7 +13,7 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from data_index import ImageRecord
-from fixed_split_manifest import load_fixed_split_manifest
+from fixed_split_manifest import load_fixed_split_manifest, load_search_proxy_manifest
 
 
 class FixedSplitManifestTests(unittest.TestCase):
@@ -66,6 +66,33 @@ class FixedSplitManifestTests(unittest.TestCase):
         rows[0]["subclass"] = "wrong"
         with self.assertRaisesRegex(ValueError, "metadata"):
             load_fixed_split_manifest(self.records, self.root, self.write_manifest(rows))
+
+    def test_search_proxy_cannot_include_or_move_test_rows(self) -> None:
+        fixed = load_fixed_split_manifest(
+            self.records, self.root, self.write_manifest(self.valid_rows())
+        )
+        proxy_path = self.root / "proxy.csv"
+        proxy_rows = self.valid_rows()[:2]
+        with proxy_path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=["relative_path", "main_class", "subclass", "split", "family_id"],
+            )
+            writer.writeheader()
+            writer.writerows(proxy_rows)
+        loaded = load_search_proxy_manifest(fixed, self.root, proxy_path)
+        self.assertEqual({name: len(rows) for name, rows in loaded.items()}, {"train": 1, "val": 1})
+
+        proxy_rows[1]["split"] = "test"
+        with proxy_path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=["relative_path", "main_class", "subclass", "split", "family_id"],
+            )
+            writer.writeheader()
+            writer.writerows(proxy_rows)
+        with self.assertRaisesRegex(ValueError, "yalniz train/val"):
+            load_search_proxy_manifest(fixed, self.root, proxy_path)
 
 
 if __name__ == "__main__":

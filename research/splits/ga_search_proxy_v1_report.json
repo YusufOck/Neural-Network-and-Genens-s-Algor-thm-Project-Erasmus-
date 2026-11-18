@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "status": "ga_search_proxy_manifest_v1_complete",
+  "experiment_type": "deterministic_train_validation_search_proxy",
+  "opens_images": false,
+  "contains_test_rows": false,
+  "seed": 20261118,
+  "source_split_manifest": "C:\\Users\\mehmet\\Desktop\\erasmus_ders\\NNGA\\research\\splits\\practical_leakage_reduced_split_v1.csv",
+  "source_split_manifest_sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171",
+  "proxy_manifest": "C:\\Users\\mehmet\\Desktop\\erasmus_ders\\NNGA\\research\\splits\\ga_search_proxy_v1.csv",
+  "proxy_manifest_sha256": "fd6a55def92aa5f3582679ef0be35bde6fcb722be00fb508db9a86a7030aff03",
+  "leaf_count": 26,
+  "leaves": [
+    "all_benign",
+    "all_early",
+    "all_pre",
+    "all_pro",
+    "brain_glioma",
+    "brain_menin",
+    "brain_tumor",
+    "breast_benign",
+    "breast_malignant",
+    "cervix_dyk",
+    "cervix_koc",
+    "cervix_mep",
+    "cervix_pab",
+    "cervix_sfi",
+    "colon_aca",
+    "colon_bnt",
+    "kidney_normal",
+    "kidney_tumor",
+    "lung_aca",
+    "lung_bnt",
+    "lung_scc",
+    "lymph_cll",
+    "lymph_fl",
+    "lymph_mcl",
+    "oral_normal",
+    "oral_scc"
+  ],
+  "counts": {
+    "train": 9100,
+    "val": 3900,
+    "test": 0
+  },
+  "per_leaf": {
+    "all_benign": {
+      "train": 350,
+      "val": 150
+    },
+    "all_early": {
+      "train": 350,
+      "val": 150
+    },
+    "all_pre": {
+      "train": 350,
+      "val": 150
+    },
+    "all_pro": {
+      "train": 350,
+      "val": 150
+    },
+    "brain_glioma": {
+      "train": 350,
+      "val": 150
+    },
+    "brain_menin": {
+      "train": 350,
+      "val": 150
+    },
+    "brain_tumor": {
+      "train": 350,
+      "val": 150
+    },
+    "breast_benign": {
+      "train": 350,
+      "val": 150
+    },
+    "breast_malignant": {
+      "train": 350,
+      "val": 150
+    },
+    "cervix_dyk": {
+      "train": 350,
+      "val": 150
+    },
+    "cervix_koc": {
+      "train": 350,
+      "val": 150
+    },
+    "cervix_mep": {
+      "train": 350,
+      "val": 150
+    },
+    "cervix_pab": {
+      "train": 350,
+      "val": 150
+    },
+    "cervix_sfi": {
+      "train": 350,
+      "val": 150
+    },
+    "colon_aca": {
+      "train": 350,
+      "val": 150
+    },
+    "colon_bnt": {
+      "train": 350,
+      "val": 150
+    },
+    "kidney_normal": {
+      "train": 350,
+      "val": 150
+    },
+    "kidney_tumor": {
+      "train": 350,
+      "val": 150
+    },
+    "lung_aca": {
+      "train": 350,
+      "val": 150
+    },
+    "lung_bnt": {
+      "train": 350,
+      "val": 150
+    },
+    "lung_scc": {
+      "train": 350,
+      "val": 150
+    },
+    "lymph_cll": {
+      "train": 350,
+      "val": 150
+    },
+    "lymph_fl": {
+      "train": 350,
+      "val": 150
+    },
+    "lymph_mcl": {
+      "train": 350,
+      "val": 150
+    },
+    "oral_normal": {
+      "train": 350,
+      "val": 150
+    },
+    "oral_scc": {
+      "train": 350,
+      "val": 150
+    }
+  },
+  "expected_per_leaf": {
+    "train": 350,
+    "val": 150
+  },
+  "selection_rule": "SHA-256 rank of seed/split/subclass/relative_path",
+  "claim": "Balanced deterministic proxy for validation-only hyperparameter search.",
+  "forbidden_claim": "Final model performance or an independent test result."
+}

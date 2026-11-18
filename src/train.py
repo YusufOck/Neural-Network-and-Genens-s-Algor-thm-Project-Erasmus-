@@ -33,7 +33,7 @@ from data_index import (
     select_max_per_label,
     target_label,
 )
-from fixed_split_manifest import load_fixed_split_manifest
+from fixed_split_manifest import load_fixed_split_manifest, load_search_proxy_manifest
 from training_support import (
     build_subclass_parent_map,
     classification_metrics,
@@ -74,7 +74,7 @@ class RecordDataset(Dataset):
 
 
 class SmallCNN(nn.Module):
-    def __init__(self, num_classes: int) -> None:
+    def __init__(self, num_classes: int, dropout: float = 0.35) -> None:
         super().__init__()
         self.features = nn.Sequential(
             nn.Conv2d(3, 32, kernel_size=3, padding=1),
@@ -90,7 +90,9 @@ class SmallCNN(nn.Module):
             nn.ReLU(inplace=True),
             nn.AdaptiveAvgPool2d((1, 1)),
         )
-        self.classifier = nn.Sequential(nn.Flatten(), nn.Dropout(0.35), nn.Linear(128, num_classes))
+        self.classifier = nn.Sequential(
+            nn.Flatten(), nn.Dropout(dropout), nn.Linear(128, num_classes)
+        )
 
     def forward(self, inputs):
         return self.classifier(self.features(inputs))
@@ -123,6 +125,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--learning-rate", type=float, default=1e-3)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument(
+        "--dropout",
+        type=float,
+        default=None,
+        help="Classifier dropout; varsayilan small_cnn=0.35, diger modeller=0.30",
+    )
+    parser.add_argument(
         "--max-per-class",
         type=int,
         default=None,
@@ -132,6 +140,19 @@ def parse_args() -> argparse.Namespace:
         "--split-manifest",
         default=None,
         help="Onceden uretilmis sabit train/val/test manifesti",
+    )
+    parser.add_argument(
+        "--search-proxy-manifest",
+        default=None,
+        help=(
+            "Yalniz hiperparametre aramasi icin sabit splitin train/val alt kumesi; "
+            "test goruntuleri acilmaz"
+        ),
+    )
+    parser.add_argument(
+        "--search-proxy-manifest-sha256",
+        default=None,
+        help="Search proxy manifesti icin zorunlu beklenen SHA-256",
     )
     parser.add_argument("--num-workers", type=int, default=2)
     parser.add_argument("--seed", type=int, default=42)
@@ -149,7 +170,14 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--experiment-type",
-        choices=["pilot", "baseline", "reproduction", "ablation", "final"],
+        choices=[
+            "pilot",
+            "baseline",
+            "reproduction",
+            "ablation",
+            "search_trial",
+            "final",
+        ],
         default="pilot",
     )
     parser.add_argument("--smoke-test", action="store_true")
@@ -224,9 +252,23 @@ def build_transforms(image_size: int, augmentation: str, normalization_name: str
     return train_transform, eval_transform
 
 
-def build_model(name: str, num_classes: int, pretrained: bool, fine_tune: bool):
+def resolve_dropout(name: str, requested: float | None) -> float:
+    value = (0.35 if name == "small_cnn" else 0.30) if requested is None else requested
+    if not 0.0 <= value < 1.0:
+        raise ValueError(f"Dropout [0, 1) araliginda olmalidir: {value}")
+    return value
+
+
+def build_model(
+    name: str,
+    num_classes: int,
+    pretrained: bool,
+    fine_tune: bool,
+    dropout: float | None = None,
+):
+    effective_dropout = resolve_dropout(name, dropout)
     if name == "small_cnn":
-        return SmallCNN(num_classes)
+        return SmallCNN(num_classes, effective_dropout)
 
     if name == "resnet18":
         weights = models.ResNet18_Weights.DEFAULT if pretrained else None
@@ -239,7 +281,7 @@ def build_model(name: str, num_classes: int, pretrained: bool, fine_tune: bool):
                 for parameter in model.layer4.parameters():
                     parameter.requires_grad = True
         model.fc = nn.Sequential(
-            nn.Dropout(0.30), nn.Linear(classifier_in_features, num_classes)
+            nn.Dropout(effective_dropout), nn.Linear(classifier_in_features, num_classes)
         )
         return model
 
@@ -256,7 +298,7 @@ def build_model(name: str, num_classes: int, pretrained: bool, fine_tune: bool):
                 for parameter in model.features.norm5.parameters():
                     parameter.requires_grad = True
         model.classifier = nn.Sequential(
-            nn.Dropout(0.30), nn.Linear(classifier_in_features, num_classes)
+            nn.Dropout(effective_dropout), nn.Linear(classifier_in_features, num_classes)
         )
         return model
 
@@ -272,7 +314,7 @@ def build_model(name: str, num_classes: int, pretrained: bool, fine_tune: bool):
                     for parameter in block.parameters():
                         parameter.requires_grad = True
         model.classifier = nn.Sequential(
-            nn.Dropout(0.30), nn.Linear(classifier_in_features, num_classes)
+            nn.Dropout(effective_dropout), nn.Linear(classifier_in_features, num_classes)
         )
         return model
 
@@ -418,10 +460,24 @@ def main() -> None:
         args.num_workers = 0
         args.pretrained = False
 
+    args.dropout = resolve_dropout(args.model, args.dropout)
+    if args.search_proxy_manifest and not args.split_manifest:
+        raise ValueError("Search proxy icin --split-manifest zorunludur")
+    if args.search_proxy_manifest and args.experiment_type != "search_trial":
+        raise ValueError("Search proxy yalniz --experiment-type search_trial ile kullanilir")
+    if args.search_proxy_manifest and not args.search_proxy_manifest_sha256:
+        raise ValueError("Search proxy icin beklenen SHA-256 zorunludur")
+    if args.search_proxy_manifest_sha256 and not args.search_proxy_manifest:
+        raise ValueError(
+            "--search-proxy-manifest-sha256 icin --search-proxy-manifest verilmelidir"
+        )
+
     seed_everything(args.seed)
     dataset_root = resolve_dataset_root(args.data_dir)
     records = discover_records(dataset_root)
     manifest_sha256 = None
+    search_proxy_sha256 = None
+    search_proxy_path = None
     if args.split_manifest:
         if args.max_per_class is not None:
             raise ValueError("Sabit split manifesti ile --max-per-class birlikte kullanilamaz")
@@ -435,9 +491,25 @@ def main() -> None:
         fixed_splits = load_fixed_split_manifest(
             records, dataset_root, manifest_path
         )
-        train_records = fixed_splits["train"]
-        val_records = fixed_splits["val"]
-        test_records = fixed_splits["test"]
+        if args.search_proxy_manifest:
+            search_proxy_path = Path(args.search_proxy_manifest).resolve()
+            search_proxy_sha256 = sha256_file(search_proxy_path)
+            if search_proxy_sha256 != args.search_proxy_manifest_sha256.lower():
+                raise ValueError(
+                    "Search proxy manifest SHA-256 beklenen degerle eslesmiyor: "
+                    f"expected={args.search_proxy_manifest_sha256.lower()}, "
+                    f"actual={search_proxy_sha256}"
+                )
+            proxy_splits = load_search_proxy_manifest(
+                fixed_splits, dataset_root, search_proxy_path
+            )
+            train_records = proxy_splits["train"]
+            val_records = proxy_splits["val"]
+            test_records = []
+        else:
+            train_records = fixed_splits["train"]
+            val_records = fixed_splits["val"]
+            test_records = fixed_splits["test"]
     else:
         records = select_max_per_label(
             records, args.max_per_class, args.seed, args.target_level
@@ -478,10 +550,11 @@ def main() -> None:
         "val": RecordDataset(
             val_records, class_to_index, args.target_level, eval_transform
         ),
-        "test": RecordDataset(
-            test_records, class_to_index, args.target_level, eval_transform
-        ),
     }
+    if not args.search_proxy_manifest:
+        datasets["test"] = RecordDataset(
+            test_records, class_to_index, args.target_level, eval_transform
+        )
     pin_memory = device.type == "cuda"
     loaders = {
         "train": DataLoader(
@@ -492,13 +565,20 @@ def main() -> None:
             datasets["val"], batch_size=args.batch_size, shuffle=False,
             num_workers=args.num_workers, pin_memory=pin_memory
         ),
-        "test": DataLoader(
+    }
+    if not args.search_proxy_manifest:
+        loaders["test"] = DataLoader(
             datasets["test"], batch_size=args.batch_size, shuffle=False,
             num_workers=args.num_workers, pin_memory=pin_memory
-        ),
-    }
+        )
 
-    model = build_model(args.model, len(class_names), args.pretrained, args.fine_tune).to(device)
+    model = build_model(
+        args.model,
+        len(class_names),
+        args.pretrained,
+        args.fine_tune,
+        args.dropout,
+    ).to(device)
     initialization = {
         "type": "default_model_initialization",
         "checkpoint_sha256": None,
@@ -557,9 +637,11 @@ def main() -> None:
         "augmentation": args.augmentation,
         "learning_rate": args.learning_rate,
         "weight_decay": args.weight_decay,
+        "dropout": args.dropout,
         "batch_size": args.batch_size,
         "seed": args.seed,
         "split_manifest_sha256": manifest_sha256,
+        "search_proxy_manifest_sha256": search_proxy_sha256,
         "init_checkpoint_sha256": initialization["checkpoint_sha256"],
     }
     if args.resume:
@@ -653,6 +735,57 @@ def main() -> None:
 
     checkpoint = torch.load(best_path, map_location=device, weights_only=True)
     model.load_state_dict(checkpoint["model_state_dict"])
+    if args.search_proxy_manifest:
+        trial_summary = {
+            "schema_version": 1,
+            "status": "hyperparameter_search_trial_complete",
+            "experiment_type": "search_trial",
+            "test_evaluated": False,
+            "model": args.model,
+            "target_level": args.target_level,
+            "best_epoch": best_epoch,
+            "best_validation_macro_f1": best_val_f1,
+            "epochs_completed": len(history),
+            "split_sizes": {
+                "train": len(datasets["train"]),
+                "val": len(datasets["val"]),
+                "test": 0,
+            },
+            "hyperparameters": {
+                "learning_rate": args.learning_rate,
+                "weight_decay": args.weight_decay,
+                "dropout": args.dropout,
+            },
+            "split_manifest_sha256": manifest_sha256,
+            "search_proxy_manifest_sha256": search_proxy_sha256,
+            "initialization": initialization,
+            "trainable_parameter_count": sum(
+                parameter.numel()
+                for parameter in model.parameters()
+                if parameter.requires_grad
+            ),
+            "warning": (
+                "Validation-only proxy-search fitness; not test performance or clinical evidence."
+            ),
+        }
+        shutil.copyfile(manifest_path, output_dir / "split_manifest.csv")
+        shutil.copyfile(search_proxy_path, output_dir / "search_proxy_manifest.csv")
+        if sha256_file(output_dir / "split_manifest.csv") != manifest_sha256:
+            raise RuntimeError("Kopyalanan split manifestinin SHA-256 degeri degisti")
+        if sha256_file(output_dir / "search_proxy_manifest.csv") != search_proxy_sha256:
+            raise RuntimeError("Kopyalanan search proxy manifestinin SHA-256 degeri degisti")
+        write_history(history, output_dir / "history.csv")
+        save_learning_curves(history, output_dir / "learning_curves.png")
+        (output_dir / "run_config.json").write_text(
+            json.dumps(vars(args), indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+        (output_dir / "search_trial_summary.json").write_text(
+            json.dumps(trial_summary, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+        print("Search trial sonucu (test acilmadi):")
+        print(json.dumps(trial_summary, indent=2, ensure_ascii=False))
+        print(f"Çıktı klasörü: {output_dir}")
+        return
     test_metrics = run_epoch(
         model, loaders["test"], criterion, device, collect_outputs=True
     )

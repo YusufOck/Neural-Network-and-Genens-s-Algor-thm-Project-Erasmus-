@@ -25,7 +25,12 @@ from training_support import (  # noqa: E402
     sha256_file,
     write_prediction_csv,
 )
-from train import build_model, run_epoch, validate_initial_checkpoint  # noqa: E402
+from train import (  # noqa: E402
+    build_model,
+    resolve_dropout,
+    run_epoch,
+    validate_initial_checkpoint,
+)
 
 
 class TrainingSupportTests(unittest.TestCase):
@@ -161,6 +166,23 @@ class TrainingSupportTests(unittest.TestCase):
             ),
             8_407_066,
         )
+
+    def test_dropout_is_configurable_without_changing_default_contract(self) -> None:
+        original_resnet18 = models.resnet18
+
+        def local_resnet18(*, weights):
+            return original_resnet18(weights=None)
+
+        with patch("train.models.resnet18", side_effect=local_resnet18):
+            default_model = build_model("resnet18", 26, pretrained=True, fine_tune=True)
+            searched_model = build_model(
+                "resnet18", 26, pretrained=True, fine_tune=True, dropout=0.17
+            )
+        self.assertAlmostEqual(default_model.fc[0].p, 0.30)
+        self.assertAlmostEqual(searched_model.fc[0].p, 0.17)
+        self.assertAlmostEqual(resolve_dropout("small_cnn", None), 0.35)
+        with self.assertRaisesRegex(ValueError, "Dropout"):
+            resolve_dropout("resnet18", 1.0)
 
 
 if __name__ == "__main__":
