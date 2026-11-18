@@ -1,7 +1,8 @@
 # ResNet18 Last-Block Grad-CAM Deneyi — Dondurulmuş Plan
 
 Tarih: 2026-11-18  
-Durum: Kod ve örnek seçimi donduruldu; gerçek checkpoint/görüntü çalışması henüz yapılmadı.
+Durum: Plan uygulandı; gerçek çalışma ve görsel denetim tamamlandı. Sonuçlar
+`research/RESNET18_LASTBLOCK_GRADCAM_RESULT_TR.md` dosyasındadır.
 
 ## 1. Amaç
 

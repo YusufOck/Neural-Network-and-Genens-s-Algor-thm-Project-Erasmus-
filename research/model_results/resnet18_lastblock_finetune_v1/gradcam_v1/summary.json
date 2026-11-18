@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "resnet18_lastblock_gradcam_v1_complete",
+  "experiment_type": "post_hoc_explainability_audit",
+  "does_not_train_or_select_a_model": true,
+  "reportable_as_model_performance": false,
+  "device": "cuda",
+  "checkpoint_sha256": "538f2891075f0870e450cd6aa7eda0a5e06ecb73eefd14a4f6a0cd869759d54d",
+  "split_manifest_sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171",
+  "test_predictions_sha256": "237f3283b88beeaf0a93f182adab23ad478810b0944245e3023e6cfe885c57bd",
+  "sample_manifest_sha256": "3f797979b4d75b092dfcb4e2348ea1705ed34d35da884ac999c68abef8c87add",
+  "target_layer": "layer4.1.conv2",
+  "sample_count": 37,
+  "correct_control_count": 26,
+  "error_count": 11,
+  "prediction_reproduction_count": 37,
+  "max_confidence_abs_difference": 3.4570693969726562e-06,
+  "panel_count": 37,
+  "contact_sheet_count": 7,
+  "selection_was_frozen_before_heatmaps": true,
+  "limitations": [
+    "Grad-CAM is a coarse localization of model influence, not object detection.",
+    "A highlighted region is not proof of medical correctness or causality.",
+    "This audit uses the held-out test set post hoc and does not change model selection or performance metrics.",
+    "The result is specific to this dataset, checkpoint and preprocessing contract."
+  ]
+}

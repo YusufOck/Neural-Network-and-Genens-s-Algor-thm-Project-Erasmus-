@@ -1,0 +1,194 @@
+{
+  "contact_sheets/gradcam_sheet_01.jpg": {
+    "sha256": "654b853e95b3b0fefa1a19a4a3b8f5e5c66367c452c9285afb0f5dee72549761",
+    "size_bytes": 303762
+  },
+  "contact_sheets/gradcam_sheet_02.jpg": {
+    "sha256": "4755c24d02bf8d3cd8bdbe22176013d4d9794f3635362d6384b61b949f0b8d63",
+    "size_bytes": 364084
+  },
+  "contact_sheets/gradcam_sheet_03.jpg": {
+    "sha256": "a67615bb80416522d716ed7e8c923f8fa4007f50bb1631c2edf3b7462483d852",
+    "size_bytes": 344459
+  },
+  "contact_sheets/gradcam_sheet_04.jpg": {
+    "sha256": "08c1b490d5a77a427ab4538f50ad5cf9b9a2f484ab70f1352c8d9c4ae3fc9100",
+    "size_bytes": 395982
+  },
+  "contact_sheets/gradcam_sheet_05.jpg": {
+    "sha256": "0cf729955030d72b830f3e241f6d05d4ea70dac81ed1960a36523de082d638fb",
+    "size_bytes": 348771
+  },
+  "contact_sheets/gradcam_sheet_06.jpg": {
+    "sha256": "f2d6829e7375ed9fa685531fa4d593098d65ea6a3708e1c17ac7a9897252e7ea",
+    "size_bytes": 390659
+  },
+  "contact_sheets/gradcam_sheet_07.jpg": {
+    "sha256": "edff1ed48a89dc2156bfa4e42e0a0600a49c112a2817dffe2bf70039a9b33a9c",
+    "size_bytes": 63717
+  },
+  "frozen_config.json": {
+    "sha256": "07f7a88c21a6e65ed6d96084d86f886eb47f2f4bc1be5096c32259cb5ca50df2",
+    "size_bytes": 2382
+  },
+  "gradcam_results.csv": {
+    "sha256": "0bac3744ea297e8c59af3b04c9b11213e0e696471772d97864b92d79b7180838",
+    "size_bytes": 8362
+  },
+  "sample_manifest.csv": {
+    "sha256": "3f797979b4d75b092dfcb4e2348ea1705ed34d35da884ac999c68abef8c87add",
+    "size_bytes": 5477
+  },
+  "sample_panels/CORRECT_all_benign.png": {
+    "sha256": "64b1c3dd5e638d8d523f6b148b1d0dc892efb36a031eae1e52e696650888b9f4",
+    "size_bytes": 800192
+  },
+  "sample_panels/CORRECT_all_early.png": {
+    "sha256": "a6c3d08a15f13150af767513cfcf6f6d34288f47edde95e67cfb3219f18c2b2c",
+    "size_bytes": 721398
+  },
+  "sample_panels/CORRECT_all_pre.png": {
+    "sha256": "e6da57168242f5a38659cc389f8148861f4750d8eaf7a1265b82fda090e9f231",
+    "size_bytes": 712508
+  },
+  "sample_panels/CORRECT_all_pro.png": {
+    "sha256": "e8e4a07f7aea6e0521669338f3564b14dd68905f18732edac7f461ebd41798c5",
+    "size_bytes": 693170
+  },
+  "sample_panels/CORRECT_brain_glioma.png": {
+    "sha256": "1d3519294bdc5280142d6c80d4ab316d787525b20f56d29e630bdbf833324fc0",
+    "size_bytes": 558976
+  },
+  "sample_panels/CORRECT_brain_menin.png": {
+    "sha256": "791a09d7adbc94e77dd9db397ff3469cb0428ec6c9c5d92996be183a6c414bd2",
+    "size_bytes": 520991
+  },
+  "sample_panels/CORRECT_brain_tumor.png": {
+    "sha256": "2c7530326c1fea8187f18f1ce329b6b1df116e450a4d2eff4f57719edbfc38b3",
+    "size_bytes": 657060
+  },
+  "sample_panels/CORRECT_breast_benign.png": {
+    "sha256": "5b6c9cbb8b43a4fa792455e34df89d2cc52ea1b079cc713286f144d809b252a1",
+    "size_bytes": 1010171
+  },
+  "sample_panels/CORRECT_breast_malignant.png": {
+    "sha256": "cc9b27bb3f8349d54d0aa134be9754179329c625afef4a53c22250eda11e2bc0",
+    "size_bytes": 853706
+  },
+  "sample_panels/CORRECT_cervix_dyk.png": {
+    "sha256": "e085bcdefafe646f1bc1dabccc634c83960a20c1eaee254069a02480fa83d570",
+    "size_bytes": 939444
+  },
+  "sample_panels/CORRECT_cervix_koc.png": {
+    "sha256": "1ce5d7e9382658667c09404c8497f79dcac99fd3d44ca2e6d25deb8dcb8436e8",
+    "size_bytes": 983556
+  },
+  "sample_panels/CORRECT_cervix_mep.png": {
+    "sha256": "49cd5fa51edffdcf425e2ffa33525462428a310938de9e4d5a9c3050de57a3f8",
+    "size_bytes": 870857
+  },
+  "sample_panels/CORRECT_cervix_pab.png": {
+    "sha256": "1ac05a9dbb18f4afc804ab204fe82842f49840405741d597b1a714622a978cc1",
+    "size_bytes": 717378
+  },
+  "sample_panels/CORRECT_cervix_sfi.png": {
+    "sha256": "66b052c1565b0461dc5cc1f962984a6a40e4e48ae4a56cd6db90cd25aaa20fae",
+    "size_bytes": 840347
+  },
+  "sample_panels/CORRECT_colon_aca.png": {
+    "sha256": "3ba06ce87aa7938f68e36ba7263a0138c6f72df1aa8c99f924c14855ff28ecd0",
+    "size_bytes": 990658
+  },
+  "sample_panels/CORRECT_colon_bnt.png": {
+    "sha256": "c2a3e9ad418832c5310bc3e68cfd5ba95010218eafdd545bc149d55889a171d0",
+    "size_bytes": 1036983
+  },
+  "sample_panels/CORRECT_kidney_normal.png": {
+    "sha256": "a6a579dbb25a890f7c75075efd3c23087d1ba6a30cb77be948d8e54c1afc9835",
+    "size_bytes": 612926
+  },
+  "sample_panels/CORRECT_kidney_tumor.png": {
+    "sha256": "e0bafe6b6e03b0fe6406afd179aa233b8b7cb52571f34cbe617917c3ca300de4",
+    "size_bytes": 566226
+  },
+  "sample_panels/CORRECT_lung_aca.png": {
+    "sha256": "377b8d5ae649513eb828f45a91f81eae927943fcc08c14005e81fd999185e2e0",
+    "size_bytes": 878088
+  },
+  "sample_panels/CORRECT_lung_bnt.png": {
+    "sha256": "bd58686ef4258a2e7133d002c83e0c55c46d58f6fbb23718d6d9ad8d2f3aa135",
+    "size_bytes": 788804
+  },
+  "sample_panels/CORRECT_lung_scc.png": {
+    "sha256": "d22006aca1bab814fc5250cbe456c0722294775a021995751a94db4297d3f6b5",
+    "size_bytes": 941803
+  },
+  "sample_panels/CORRECT_lymph_cll.png": {
+    "sha256": "cf50a6a34b6711d879d0319a3e55f3851c49a75a9873a23aebb81b9d8fbf484e",
+    "size_bytes": 1176363
+  },
+  "sample_panels/CORRECT_lymph_fl.png": {
+    "sha256": "8eff02385a053ee53fe32bd1e0aaa41cd2a0839d7e209bedbd85add6d0fea69c",
+    "size_bytes": 1167327
+  },
+  "sample_panels/CORRECT_lymph_mcl.png": {
+    "sha256": "c5e67d1ef679ba0021beaf4748ba35db77acc9c9e59d38efc120c518e858fa63",
+    "size_bytes": 1155405
+  },
+  "sample_panels/CORRECT_oral_normal.png": {
+    "sha256": "fb51fae6acad731a29ad28837941b0aca6b4fdab0b7817dd90489a814e6e43a6",
+    "size_bytes": 1030610
+  },
+  "sample_panels/CORRECT_oral_scc.png": {
+    "sha256": "c5b6d916b72efd732974d88b0cedf74d90e9ad288270ef965a289e2bb29904f7",
+    "size_bytes": 935522
+  },
+  "sample_panels/ERROR_01.png": {
+    "sha256": "98330ce3cb1923e3feac58f6128017dddf6057be2d2400c6b63d0d733e1b25f7",
+    "size_bytes": 568723
+  },
+  "sample_panels/ERROR_02.png": {
+    "sha256": "58207d4019e38d05606ac354bb31acd7a97bad881287ddf737dfddc91c5ed1e8",
+    "size_bytes": 575059
+  },
+  "sample_panels/ERROR_03.png": {
+    "sha256": "c380dd8e3734d1746c8de5d99d883897d95b13570d2e8a28d9fe23e322d3e83d",
+    "size_bytes": 1164395
+  },
+  "sample_panels/ERROR_04.png": {
+    "sha256": "89fa738d77481ad2c1dfba4212ced9d5642504c92fd2660dd32067731195caf9",
+    "size_bytes": 786710
+  },
+  "sample_panels/ERROR_05.png": {
+    "sha256": "bf2a0a14131a481de12c9b03e2deb3f476f508fa97cdfb1841ef29e264952cd9",
+    "size_bytes": 1200814
+  },
+  "sample_panels/ERROR_06.png": {
+    "sha256": "fdb5e3a3bd4d32872736157c00087009f9d1e1b4cf26549a768631577e1d1d71",
+    "size_bytes": 997844
+  },
+  "sample_panels/ERROR_07.png": {
+    "sha256": "89b7e38d9d512799cce7a4fba20a3c90d0bbef20042fdba8756c5c928ca2fbbe",
+    "size_bytes": 1025567
+  },
+  "sample_panels/ERROR_08.png": {
+    "sha256": "3ebac776685d243f0d3a4791965f9140100e2fa0783af06e3dd292aa1710096e",
+    "size_bytes": 862655
+  },
+  "sample_panels/ERROR_09.png": {
+    "sha256": "73ad6df9ef54278994f79aafc2f03832afd764ec2c5396aa8587b57e1c466e0e",
+    "size_bytes": 1129111
+  },
+  "sample_panels/ERROR_10.png": {
+    "sha256": "b39c046d5e9b22885487a9e79759d83f6e908fb15c3f8625b22d94771d0e68b6",
+    "size_bytes": 986612
+  },
+  "sample_panels/ERROR_11.png": {
+    "sha256": "5c3b29659ac141f9182ca353287e2f2340847373a9b64e0b36aa05be281671a3",
+    "size_bytes": 742825
+  },
+  "summary.json": {
+    "sha256": "32ccda1543629d2f105efdb597ee43ad996e3110b5775b98373a04e1dc4b7426",
+    "size_bytes": 1310
+  }
+}

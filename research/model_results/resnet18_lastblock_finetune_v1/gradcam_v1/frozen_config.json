@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "resnet18_lastblock_gradcam_v1",
+  "experiment_type": "post_hoc_explainability_audit",
+  "reportable_as_model_performance": false,
+  "does_not_train_or_select_a_model": true,
+  "model": "resnet18",
+  "target_level": "subclass",
+  "class_count": 26,
+  "target_layer": "layer4.1.conv2",
+  "image_size": 224,
+  "normalization": "imagenet",
+  "checkpoint": {
+    "expected_filename": "best_model.pth",
+    "sha256": "538f2891075f0870e450cd6aa7eda0a5e06ecb73eefd14a4f6a0cd869759d54d"
+  },
+  "split_manifest": {
+    "expected_filename": "practical_leakage_reduced_split_v1.csv",
+    "sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171"
+  },
+  "test_predictions": {
+    "expected_filename": "test_predictions.csv",
+    "sha256": "237f3283b88beeaf0a93f182adab23ad478810b0944245e3023e6cfe885c57bd"
+  },
+  "sample_manifest": {
+    "path": "research/gradcam/resnet18_lastblock_gradcam_v1/sample_manifest.csv",
+    "sha256": "3f797979b4d75b092dfcb4e2348ea1705ed34d35da884ac999c68abef8c87add",
+    "sample_count": 37,
+    "correct_control_count": 26,
+    "error_count": 11
+  },
+  "selection_contract": {
+    "correct_controls": "One correct test prediction per leaf, selected deterministically nearest to that leaf's median correct confidence; relative-path lexical order breaks ties.",
+    "cross_parent_errors": "All two cross-parent errors from the frozen test predictions.",
+    "high_confidence_errors": "All seven leaf errors with confidence >= 0.99.",
+    "dominant_oral_confusion": "One error nearest the direction-specific median confidence for oral_normal->oral_scc and one for oral_scc->oral_normal.",
+    "deduplicate_paths": true,
+    "selected_before_heatmap_generation": true
+  },
+  "render_contract": {
+    "correct_target_maps": [
+      "predicted"
+    ],
+    "error_target_maps": [
+      "predicted",
+      "true"
+    ],
+    "overlay_alpha": 0.45,
+    "colormap": "turbo",
+    "contact_sheet_columns": 3
+  },
+  "interpretation_limitations": [
+    "Grad-CAM is a coarse localization of model influence, not object detection.",
+    "A highlighted region is not proof of medical correctness or causality.",
+    "This audit uses the held-out test set post hoc and does not change model selection or performance metrics.",
+    "The result is specific to this dataset, checkpoint and preprocessing contract."
+  ]
+}

@@ -5,6 +5,7 @@
 *.ipynb text eol=lf
 *.sha256 text eol=lf
 *.csv text eol=lf
+research/model_results/resnet18_lastblock_finetune_v1/gradcam_v1/*.csv binary
 *.md text eol=lf
 *.pdf binary
 *.png binary
