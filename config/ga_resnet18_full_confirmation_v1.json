@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "status": "ga_resnet18_full_confirmation_v1_frozen_before_execution",
+  "experiment_type": "full_data_validation_only_hyperparameter_confirmation",
+  "authorization_token": "FROZEN_GA_RANDOM_FULL_CONFIRMATION_V1",
+  "model_contract": {
+    "model": "resnet18",
+    "target_level": "subclass",
+    "pretrained": true,
+    "fine_tune": true,
+    "trainable_scope": "layer4_plus_fc",
+    "image_size": 224,
+    "normalization": "imagenet",
+    "augmentation": "minimal",
+    "batch_size": 32,
+    "seed": 42,
+    "optimizer": "AdamW",
+    "scheduler": "ReduceLROnPlateau",
+    "maximum_epochs": 12,
+    "early_stopping_patience": 4,
+    "checkpoint_selection": "best_validation_macro_f1"
+  },
+  "frozen_inputs": {
+    "split_manifest_sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171",
+    "confirmation_manifest_sha256": "afe9d336d53ae24490e065c37b5cc764d0cfeff8f01b3fb7ee8af756bcd375f9",
+    "init_checkpoint_sha256": "20613069067825ea0dfa30e2242678b863cd0acd7b9be3c5b88f265d39285177",
+    "source_search_summary_sha256": "debb373153f0c3264e599e6c91a00c1689a86d2a21730cee2bba6d70f4a36f9c",
+    "source_review_zip_sha256": "817c95918dfc997ab75ef8410810d2b86afe44241d72cc4138b160443d804f1b",
+    "counts": {
+      "train": 91000,
+      "val": 19500,
+      "test": 0,
+      "train_per_leaf": 3500,
+      "val_per_leaf": 750,
+      "leaf_count": 26
+    }
+  },
+  "candidates": [
+    {
+      "candidate_id": "GA_G01_C02",
+      "method": "ga",
+      "learning_rate": 0.0000724655842233,
+      "weight_decay": 0.0000194540732384,
+      "dropout": 0.461905683802,
+      "proxy_validation_macro_f1": 0.9522806398375507,
+      "source_summary_sha256": "663fd75bb59622510832095d0535043a5f3b27ad51732b025566c11e5498f429"
+    },
+    {
+      "candidate_id": "RANDOM_002",
+      "method": "random",
+      "learning_rate": 0.0000586477956786,
+      "weight_decay": 0.000314775256001,
+      "dropout": 0.282717237583,
+      "proxy_validation_macro_f1": 0.9496116396155523,
+      "source_summary_sha256": "96e3d9bd78b8cec7e2a5fe22580937f35e397c6436ce947d07d811838ffa1706"
+    }
+  ],
+  "manual_baseline_reference": {
+    "name": "resnet18_lastblock_finetune_v1",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "dropout": 0.3,
+    "best_validation_macro_f1": 0.9959480748813776,
+    "note": "Previously completed shared-benchmark ablation; descriptive reference only."
+  },
+  "test_policy": {
+    "test_opened_during_confirmation": false,
+    "test_loader_constructed": false,
+    "test_metrics_allowed": false,
+    "later_test_evaluation_requires_separate_approval": true
+  },
+  "limitations": [
+    "The two candidates were selected on a smaller four-epoch proxy and their ranking may change on full train/validation data.",
+    "Only one seed is used; this confirmation does not estimate seed variance.",
+    "The underlying trainer calls the full train/validation manifest through its validation-only search-trial engine; no test rows are present.",
+    "The shared test set was used by earlier experiments and is not an untouched external test.",
+    "This dataset-specific comparison is not clinical validation."
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "status": "ga_full_confirmation_manifest_v1_complete",
+  "experiment_type": "full_train_validation_only_confirmation_manifest",
+  "opens_images": false,
+  "contains_test_rows": false,
+  "source_split_manifest": "C:\\Users\\mehmet\\Desktop\\erasmus_ders\\NNGA\\research\\splits\\practical_leakage_reduced_split_v1.csv",
+  "source_split_manifest_sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171",
+  "confirmation_manifest": "C:\\Users\\mehmet\\Desktop\\erasmus_ders\\NNGA\\research\\splits\\ga_full_confirmation_v1.csv",
+  "confirmation_manifest_sha256": "afe9d336d53ae24490e065c37b5cc764d0cfeff8f01b3fb7ee8af756bcd375f9",
+  "leaf_count": 26,
+  "leaves": [
+    "all_benign",
+    "all_early",
+    "all_pre",
+    "all_pro",
+    "brain_glioma",
+    "brain_menin",
+    "brain_tumor",
+    "breast_benign",
+    "breast_malignant",
+    "cervix_dyk",
+    "cervix_koc",
+    "cervix_mep",
+    "cervix_pab",
+    "cervix_sfi",
+    "colon_aca",
+    "colon_bnt",
+    "kidney_normal",
+    "kidney_tumor",
+    "lung_aca",
+    "lung_bnt",
+    "lung_scc",
+    "lymph_cll",
+    "lymph_fl",
+    "lymph_mcl",
+    "oral_normal",
+    "oral_scc"
+  ],
+  "counts": {
+    "train": 91000,
+    "val": 19500,
+    "test": 0
+  },
+  "per_leaf": {
+    "all_benign": {
+      "train": 3500,
+      "val": 750
+    },
+    "all_early": {
+      "train": 3500,
+      "val": 750
+    },
+    "all_pre": {
+      "train": 3500,
+      "val": 750
+    },
+    "all_pro": {
+      "train": 3500,
+      "val": 750
+    },
+    "brain_glioma": {
+      "train": 3500,
+      "val": 750
+    },
+    "brain_menin": {
+      "train": 3500,
+      "val": 750
+    },
+    "brain_tumor": {
+      "train": 3500,
+      "val": 750
+    },
+    "breast_benign": {
+      "train": 3500,
+      "val": 750
+    },
+    "breast_malignant": {
+      "train": 3500,
+      "val": 750
+    },
+    "cervix_dyk": {
+      "train": 3500,
+      "val": 750
+    },
+    "cervix_koc": {
+      "train": 3500,
+      "val": 750
+    },
+    "cervix_mep": {
+      "train": 3500,
+      "val": 750
+    },
+    "cervix_pab": {
+      "train": 3500,
+      "val": 750
+    },
+    "cervix_sfi": {
+      "train": 3500,
+      "val": 750
+    },
+    "colon_aca": {
+      "train": 3500,
+      "val": 750
+    },
+    "colon_bnt": {
+      "train": 3500,
+      "val": 750
+    },
+    "kidney_normal": {
+      "train": 3500,
+      "val": 750
+    },
+    "kidney_tumor": {
+      "train": 3500,
+      "val": 750
+    },
+    "lung_aca": {
+      "train": 3500,
+      "val": 750
+    },
+    "lung_bnt": {
+      "train": 3500,
+      "val": 750
+    },
+    "lung_scc": {
+      "train": 3500,
+      "val": 750
+    },
+    "lymph_cll": {
+      "train": 3500,
+      "val": 750
+    },
+    "lymph_fl": {
+      "train": 3500,
+      "val": 750
+    },
+    "lymph_mcl": {
+      "train": 3500,
+      "val": 750
+    },
+    "oral_normal": {
+      "train": 3500,
+      "val": 750
+    },
+    "oral_scc": {
+      "train": 3500,
+      "val": 750
+    }
+  },
+  "selection_rule": "All frozen train and validation rows, sorted by split/subclass/relative_path; all frozen test rows omitted.",
+  "claim": "Full-data validation-only confirmation input; not test performance.",
+  "forbidden_claim": "Final test result, external validation or clinical evidence."
+}
