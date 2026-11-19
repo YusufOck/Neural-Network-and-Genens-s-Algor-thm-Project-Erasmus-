@@ -111,9 +111,9 @@ def build_report(source_path: Path, output_path: Path, rows: List[dict]) -> dict
         "experiment_type": "full_train_validation_only_confirmation_manifest",
         "opens_images": False,
         "contains_test_rows": False,
-        "source_split_manifest": str(source_path),
+        "source_split_manifest": "research/splits/practical_leakage_reduced_split_v1.csv",
         "source_split_manifest_sha256": sha256_file(source_path),
-        "confirmation_manifest": str(output_path),
+        "confirmation_manifest": "research/splits/ga_full_confirmation_v1.csv",
         "confirmation_manifest_sha256": sha256_file(output_path),
         "leaf_count": len(leaves),
         "leaves": leaves,
@@ -171,9 +171,8 @@ def main() -> None:
     write_csv(rows, output_path)
     report = build_report(source_path, output_path, rows)
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(
-        json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
+    with report_path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps(report, indent=2, ensure_ascii=False))
 
 

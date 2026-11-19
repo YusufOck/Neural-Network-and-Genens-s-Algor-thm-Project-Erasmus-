@@ -54,7 +54,7 @@ class GaRandomFullConfirmationNotebookTests(unittest.TestCase):
             ROOT / "src/run_ga_random_full_confirmation.py": "69d045c449245b1e408b33017737691c153c25586461d3cf5c8691c2a449fc49",
             ROOT / "config/ga_resnet18_full_confirmation_v1.json": "7f0886527f24365373842081561a0a4b6318f16fb59d0272fff1266a9bbd34a9",
             ROOT / "research/splits/ga_full_confirmation_v1.csv": "afe9d336d53ae24490e065c37b5cc764d0cfeff8f01b3fb7ee8af756bcd375f9",
-            ROOT / "research/splits/ga_full_confirmation_v1_report.json": "33ee90d0c62320b02a3c2e9e0e0db3c5662c759d6b1ddb8cef9dcb801d904146",
+            ROOT / "research/splits/ga_full_confirmation_v1_report.json": "eba3d8b626cc8b2ba2f513f4ec58061a28470f9d99b5a095d62461ca5e3d4e6d",
         }
         for path, expected in locked.items():
             self.assertIn(expected, self.code)

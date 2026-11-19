@@ -153,7 +153,7 @@ açılmayacaktır.
 - Trainer:
   `807a23e40ea3aaa5c0c98737beddb637d71c5e5a9e5f230aa0b75d0be7212a77`
 - Manifest builder:
-  `68664894ab314bbf0fee870e25b15d6c7392a1b21fdc2635c01254e07582d0cb`
+  `5cc3ceb90da85c94612535189c869f8a3f4e8343a72bb6def12d890188128d58`
 - Confirmation runner:
   `69d045c449245b1e408b33017737691c153c25586461d3cf5c8691c2a449fc49`
 - Frozen config:
@@ -161,9 +161,9 @@ açılmayacaktır.
 - Confirmation manifest:
   `afe9d336d53ae24490e065c37b5cc764d0cfeff8f01b3fb7ee8af756bcd375f9`
 - Manifest report:
-  `33ee90d0c62320b02a3c2e9e0e0db3c5662c759d6b1ddb8cef9dcb801d904146`
+  `eba3d8b626cc8b2ba2f513f4ec58061a28470f9d99b5a095d62461ca5e3d4e6d`
 - Colab notebook:
-  `4f488a3d0dca16c5fb9e4274f0e7d90ecf509f616256a14cb460d655fb024233`
+  `2ca6b5c97d3cdef37e0cda379f59998943a70f41d62e9a3677534e40dde639e3`
 
 ## 10. Doğrulama durumu
 
