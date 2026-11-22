@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "ga_random_shared_test_v1_frozen_before_execution",
+  "experiment_type": "shared_benchmark_test_only_evaluation",
+  "authorization_token": "FROZEN_GA_RANDOM_SHARED_TEST_V1",
+  "model_contract": {
+    "model": "resnet18",
+    "target_level": "subclass",
+    "image_size": 224,
+    "normalization": "imagenet",
+    "batch_size": 32,
+    "seed": 42,
+    "evaluation_only": true,
+    "training_allowed": false,
+    "checkpoint_selection": "already_frozen_by_full_validation_macro_f1"
+  },
+  "frozen_inputs": {
+    "split_manifest_sha256": "999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171",
+    "label_taxonomy_sha256": "63820de352eb442cacf7f9701ac6006ff3c16a26642eae5042015941d8d8dd1b",
+    "confirmation_summary_sha256": "37c5d8a2f353642403a0d5469122a01c2c82fb915fd60b5efb0f7bd7744d91e1",
+    "confirmation_run_contract_sha256": "c0d11243ac4ef50c305ea03b41fc13999f030039da5a068081ec872fd1aa0017",
+    "confirmation_config_sha256": "7f0886527f24365373842081561a0a4b6318f16fb59d0272fff1266a9bbd34a9",
+    "counts": {
+      "test": 19500,
+      "test_per_leaf": 750,
+      "leaf_count": 26,
+      "parent_count": 8
+    }
+  },
+  "candidates": [
+    {
+      "candidate_id": "GA_G01_C02",
+      "method": "ga",
+      "learning_rate": 0.0000724655842233,
+      "weight_decay": 0.0000194540732384,
+      "dropout": 0.461905683802,
+      "full_validation_macro_f1": 0.9961039848384632,
+      "best_epoch": 10,
+      "confirmation_result_sha256": "46daf7c3a0e7511a84e09af91de23b26ba37afd7f58b3f8fe10e840476428903"
+    },
+    {
+      "candidate_id": "RANDOM_002",
+      "method": "random",
+      "learning_rate": 0.0000586477956786,
+      "weight_decay": 0.000314775256001,
+      "dropout": 0.282717237583,
+      "full_validation_macro_f1": 0.9956402280078372,
+      "best_epoch": 11,
+      "confirmation_result_sha256": "6fba93e355e35ef04bae13401bbd1de74839026195e61252c0bb6b92e8fd6deb"
+    }
+  ],
+  "test_policy": {
+    "candidate_selection_completed_before_test": true,
+    "evaluate_both_frozen_candidates_once": true,
+    "retraining_allowed": false,
+    "hyperparameter_change_allowed": false,
+    "test_based_reselection_allowed": false,
+    "shared_benchmark_already_used_by_prior_models": true,
+    "untouched_external_test_claim_allowed": false
+  },
+  "limitations": [
+    "The shared test split was already evaluated by earlier project models and is not an untouched final or external test.",
+    "Both candidates use one seed; the comparison does not estimate seed variance.",
+    "The dataset may contain residual unknown near-duplicate or patient/series relations beyond the known-family grouped split.",
+    "The result is dataset-specific educational evidence, not clinical validation."
+  ]
+}
