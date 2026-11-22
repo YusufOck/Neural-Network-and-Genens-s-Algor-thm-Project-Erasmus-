@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "status": "ga_random_shared_test_v1_locally_verified",
+  "verified_date": "2026-11-22",
+  "review_zip_sha256": "03ad9a66b089456175923ffc1bb24d011ea987dd908524ed86688aba4f4efd20",
+  "zip_entry_count": 21,
+  "review_manifest": {
+    "artifact_count": 20,
+    "missing": 0,
+    "hash_or_size_mismatch": 0,
+    "unexpected": 0
+  },
+  "internal_hash_manifest": {
+    "artifact_count": 18,
+    "hash_or_size_mismatch": 0
+  },
+  "checkpoint_freeze": {
+    "test_opened_during_freeze": false,
+    "ga_sha256": "d5653ff05753e53ff3678d2003d1845cf4994f5799e3b136675333a0389d3cdd",
+    "random_sha256": "9260abe7717ab65147ac136d02c3ce5b837cf4b4688f8a56bbaa3a27fadb8a1a"
+  },
+  "prediction_checks_per_candidate": {
+    "rows": 19500,
+    "unique_paths": 19500,
+    "manifest_membership_mismatch": 0,
+    "true_leaf_mismatch": 0,
+    "true_parent_mismatch": 0,
+    "probability_key_mismatch": 0,
+    "probability_sum_mismatch": 0,
+    "argmax_mismatch": 0,
+    "confidence_mismatch": 0
+  },
+  "ga": {
+    "leaf_accuracy": 0.9957948717948718,
+    "leaf_macro_f1": 0.99579379443871,
+    "leaf_balanced_accuracy": 0.9957948717948718,
+    "leaf_errors": 82,
+    "parent_accuracy": 0.9998461538461538,
+    "parent_errors": 3
+  },
+  "random": {
+    "leaf_accuracy": 0.9957435897435898,
+    "leaf_macro_f1": 0.9957445252352625,
+    "leaf_balanced_accuracy": 0.9957435897435898,
+    "leaf_errors": 83,
+    "parent_accuracy": 0.9997948717948718,
+    "parent_errors": 4
+  },
+  "paired_leaf": {
+    "both_correct": 19366,
+    "ga_only_correct": 52,
+    "random_only_correct": 51,
+    "both_wrong": 31,
+    "exact_mcnemar_pvalue": 1.0
+  },
+  "conclusion": "GA preserves the validation ranking by one test image, but exact paired evidence does not show a statistically distinguishable advantage."
+}
