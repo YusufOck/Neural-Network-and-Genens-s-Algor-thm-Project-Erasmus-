@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "status": "nnga_final_report_figures_complete",
+  "figure_count": 20,
+  "figures": [
+    "01_project_workflow.png",
+    "02_dataset_modalities.png",
+    "03_parent_distribution.png",
+    "04_phash_pipeline.png",
+    "05_duplicate_examples.png",
+    "06_candidate_load.png",
+    "07_split_and_components.png",
+    "08_smallcnn_architecture.png",
+    "09_model_comparison.png",
+    "10_best_training_curves.png",
+    "11_best_leaf_confusion_matrix.png",
+    "12_best_parent_confusion_matrix.png",
+    "13_error_pair_distribution.png",
+    "14_reliability_diagram.png",
+    "15_gradcam_examples.jpg",
+    "16_error_examples.png",
+    "17_prediction_examples.png",
+    "18_ga_workflow.png",
+    "19_ga_proxy_comparison.png",
+    "20_ga_shared_test.png"
+  ],
+  "does_not_train_or_evaluate_models": true
+}
