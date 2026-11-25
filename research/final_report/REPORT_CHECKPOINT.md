@@ -67,16 +67,19 @@ Last updated: 2026-11-25
 - [x] Evidence and document rules inspected
 - [x] Report scope and headline metrics frozen
 - [x] External primary references identified
-- [ ] Figure assets generated and audited
-- [ ] English manuscript authored
-- [ ] DOCX generated
-- [ ] DOCX rendered to PNG pages
-- [ ] Every page visually inspected
-- [ ] Layout defects corrected and re-rendered
-- [ ] Final DOCX committed and pushed
+- [x] Figure assets generated and audited (20 figures)
+- [x] English manuscript authored
+- [x] DOCX generated (29 pages)
+- [x] DOCX rendered to PNG pages through Microsoft Word and Poppler
+- [x] Every page visually inspected
+- [x] Layout defects corrected and re-rendered
+- [x] Word fields and table of contents updated and saved
+- [x] Accessibility audit: 0 high-severity findings; all 20 figures have alternative descriptions
+- [x] Heading and image-placement audits passed
+- [x] Final DOCX committed and pushed
 
 ## Restart instruction
 
 Read this file, inspect `research/final_report/figures`, `scripts/build_final_report_figures.py`,
-and `scripts/build_final_report.py`, then continue from the first unchecked item. Do not rerun any
-model training. All reportable model results are already frozen.
+and `scripts/build_final_report_docx.py`, then continue from the first unchecked item. Do not rerun
+any model training. All reportable model results are already frozen.
