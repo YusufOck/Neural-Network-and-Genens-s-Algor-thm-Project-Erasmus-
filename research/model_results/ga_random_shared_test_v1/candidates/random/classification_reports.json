@@ -1,0 +1,236 @@
+{
+  "leaf": {
+    "all_benign": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "all_early": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "all_pre": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "all_pro": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "brain_glioma": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "brain_menin": {
+      "precision": 1.0,
+      "recall": 0.9946666666666667,
+      "f1-score": 0.9973262032085561,
+      "support": 750.0
+    },
+    "brain_tumor": {
+      "precision": 0.9946949602122016,
+      "recall": 1.0,
+      "f1-score": 0.9973404255319149,
+      "support": 750.0
+    },
+    "breast_benign": {
+      "precision": 0.9986522911051213,
+      "recall": 0.988,
+      "f1-score": 0.9932975871313673,
+      "support": 750.0
+    },
+    "breast_malignant": {
+      "precision": 0.9920424403183024,
+      "recall": 0.9973333333333333,
+      "f1-score": 0.9946808510638298,
+      "support": 750.0
+    },
+    "cervix_dyk": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "cervix_koc": {
+      "precision": 0.9986684420772304,
+      "recall": 1.0,
+      "f1-score": 0.9993337774816788,
+      "support": 750.0
+    },
+    "cervix_mep": {
+      "precision": 1.0,
+      "recall": 0.9986666666666667,
+      "f1-score": 0.9993328885923949,
+      "support": 750.0
+    },
+    "cervix_pab": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "cervix_sfi": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "colon_aca": {
+      "precision": 0.9946949602122016,
+      "recall": 1.0,
+      "f1-score": 0.9973404255319149,
+      "support": 750.0
+    },
+    "colon_bnt": {
+      "precision": 1.0,
+      "recall": 0.9946666666666667,
+      "f1-score": 0.9973262032085561,
+      "support": 750.0
+    },
+    "kidney_normal": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "kidney_tumor": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "lung_aca": {
+      "precision": 0.9973154362416108,
+      "recall": 0.9906666666666667,
+      "f1-score": 0.9939799331103679,
+      "support": 750.0
+    },
+    "lung_bnt": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 750.0
+    },
+    "lung_scc": {
+      "precision": 0.990728476821192,
+      "recall": 0.9973333333333333,
+      "f1-score": 0.9940199335548173,
+      "support": 750.0
+    },
+    "lymph_cll": {
+      "precision": 0.9946949602122016,
+      "recall": 1.0,
+      "f1-score": 0.9973404255319149,
+      "support": 750.0
+    },
+    "lymph_fl": {
+      "precision": 0.9894459102902374,
+      "recall": 1.0,
+      "f1-score": 0.9946949602122016,
+      "support": 750.0
+    },
+    "lymph_mcl": {
+      "precision": 1.0,
+      "recall": 0.984,
+      "f1-score": 0.9919354838709677,
+      "support": 750.0
+    },
+    "oral_normal": {
+      "precision": 0.9706275033377837,
+      "recall": 0.9693333333333334,
+      "f1-score": 0.9699799866577719,
+      "support": 750.0
+    },
+    "oral_scc": {
+      "precision": 0.9682119205298013,
+      "recall": 0.9746666666666667,
+      "f1-score": 0.9714285714285714,
+      "support": 750.0
+    },
+    "accuracy": 0.9957435897435898,
+    "macro avg": {
+      "precision": 0.9957606654368416,
+      "recall": 0.9957435897435899,
+      "f1-score": 0.9957445252352627,
+      "support": 19500.0
+    },
+    "weighted avg": {
+      "precision": 0.9957606654368419,
+      "recall": 0.9957435897435898,
+      "f1-score": 0.9957445252352625,
+      "support": 19500.0
+    }
+  },
+  "parent": {
+    "ALL": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 3000.0
+    },
+    "Brain Cancer": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 2250.0
+    },
+    "Breast Cancer": {
+      "precision": 1.0,
+      "recall": 0.9973333333333333,
+      "f1-score": 0.9986648865153538,
+      "support": 1500.0
+    },
+    "Cervical Cancer": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 3750.0
+    },
+    "Kidney Cancer": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1500.0
+    },
+    "Lung and Colon Cancer": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 3750.0
+    },
+    "Lymphoma": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 2250.0
+    },
+    "Oral Cancer": {
+      "precision": 0.9973404255319149,
+      "recall": 1.0,
+      "f1-score": 0.9986684420772304,
+      "support": 1500.0
+    },
+    "accuracy": 0.9997948717948718,
+    "macro avg": {
+      "precision": 0.9996675531914894,
+      "recall": 0.9996666666666667,
+      "f1-score": 0.999666666074073,
+      "support": 19500.0
+    },
+    "weighted avg": {
+      "precision": 0.9997954173486088,
+      "recall": 0.9997948717948718,
+      "f1-score": 0.9997948714301987,
+      "support": 19500.0
+    }
+  }
+}

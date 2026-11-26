@@ -7,6 +7,8 @@ English summaries are available in:
 - [Experiments and Results](../docs/EXPERIMENTS_AND_RESULTS.md)
 - [Repository and Evidence Guide](../docs/REPOSITORY_GUIDE.md)
 - [Reproducibility Guide](../docs/REPRODUCIBILITY.md)
+- [Model Evaluation and Graphics Catalogue](../docs/MODEL_EVALUATION_GRAPHICS.md)
+- [Live Inference Demonstration](../docs/LIVE_DEMO.md)
 
 ## Primary evidence
 
@@ -20,6 +22,8 @@ English summaries are available in:
 | Error/calibration audit | [`model_results/resnet18_lastblock_finetune_v1/error_analysis_v1/`](model_results/resnet18_lastblock_finetune_v1/error_analysis_v1/) |
 | Grad-CAM audit | [`model_results/resnet18_lastblock_finetune_v1/gradcam_v1/`](model_results/resnet18_lastblock_finetune_v1/gradcam_v1/) |
 | GA versus random shared test | [`model_results/ga_random_shared_test_v1/`](model_results/ga_random_shared_test_v1/) |
+| GA/random full-validation curves | [`model_results/ga_random_full_confirmation_v1/`](model_results/ga_random_full_confirmation_v1/) |
+| GA/random proxy-search table | [`model_results/ga_resnet18_lastblock_search_v1/`](model_results/ga_resnet18_lastblock_search_v1/) |
 | Final-report figures | [`final_report/figures/`](final_report/figures/) |
 
 ## Historical research logs

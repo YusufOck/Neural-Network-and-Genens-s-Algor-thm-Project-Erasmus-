@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "status": "ga_random_shared_test_v1_complete",
+  "experiment_type": "shared_benchmark_test_only_evaluation",
+  "test_evaluated": true,
+  "test_rows": 19500,
+  "frozen_validation_winner": "GA_G01_C02",
+  "candidate_results": {
+    "ga": {
+      "schema_version": 1,
+      "status": "ga_random_shared_test_candidate_complete",
+      "experiment_type": "shared_benchmark_test_only_evaluation",
+      "candidate_id": "GA_G01_C02",
+      "method": "ga",
+      "test_evaluated": true,
+      "checkpoint_sha256": "d5653ff05753e53ff3678d2003d1845cf4994f5799e3b136675333a0389d3cdd",
+      "full_validation_macro_f1": 0.9961039848384632,
+      "best_validation_epoch": 10,
+      "test_loss": 0.013583091525916769,
+      "leaf_metrics": {
+        "accuracy": 0.9957948717948718,
+        "macro_f1": 0.99579379443871,
+        "balanced_accuracy": 0.9957948717948718
+      },
+      "parent_metrics": {
+        "accuracy": 0.9998461538461538,
+        "macro_f1": 0.9998000277592624,
+        "balanced_accuracy": 0.9998,
+        "class_names": [
+          "ALL",
+          "Brain Cancer",
+          "Breast Cancer",
+          "Cervical Cancer",
+          "Kidney Cancer",
+          "Lung and Colon Cancer",
+          "Lymphoma",
+          "Oral Cancer"
+        ]
+      },
+      "prediction_rows": 19500,
+      "warning": "Shared benchmark result; not an untouched external test or clinical evidence."
+    },
+    "random": {
+      "schema_version": 1,
+      "status": "ga_random_shared_test_candidate_complete",
+      "experiment_type": "shared_benchmark_test_only_evaluation",
+      "candidate_id": "RANDOM_002",
+      "method": "random",
+      "test_evaluated": true,
+      "checkpoint_sha256": "9260abe7717ab65147ac136d02c3ce5b837cf4b4688f8a56bbaa3a27fadb8a1a",
+      "full_validation_macro_f1": 0.9956402280078372,
+      "best_validation_epoch": 11,
+      "test_loss": 0.012581274825363585,
+      "leaf_metrics": {
+        "accuracy": 0.9957435897435898,
+        "macro_f1": 0.9957445252352625,
+        "balanced_accuracy": 0.9957435897435898
+      },
+      "parent_metrics": {
+        "accuracy": 0.9997948717948718,
+        "macro_f1": 0.9996666660740731,
+        "balanced_accuracy": 0.9996666666666667,
+        "class_names": [
+          "ALL",
+          "Brain Cancer",
+          "Breast Cancer",
+          "Cervical Cancer",
+          "Kidney Cancer",
+          "Lung and Colon Cancer",
+          "Lymphoma",
+          "Oral Cancer"
+        ]
+      },
+      "prediction_rows": 19500,
+      "warning": "Shared benchmark result; not an untouched external test or clinical evidence."
+    }
+  },
+  "ga_minus_random": {
+    "accuracy": 5.1282051282020014e-05,
+    "macro_f1": 4.926920344749952e-05,
+    "balanced_accuracy": 5.1282051282020014e-05
+  },
+  "paired_comparison": {
+    "leaf": {
+      "both_correct": 19366,
+      "ga_only_correct": 52,
+      "random_only_correct": 51,
+      "both_wrong": 31,
+      "discordant": 103,
+      "exact_mcnemar_pvalue": 1.0
+    },
+    "parent": {
+      "both_correct": 19493,
+      "ga_only_correct": 4,
+      "random_only_correct": 3,
+      "both_wrong": 0,
+      "discordant": 7,
+      "exact_mcnemar_pvalue": 1.0
+    }
+  },
+  "test_based_reselection_performed": false,
+  "warning": "Shared benchmark already used by prior models; not untouched external test or clinical evidence. Validation selection remains frozen regardless of test ranking."
+}

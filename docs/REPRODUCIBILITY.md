@@ -142,6 +142,13 @@ Large checkpoints and full prediction packages are kept in Google Drive under `N
 excluded from Git. Compact verified metrics, figures, and audit summaries are tracked under
 `research/model_results/`.
 
+## Live inference demonstration
+
+Use [`notebooks/resnet18_live_demo_colab.ipynb`](../notebooks/resnet18_live_demo_colab.ipynb).
+It verifies the best checkpoint hash, replays 37 frozen samples, runs one selected-image prediction,
+and creates a hash-manifested evidence ZIP. It does not call the trainer or alter checkpoints. See
+the [Live Inference Demonstration guide](LIVE_DEMO.md) for the expected outputs and proof protocol.
+
 ## Safety rules for completed experiments
 
 - Never overwrite an existing completed output directory.

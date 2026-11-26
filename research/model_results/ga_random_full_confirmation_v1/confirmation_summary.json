@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "ga_random_full_confirmation_v1_complete",
+  "experiment_type": "full_data_validation_only_hyperparameter_confirmation",
+  "test_evaluated": false,
+  "completed_candidates": 2,
+  "expected_candidates": 2,
+  "results": {
+    "ga": {
+      "schema_version": 1,
+      "candidate_id": "GA_G01_C02",
+      "method": "ga",
+      "learning_rate": 7.24655842233e-05,
+      "weight_decay": 1.94540732384e-05,
+      "dropout": 0.461905683802,
+      "proxy_validation_macro_f1": 0.9522806398375507,
+      "source_summary_sha256": "663fd75bb59622510832095d0535043a5f3b27ad51732b025566c11e5498f429",
+      "full_validation_macro_f1": 0.9961039848384632,
+      "best_epoch": 10,
+      "epochs_completed": 12,
+      "test_evaluated": false,
+      "summary_sha256": "404b0e85e95988764e10e3727d285e043a37334913f4ece080030097949df537"
+    },
+    "random": {
+      "schema_version": 1,
+      "candidate_id": "RANDOM_002",
+      "method": "random",
+      "learning_rate": 5.86477956786e-05,
+      "weight_decay": 0.000314775256001,
+      "dropout": 0.282717237583,
+      "proxy_validation_macro_f1": 0.9496116396155523,
+      "source_summary_sha256": "96e3d9bd78b8cec7e2a5fe22580937f35e397c6436ce947d07d811838ffa1706",
+      "full_validation_macro_f1": 0.9956402280078372,
+      "best_epoch": 11,
+      "epochs_completed": 12,
+      "test_evaluated": false,
+      "summary_sha256": "8524824285f78e617450dbfba0a7922f29b4e932510f6fb5e4a849ffa9f542a3"
+    }
+  },
+  "validation_winner": {
+    "schema_version": 1,
+    "candidate_id": "GA_G01_C02",
+    "method": "ga",
+    "learning_rate": 7.24655842233e-05,
+    "weight_decay": 1.94540732384e-05,
+    "dropout": 0.461905683802,
+    "proxy_validation_macro_f1": 0.9522806398375507,
+    "source_summary_sha256": "663fd75bb59622510832095d0535043a5f3b27ad51732b025566c11e5498f429",
+    "full_validation_macro_f1": 0.9961039848384632,
+    "best_epoch": 10,
+    "epochs_completed": 12,
+    "test_evaluated": false,
+    "summary_sha256": "404b0e85e95988764e10e3727d285e043a37334913f4ece080030097949df537"
+  },
+  "manual_baseline_reference": {
+    "name": "resnet18_lastblock_finetune_v1",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "dropout": 0.3,
+    "best_validation_macro_f1": 0.9959480748813776,
+    "note": "Previously completed shared-benchmark ablation; descriptive reference only."
+  },
+  "deltas_vs_manual_baseline": {
+    "ga": 0.00015590995708558708,
+    "random": -0.0003078468735403517
+  },
+  "next_stage": "Review full-validation evidence before any separately approved test evaluation.",
+  "warning": "Validation-only full-data confirmation; not test performance or clinical evidence."
+}

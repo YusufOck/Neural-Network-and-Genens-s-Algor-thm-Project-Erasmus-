@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "ga_random_shared_test_candidate_complete",
+  "experiment_type": "shared_benchmark_test_only_evaluation",
+  "candidate_id": "RANDOM_002",
+  "method": "random",
+  "test_evaluated": true,
+  "checkpoint_sha256": "9260abe7717ab65147ac136d02c3ce5b837cf4b4688f8a56bbaa3a27fadb8a1a",
+  "full_validation_macro_f1": 0.9956402280078372,
+  "best_validation_epoch": 11,
+  "test_loss": 0.012581274825363585,
+  "leaf_metrics": {
+    "accuracy": 0.9957435897435898,
+    "macro_f1": 0.9957445252352625,
+    "balanced_accuracy": 0.9957435897435898
+  },
+  "parent_metrics": {
+    "accuracy": 0.9997948717948718,
+    "macro_f1": 0.9996666660740731,
+    "balanced_accuracy": 0.9996666666666667,
+    "class_names": [
+      "ALL",
+      "Brain Cancer",
+      "Breast Cancer",
+      "Cervical Cancer",
+      "Kidney Cancer",
+      "Lung and Colon Cancer",
+      "Lymphoma",
+      "Oral Cancer"
+    ]
+  },
+  "prediction_rows": 19500,
+  "warning": "Shared benchmark result; not an untouched external test or clinical evidence."
+}

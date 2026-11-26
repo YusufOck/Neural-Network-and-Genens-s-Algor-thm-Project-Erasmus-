@@ -29,6 +29,8 @@ with equal-budget random search.
 - [x] Shared 19,500-image test evaluation and exact McNemar comparison.
 - [x] English academic final report.
 - [x] English professor-facing GitHub documentation.
+- [x] Hash-verified live-inference CLI and locked Colab demonstration notebook.
+- [x] Complete compact graphics catalogue for all primary and GA/random experiments.
 
 ## Current principal result
 
@@ -53,16 +55,18 @@ set: 52 GA-only correct versus 51 random-only correct, exact McNemar `p = 1.0`.
 | Visual evidence | Complete | `research/final_report/figures/` and model-result folders |
 | English final report | Complete | `deliverables/NNGA_Final_Report_Mehmet_Yusuf_Ocak_Erasmus.docx` |
 | English GitHub documentation | Complete | `README.md`, `docs/`, `research/README.md` |
+| Live demo implementation | Complete; full 37-case Drive replay pending | `src/predict_image.py`, `notebooks/resnet18_live_demo_colab.ipynb` |
 | Presentation | Deferred | Ask the professor whether presenting directly from the report is acceptable |
 
 ## Remaining delivery actions
 
-1. Review the English report and repository documentation with the student.
-2. Ask the professor whether a separate slide deck is required or whether the report may be used
+1. Run the live-demo notebook once against the Drive checkpoint and retain its evidence ZIP.
+2. Review the English report and repository documentation with the student.
+3. Ask the professor whether a separate slide deck is required or whether the report may be used
    during the defense.
-3. If requested, create the presentation from the already verified report figures and results.
-4. Prepare a short oral-defense script and technical question/answer sheet.
-5. Perform one final repository-link, report-render, and Git cleanliness check before submission.
+4. If requested, create the presentation from the already verified report figures and results.
+5. Prepare a short oral-defense script and technical question/answer sheet.
+6. Perform one final repository-link, report-render, and Git cleanliness check before submission.
 
 ## Frozen scientific rules
 

@@ -246,6 +246,7 @@ Main reportable Colab notebooks:
 - [`notebooks/ga_resnet18_lastblock_search_colab.ipynb`](notebooks/ga_resnet18_lastblock_search_colab.ipynb)
 - [`notebooks/ga_random_full_confirmation_colab.ipynb`](notebooks/ga_random_full_confirmation_colab.ipynb)
 - [`notebooks/ga_random_shared_test_colab.ipynb`](notebooks/ga_random_shared_test_colab.ipynb)
+- [`notebooks/resnet18_live_demo_colab.ipynb`](notebooks/resnet18_live_demo_colab.ipynb) — inference-only professor demo
 
 See [Reproducibility Guide](docs/REPRODUCIBILITY.md) before running a notebook. Existing result
 directories and Drive checkpoints must not be overwritten.
@@ -258,6 +259,8 @@ directories and Drive checkpoints must not be overwritten.
 - [Experiments and Results](docs/EXPERIMENTS_AND_RESULTS.md)
 - [Reproducibility Guide](docs/REPRODUCIBILITY.md)
 - [Professor Demonstration Guide](docs/PROFESSOR_DEMO_GUIDE.md)
+- [Live Inference Demonstration](docs/LIVE_DEMO.md)
+- [Model Evaluation and Graphics Catalogue](docs/MODEL_EVALUATION_GRAPHICS.md)
 - [Current Project Plan](PROJECT_PLAN.md)
 - [Research Evidence Index](research/README.md)
 - [Final English report](deliverables/NNGA_Final_Report_Mehmet_Yusuf_Ocak_Erasmus.docx)

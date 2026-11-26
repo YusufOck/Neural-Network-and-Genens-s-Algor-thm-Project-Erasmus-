@@ -41,6 +41,7 @@ NNGA/
 | [`src/run_ga_random_search.py`](../src/run_ga_random_search.py) | Equal-budget GA and random proxy search |
 | [`src/run_ga_random_full_confirmation.py`](../src/run_ga_random_full_confirmation.py) | Full train/validation confirmation of frozen search winners |
 | [`src/evaluate_ga_random_shared_test.py`](../src/evaluate_ga_random_shared_test.py) | Shared-test inference and paired McNemar comparison |
+| [`src/predict_image.py`](../src/predict_image.py) | Hash-verified single-image inference and 37-case frozen replay |
 
 ## Dataset and duplicate-audit code
 
@@ -98,6 +99,9 @@ Folder: [`research/model_results/resnet18_lastblock_finetune_v1/`](../research/m
 
 - `test_metrics.json`: verified 26-leaf and eight-parent metrics;
 - `history.csv`: epoch history;
+- `learning_curves.png`: train/validation loss, accuracy, and macro-F1;
+- `leaf_confusion_matrix.png` and `parent_confusion_matrix.png`;
+- `classification_reports.json`: per-class precision, recall, and F1;
 - `paired_comparison.json`: paired comparison with earlier baselines;
 - `verification_summary.json`: independent package and prediction checks;
 - `error_analysis_v1/`: all 69 errors, calibration outputs, and 12 contact sheets;
@@ -110,8 +114,12 @@ The large `best_model.pth` checkpoint is stored in Google Drive under
 
 Folder: [`research/model_results/ga_random_shared_test_v1/`](../research/model_results/ga_random_shared_test_v1/)
 
-The compact `verification_summary.json` contains both test metrics, checkpoint hashes, prediction
-integrity checks, paired correctness counts, and the exact McNemar result.
+The folder now includes both candidates' test metrics, classification reports, leaf/parent
+confusion matrices, the shared-test summary, and the compact `verification_summary.json` with
+checkpoint hashes, prediction integrity checks, paired correctness counts, and exact McNemar result.
+
+For a complete experiment-by-experiment index, use the
+[Model Evaluation and Graphics Catalogue](MODEL_EVALUATION_GRAPHICS.md).
 
 ## Visual evidence to show the professor
 
@@ -145,6 +153,7 @@ For all seven Grad-CAM sheets, use
 | [`ga_resnet18_lastblock_search_colab.ipynb`](../notebooks/ga_resnet18_lastblock_search_colab.ipynb) | GA/random proxy search |
 | [`ga_random_full_confirmation_colab.ipynb`](../notebooks/ga_random_full_confirmation_colab.ipynb) | Full validation confirmation |
 | [`ga_random_shared_test_colab.ipynb`](../notebooks/ga_random_shared_test_colab.ipynb) | Frozen shared-test evaluation |
+| [`resnet18_live_demo_colab.ipynb`](../notebooks/resnet18_live_demo_colab.ipynb) | Inference-only frozen replay and live prediction |
 
 ## Final deliverable
 

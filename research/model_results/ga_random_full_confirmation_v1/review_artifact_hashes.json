@@ -1,0 +1,70 @@
+{
+  "run_contract.json": {
+    "sha256": "c0d11243ac4ef50c305ea03b41fc13999f030039da5a068081ec872fd1aa0017",
+    "size_bytes": 876
+  },
+  "frozen_config.json": {
+    "sha256": "7f0886527f24365373842081561a0a4b6318f16fb59d0272fff1266a9bbd34a9",
+    "size_bytes": 3170
+  },
+  "confirmation_results.csv": {
+    "sha256": "0eac76deaa043bfaf4848347d0b7f32d355df1a29854597846f6cfaef72385d5",
+    "size_bytes": 680
+  },
+  "confirmation_summary.json": {
+    "sha256": "37c5d8a2f353642403a0d5469122a01c2c82fb915fd60b5efb0f7bd7744d91e1",
+    "size_bytes": 2677
+  },
+  "ga_random_full_confirmation_v1_console.log": {
+    "sha256": "9c5e37caceb8e52611383f440c2d12c15fe7fc9a92ba1993c4c4d8c006412987",
+    "size_bytes": 41438
+  },
+  "candidates/ga/candidate.json": {
+    "sha256": "a13efdbffd2ae9f3eea4bd8b598b36395378da90855431c1ae296a532af7cbfb",
+    "size_bytes": 326
+  },
+  "candidates/ga/confirmation_result.json": {
+    "sha256": "46daf7c3a0e7511a84e09af91de23b26ba37afd7f58b3f8fe10e840476428903",
+    "size_bytes": 537
+  },
+  "candidates/ga/search_trial_summary.json": {
+    "sha256": "404b0e85e95988764e10e3727d285e043a37334913f4ece080030097949df537",
+    "size_bytes": 1098
+  },
+  "candidates/ga/history.csv": {
+    "sha256": "a9cb54339bf1966586af482673c44bdfc293c0d28d9e0f5d1191ab8c971158f9",
+    "size_bytes": 1518
+  },
+  "candidates/ga/run_config.json": {
+    "sha256": "9a889a63929cd9c231ad8141d170a4a5b9ae953dd18c2dd7b7a814b5b4997492",
+    "size_bytes": 1132
+  },
+  "candidates/ga/learning_curves.png": {
+    "sha256": "370e37451f2fa6ac64387cc8f1d260adb1b75ae6a31301b29b8b5c5713300e05",
+    "size_bytes": 121106
+  },
+  "candidates/random/candidate.json": {
+    "sha256": "b8d1d078fb3c759b7a1dbc19981cde8d6aca45856ffbefeb13fac22517771993",
+    "size_bytes": 330
+  },
+  "candidates/random/confirmation_result.json": {
+    "sha256": "6fba93e355e35ef04bae13401bbd1de74839026195e61252c0bb6b92e8fd6deb",
+    "size_bytes": 541
+  },
+  "candidates/random/search_trial_summary.json": {
+    "sha256": "8524824285f78e617450dbfba0a7922f29b4e932510f6fb5e4a849ffa9f542a3",
+    "size_bytes": 1098
+  },
+  "candidates/random/history.csv": {
+    "sha256": "36a61ded64fa6d9d9bdd72c3810ca6120af13f536cd6cd7dfbe1930eea71e4eb",
+    "size_bytes": 1507
+  },
+  "candidates/random/run_config.json": {
+    "sha256": "cf8abe2a2d24f59367a3d58fbf7068dfd31267531b018f0cbd515000da582e4c",
+    "size_bytes": 1136
+  },
+  "candidates/random/learning_curves.png": {
+    "sha256": "072cb35371dc613a8520de339aa392bd188194a3428fdc655179e9753825c1c1",
+    "size_bytes": 120682
+  }
+}

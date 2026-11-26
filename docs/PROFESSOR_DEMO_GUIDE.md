@@ -74,6 +74,13 @@ Key conclusion:
 Explain that the work is a strong dataset benchmark but not clinical validation because modalities
 and data sources differ, patient IDs are unavailable, and unknown near relatives may remain.
 
+### 8. Optional live inference
+
+Open the [live demo notebook in Colab](https://colab.research.google.com/github/YusufOck/Neural-Network-and-Genens-s-Algor-thm-Project-Erasmus-/blob/main/notebooks/resnet18_live_demo_colab.ipynb).
+First show the frozen `37/37` replay result, then classify one chosen image and display its saved
+prediction card. The replay is stronger evidence than showing only a hand-picked correct example.
+See the complete [Live Inference Demonstration guide](LIVE_DEMO.md).
+
 ## Files to keep open before meeting
 
 1. [`deliverables/NNGA_Final_Report_Mehmet_Yusuf_Ocak_Erasmus.docx`](../deliverables/NNGA_Final_Report_Mehmet_Yusuf_Ocak_Erasmus.docx)
@@ -82,6 +89,7 @@ and data sources differ, patient IDs are unavailable, and unknown near relatives
 4. [`research/final_report/figures/`](../research/final_report/figures/)
 5. [`error_analysis_v1/contact_sheets/`](../research/model_results/resnet18_lastblock_finetune_v1/error_analysis_v1/contact_sheets/)
 6. [`gradcam_v1/contact_sheets/`](../research/model_results/resnet18_lastblock_finetune_v1/gradcam_v1/contact_sheets/)
+7. [`docs/MODEL_EVALUATION_GRAPHICS.md`](MODEL_EVALUATION_GRAPHICS.md)
 
 ## If the professor asks for code
 
@@ -89,5 +97,6 @@ and data sources differ, patient IDs are unavailable, and unknown near relatives
 - split: [`src/build_practical_leakage_reduced_split.py`](../src/build_practical_leakage_reduced_split.py);
 - Grad-CAM: [`src/run_gradcam_audit.py`](../src/run_gradcam_audit.py);
 - GA search: [`src/run_ga_random_search.py`](../src/run_ga_random_search.py);
+- live inference: [`src/predict_image.py`](../src/predict_image.py);
 - notebooks: [`notebooks/`](../notebooks/);
 - tests: [`tests/`](../tests/).

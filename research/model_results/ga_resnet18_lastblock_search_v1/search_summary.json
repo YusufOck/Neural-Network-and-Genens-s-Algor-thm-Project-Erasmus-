@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "status": "ga_random_search_v1_complete",
+  "experiment_type": "bounded_equal_budget_hyperparameter_search",
+  "test_evaluated": false,
+  "completed_trials": {
+    "ga": 12,
+    "random": 12
+  },
+  "expected_trials": {
+    "ga": 12,
+    "random": 12
+  },
+  "equal_budget_complete": true,
+  "winners": {
+    "ga": {
+      "schema_version": 1,
+      "candidate_id": "GA_G01_C02",
+      "method": "ga",
+      "sequence": 2,
+      "round_index": 1,
+      "slot_index": 2,
+      "learning_rate": 7.24655842233e-05,
+      "weight_decay": 1.94540732384e-05,
+      "dropout": 0.461905683802,
+      "fitness": 0.9522806398375507,
+      "best_epoch": 4,
+      "epochs_completed": 4,
+      "test_evaluated": false,
+      "summary_sha256": "663fd75bb59622510832095d0535043a5f3b27ad51732b025566c11e5498f429"
+    },
+    "random": {
+      "schema_version": 1,
+      "candidate_id": "RANDOM_002",
+      "method": "random",
+      "sequence": 2,
+      "round_index": null,
+      "slot_index": null,
+      "learning_rate": 5.86477956786e-05,
+      "weight_decay": 0.000314775256001,
+      "dropout": 0.282717237583,
+      "fitness": 0.9496116396155523,
+      "best_epoch": 4,
+      "epochs_completed": 4,
+      "test_evaluated": false,
+      "summary_sha256": "96e3d9bd78b8cec7e2a5fe22580937f35e397c6436ce947d07d811838ffa1706"
+    }
+  },
+  "next_stage": "Separate approval for full-data confirmation of both winners.",
+  "warning": "Proxy validation search result; not test performance or clinical evidence."
+}
