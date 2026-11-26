@@ -1,336 +1,286 @@
-# NNGA Multi-Cancer Classification Project
+# Multi-Cancer Image Classification with Neural Networks and Genetic Algorithms
 
-Bu proje, Bükreş Politeknik Üniversitesi Neural Networks and Genetic Algorithms dersi için
-Kaggle'daki **Multi Cancer Dataset** üzerinde yürütülen görüntü sınıflandırma çalışmasıdır.
+**Student:** Mehmet Yusuf Ocak — Erasmus<br>
+**Course:** Neural Networks and Genetic Algorithms<br>
+**Institution:** National University of Science and Technology POLITEHNICA Bucharest<br>
+**Project type:** Educational image-classification research project
 
-Profesör kayıtta sekiz sınıf istemiştir; ancak veri setinin sekiz üst klasörü sekiz tutarlı
-kanser tanısı değil, farklı kaynak/organ gruplarıdır. Bazılarının içinde hem normal/benign hem
-de hastalıklı görüntüler bulunur. Bu nedenle çalışma iki seviyeyi birlikte ele almayı planlar:
+This repository contains a reproducible study of the Kaggle **Multi Cancer** image dataset. The
+system predicts one of **26 detailed dataset leaf classes** and then deterministically maps that
+prediction to one of the dataset's **eight parent groups**. The work includes a full dataset audit,
+duplicate/leakage analysis, a fixed known-family-grouped split, controlled neural-network
+experiments, error analysis, Grad-CAM explainability, and an equal-budget genetic-algorithm versus
+random-search comparison.
 
-1. Profesörün sekiz sınıf ifadesiyle uyumlu üst grup değerlendirmesi.
-2. Veri setindeki daha ayrıntılı 26 alt sınıfın tahmini ve buradan sekiz üst grubun türetilmesi.
+> This project evaluates classification within the supplied dataset. It is not a clinically
+> validated diagnostic system, does not predict a universal cancer/no-cancer label, and does not
+> predict cancer stage.
 
-Bu kapsam henüz nihai deney sonucu veya klinik tanı iddiası değildir.
+## Project at a glance
 
-## Temel belgeler
+| Item | Verified value |
+|---|---:|
+| Accepted images | 130,000 |
+| Parent dataset groups | 8 |
+| Detailed leaf classes | 26 |
+| Images per leaf | 5,000 |
+| Fixed train / validation / test | 91,000 / 19,500 / 19,500 |
+| Best test leaf accuracy | **99.6462%** |
+| Best test leaf macro-F1 | **99.6462%** |
+| Best derived-parent accuracy | **99.9897%** |
+| Best-model leaf errors | 69 / 19,500 |
+| Exact duplicate groups | 1,318 |
+| Cross-split known-family components | 0 |
 
-- [research/BEGINNER_PROJECT_MAP_TR.md](research/BEGINNER_PROJECT_MAP_TR.md): başlangıçtan klasör/kod haritası, tek Pair ID inceleme yöntemi, sentetik pozitif ve pHash açıklaması
-- [PROJECT_PLAN.md](PROJECT_PLAN.md): deney sırası, başarı ölçütleri ve teslim planı
-- [research/PROJECT_STATUS_TR.md](research/PROJECT_STATUS_TR.md): tam kapsam, pilot, devam eden ve başlamamış işlerin güncel kontrol listesi
-- [research/NEAR_DUPLICATE_METHOD_PLAN_TR.md](research/NEAR_DUPLICATE_METHOD_PLAN_TR.md): pHash, ORB/RANSAC, ECC ve hizalanmış benzerlikle bütün 26 sınıfa genişleme planı
-- [research/CALIBRATION_SET_V1_AUDIT_TR.md](research/CALIBRATION_SET_V1_AUDIT_TR.md): 26 sınıflı duplicate-yöntem kalibrasyon taslağının üretim ve kontrol sonuçları
-- [research/CALIBRATION_REVIEW_PACKAGE_TR.md](research/CALIBRATION_REVIEW_PACKAGE_TR.md): 278 aday için Pair ID'li temas sayfaları ve kontrollü development/holdout inceleme protokolü
-- [research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md](research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md): 139 development çiftinin AI-destekli görsel kararları ve holdout koruması
-- [research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md](research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md): 671 development çiftinde ORB/RANSAC, phase correlation, ECC ve hizalanmış benzerlik pilotu
-- [research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md](research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md): dondurulmuş duplicate rule v1'in 671 holdout çiftindeki tek seferlik değerlendirmesi ve kesinti sonrası bütünlük doğrulaması
-- [research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md](research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md): 130.000 görüntü öncesi pHash/ResNet18 aday üretimi hız-recall pilotu
-- [research/CANDIDATE_GENERATION_BENCHMARK_V2_TR.md](research/CANDIDATE_GENERATION_BENCHMARK_V2_TR.md): autocontrast/multi-crop robust ResNet18 top-k aday üretimi ve kalibrasyon kabul sonucu
-- [research/CANDIDATE_GENERATION_SCALED_PILOT_V1_TR.md](research/CANDIDATE_GENERATION_SCALED_PILOT_V1_TR.md): 8.248 görüntülük indeks-yoğunluğu pilotu, robust top-10 kaçırmaları ve post-hoc pHash≤8 safety-channel analizi
-- [research/DATASET_MASTER_AUDIT_TR.md](research/DATASET_MASTER_AUDIT_TR.md): veri setinin ana denetimi
-- [research/LABEL_SEMANTICS_AUDIT_TR.md](research/LABEL_SEMANTICS_AUDIT_TR.md): 26 etiketin anlamları ve sınırları
-- [research/EXISTING_WORKS.md](research/EXISTING_WORKS.md): Kaggle/GitHub çalışmalarının karşılaştırması
-- [research/ROUPB_CANCER_APP_AUDIT_TR.md](research/ROUPB_CANCER_APP_AUDIT_TR.md): en yakın 26-sınıf dış projenin kod denetimi
-- [output/pdf/NNGA_Progress_Update_2026-10-22.pdf](output/pdf/NNGA_Progress_Update_2026-10-22.pdf): hocaya gönderilebilecek iki sayfalık İngilizce ilerleme özeti
-- [output/pdf/NNGA_Duplicate_Examples_2026-10-22.png](output/pdf/NNGA_Duplicate_Examples_2026-10-22.png): aynı-kaynak ve belirsiz çift örneğini gösteren ek görsel
+![Complete project workflow](research/final_report/figures/01_project_workflow.png)
 
-## Öğretmenin istediği teslim
+## Main contribution
 
-- Kayıttaki ifadeye göre sekiz sınıflı görüntü sınıflandırma yazılımı
-- Yaklaşık 15-20 sayfalık teorik ve deneysel rapor
-- Proje sunumu/savunması
-- Kullanılan dış kodların kaynaklandırılması ve öğrencinin katkısının açıklanması
+The downloaded dataset is already augmented, while filenames do not preserve patient, series, or
+original-image family identifiers. A naive random image-level split could therefore place exact or
+visually related files on both sides of the evaluation. The project addressed this risk before
+training:
 
-## Veri setinin önemli sınırları
+1. Audited all 130,000 accepted images and their metadata.
+2. Detected byte-identical files with SHA-256.
+3. Developed and tested a modality-aware near-duplicate workflow using pHash, robust ResNet18
+   retrieval, ORB/RANSAC, phase correlation, ECC, SSIM, NMI, correlation, and blinded visual
+   review.
+4. Merged every known exact or reviewed relationship into transitive components.
+5. Assigned each component wholly to train, validation, or test.
+6. Reused the exact same saved split for every reportable model.
 
-Sekiz üst grup şunlardır:
+![Duplicate audit examples](research/final_report/figures/05_duplicate_examples.png)
 
-1. ALL
-2. Brain Cancer
-3. Breast Cancer
-4. Cervical Cancer
-5. Kidney Cancer
-6. Lung and Colon Cancer
-7. Lymphoma
-8. Oral Cancer
+## Dataset and task definition
 
-> Bu sekiz etiket sağlıklı/kanserli veya kanser evresi etiketi değildir. Örneğin
-> `oral_normal` üst seviyede `Oral Cancer`, `kidney_normal` ise `Kidney Cancer` grubuna girer.
-> Veri seti MRI, CT, kan yayması, Pap smear ve farklı histopatoloji görüntülerini bir araya
-> getirir. Model hastalık özelliği yerine görüntüleme yöntemini öğrenebilir. Çalışma klinik tanı
-> sistemi olarak sunulmamalıdır.
+The eight top-level folders are heterogeneous dataset/source groups rather than eight uniform
+cancer diagnoses. They combine blood-smear microscopy, contrast-enhanced brain MRI, abdominal CT,
+Pap-smear microscopy, and several histopathology collections.
 
-Yerel veri yolu:
+| Parent group | Leaf labels | Images |
+|---|---|---:|
+| ALL | `all_benign`, `all_early`, `all_pre`, `all_pro` | 20,000 |
+| Brain Cancer | `brain_glioma`, `brain_menin`, `brain_tumor` | 15,000 |
+| Breast Cancer | `breast_benign`, `breast_malignant` | 10,000 |
+| Cervical Cancer | `cervix_dyk`, `cervix_koc`, `cervix_mep`, `cervix_pab`, `cervix_sfi` | 25,000 |
+| Kidney Cancer | `kidney_normal`, `kidney_tumor` | 10,000 |
+| Lung and Colon Cancer | `colon_aca`, `colon_bnt`, `lung_aca`, `lung_bnt`, `lung_scc` | 25,000 |
+| Lymphoma | `lymph_cll`, `lymph_fl`, `lymph_mcl` | 15,000 |
+| Oral Cancer | `oral_normal`, `oral_scc` | 10,000 |
+
+The model is trained directly on the 26 leaf labels. The eight-parent result is derived from the
+predicted leaf; it is not produced by a separate model. This preserves the detailed target while
+also providing the professor-requested eight-group evaluation.
+
+![Dataset modalities](research/final_report/figures/02_dataset_modalities.png)
+
+See [Dataset Taxonomy](docs/DATASET_TAXONOMY.md) for the full semantic interpretation and safe
+wording for every leaf.
+
+## Data audit and fixed split
+
+The audit accepted 130,000 images after excluding two `*.bak.jpg` files. All accepted images open
+successfully. A content-header inspection found 125,000 JPEG-encoded images and 5,000 PNG-encoded
+`breast_malignant` images stored with `.jpg` names. Three images are 640×640; all others are
+512×512. The loader decodes by file content and resizes without altering source files.
+
+SHA-256 analysis found **1,318 exact-duplicate groups**, containing 2,673 files and 1,355 redundant
+copies. No exact group crossed a leaf label. Exact groups and 85 frozen reviewed links were merged
+transitively into:
+
+- 128,560 total components;
+- 1,402 multi-image components;
+- 2,842 images inside multi-image components;
+- maximum component size of four.
+
+The final fixed split is exactly stratified at leaf level:
+
+- 3,500 train images per leaf;
+- 750 validation images per leaf;
+- 750 test images per leaf;
+- zero cross-split exact groups;
+- zero cross-split reviewed links;
+- zero cross-split known-family components.
+
+![Fixed split and known-family grouping](research/final_report/figures/07_split_and_components.png)
+
+The authoritative manifest is
+[`research/splits/practical_leakage_reduced_split_v1.csv`](research/splits/practical_leakage_reduced_split_v1.csv),
+SHA-256 `999bf7a9bd1bba9f2957a9db0e13ae72adb3ecb8fdbc1f33cce40b083c1cf171`.
+
+The valid claim is **known-family-grouped, practical leakage-reduced split**. Patient-level or
+complete unknown-near-duplicate separation cannot be claimed because the dataset does not provide
+patient or scan-series identifiers.
+
+## Neural-network experiments
+
+All reportable runs used the same split, seed 42, 224×224 inputs, validation macro-F1 checkpoint
+selection, and the identical 19,500-image test set.
+
+| Model | Training strategy | Best epoch | Leaf accuracy | Leaf macro-F1 | Parent accuracy |
+|---|---|---:|---:|---:|---:|
+| ResNet18 | ImageNet backbone frozen; new classifier head | 9 | 91.3026% | 91.2455% | 99.7744% |
+| SmallCNN | Approximately 97k parameters, trained from scratch | 25 | 95.5846% | 95.5916% | 99.9231% |
+| **ResNet18** | **Prior best checkpoint; train `layer4 + fc`** | **11** | **99.6462%** | **99.6462%** | **99.9897%** |
+| GA-selected ResNet18 | Equal-budget GA hyperparameters | 10 validation | 99.5795% | 99.5794% | 99.9846% |
+| Random-selected ResNet18 | Equal-budget random-search hyperparameters | 11 validation | 99.5744% | 99.5745% | 99.9795% |
+
+![Model comparison](research/final_report/figures/09_model_comparison.png)
+
+The manually configured last-block fine-tuned ResNet18 remains the strongest test result. Its
+19,500 test predictions contain 19,431 correct leaf predictions and 69 leaf errors. Sixty-seven
+of those leaf errors remain inside the correct parent group, explaining why parent accuracy is
+higher than leaf accuracy.
+
+![Best-model training curves](research/final_report/figures/10_best_training_curves.png)
+
+## Best-model evidence
+
+The repository includes the following visual and machine-readable evidence:
+
+- [Representative correct and incorrect predictions](research/final_report/figures/17_prediction_examples.png)
+- [26-leaf confusion matrix](research/final_report/figures/11_best_leaf_confusion_matrix.png)
+- [Eight-parent confusion matrix](research/final_report/figures/12_best_parent_confusion_matrix.png)
+- [All 69 error rows](research/model_results/resnet18_lastblock_finetune_v1/error_analysis_v1/error_rows.csv)
+- [Twelve error contact sheets](research/model_results/resnet18_lastblock_finetune_v1/error_analysis_v1/contact_sheets/)
+- [Best-model test metrics](research/model_results/resnet18_lastblock_finetune_v1/test_metrics.json)
+- [Training history](research/model_results/resnet18_lastblock_finetune_v1/history.csv)
+
+![Representative predictions](research/final_report/figures/17_prediction_examples.png)
+
+## Error and confidence analysis
+
+The most frequent leaf confusion was oral normal versus oral SCC: 18
+`oral_normal → oral_scc` and 16 `oral_scc → oral_normal` errors. Only two errors crossed parent
+groups. The post-hoc test audit also measured:
+
+| Measure | Value |
+|---|---:|
+| 15-bin expected calibration error | 0.001032 |
+| Negative log-likelihood | 0.010893 |
+| Multiclass Brier score | 0.005630 |
+| Top-2 accuracy | 99.9949% |
+
+![Error distribution](research/final_report/figures/13_error_pair_distribution.png)
+
+## Grad-CAM explainability audit
+
+Before generating heatmaps, 37 test samples were frozen: one correct control for every leaf and 11
+predefined error cases. The final checkpoint reproduced all 37 predictions. Grad-CAM was computed
+at `layer4.1.conv2`, producing 37 panels and seven contact sheets.
+
+![Grad-CAM examples](research/final_report/figures/15_gradcam_examples.jpg)
+
+Grad-CAM identifies coarse regions that influence a class score. It is not object detection,
+pathologist annotation, causal evidence, or proof that a highlighted region is malignant. The
+complete evidence is in
+[`research/model_results/resnet18_lastblock_finetune_v1/gradcam_v1/`](research/model_results/resnet18_lastblock_finetune_v1/gradcam_v1/).
+
+## Genetic algorithm experiment
+
+The genetic algorithm optimized three ResNet18 hyperparameters while keeping model architecture,
+initial checkpoint, data, seed, and compute budget fixed:
+
+- learning rate: `1e-5` to `3e-4`, log scale;
+- weight decay: `1e-6` to `1e-3`, log scale;
+- dropout: `0.10` to `0.50`.
+
+GA and random search each received 12 unique candidates and four proxy epochs per candidate. The
+proxy contained 9,100 train and 3,900 validation images, with no test access. Their two winners
+were then confirmed on all 91,000 training and 19,500 validation paths before a single shared-test
+evaluation.
+
+![GA workflow](research/final_report/figures/18_ga_workflow.png)
+
+| Stage | GA winner | Random winner | Difference |
+|---|---:|---:|---:|
+| Proxy validation macro-F1 | 95.2281% | 94.9612% | +0.2669 pp |
+| Full validation macro-F1 | 99.6104% | 99.5640% | +0.0464 pp |
+| Shared-test macro-F1 | 99.5794% | 99.5745% | +0.0049 pp |
+
+On shared test, GA was uniquely correct on 52 images and random search on 51; exact McNemar
+`p = 1.0`. Therefore GA preserved the validation ordering by one image, but the paired evidence
+does not demonstrate a statistically distinguishable GA advantage.
+
+![GA shared-test comparison](research/final_report/figures/20_ga_shared_test.png)
+
+## Repository guide
+
+| Path | Purpose |
+|---|---|
+| [`src/`](src/) | Training, evaluation, duplicate auditing, Grad-CAM, GA, and split code |
+| [`notebooks/`](notebooks/) | Locked Google Colab entrypoints for reportable runs |
+| [`config/`](config/) | Label taxonomy and hash-frozen experiment contracts |
+| [`research/splits/`](research/splits/) | Fixed split and GA proxy/full-validation manifests |
+| [`research/model_results/`](research/model_results/) | Verified metrics, curves, matrices, errors, and Grad-CAM evidence |
+| [`research/final_report/figures/`](research/final_report/figures/) | Publication-ready figures used in this README and final report |
+| [`tests/`](tests/) | Automated contract, integrity, and pipeline tests |
+| [`deliverables/`](deliverables/) | Final English report |
+| `archive/` | Local dataset; intentionally excluded from Git |
+| `artifacts/` | Large/reproducible local audit outputs; intentionally excluded from Git |
+
+Start with the detailed [Repository and Evidence Guide](docs/REPOSITORY_GUIDE.md).
+
+## Reproduction entrypoints
+
+Local Windows work uses Python 3.10:
+
+```powershell
+py -3.10 -m pip install -r requirements.txt
+py -3.10 -m pytest -q
+```
+
+Main training implementation:
 
 ```text
-archive/Multi Cancer/Multi Cancer
+src/train.py
 ```
 
-Kaynak veri GitHub'a yüklenmez ve kod tarafından değiştirilmez. İki `*.bak.jpg` dosyası deney
-indeksinden çıkarıldığında 26 alt sınıfta toplam 130.000 kabul edilen görüntü bulunur.
+Main reportable Colab notebooks:
 
-## Yerel ortam
+- [`notebooks/resnet18_26leaf_baseline_colab.ipynb`](notebooks/resnet18_26leaf_baseline_colab.ipynb)
+- [`notebooks/smallcnn_26leaf_baseline_colab.ipynb`](notebooks/smallcnn_26leaf_baseline_colab.ipynb)
+- [`notebooks/resnet18_lastblock_finetune_colab.ipynb`](notebooks/resnet18_lastblock_finetune_colab.ipynb)
+- [`notebooks/resnet18_lastblock_gradcam_colab.ipynb`](notebooks/resnet18_lastblock_gradcam_colab.ipynb)
+- [`notebooks/ga_resnet18_lastblock_search_colab.ipynb`](notebooks/ga_resnet18_lastblock_search_colab.ipynb)
+- [`notebooks/ga_random_full_confirmation_colab.ipynb`](notebooks/ga_random_full_confirmation_colab.ipynb)
+- [`notebooks/ga_random_shared_test_colab.ipynb`](notebooks/ga_random_shared_test_colab.ipynb)
 
-Aktif proje sürümü **Python 3.10.11**'dir. 19 Ekim 2026 tarihinde doğrulanan temel ortam:
+See [Reproducibility Guide](docs/REPRODUCIBILITY.md) before running a notebook. Existing result
+directories and Drive checkpoints must not be overwritten.
 
-- PyTorch `2.5.1+cu118`
-- torchvision `0.20.1+cu118`
-- NumPy `2.2.6`
-- Pillow `12.3.0`
-- CUDA kullanılabilir
+## Documentation
 
-Python 3.10 ortamında `scikit-learn` ve `matplotlib` henüz kurulmamıştır. pHash pilotu yalnızca
-NumPy ve Pillow kullanır; model eğitimi öncesinde eksik eğitim bağımlılıkları ayrıca kurulup
-doğrulanacaktır.
+- [Repository and Evidence Guide](docs/REPOSITORY_GUIDE.md)
+- [Dataset Taxonomy](docs/DATASET_TAXONOMY.md)
+- [Methods and Validation](docs/METHODS_AND_VALIDATION.md)
+- [Experiments and Results](docs/EXPERIMENTS_AND_RESULTS.md)
+- [Reproducibility Guide](docs/REPRODUCIBILITY.md)
+- [Professor Demonstration Guide](docs/PROFESSOR_DEMO_GUIDE.md)
+- [Current Project Plan](PROJECT_PLAN.md)
+- [Research Evidence Index](research/README.md)
+- [Final English report](deliverables/NNGA_Final_Report_Mehmet_Yusuf_Ocak_Erasmus.docx)
 
-## Tamamlanan veri denetimleri
+## Scope and limitations
 
-Temel veri denetimi:
+- The dataset contains source/modality confounding: distinguishing MRI from histopathology can be
+  easier than learning disease biology.
+- The dataset has no patient or scan-series identifiers.
+- Known duplicate families are grouped, but unknown visual relatives may remain.
+- Some labels are benign/normal, some are malignant subtypes, some are tumor types, and cervical
+  labels describe cell morphology. They cannot be converted into one universal binary target
+  without unsupported assumptions.
+- Parent accuracy measures eight dataset groups, not cancer presence or stage.
+- Results are single-dataset, primarily single-seed educational experiments.
+- Confidence and Grad-CAM must not be interpreted as clinical certainty or medical localization.
 
-```powershell
-py -3.10 src/audit_dataset.py
-```
+## Dataset and external references
 
-Tüm görüntüleri açarak bozuk dosya kontrolü:
+- O. Sai Naren, [Multi Cancer Dataset](https://www.kaggle.com/datasets/obulisainaren/multi-cancer), Kaggle.
+- RoupB, [cancer-app](https://github.com/RoupB/cancer-app), inspected as the closest external 26-class reference.
+- K. He et al., “Deep Residual Learning for Image Recognition,” CVPR 2016.
+- R. R. Selvaraju et al., “Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization,” ICCV 2017.
+- J. H. Holland, *Adaptation in Natural and Artificial Systems*, 1975.
 
-```powershell
-py -3.10 src/audit_dataset.py --verify-all
-```
-
-SHA-256 ile byte-byte aynı dosyaları bulma:
-
-```powershell
-py -3.10 src/audit_exact_duplicates.py
-```
-
-SHA-256 denetimi 1.318 birebir kopya grubu ve bu gruplarda 2.673 dosya bulmuştur. SHA-256
-yalnızca dosya içeriği tamamen aynı olan kopyaları belirler; döndürülmüş, parlaklığı değiştirilmiş
-veya yeniden kodlanmış akrabaları bulamaz.
-
-## Tamamlanan kontrollü adım: pHash pilotu
-
-`src/audit_perceptual_duplicates.py`, seçilen alt sınıflardaki görüntüler için 64-bit pHash
-hesaplar ve Hamming uzaklığı aralıklarından manuel inceleme örnekleri üretir. Kod otomatik eşik
-seçmez, split oluşturmaz ve model eğitmez.
-
-2026-10-19 tarihinde Python 3.10 ile çalıştırılan pilot komutu:
-
-```powershell
-py -3.10 src/audit_perceptual_duplicates.py `
-  --subclasses lung_scc brain_glioma `
-  --samples-per-band 12 `
-  --seed 42 `
-  --workers 4
-```
-
-Pilot 10.000 görüntüyü ve iki sınıfta toplam 24.995.000 çifti taradı; 120 örneği 20 temas
-sayfasında incelemeye açtı. Bilinen 279 SHA-256 tam-kopya çiftinin tamamı pHash uzaklığı 0 verdi.
-Ancak yöntem görüntü türüne çok farklı tepki verdi: `brain_glioma` için 12 veya daha küçük
-uzaklıkta 173.992 aday, `lung_scc` için yalnız 1.731 aday oluştu. Görsel denetimde beyin MR
-adaylarının çoğu ortak arka plan/anatomi kaynaklı false positive iken akciğer histoloji örnekleri
-aynı mikroskobik alanın dönüşümleri görünümündeydi. Bu nedenle henüz otomatik/global eşik
-seçilmemiştir ve split oluşturulmamıştır. Ayrıntılı sonuç:
-[`research/PHASH_PILOT_AUDIT_TR.md`](research/PHASH_PILOT_AUDIT_TR.md).
-
-Manuel kararları sohbetten bağımsız ve makine-okunur biçimde saklamak için mevcut 120 adaydan
-güvenli bir `review_labels.csv` şablonu hazırlanabilir:
-
-```powershell
-py -3.10 src/prepare_phash_review.py
-```
-
-Bu yardımcı araç görüntüleri sınıflandırmaz. SHA-256 ile zaten byte-byte aynı olduğu kanıtlanan
-çiftleri önceden işaretler; diğer satırları `same_source_candidate`, `independent_lookalike` veya
-`uncertain` görsel kararlarından biri girilmek üzere boş bırakır. Var olan tabloyu normal
-çalıştırmada ezmez. Dosya yerel bir audit çıktısı olduğu için `artifacts/` altında tutulur ve
-GitHub'a gönderilmez. Bu 120 satır yalnızca iki alt sınıftaki eski pHash pilotunun kaydıdır;
-bütün 26 alt sınıfı kapsayacak resmi kalibrasyon kümesinin yerine geçmez.
-
-Temas sayfaları, `candidate_samples.csv` ve `review_labels.csv` aynı `P0001`–`P0120` Pair ID
-değerlerini kullanır. Eski bir pilot çıktısına Pair ID eklemek için 24.995.000 çifti yeniden
-taramadan yalnızca mevcut adaylar tekrar çizilebilir:
-
-```powershell
-py -3.10 src/audit_perceptual_duplicates.py --rerender-existing
-```
-
-### Bütün 26 sınıflı duplicate kalibrasyon taslağı
-
-Eski iki-sınıflı pilotun yerine geçmek üzere, bütün 26 alt sınıftan kontrollü pozitif ve insan
-incelemeli adaylar şu komutla üretildi:
-
-```powershell
-$env:PYTHONUTF8="1"
-py -3.10 .\src\build_duplicate_calibration_set.py --seed 42 --workers 4
-```
-
-Bu komut model eğitmez ve 70/15/15 sınıflandırma split'i oluşturmaz. Üretilen audit artefaktları
-`artifacts/audit/duplicate_calibration_v1/` altında yerel tutulur. Doğrulanmış sayılar ve pHash
-recall bulguları için
-[`research/CALIBRATION_SET_V1_AUDIT_TR.md`](research/CALIBRATION_SET_V1_AUDIT_TR.md) dosyasına bakın.
-
-278 belirsiz adayın Pair ID'li temas sayfalarını ve güvenli inceleme tablosunu üretmek için:
-
-```powershell
-$env:PYTHONUTF8="1"
-py -3.10 .\src\render_calibration_review.py --pairs-per-page 6 --thumb-size 320
-```
-
-Önce yalnız development çiftleri etiketlenecek; holdout, yöntem dondurulana kadar kullanılmayacak.
-İnceleme paketi ve karar sözlüğü
-[`research/CALIBRATION_REVIEW_PACKAGE_TR.md`](research/CALIBRATION_REVIEW_PACKAGE_TR.md) içinde
-açıklanmıştır.
-
-139 development çiftinin AI-destekli görsel incelemesi tamamlandı: 15 aynı-kaynak adayı, 123
-bağımsız benzer görüntü ve 1 belirsiz çift kaydedildi. Karar kaynağı
-`research/development_visual_review_v1.csv`, ayrıntılı rapor ise
-`research/DEVELOPMENT_VISUAL_REVIEW_V1_TR.md` dosyasındadır. Kararların PNG başlıklarında görüldüğü
-32 yerel sayfa `artifacts/audit/duplicate_calibration_v1/review/reviewed_development_v1/`
-altındadır. Bu geliştirme tamamlandıktan sonra rule v1 dondurulmuş ve holdout kontrollü olarak
-açılmıştır; aşağıdaki holdout bölümü güncel durumu verir.
-
-Development bölümündeki 671 çift için tekrar üretilebilir hibrit kanıt çıkarımı şu komutla
-çalıştırılır:
-
-```powershell
-$env:PYTHONUTF8="1"
-py -3.10 .\src\score_duplicate_development.py
-```
-
-Bu komut ORB/RANSAC, phase correlation, CT/MRI/Pap için ECC ve hizalanmış SSIM/NMI ölçümlerini
-`artifacts/audit/duplicate_hybrid_development_v1/` altına yazar. Holdout görüntülerini açmaz;
-otomatik duplicate kararı, augmentation family veya model split'i üretmez. Doğrulanmış pilot
-bulguları için
-[`research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md`](research/HYBRID_DUPLICATE_DEVELOPMENT_V1_TR.md)
-dosyasına bakın.
-
-### Dondurulmuş kuralın holdout değerlendirmesi
-
-139 doğal holdout adayı önce algoritma skorları gösterilmeyen temas sayfalarında etiketlendi.
-Ardından frozen rule v1, development scorer koduyla aynı SHA-256 doğrulanarak 671 holdout çifti
-üzerinde yalnız bir kez çalıştırıldı:
-
-```powershell
-$env:PYTHONUTF8="1"
-py -3.10 .\src\evaluate_duplicate_holdout.py
-```
-
-Kaydedilmiş çıktının eksiksizliğini görüntüleri yeniden açmadan kontrol etmek için:
-
-```powershell
-$env:PYTHONUTF8="1"
-py -3.10 .\src\verify_duplicate_holdout.py
-```
-
-Sonuç: 547/547 aynı-kaynak bulundu, 120/124 bağımsız çift kesin negatif ayrıldı, dört zor MRI/CT
-çifti güvenli biçimde `uncertain` kaldı; kesin karar verilen 667 çiftte hata yoktur. Bu bir
-duplicate-audit sonucudur, kanser sınıflandırma doğruluğu değildir. Ayrıntılar
-[`research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md`](research/DUPLICATE_HOLDOUT_EVALUATION_V1_TR.md)
-dosyasındadır.
-
-### Tam veri taraması öncesi aday üretimi pilotu
-
-Pahalı duplicate doğrulayıcıyı milyarlarca çifte uygulamamak için pHash ve ResNet18 top-k retrieval
-şu komutla 1.748 kalibrasyon görüntüsünde karşılaştırıldı:
-
-```powershell
-$env:PYTHONUTF8="1"
-py -3.10 .\src\benchmark_candidate_generation.py --batch-size 32 --workers 4 --seed 42
-```
-
-Pilot, pHash ≤32'nin %100 recall için olası çiftlerin %94,5'ini geçirdiğini; ResNet18 top-50'nin
-daha ekonomik olmasına rağmen 1.094 pozitifin beşini kaçırdığını gösterdi. Bu nedenle tam 130.000
-görüntü taraması başlatılmadı. Ayrıntılar
-[`research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md`](research/CANDIDATE_GENERATION_BENCHMARK_V1_TR.md)
-dosyasındadır.
-
-Candidate generator v2 şu komutla autocontrast ve multi-crop ResNet18 descriptor'larını ölçer:
-
-```powershell
-$env:PYTHONUTF8="1"
-py -3.10 .\src\benchmark_candidate_generation_v2.py --batch-size 8 --workers 4 --seed 42
-```
-
-V2 kalibrasyonunda robust top-10, 1.094/1.094 aynı-kaynak referansını buldu ve 224.926 olası
-çiftin 18.012'sini (%8,01) aday yaptı. Önceden belirlenen pilot kapısı geçti; fakat bu hâlâ 1.748
-görüntülük pilot olduğundan tam tarama/family/split başlatılmadı. Sıradaki adım daha büyük sınırlı
-bir havuzda retrieval yoğunluğu ve uçtan uca hesap maliyetini ölçmektir. Ayrıntılar
-[`research/CANDIDATE_GENERATION_BENCHMARK_V2_TR.md`](research/CANDIDATE_GENERATION_BENCHMARK_V2_TR.md)
-dosyasındadır.
-
-### Candidate Generator v2 ölçekli kapasite pilotu
-
-V2'nin indeks büyüdüğünde bilinen akrabaları ilk 10'da tutup tutmadığı şu komutla ölçüldü:
-
-```powershell
-$env:PYTHONUTF8="1"
-py -3.10 .\src\benchmark_candidate_generation_scaled.py `
-  --stage-sizes 50,100,250 `
-  --batch-size 8 `
-  --retrieval-block-size 256 `
-  --seed 42
-```
-
-Maksimum 8.248 görüntülük stage'de robust top-10, 1.092/1.094 aynı-kaynak referansını buldu;
-iki `brightness_1_20` çifti rank 24 ve 27'ye düştü. Aday yükü 122.211 çift veya 14,82
-çift/görüntüydü. Bu nedenle önceden belirlenen recall kapısı geçmedi ve tam tarama başlatılmadı.
-
-Sonradan yapılan, açıkça post-hoc olarak işaretlenen `top-10 ∪ pHash≤8` kontrolü yalnız 817 ek
-çiftle iki kaçağı geri aldı. Bu birleşim Candidate Generator v2.1 hipotezidir; yeni ve kaynak-yolu
-ayrılmış holdout'ta dondurularak doğrulanmadan tam taramaya kullanılamaz. Ayrıntılar
-[`research/CANDIDATE_GENERATION_SCALED_PILOT_V1_TR.md`](research/CANDIDATE_GENERATION_SCALED_PILOT_V1_TR.md)
-dosyasındadır.
-
-## Eğitim kodunun mevcut durumu
-
-`src/train.py` şu modelleri destekleyen kontrollü eğitim uygulamasıdır:
-
-- SmallCNN
-- ResNet18
-- DenseNet121
-- EfficientNet-B0
-
-Ana deney split'i `research/splits/practical_leakage_reduced_split_v1.csv` olarak dondurulmuştur.
-Trainer bu manifestin SHA-256 değerini eğitim başlamadan doğrular. 26 leaf tahmininden sekiz parent
-sonucu türetir; iki seviyede accuracy, macro-F1, balanced accuracy, sınıf raporu ve confusion matrix
-üretir. Ayrıca test görüntüsü bazında tahmin/olasılık CSV'si, öğrenme eğrileri, en iyi validation
-macro-F1 checkpoint'i ve erken durdurma kaydı oluşturur. Dondurulmuş pretrained omurgalardaki
-BatchNorm istatistikleri de sabit tutulur.
-
-2026-11-14 tarihli altyapı smoke testi başarıyla tamamlanmış ve tam test paketi 186/186 geçmiştir.
-Smoke metriği proje performansı değildir. Ayrıntı:
-[`research/TRAINER_HARDENING_V1_TR.md`](research/TRAINER_HARDENING_V1_TR.md).
-
-İlk tam baseline için Colab/T4 notebook'u hazırlanmıştır:
-[`notebooks/resnet18_26leaf_baseline_colab.ipynb`](notebooks/resnet18_26leaf_baseline_colab.ipynb).
-Deney sözleşmesi, kesinti sonrası resume davranışı ve beklenen çıktılar
-[`research/RESNET18_26LEAF_BASELINE_PLAN_TR.md`](research/RESNET18_26LEAF_BASELINE_PLAN_TR.md)
-dosyasındadır.
-
-İlk tam koşu 2026-11-15 tarihinde Colab/T4 üzerinde tamamlandı. Frozen-head ResNet18, sabit
-91.000/19.500/19.500 manifestte 26 leaf için test accuracy `0,913026`, macro-F1 `0,912455` ve
-balanced accuracy `0,913026` üretti. Türetilmiş sekiz parent grup accuracy'si `0,997744` olsa da
-bu kanser var/yok veya evre doğruluğu değildir; üst veri-seti/organ-modalite grubu doğruluğudur.
-İndirilen artifact paketi hash, manifest, 19.500 benzersiz test tahmini ve metrik aritmetiğiyle
-yerelde doğrulandı. Ayrıntı:
-[`research/RESNET18_26LEAF_BASELINE_RESULT_TR.md`](research/RESNET18_26LEAF_BASELINE_RESULT_TR.md).
-
-Aynı sabit split üzerinde sıfırdan eğitilen SmallCNN karşılaştırması 2026-11-16 tarihinde
-tamamlandı. Epoch 25 validation macro-F1 ile seçildi; test leaf accuracy `0,955846`, macro-F1
-`0,955916` ve balanced accuracy `0,955846` oldu. Aynı 19.500 test görüntüsünde frozen-head
-ResNet18'e göre accuracy farkı `+4,282`, macro-F1 farkı `+4,346` yüzde puandır. Bu veri-setine özgü
-bir karşılaştırmadır; klinik tanı veya genel mimari üstünlük iddiası değildir. Paket hash'leri,
-split, tahminler ve metrik aritmetiği yerelde doğrulandı. Ayrıntı:
-[`research/SMALLCNN_26LEAF_BASELINE_RESULT_TR.md`](research/SMALLCNN_26LEAF_BASELINE_RESULT_TR.md).
-
-## GitHub kapsamı
-
-Depoya kod, yapılandırma ve araştırma notları gönderilir. Aşağıdakiler yerelde tutulur:
-
-- `archive/`: yaklaşık 8,6 GiB kaynak veri seti
-- `artifacts/`: yeniden üretilebilir çalışma çıktıları ve görsel örnekler
-- `transcript.pdf` ve ham ses/video kayıtları
-- model ağırlıkları (`*.pt`, `*.pth`, `*.ckpt`) ve dışarı aktarılan modeller (`*.onnx`)
-- üçüncü taraf depoların yerel kopyaları (`research/external/`)
-
-Anlamlı ve doğrulanmış her geliştirme açıklayıcı bir Git commit'i olarak `main` dalına gönderilir.
-Bozuk, yarım veya henüz doğrulanmamış deney sonuçları başarı sonucu gibi paylaşılmaz.
+The complete bibliography and academic discussion are provided in the final report.
